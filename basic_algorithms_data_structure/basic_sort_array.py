@@ -4,32 +4,47 @@ Explanation:
 - This process continues until the array is fully sorted, with larger elements "bubbling" to the end of the list.
 - In the provided code, the list my_array is sorted in ascending order using Bubble Sort.
 """
+# Function to sort an array using Bubble Sort in ascending order
 def bubble_sort_array_in_ascending_order(arr):
-
-    n = len(arr)
+    n = len(arr)  # Get the length of the array
+    # Traverse through all elements in the array
     for i in range(n):
-        for j in range(0,n-i-1):
-            if arr[j] > arr[j+1]:
-                arr[j], arr[j+1] = arr[j+1], arr[j]
+        # Traverse the array from 0 to n-i-1
+        # The last i elements are already sorted
+        for j in range(0, n-i-1):
+             if arr[j] > arr[j+1]:  # Swap if the element found is greater than the next element
+         
+                arr[j], arr[j+1] = arr[j+1], arr[j]  # Swap the elements
 
+# Define the array to be sorted
 my_array = [64, 34, 25, 12, 22, 11, 90, 5]
+
+# Apply the bubble sort function
 bubble_sort_array_in_ascending_order(my_array)
 
-print("sorted arry",my_array )
+# Print the sorted array
+print("Sorted array:", my_array)
 
 
+# Another version of bubble sort function
 def bubble_sort(arr):
-     n = len(arr)
-     for i in range(n-1):
-          for j in range(n-i-1):
-               if arr[j]>arr[j+1]:
-                    arr[j],arr[j+1] = arr[j+1],arr[j]
+    n = len(arr)  # Get the length of the array
+    # Outer loop for traversing through the array
+    for i in range(n-1):
+        # Inner loop to compare adjacent elements
+        for j in range(n-i-1):
+            # Swap if the current element is greater than the next
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]  # Swap the elements
 
+# Define another array to be sorted
 lst = [15, 6, 7, 10, 12, 20, 10, 28, 10]
 
+# Apply the bubble sort function to the second list
 bubble_sort(lst)
 
-print ("sorted array",lst )
+# Print the sorted array
+print("Sorted array:", lst)
 
 
 
@@ -77,3 +92,65 @@ def selection_sort(arr):
 lst = [15, 6, 7, 10, 12, 20, 10, 28, 10]
 selection_sort(lst)
 print("Selection Sorted array without return function:", lst)
+
+"""
+The insertion sort works by dividing the array into two parts: a sorted and an unsorted section.
+It iterates through the unsorted section, picks each element (key), and places it in its correct position in the sorted section by shifting larger elements to the right.
+
+"""
+def insertion_sort(arr):
+    n = len(arr)
+    for i in range(1, n):
+        current_value = arr[i]
+        j = i - 1
+
+        # Shift elements of arr[0..i-1] that are greater than current_value to one position ahead
+        while j >= 0 and arr[j] > current_value:
+            arr[j + 1] = arr[j]
+            j -= 1
+
+        # Place current_value at the correct position
+        arr[j + 1] = current_value
+
+# Test array
+my_array = [64, 34, 25, 12, 22, 11, 90, 5]
+
+# Apply insertion sort (no return needed)
+insertion_sort(my_array)
+# Print the sorted array
+print("The insertion Sorted array without return statement:", my_array)
+
+
+"""
+The function now returns the sorted array using the return statement.
+After calling the function, you can assign the returned sorted array to a variable (sorted_array) and print it.
+
+"""
+
+def insertion_sort(arr):
+    n = len(arr)  # Get the length of the array
+    
+    # Traverse from the second element to the last element of the array
+    for i in range(1, n):
+        current_value = arr[i]  # The element to be placed at the correct position
+        j = i - 1  # The index of the last element in the sorted portion of the array
+
+        # Shift elements of arr[0..i-1] that are greater than current_value to one position ahead
+        while j >= 0 and arr[j] > current_value:
+            arr[j + 1] = arr[j]  # Move the larger element one position to the right
+            j -= 1  # Move the index back to check the next element
+
+        # Place current_value at the correct position
+        arr[j + 1] = current_value
+
+    return arr  # Return the sorted array
+
+# Test array
+my_array = [64, 34, 25, 12, 22, 11, 90, 5]
+
+# Apply insertion sort and return the sorted array
+sorted_array = insertion_sort(my_array)
+
+# Print the sorted array
+print("The insertion sorted array with return statement:", sorted_array)
+
