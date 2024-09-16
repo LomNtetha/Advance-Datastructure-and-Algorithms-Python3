@@ -3,6 +3,12 @@ Explanation:
 - The Bubble Sort algorithm works by repeatedly swapping adjacent elements if they are in the wrong order.
 - This process continues until the array is fully sorted, with larger elements "bubbling" to the end of the list.
 - In the provided code, the list my_array is sorted in ascending order using Bubble Sort.
+- This number grows quadratically with the size of the array, which aligns with the time complexity of O(n²).
+"""
+
+"""
+
+
 """
 # Function to sort an array using Bubble Sort in ascending order
 def bubble_sort_array_in_ascending_order(arr):
@@ -25,27 +31,47 @@ bubble_sort_array_in_ascending_order(my_array)
 # Print the sorted array
 print("Sorted array:", my_array)
 
-
-# Another version of bubble sort function
-def bubble_sort(arr):
+def bubble_sort_array_in_descending_order(arr):
     n = len(arr)  # Get the length of the array
-    # Outer loop for traversing through the array
-    for i in range(n-1):
-        # Inner loop to compare adjacent elements
-        for j in range(n-i-1):
-            # Swap if the current element is greater than the next
-            if arr[j] > arr[j+1]:
+    # Traverse through all elements in the array
+    for i in range(n):
+        # Traverse the array from 0 to n-i-1
+        # The last i elements are already sorted
+        for j in range(0, n-i-1):
+            if arr[j] < arr[j+1]:  # Swap if the element found is smaller than the next element
                 arr[j], arr[j+1] = arr[j+1], arr[j]  # Swap the elements
 
-# Define another array to be sorted
-lst = [15, 6, 7, 10, 12, 20, 10, 28, 10]
+# Define the array to be sorted
+my_array = [64, 34, 25, 12, 22, 11, 90, 5]
 
-# Apply the bubble sort function to the second list
-bubble_sort(lst)
+# Apply the descending order bubble sort function
+bubble_sort_array_in_descending_order(my_array)
 
 # Print the sorted array
-print("Sorted array:", lst)
+print("Sorted array in descending order:", my_array)
 
+def optimized_bubble_sort(arr):
+    n = len(arr)
+    for i in range(n):
+        swapped = False  # Keep track of whether a swap occurs
+        for j in range(0, n-i-1):
+            if arr[j] > arr[j+1]:
+                arr[j], arr[j+1] = arr[j+1], arr[j]  # Swap the elements
+                swapped = True  # Mark that a swap happened
+        # If no swaps occurred during this pass, the array is already sorted
+        if not swapped:
+            break
+
+# Define the array to be sorted
+my_array = [64, 34, 25, 12, 22, 11, 90, 5]
+
+# Apply the optimized bubble sort function
+optimized_bubble_sort(my_array)
+
+# Print the sorted array
+print("Sorted array:", my_array)
+
+# Another version of bubble sort function
 
 
 """
