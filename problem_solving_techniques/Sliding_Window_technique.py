@@ -50,9 +50,7 @@ Example Question: Given a string s, find the length of the longest substring wit
 Input:
 
 s = "abcabcbb"
-Output:
-
-3 (The longest substring is "abc").
+Output: 3 (The longest substring is "abc").
 Approach:
 
 Use a sliding window with two pointers (start and end) to maintain the current substring. Use a hash set to track the characters in the window. If a repeating character is found, move the start pointer to shrink the window until there are no repeating characters.
@@ -87,9 +85,7 @@ Input:
 
 nums = [2,3,1,2,4,3]
 target = 7
-Output:
-
-2 (The subarray [4, 3] has the smallest length with sum 7).
+Output: 2 (The subarray [4, 3] has the smallest length with sum 7).
 Approach:
 
 Use a sliding window to track the current sum of elements. Start with both pointers at the beginning of the array. Expand the window by moving the end pointer until the sum is greater than or equal to target. Then, shrink the window by moving the start pointer to find the smallest possible window that satisfies the condition.
