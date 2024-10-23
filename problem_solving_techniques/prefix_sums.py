@@ -1,4 +1,43 @@
 """
+Given an array arr = [2, 4, 1, 6, 3], find the sum of elements between index i = 1 and j = 3.
+
+
+Consider arr = [2, 4, 1, 6, 3] and the prefix sum array prefix_sum = [2, 6, 7, 13, 16].
+
+If you want to find the sum of elements from index 1 to 3 (i.e., [4, 1, 6]):
+
+Using regular summing, it would be: 4 + 1 + 6 = 11
+Using prefix sums, the sum from index 1 to 3 is: prefix_sum[3] - prefix_sum[0] = 13 - 2 = 11
+"""
+
+class Solution:
+    def subarray_sum(arr: List[int], i: int, j: int) -> int:
+        # Compute the prefix sum array on-the-fly
+        prefix_sum = [0] * len(arr)
+        
+        prefix_sum[0] = arr[0]  # The first element is the same in prefix sum
+
+        # Calculate the prefix sum for the entire array
+        for k in range(1, len(arr)):
+            prefix_sum[k] = prefix_sum[k - 1] + arr[k]
+
+        # Determine the sum of the subarray from index i to j
+        if i == 0:
+            # If i is 0, return the prefix sum up to index j
+            return prefix_sum[j]
+        else:
+            # Otherwise, return the difference of prefix sums
+            # This gives us the sum of elements from index i to j
+            return prefix_sum[j] - prefix_sum[i - 1]
+
+# Example usage
+arr = [2, 4, 1, 6, 3]
+i, j = 1, 3
+result = Solution.subarray_sum(arr, i, j)
+print(f"The sum of the subarray from index {i} to {j} is: {result}")
+
+
+"""
 Problem Statement: Given an integer array nums, and multiple queries, each query asks for the sum of elements between indices i and j inclusive.
 
 Example:
@@ -22,32 +61,36 @@ Solution Using Prefix Sums:
 from collections import deque
 from typing import List, Tuple
 
+from typing import List, Tuple
 
 class Solution:
-    def __init__(self, nums: List[int]):
-        # Initialize and compute prefix sums
-        self.prefix_sum = self.compute_prefix_sums(nums)
-    
-    def compute_prefix_sums(self, nums: List[int]) -> List[int]:
+    @staticmethod
+    def query_sums(nums: List[int], queries: List[Tuple[int, int]]) -> List[int]:
+        # Compute the prefix sum array on-the-fly
         prefix_sum = [0] * len(nums)
-        prefix_sum[0] = nums[0]
-        for i in range(1, len(nums)):
-            prefix_sum[i] = prefix_sum[i - 1] + nums[i]
-        return prefix_sum
+        prefix_sum[0] = nums[0]  # Initialize the first element
 
-    def range_sum(self, i: int, j: int) -> int:
-        if i == 0:
-            return self.prefix_sum[j]
-        return self.prefix_sum[j] - self.prefix_sum[i - 1]
+        # Calculate the prefix sum for the entire array
+        for k in range(1, len(nums)):
+            prefix_sum[k] = prefix_sum[k - 1] + nums[k]
 
-# Example Usage
+        result = []
+        # For each query, calculate the sum of the subarray
+        for i, j in queries:
+            if i == 0:
+                # If i is 0, return the prefix sum up to index j
+                result.append(prefix_sum[j])
+            else:
+                # Otherwise, return the difference of prefix sums
+                result.append(prefix_sum[j] - prefix_sum[i - 1])
+
+        return result
+
+# Example usage
 nums = [1, 3, 5]
 queries = [(0, 2), (1, 2), (0, 1)]
-solution = Solution(nums)
-
-# Process each query
-results = [solution.range_sum(i, j) for i, j in queries]
-print(results)  # Output: [9, 8, 4]
+result = Solution.query_sums(nums, queries)
+print(result)  # Output: [9, 8, 4]
 
 """
 Subarray Sum Equals K
@@ -58,9 +101,7 @@ Example:
 Input:
 nums = [1, 1, 1]
 k = 2
-Output:
-
-2
+Output: 2
 Explanation: The two subarrays are [1, 1] which sum to 2.
 
 Solution Using Prefix Sums:"""
@@ -221,3 +262,4 @@ class Solution:
 nums = [3, 4, 5, 1, 2]
 solution = Solution()
 print(solution.findMin(nums))  # Output: 1
+
