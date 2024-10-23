@@ -19,22 +19,29 @@ from typing import List
 
 class Solution:
     def twoSum(self, numbers: List[int], target: int) -> List[int]:
+        # Initialize two pointers: one at the beginning (left) and one at the end (right) of the list.
         left, right = 0, len(numbers) - 1
         
+        # Use a while loop to iterate as long as the left pointer is less than the right pointer.
         while left < right:
+            # Calculate the sum of the elements at the left and right pointers.
             current_sum = numbers[left] + numbers[right]
-            
+            # Check if the current sum equals the target value.
             if current_sum == target:
+                # If the sum matches the target, return the indices (1-indexed) of these two elements.
                 return [left + 1, right + 1]  # Assuming 1-indexed result.
+            # If the current sum is less than the target, move the left pointer to the right to increase the sum.
             elif current_sum < target:
-                left += 1  # Move left pointer to increase sum.
+                left += 1  # Increase left pointer to get a larger sum.
+            # If the current sum is greater than the target, move the right pointer to the left to decrease the sum.
             else:
-                right -= 1  # Move right pointer to decrease sum.
+                right -= 1  # Decrease right pointer to get a smaller sum.
 
-# Example
-numbers = [2, 7, 11, 15]
-target = 9
-print(Solution().twoSum(numbers, target))  # Output: [1, 2]
+# Example usage
+numbers = [2, 7, 11, 15]  # A sorted list of numbers.
+target = 9  # The target sum we are trying to find.
+# Create an instance of the Solution class and call the twoSum method.
+print(Solution().twoSum(numbers, target))  # Output: [1, 2] which means the elements at indices 1 and 2 (1-indexed) sum to 9.
 
 
 """
@@ -48,18 +55,27 @@ Time Complexity: O(n) – Half of the array is traversed.
 
 class Solution:
     def reverseString(self, s: List[str]) -> None:
+        """
+        This function reverses the input list of characters in place.
+        The algorithm uses a two-pointer approach.
+        """
+
+        # Initialize two pointers, one at the beginning (left) and one at the end (right)
         left, right = 0, len(s) - 1
         
+        # Continue swapping characters until the two pointers meet
         while left < right:
+            # Swap the characters at the left and right pointers
             s[left], s[right] = s[right], s[left]
+            
+            # Move the left pointer to the right and right pointer to the left
             left += 1
             right -= 1
 
-# Example
-s = ["h", "e", "l", "l", "o"]
+# Example usage:
+s = ["h", "e", "l", "l", "o"]  # Input string in the form of a list of characters
 Solution().reverseString(s)
 print(s)  # Output: ["o", "l", "l", "e", "h"]
-
 
 """
 Problem: Given a sorted array, remove duplicates in-place such that each element appears only once and return the new length.
@@ -100,27 +116,67 @@ Time Complexity: O(n) – Single pass through the string.
 
 class Solution:
     def isPalindrome(self, s: str) -> bool:
+        # Initialize two pointers: left at the start, right at the end
         left, right = 0, len(s) - 1
         
+        # Continue checking while the left pointer is less than the right pointer
         while left < right:
-            # Move left pointer to next alphanumeric character
+            # Move left pointer to the next alphanumeric character
             while left < right and not s[left].isalnum():
                 left += 1
-            # Move right pointer to previous alphanumeric character
+            
+            # Move right pointer to the previous alphanumeric character
             while left < right and not s[right].isalnum():
                 right -= 1
             
+            # Compare the characters at the left and right pointers
+            # Convert both characters to lowercase to ensure case insensitivity
             if s[left].lower() != s[right].lower():
-                return False
+                return False  # If characters don't match, it's not a palindrome
             
+            # Move both pointers towards the center
             left += 1
             right -= 1
         
+        # If all checks passed, the string is a palindrome
         return True
 
 # Example
 s = "A man, a plan, a canal: Panama"
 print(Solution().isPalindrome(s))  # Output: True
+
+
+"""
+Given a string s, the goal is to find the longest palindromic substring. This solution utilizes the expand around center technique
+ the overall time complexity is O(n^2)
+
+
+"""
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        # Helper function to expand around the center
+        def expand_around_center(s, left, right):
+            # Expand while characters on both sides match and we are within bounds
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1  # Move left pointer outward
+                right += 1  # Move right pointer outward
+            # Return the palindromic substring found during the expansion
+            return s[left + 1:right]
+
+        longest = ""  # Variable to keep track of the longest palindrome found
+        # Loop through each character in the string
+        for i in range(len(s)):
+            # Odd length palindrome (single character center)
+            odd_palindrome = expand_around_center(s, i, i)
+            # Even length palindrome (two character center)
+            even_palindrome = expand_around_center(s, i, i + 1)
+            # Update the longest palindrome by comparing lengths
+            longest = max(longest, odd_palindrome, even_palindrome, key=len)
+
+        return longest  # Return the longest palindrome found
+
+solution = Solution()
+print(solution.longestPalindrome("babad"))  # Output: "bab" or "aba"
 
 
 """
@@ -134,27 +190,35 @@ Time Complexity: O(n) – Each pair of pointers is evaluated once.
 
 class Solution:
     def maxArea(self, height: List[int]) -> int:
+        # Initialize two pointers: one at the start (left) and one at the end (right)
         left, right = 0, len(height) - 1
+        
+        # Variable to keep track of the maximum area found
         max_area = 0
         
+        # Loop until the two pointers meet
         while left < right:
-            # Calculate the area formed by lines at left and right
+            # Calculate the width between the two pointers
             width = right - left
+            
+            # Calculate the height of the container by taking the smaller of the two heights
             h = min(height[left], height[right])
+            
+            # Calculate the area and update max_area if this is the largest we've seen
             max_area = max(max_area, width * h)
             
-            # Move the pointer with the smaller height
+            # Move the pointer pointing to the shorter height inward to try and find a larger area
             if height[left] < height[right]:
                 left += 1
             else:
                 right -= 1
         
+        # Return the maximum area found
         return max_area
 
 # Example
-height = [1,8,6,2,5,4,8,3,7]
+height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
 print(Solution().maxArea(height))  # Output: 49
-
 
 """
 Merging Two Sorted Arrays
@@ -174,35 +238,41 @@ Time Complexity: O(m + n) – You are traversing both arrays.
 
 class Solution:
     def merge_sorted_arrays(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        i, j = 0, 0  # Pointers for nums1 and nums2
-        result = []
+        # Initialize two pointers to track current positions in nums1 and nums2
+        i, j = 0, 0   # i is for nums1, j is for nums2
+        result = []  # List to store the merged and sorted result
 
-        # Traverse both arrays
+        # Traverse both arrays until we reach the end of one of them
         while i < len(nums1) and j < len(nums2):
+            # Compare elements at current pointers in both arrays
             if nums1[i] <= nums2[j]:
+                # If element in nums1 is smaller or equal, add it to the result
                 result.append(nums1[i])
-                i += 1
+                i += 1  # Move the pointer in nums1 forward
             else:
+                # If element in nums2 is smaller, add it to the result
                 result.append(nums2[j])
-                j += 1
+                j += 1  # Move the pointer in nums2 forward
 
-        # Append any remaining elements in nums1
+        # Append any remaining elements in nums1 (if nums2 is fully traversed)
         while i < len(nums1):
             result.append(nums1[i])
-            i += 1
+            i += 1  # Continue moving the pointer in nums1
 
-        # Append any remaining elements in nums2
+        # Append any remaining elements in nums2 (if nums1 is fully traversed)
         while j < len(nums2):
             result.append(nums2[j])
-            j += 1
+            j += 1  # Continue moving the pointer in nums2
 
-        return result
+        return result  # Return the merged sorted list
 
-# Test the class method
+# Example test case
 solution = Solution()
-nums1 = [1, 2, 4]
-nums2 = [1, 3, 4]
-print(solution.merge_sorted_arrays(nums1, nums2))
+nums1 = [1, 2, 4]  # First sorted array
+nums2 = [1, 3, 4]  # Second sorted array
+
+# Print the merged and sorted result
+print("Merged array:", solution.merge_sorted_arrays(nums1, nums2))
 
 """
 Linked List Cycle Detection (Floyd’s Cycle Detection)
@@ -231,7 +301,7 @@ class Solution:
         while fast and fast.next:
             slow = slow.next           # Move slow pointer by 1 step
             fast = fast.next.next      # Move fast pointer by 2 steps
-            
+
             if slow == fast:           # Cycle detected
                 return True
         
