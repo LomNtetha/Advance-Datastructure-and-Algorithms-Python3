@@ -36,6 +36,62 @@ i, j = 1, 3
 result = Solution.subarray_sum(arr, i, j)
 print(f"The sum of the subarray from index {i} to {j} is: {result}")
 
+"""
+Question: Subarray Sum Query with Prefix Sums
+You are given an array of integers, arr, and a list of queries. Each query specifies a pair of indices (i, j), representing the start and end indices of a subarray. For each query, return the sum of the elements within the subarray starting at index i and ending at index j (inclusive).
+
+Input:
+
+An integer array arr of length n.
+A list of queries queries, where each query is a tuple (i, j) indicating the range of indices to calculate the subarray sum.
+Output: Return the sum of elements within the subarray for each query.
+
+Constraints:
+
+1 <= len(arr) <= 10^5
+1 <= arr[i] <= 10^4
+0 <= i <= j < len(arr)
+Example:
+
+Input:
+arr = [3, 5, 2, 8, 6]
+queries = [(1, 3), (0, 4), (2, 4)]
+
+Output:
+Sum from index 1 to 3: 15
+Sum from index 0 to 4: 24
+Sum from index 2 to 4: 16
+
+"""
+
+from typing import List
+
+class Solution:
+    @staticmethod
+    def subarray_sum(arr: List[int], i: int, j: int) -> int:
+        # Initialize and compute the prefix sum array
+        prefix_sum = [0] * len(arr)
+        prefix_sum[0] = arr[0]
+        
+        # Compute prefix sums
+        for k in range(1, len(arr)):
+            prefix_sum[k] = prefix_sum[k - 1] + arr[k]
+        
+        # Return the sum of the subarray from index i to j
+        if i == 0:
+            return prefix_sum[j]
+        else:
+            return prefix_sum[j] - prefix_sum[i - 1]
+
+# Example usage
+arr = [3, 5, 2, 8, 6]
+queries = [(1, 3), (0, 4), (2, 4)]
+
+for i, j in queries:
+    result = Solution.subarray_sum(arr, i, j)
+    print(f"Sum from index {i} to {j}: {result}")
+
+
 
 """
 Problem Statement: Given an integer array nums, and multiple queries, each query asks for the sum of elements between indices i and j inclusive.
@@ -207,31 +263,6 @@ class Solution:
 nums = [3, 4, 5, 1, 2]
 solution = Solution()
 print(solution.findMin(nums))  # Output: 1
-
-class Solution:
-    @staticmethod
-    def subarray_sum(arr: List[int], i: int, j: int) -> int:
-        # Initialize and compute the prefix sum array
-        prefix_sum = [0] * len(arr)
-        prefix_sum[0] = arr[0]
-        
-        # Compute prefix sums
-        for k in range(1, len(arr)):
-            prefix_sum[k] = prefix_sum[k - 1] + arr[k]
-        
-        # Return the sum of the subarray from index i to j
-        if i == 0:
-            return prefix_sum[j]
-        else:
-            return prefix_sum[j] - prefix_sum[i - 1]
-
-# Example usage
-arr = [3, 5, 2, 8, 6]
-queries = [(1, 3), (0, 4), (2, 4)]
-
-for i, j in queries:
-    result = Solution.subarray_sum(arr, i, j)
-    print(f"Sum from index {i} to {j}: {result}")
 
 
 """Problem Statement
