@@ -21,7 +21,7 @@ Space Complexity: 𝑂(1)
 This indicates that the algorithm uses a fixed amount of space.
 """
 
-from typing import List, Set
+from typing import List, Optional, Set
 from collections import deque
 from collections import defaultdict
 
@@ -50,6 +50,53 @@ nums = [2, 1, 5, 1, 3, 2]
 k = 3
 solution = Solution()
 print(solution.maxSumSubarray(nums, k))  # Output: 9
+
+"""
+Subarray with Sum Equal to Target
+Example Question: Given an array of positive integers, find the subarray that sums up to a given target.
+
+Input:
+
+nums = [1, 2, 3, 4, 5]
+target = 9
+Approach:
+
+Use two pointers to form a sliding window. Start both pointers at the beginning and move the right pointer to grow the sum until it equals or exceeds the target.
+If the sum exceeds the target, move the left pointer to reduce the sum.
+Time Complexity: O(n) – Each element is visited once.
+
+"""
+
+class Solution:
+    def subarraySum(self, nums: List[int], target: int) -> Optional[List[int]]:
+        # Initialize the left pointer for the sliding window and the current sum
+        left = 0
+        current_sum = 0
+        
+        # Iterate over each element with the right pointer to adjust the window size
+        for right in range(len(nums)):
+            # Expand the window by adding the current number at right pointer to current_sum
+            current_sum += nums[right]
+            
+            # If current_sum exceeds target, shrink the window from the left side
+            while current_sum > target and left <= right:
+                # Subtract nums[left] from current_sum and move the left pointer to the right
+                current_sum -= nums[left]
+                left += 1
+            
+            # Check if current_sum is equal to the target
+            if current_sum == target:
+                # If we find the sum, return the subarray from left to right (inclusive)
+                return nums[left:right + 1]
+        
+        # If no subarray is found that adds up to the target, return None
+        return None
+
+# Example Usage
+nums = [1, 2, 3, 4, 5]
+target = 9
+solution = Solution()
+print(solution.subarraySum(nums, target))  # Output: [2, 3, 4]
 
 
 
