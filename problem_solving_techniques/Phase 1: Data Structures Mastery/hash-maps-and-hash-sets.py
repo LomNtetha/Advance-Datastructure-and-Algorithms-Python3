@@ -1,45 +1,4 @@
 """
-Given an array of integers nums and an integer target, return the indices of the two numbers such that they add up to the target.
-
-You may assume that each input would have exactly one solution, and you may not use the same element twice.
-
-Example:
-Input:
-nums = [2, 7, 11, 15]
-target = 9
-Output: [0, 1]
-
-"""
-"""
-Time Complexity:
-O(n) because we traverse the nums array once.
-Space Complexity:
-O(n) because we store the elements in the hash map.
-
-"""
-from typing import List
-from collections import defaultdict
-
-class Solution:
-    def twoSum(self, nums: List[int], target: int) -> List[int]:
-        # Create a hash map to store the complement and its index
-        hash_map = {}
-        
-        # Iterate through the nums array
-        for i, num in enumerate(nums):
-            # Calculate the complement of the current number
-            complement = target - num
-            
-            # If the complement exists in the hash map, return the indices
-            if complement in hash_map:
-                return [hash_map[complement], i]
-            
-            # Otherwise, add the current number and its index to the hash map
-            hash_map[num] = i
-            
-        # Return an empty list if no solution is found (this case won't happen as per the problem's assumption)
-        return []
-"""
 Given an array of integers, return True if any value appears at least twice, otherwise return False.
 
 Example:
@@ -419,7 +378,7 @@ Space Complexity:
 O(1) since both p_count and s_count are bounded by the alphabet size (fixed size).
 
 """
-from collections import Counter
+from collections import Counter, defaultdict
 from typing import List
 
 class Solution:
