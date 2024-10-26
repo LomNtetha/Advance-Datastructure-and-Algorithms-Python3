@@ -236,35 +236,25 @@ Time Complexity: O(m + n) – You are traversing both arrays.
 
 """
 
+
 class Solution:
     def merge_sorted_arrays(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        # Initialize two pointers to track current positions in nums1 and nums2
-        i, j = 0, 0   # i is for nums1, j is for nums2
-        result = []  # List to store the merged and sorted result
-
-        # Traverse both arrays until we reach the end of one of them
+        i, j, result = 0, 0, []  # Initialize pointers for nums1 and nums2, and result list
+        
+        # Traverse both arrays until reaching the end of one
         while i < len(nums1) and j < len(nums2):
-            # Compare elements at current pointers in both arrays
-            if nums1[i] <= nums2[j]:
-                # If element in nums1 is smaller or equal, add it to the result
+            if nums1[i] <= nums2[j]:    # If nums1 element is smaller, add it to result
                 result.append(nums1[i])
-                i += 1  # Move the pointer in nums1 forward
-            else:
-                # If element in nums2 is smaller, add it to the result
+                i += 1                  # Move pointer in nums1 forward
+            else:                       # Otherwise, add nums2 element to result
                 result.append(nums2[j])
-                j += 1  # Move the pointer in nums2 forward
+                j += 1                  # Move pointer in nums2 forward
 
-        # Append any remaining elements in nums1 (if nums2 is fully traversed)
-        while i < len(nums1):
-            result.append(nums1[i])
-            i += 1  # Continue moving the pointer in nums1
-
-        # Append any remaining elements in nums2 (if nums1 is fully traversed)
-        while j < len(nums2):
-            result.append(nums2[j])
-            j += 1  # Continue moving the pointer in nums2
-
-        return result  # Return the merged sorted list
+        # Append any remaining elements from nums1 or nums2
+        result.extend(nums1[i:])         # Add remaining elements in nums1 (if any)
+        result.extend(nums2[j:])         # Add remaining elements in nums2 (if any)
+        
+        return result                    # Return the merged sorted list
 
 # Example test case
 solution = Solution()
@@ -273,6 +263,7 @@ nums2 = [1, 3, 4]  # Second sorted array
 
 # Print the merged and sorted result
 print("Merged array:", solution.merge_sorted_arrays(nums1, nums2))
+
 
 """
 Linked List Cycle Detection (Floyd’s Cycle Detection)
