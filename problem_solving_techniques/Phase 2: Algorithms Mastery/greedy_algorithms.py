@@ -115,6 +115,16 @@ class Solution:
         
         # Return the minimum number of platforms required
         return result
+    
+# Example usage
+solution = Solution()
+arrival = [900, 940, 950, 1100, 1500, 1800]  # Arrival times in 24-hour format
+departure = [910, 1200, 1120, 1130, 1900, 2000]  # Departure times in 24-hour format
+
+# Calculate and print the result
+print("Minimum platforms required:", solution.min_platforms(arrival, departure))
+
+
 """
 Time Complexity: O(n log n)
 We sort the arrival and departure times.
