@@ -209,21 +209,6 @@ cons = [1, 1, 1, 64, 23, 64, 22, 22, 22]
 print(find_three_consecutive_numbers(cons))
 
 
-# def three_combinations(comp):
-
-#     for i in range(3): 
-#         for j in range(3): 
-#             for k in range(3): 
-                  
-#                 # check if the indexes are not 
-#                 # same 
-#                 if (i!=j and j!=k and i!=k): 
-#                     print(comp[i], comp[j], comp[k]) 
-                      
-# # Driver Code 
-# three_combinations([1, 2, 3])
-
-
 from itertools import permutations
 
 def find_all_combinations(digits):
