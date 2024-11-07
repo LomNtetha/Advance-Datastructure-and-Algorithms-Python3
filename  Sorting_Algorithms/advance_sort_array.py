@@ -9,7 +9,7 @@ Then, it recursively applies the same process to the left and right subarrays.
 
 """
 
-#without class
+# without class
 def partition(arr, low, high):
     pivot = arr[high]  # Choose the last element as the pivot
     i = low - 1        # Index of smaller element
