@@ -68,7 +68,7 @@ Given the root of a binary tree, return its postorder traversal.
 Example:
 Input:
 
-root = [1, null, 2, 3]  # Represents the tree: 1 -> (null, 2 -> (3, null))
+root = [1, null, 2, 3]  # Representssolution = Solution() the tree: 1 -> (null, 2 -> (3, null))
 Output: [3, 2, 1]
 
 Technique Used: Postorder Traversal (DFS)
