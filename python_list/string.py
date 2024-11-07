@@ -67,3 +67,67 @@ print(solution.isAnagram("allergy", "allergic")) # Output: False
 print(solution.isAnagram("g", "g"))            # Output: True
 
 
+
+
+"""
+Now, lets look into this through a question. Given a string of braces named bound_by, and a string named tag_name. The task is to print a new string such that tag_name is in the middle of bound_by.
+
+Example 1:
+
+Input: 
+bound_by = [[]], tag_name = tag
+Output:
+[[tag]]
+Example 2:
+
+Input: 
+bound_by = <>, tag_name = body
+Output:
+<body>
+"""
+class Solution:
+    def createBoundedTag(self, bound_by, tag_name):
+        # Find the midpoint to split bound_by
+        midpoint = len(bound_by) // 2
+        opening = bound_by[:midpoint]  # First half
+        closing = bound_by[midpoint:]  # Second half
+        
+        # Form the result with tag_name in the middle
+        return f"{opening}{tag_name}{closing}"
+
+# Example usage:
+solution = Solution()
+
+# Test case 1
+bound_by = "[[]]"
+tag_name = "tag"
+print(solution.createBoundedTag(bound_by, tag_name))  # Output: "[[tag]]"
+
+# Test case 2
+bound_by = "<>"
+tag_name = "body"
+print(solution.createBoundedTag(bound_by, tag_name))  # Output: "<body>"
+
+class Solution:
+    def makeNewString(self, a, b):
+        # Determine the shorter and longer strings
+        if len(a) < len(b):
+            shorter, longer = a, b
+        else:
+            shorter, longer = b, a
+        
+        # Form the new string in the required format
+        return shorter + longer + shorter
+
+# Example usage:
+solution = Solution()
+
+# Test case 1
+a = "Hi"
+b = "There"
+print(solution.makeNewString(a, b))  # Output: "HiThereHi"
+
+# Test case 2
+a = "Hello"
+b = "Hi"
+print(solution.makeNewString(a, b))  # Output: "HiHelloHi"
