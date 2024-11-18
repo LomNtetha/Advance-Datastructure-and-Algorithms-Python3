@@ -1,3 +1,14 @@
+
+"""
+Write a function to find the maximum of each pair of adjacent elements in an array."
+
+Analysis of the Code:
+The function max_adjacent_pairs does the following:
+
+Iterates through the array and compares each element with the next one.
+Appends the maximum of each pair to the result list.
+Returns the list of maximum values for each adjacent pair.
+"""
 def max_adjacent_pairs(arr):
     result = []
     for i in range(len(arr) - 1):
@@ -10,11 +21,22 @@ arr1 = [1, 3, 2, 3, 4, 5]
 arr2 = [1, 5,7,8,9,10]
 arr3 = [1, 2, 2, 3, 4, 5]
 
-print(max_adjacent_pairs(arr1))  # Output: [2, 2, 3, 4, 5]
-print(max_adjacent_pairs(arr2))  # Output: [5] 
-print(max_adjacent_pairs(arr3) ) # Output: [5] 
+print(max_adjacent_pairs(arr1))
+print(max_adjacent_pairs(arr2))  
+print(max_adjacent_pairs(arr3) )
 
+"""
+Write a function that takes an array of integers and returns a list of the strongest neighbors for each element. 
+A 'strongest neighbor' is the maximum value between an element and its adjacent (next) element.
+Example:
+Input:
+arr = [1, 2, 2, 3, 4, 5]
 
+Output Reasoning:
+
+Adjacent comparisons: (1, 2), (2, 2), (2, 3), (3, 4), (4, 5)
+Strongest neighbors: [2, 2, 3, 4, 5]
+"""
 def find_strongest_neighbour(arr):
     # Initialize an empty list to store the results
     strongest_neighbours = []
@@ -31,7 +53,9 @@ arr = [1, 2, 2, 3, 4, 5]
 print(find_strongest_neighbour(arr))  # Output: [2, 2, 3, 4, 5]
 
 
-
+"""
+Write a function to count the number of unique elements in a list without using built-in Python functions like set.
+"""
 def count_unique_numbers(input_list):
     l1 = []
     count = 0
