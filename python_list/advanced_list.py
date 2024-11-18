@@ -54,7 +54,7 @@ print(find_strongest_neighbour(arr))  # Output: [2, 2, 3, 4, 5]
 
 
 """
-Write a function to count the number of unique elements in a list without using built-in Python functions like set.
+Write a function to count the number of unique elements in a list without using built-in Python functions like set.s
 """
 def count_unique_numbers(input_list):
     l1 = []
@@ -71,7 +71,9 @@ input_list = [1, 2, 2, 5, 8, 4, 4, 8]
 
 print("Number of unique items are:", count_unique_numbers(input_list))
 
-
+"""
+Write a function to count the number of unique elements in a list using Python's set data structure
+"""
 def count_unique_numbers_using_set(lists):
     # Convert the list to a set to remove duplicates, then convert back to a list
     unique_list = list(set(lists))
@@ -109,7 +111,18 @@ unique_product(input_list)
 from collections import Counter
 
 """
-This is to address the frequence question using Counter() and compresion list
+Write a function to find all elements in a list that appear more than a given number of times K
+
+Example Walkthrough:
+Input 1:
+test_list1 = [4, 6, 4, 3, 3, 4, 3, 4, 3, 8], K1 = 3
+
+Step-by-Step Process:
+
+Count frequencies: {4: 4, 6: 1, 3: 4, 8: 1}
+Extract elements with frequency > 3: [4, 3]
+Output:
+Here is the frequency [4, 3]
 
 """
 def find_elements_with_frequency_greater_than_k(test_list, K):
@@ -162,7 +175,14 @@ test_list2 = [4, 6, 4, 3, 3, 4, 3, 4, 6, 6]
 K2 = 2
 print(find_elements_with_frequency_greater_than_k(test_list2, K2))  # Output: [4, 3, 6]
 
-
+"""
+Write a function that takes a list and returns all elements after the first three, ignoring the initial three elements.
+Example:
+Input:
+cons = [1, 1, 1, 64, 23, 64, 22, 22, 22]
+Output:
+[64, 23, 64, 22, 22, 22]
+"""
 def print_three_consective_numbers(cons):
 
     count = 0
@@ -178,7 +198,12 @@ cons= [1, 1, 1, 64, 23, 64, 22, 22, 22]
 print (print_three_consective_numbers(cons))
 
 """
-print all items in a list that appear consecutively at least three times.
+Write a function that finds and returns elements in a list that appear consecutively at least three times.
+Example:
+Input:
+cons = [1, 1, 1, 64, 23, 64, 22, 22, 22]
+Output:
+[1, 22]
 """
 
 def print_three_consecutive_numbers(cons):
