@@ -173,6 +173,125 @@ sol = Solution()
 graph = {0: [1], 1: [2], 2: [0]}
 print(sol.has_cycle(graph))
 
+"""
+Question:
+You are developing a text-based adventure game where players navigate through a series of interconnected rooms. Each room is represented as a node in a graph, and the connections between the rooms are represented as edges in the graph. Players can move from one room to another if there is a direct connection between them.
+
+Your task is to implement a function that finds the shortest path between two rooms using the Breadth-First Search (BFS) algorithm.
+
+Requirements:
+Represent the graph as an adjacency list.
+Write a function find_shortest_path(start, end) that:
+Takes the starting room start and the destination room end.
+Returns a list of rooms representing the shortest path from start to end. If no path exists, return None.
+Ensure the function handles edge cases such as:
+The starting room or destination room does not exist.
+No path exists between the two rooms.
+Constraints:
+The graph is unweighted (all edges have the same "cost").
+The graph is undirected (connections work both ways).
+The graph is connected (all rooms are reachable) or may have some isolated components.
+Example:
+Graph Structure:
+The game map is represented as follows:
+
+Rooms: "Entrance", "Hallway", "Kitchen", "Living Room", "Bedroom".
+Connections:
+Copy code
+Entrance ↔ Hallway
+Hallway ↔ Kitchen
+Kitchen ↔ Living Room
+Living Room ↔ Bedroom
+Input:
+python
+Copy code
+start = "Entrance"
+end = "Bedroom"
+Output:
+python
+Copy code
+['Entrance', 'Hallway', 'Kitchen', 'Living Room', 'Bedroom']
+Explanation:
+The shortest path from "Entrance" to "Bedroom" passes through all intermediate rooms in the order shown.
+
+"""
+
+from collections import deque
+
+class Solution:
+    def __init__(self):
+        self.graph = {}  # Represents the rooms and their connections as an adjacency list
+
+    def add_room(self, room):
+        """
+        Adds a room to the graph.
+        :param room: The name of the room (node)
+        """
+        if room not in self.graph:
+            self.graph[room] = []
+
+    def connect_rooms(self, room1, room2):
+        """
+        Creates a two-way connection between two rooms.
+        :param room1: First room
+        :param room2: Second room
+        """
+        self.graph[room1].append(room2)
+        self.graph[room2].append(room1)
+
+    def find_shortest_path(self, start, end):
+        """
+        Finds the shortest path between two rooms using BFS.
+        :param start: Starting room
+        :param end: Destination room
+        :return: List representing the shortest path or None if no path exists
+        """
+        if start not in self.graph or end not in self.graph:
+            return None  # Return None if either room doesn't exist
+
+        visited = set()  # To keep track of visited rooms
+        queue = deque([[start]])  # Queue to store paths, starting with the `start` room
+
+        while queue:
+            path = queue.popleft()  # Get the next path from the queue
+            room = path[-1]  # Get the last room in the current path
+
+            if room in visited:
+                continue
+
+            visited.add(room)
+
+            # Check if we've reached the destination
+            if room == end:
+                return path
+
+            # Add connected rooms to the queue
+            for neighbor in self.graph[room]:
+                if neighbor not in visited:
+                    new_path = path + [neighbor]
+                    queue.append(new_path)
+
+        return None  # No path found
+
+
+# Example Usage
+solution = Solution()
+solution.add_room("Entrance")
+solution.add_room("Hallway")
+solution.add_room("Kitchen")
+solution.add_room("Living Room")
+solution.add_room("Bedroom")
+
+solution.connect_rooms("Entrance", "Hallway")
+solution.connect_rooms("Hallway", "Kitchen")
+solution.connect_rooms("Kitchen", "Living Room")
+solution.connect_rooms("Living Room", "Bedroom")
+
+# Find the shortest path
+shortest_path = solution.find_shortest_path("Entrance", "Bedroom")
+print("Shortest Path:", shortest_path)
+
+
 
 """
 5. Find the Shortest Path Using Dijkstra's Algorithm
@@ -879,9 +998,7 @@ start = 0
 Example Output:
 [(0, 1, 2), (1, 2, 3), (0, 3, 6)]
 Solution:
-
-python
-Copy code"""
+"""
 from heapq import heappop, heappush
 
 class Solution:
