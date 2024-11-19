@@ -30,8 +30,6 @@ class Solution:
 solution = Solution()
 print(solution.longestPalindrome("babad"))  # Output: "bab" or "aba"
 
-
-
 from typing import List
 
 """
@@ -92,7 +90,7 @@ print("Minimum cost to cover all travel days:", solution.min_cost_for_travel(day
 
 
 """
- Fibonacci Sequence
+Fibonacci Sequence
 Question: Given a positive integer n, return the n-th Fibonacci number. The Fibonacci sequence is defined as follows:
 F(0) = 0, F(1) = 1
 F(n) = F(n-1) + F(n-2) for n > 1
@@ -123,7 +121,7 @@ sol = Solution()
 print(sol.fibonacci(7))  # Output: 13
 
 
-print(fibonacci(7))  # Output: 13
+# print(fibonacci(7))  # Output: 13
 
 """
 2. Climbing Stairs
