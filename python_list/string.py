@@ -1,3 +1,9 @@
+"""
+Write a Python class with a method to remove duplicate characters from a given string while preserving the order of their first appearance.
+Case sensitivity should be maintained (i.e., uppercase and lowercase characters are treated as distinct).
+
+Method 1
+"""
 class Solution:
     def removeDuplicates(self, s):
         result = ""
@@ -16,6 +22,12 @@ str = "geEksforGEeks"
 solution = Solution()
 print(solution.removeDuplicates(str))
 
+"""
+Write a Python class with a method to remove duplicate characters from a given string while preserving the order of their first appearance. 
+Case sensitivity should be maintained (i.e., uppercase and lowercase characters are treated as distinct).
+
+Method 2
+"""
 
 class Solution:
     def removeDuplicates(self, s):
@@ -28,6 +40,15 @@ str = "geEksforGEeks"
 results = str
 solution = Solution()
 print(solution.removeDuplicates(results))  # Output: "geksfor"
+
+"""
+Write a Python class with a method that takes a string as input and checks whether the number of occurrences of the word "cat" is equal to the number of occurrences of the word "hat". Return True if the counts match, otherwise return False.
+
+Key Points:
+
+Use the str.count() method to calculate the occurrences of "cat" and "hat".
+Compare the counts and return the result.
+"""
 
 class Solution:
     def cat_hat(self, s):
@@ -48,6 +69,16 @@ print(solution.cat_hat(str1))  # Output: True
 # Test case 2
 str2 = "bazingaa"
 print(solution.cat_hat(str2))  # Output: True
+
+"""
+Write a Python class with a method that determines whether two given strings are anagrams of each other. Two strings are considered anagrams if they have the same characters in the same frequency, regardless of the order. Return True if the strings are anagrams, otherwise return False.
+
+Key Points:
+
+Anagrams must have the same length.
+Use the sorted() function to compare the sorted versions of the strings.
+Handle edge cases such as strings of length 1 or empty strings.
+"""
 
 class Solution:
     def isAnagram(self, s1, s2):
