@@ -266,54 +266,6 @@ print("Merged array:", solution.merge_sorted_arrays(nums1, nums2))
 
 
 """
-Linked List Cycle Detection (Floyd’s Cycle Detection)
-Example Question: Given a linked list, determine if there is a cycle in it. Use constant space.
-
-Input: A linked list.
-
-Approach:
-
-Use two pointers: a slow pointer (slow) that moves one step at a time, and a fast pointer (fast) that moves two steps at a time.
-If the fast pointer meets the slow pointer, there is a cycle. If the fast pointer reaches the end (null), there is no cycle.
-Time Complexity: O(n) – Each pointer will traverse the list once.
-
-"""
-
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-
-class Solution:
-    def hasCycle(self, head: ListNode) -> bool:
-        slow, fast = head, head
-        
-        # Traverse the linked list with two pointers
-        while fast and fast.next:
-            slow = slow.next           # Move slow pointer by 1 step
-            fast = fast.next.next      # Move fast pointer by 2 steps
-
-            if slow == fast:           # Cycle detected
-                return True
-        
-        return False                   # No cycle
-
-# Example Usage
-# Create a linked list with a cycle for testing
-node1 = ListNode(3)
-node2 = ListNode(2)
-node3 = ListNode(0)
-node4 = ListNode(-4)
-
-node1.next = node2
-node2.next = node3
-node3.next = node4
-node4.next = node2  # Creates a cycle back to node2
-
-solution = Solution()
-print(solution.hasCycle(node1))  # Output: True
-
-"""
 Partitioning Array (QuickSort Partition)
 Example Question: Given an unsorted array, partition it around a pivot such that elements less than the pivot come before all elements greater than the pivot.
 
