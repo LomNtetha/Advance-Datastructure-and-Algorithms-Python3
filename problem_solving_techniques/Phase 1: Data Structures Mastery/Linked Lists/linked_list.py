@@ -41,12 +41,9 @@ while reversed_head:
 # Output: 5 -> 4 -> 3 -> 2 -> 1
 """
 Time Complexity:
+O(n), where n is the number of nodes in the linked list. We traverse the list once.
 
-O(n), where 
-𝑛
-n is the number of nodes in the linked list. We traverse the list once.
 Space Complexity:
-
 O(1). We only use a few extra pointers, so the space complexity is constant.
 """
 
@@ -106,7 +103,8 @@ Given the heads of two sorted linked lists, merge them into one sorted list. The
 
 Example:
 
-Input: List 1: 1 -> 2 -> 4
+Input:
+List 1: 1 -> 2 -> 4
 List 2: 1 -> 3 -> 4
 
 Output: Merged List: 1 -> 1 -> 2 -> 3 -> 4 -> 4
@@ -147,14 +145,9 @@ while merged_head:
 # Output: 1 -> 1 -> 2 -> 3 -> 4 -> 4
 """
 Time Complexity:
+O(n + m), where 𝑛 and 𝑚 are the lengths of the two linked lists.
 
-O(n + m), where 
-𝑛
-n and 
-𝑚
-m are the lengths of the two linked lists.
 Space Complexity:
-
 O(1). We merge the lists in place without using any extra space for the new list.
 """
 
