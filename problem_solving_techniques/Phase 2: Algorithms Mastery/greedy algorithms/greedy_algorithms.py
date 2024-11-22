@@ -418,3 +418,49 @@ We sort the numbers based on the custom comparator.
 Space Complexity: O(n)
 We store the numbers as strings.
 """
+
+"""
+Problem Setup:
+Suppose we have coin denominations of 25, 10, 5, and 1 (as in U.S. currency) and need to make 41 cents. Our goal is to use as few coins as possible to reach this amount.
+
+Complexity:
+Time Complexity: O(n), where 
+n is the number of coin denominations (constant in this case as it is a fixed list of 4 denominations).
+Space Complexity: O(k), where 
+k is the number of coins used (to store the list coins_used).
+"""
+
+class Solution:
+    def minimumCoins(self, amount):
+        """
+        Function to find the minimum number of coins required to make the given amount.
+        Parameters:
+        - amount (int): The target amount in cents.
+        
+        Returns:
+        - int: Minimum number of coins required.
+        - list: Coins used to form the amount.
+        """
+        # Variables to store the number of coins and the list of coins used
+        coin_count = 0
+        coins_used = []
+
+        # Iterate through each denomination
+        for coin in denominations:
+            # Determine how many coins of this denomination can be used
+            if amount >= coin:
+                coins_used.append(coin)  # Append the coin
+                coin_count += 1          # Increment the coin count
+                amount -= coin           # Reduce the remaining amount
+
+
+        return coin_count, coins_used
+
+# Coin denominations in descending order
+denominations = [25, 16,10, 5, 1]
+# Example usage
+solution = Solution()
+amount = 41  # Target amount in cents
+min_coins, coins_used = solution.minimumCoins(amount)
+print(f"Minimum coins required: {min_coins}")
+print(f"Coins used: {coins_used}")
