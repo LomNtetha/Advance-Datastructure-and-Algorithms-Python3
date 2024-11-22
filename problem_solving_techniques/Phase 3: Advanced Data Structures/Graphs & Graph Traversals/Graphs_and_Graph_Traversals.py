@@ -196,20 +196,18 @@ Graph Structure:
 The game map is represented as follows:
 
 Rooms: "Entrance", "Hallway", "Kitchen", "Living Room", "Bedroom".
+
 Connections:
-Copy code
 Entrance ↔ Hallway
 Hallway ↔ Kitchen
 Kitchen ↔ Living Room
 Living Room ↔ Bedroom
+
 Input:
-python
-Copy code
 start = "Entrance"
 end = "Bedroom"
+
 Output:
-python
-Copy code
 ['Entrance', 'Hallway', 'Kitchen', 'Living Room', 'Bedroom']
 Explanation:
 The shortest path from "Entrance" to "Bedroom" passes through all intermediate rooms in the order shown.
