@@ -248,20 +248,11 @@ Example:
 Input: coins = [1, 2, 5], amount = 11
 Output: 3
 Explanation: 
-11
-=
-5
-+
-5
-+
-1
 11=5+5+1 (3 coins).
 
 Input: coins = [2], amount = 3
 Output: -1
-Explanation: There is no combination of coins that sums to 
-3
-3.
+Explanation: There is no combination of coins that sums to 3.
 
 Input: coins = [1], amount = 0
 Output: 0
@@ -270,9 +261,7 @@ Output: 0
 """
 Technique: Dynamic Programming
 Time Complexity: 
-O(n⋅amount), where 
-𝑛
-n is the number of coins.
+O(n⋅amount), where  n is the number of coins.
 Space Complexity: 
 O(amount).
 """
@@ -320,9 +309,7 @@ Explanation: Rob house 1 ($2), house 3 ($9), and house 5 ($1). Total = $12.
 """
 Technique: Dynamic Programming
 Time Complexity: 
-O(n), where 
-𝑛
-n is the number of houses.
+O(n), where  n is the number of houses.
 Space Complexity: 
 O(1), as we optimize to use constant space.
 """
@@ -371,13 +358,11 @@ Input: nums = [1], target = 1
 Output: 1
 
 Technique: Dynamic Programming (Subset Sum)
+
 Time Complexity: 
+O(n⋅sum), where  n is the number of elements in nums.
 
-O(n⋅sum), where 
-𝑛
-n is the number of elements in nums.
 Space Complexity: 
-
 O(sum).
 """
 
@@ -500,6 +485,7 @@ Input:
 weights = [2, 1, 3]
 values = [4, 2, 3]
 W = 4
+
 Output: 6
 Explanation: Select items with weights 
 1 and 
@@ -556,8 +542,8 @@ word1 = "horse"
 word2 = "ros"
 
 Output: 3
-Explanation:
 
+Explanation:
 Replace 'h' with 'r'.
 Delete 'o'.
 Delete 'e'.
