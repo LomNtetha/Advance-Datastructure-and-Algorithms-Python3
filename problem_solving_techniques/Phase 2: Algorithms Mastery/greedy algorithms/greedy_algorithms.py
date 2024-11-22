@@ -43,6 +43,8 @@ amount = 41  # Target amount in cents
 min_coins, coins_used = solution.minimumCoins(amount)
 print(f"Minimum coins required: {min_coins}")
 print(f"Coins used: {coins_used}")
+
+
 """
 2. Activity Selection Problem
 Problem:
@@ -113,8 +115,14 @@ Explanation: Take the full items with weight 20 (value 100) and weight 10 (value
 
 class Solution:
     def fractional_knapsack(self, weights: List[int], values: List[int], capacity: int) -> float:
-        # Calculate value-to-weight ratio and sort items in descending order
-        items = sorted([(v / w, w) for v, w in zip(values, weights)], reverse=True)
+        # Step 1: Zip values and weights together
+        zipped_items = zip(values, weights)
+        
+        # Step 2: Calculate value-to-weight ratios and create a list of tuples
+        items_with_ratios = [(v / w, w) for v, w in zipped_items]
+        
+        # Step 3: Sort the items by value-to-weight ratio in descending order
+        items = sorted(items_with_ratios, reverse=True)
         
         total_value = 0.0  # Total value accumulated in the knapsack
         
@@ -131,6 +139,19 @@ class Solution:
         
         # Return the maximum value that can be taken
         return total_value
+    
+# Example usage:
+solution = Solution()
+weights = [10, 20, 30]  # Weights of items
+values = [60, 100, 120]  # Values of items
+capacity = 50  # Capacity of the knapsack
+
+# Call the fractional_knapsack method
+max_value = solution.fractional_knapsack(weights, values, capacity)
+
+# Print the result
+print(f"Maximum value in the knapsack: {max_value}")
+
 """
 Time Complexity: O(n log n)
 We sort the items based on their value-to-weight ratio.
