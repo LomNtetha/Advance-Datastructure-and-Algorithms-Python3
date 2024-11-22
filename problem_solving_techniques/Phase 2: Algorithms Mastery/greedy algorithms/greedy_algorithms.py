@@ -1,4 +1,49 @@
 """
+1. Problem Setup:
+Suppose we have coin denominations of 25, 10, 5, and 1 (as in U.S. currency) and need to make 41 cents. Our goal is to use as few coins as possible to reach this amount.
+
+Complexity:
+Time Complexity: O(n), where 
+n is the number of coin denominations (constant in this case as it is a fixed list of 4 denominations).
+Space Complexity: O(k), where 
+k is the number of coins used (to store the list coins_used).
+"""
+
+class Solution:
+    def minimumCoins(self, amount):
+        """
+        Function to find the minimum number of coins required to make the given amount.
+        Parameters:
+        - amount (int): The target amount in cents.
+        
+        Returns:
+        - int: Minimum number of coins required.
+        - list: Coins used to form the amount.
+        """
+        # Variables to store the number of coins and the list of coins used
+        coin_count = 0
+        coins_used = []
+
+        # Iterate through each denomination
+        for coin in denominations:
+            # Determine how many coins of this denomination can be used
+            if amount >= coin:
+                coins_used.append(coin)  # Append the coin
+                coin_count += 1          # Increment the coin count
+                amount -= coin           # Reduce the remaining amount
+
+
+        return coin_count, coins_used
+
+# Coin denominations in descending order
+denominations = [25, 16,10, 5, 1]
+# Example usage
+solution = Solution()
+amount = 41  # Target amount in cents
+min_coins, coins_used = solution.minimumCoins(amount)
+print(f"Minimum coins required: {min_coins}")
+print(f"Coins used: {coins_used}")
+"""
 2. Activity Selection Problem
 Problem:
 Given n activities with their start and end times, select the maximum number of activities that can be performed by a single person, assuming that a person can only work on one activity at a time.
@@ -14,23 +59,39 @@ from typing import Dict, List, Tuple
 
 class Solution:
     def max_activities(self, start: List[int], end: List[int]) -> int:
-        # Sort activities by their finish times
-        activities = sorted(zip(start, end), key=lambda x: x[1])
+        # Zip start and end times together
+        activities = list(zip(start, end))
+        
+        # Sort the activities based on their end times (second element of each tuple)
+        activities.sort(key=lambda x: x[1])
         
         # The first activity is always selected
         last_end_time = activities[0][1]
         count = 1  # We've selected the first activity
+        selected_activities = [0]  # To store indices of selected activities
         
         # Iterate over the remaining activities
         for i in range(1, len(activities)):
             # If the current activity starts after the last selected activity ends, select it
             if activities[i][0] >= last_end_time:
                 count += 1
+                selected_activities.append(i)  # Track the index of the selected activity
                 # Update last_end_time to the end time of the current activity
                 last_end_time = activities[i][1]
         
-        # Return the maximum number of activities that can be performed
-        return count
+        # Return the maximum number of activities that can be performed and the selected activities' indices
+        return count, selected_activities
+
+
+# Example usage
+solution = Solution()
+start = [1, 3, 0, 5, 8, 5]
+end = [2, 4, 6, 7, 9, 9]
+max_activities, selected_activities = solution.max_activities(start, end)
+
+print(f"Maximum number of activities: {max_activities}")
+print(f"Indices of selected activities: {selected_activities}")
+
 """
 Time Complexity: O(n log n)
 We sort the activities based on their end times.
@@ -418,49 +479,3 @@ We sort the numbers based on the custom comparator.
 Space Complexity: O(n)
 We store the numbers as strings.
 """
-
-"""
-Problem Setup:
-Suppose we have coin denominations of 25, 10, 5, and 1 (as in U.S. currency) and need to make 41 cents. Our goal is to use as few coins as possible to reach this amount.
-
-Complexity:
-Time Complexity: O(n), where 
-n is the number of coin denominations (constant in this case as it is a fixed list of 4 denominations).
-Space Complexity: O(k), where 
-k is the number of coins used (to store the list coins_used).
-"""
-
-class Solution:
-    def minimumCoins(self, amount):
-        """
-        Function to find the minimum number of coins required to make the given amount.
-        Parameters:
-        - amount (int): The target amount in cents.
-        
-        Returns:
-        - int: Minimum number of coins required.
-        - list: Coins used to form the amount.
-        """
-        # Variables to store the number of coins and the list of coins used
-        coin_count = 0
-        coins_used = []
-
-        # Iterate through each denomination
-        for coin in denominations:
-            # Determine how many coins of this denomination can be used
-            if amount >= coin:
-                coins_used.append(coin)  # Append the coin
-                coin_count += 1          # Increment the coin count
-                amount -= coin           # Reduce the remaining amount
-
-
-        return coin_count, coins_used
-
-# Coin denominations in descending order
-denominations = [25, 16,10, 5, 1]
-# Example usage
-solution = Solution()
-amount = 41  # Target amount in cents
-min_coins, coins_used = solution.minimumCoins(amount)
-print(f"Minimum coins required: {min_coins}")
-print(f"Coins used: {coins_used}")
