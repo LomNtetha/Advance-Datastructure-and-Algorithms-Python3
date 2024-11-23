@@ -27,7 +27,7 @@ class Solution:
         # Iterate through each denomination
         for coin in denominations:
             # Determine how many coins of this denomination can be used
-            if amount >= coin:
+            while amount >= coin:
                 coins_used.append(coin)  # Append the coin
                 coin_count += 1          # Increment the coin count
                 amount -= coin           # Reduce the remaining amount
@@ -171,40 +171,40 @@ Explanation: At peak time (around 11:00), there are 3 trains at the station.
 
 """
 class Solution:
-    def min_platforms(self, arrival: List[int], departure: List[int]) -> int:
+    def findMinPlatforms(self, arrival, departure):
+
+        # Format arrival and departure times to ensure proper comparison
+        arrival = [time.zfill(5) for time in arrival]
+        departure = [time.zfill(5) for time in departure]
         # Sort arrival and departure times
         arrival.sort()
         departure.sort()
         
-        platforms = 1  # Minimum platforms needed
-        result = 1  # Final result (maximum platforms required)
-        i = 1  # Pointer for arrival
-        j = 0  # Pointer for departure
+        # Initialize pointers and platform counters
+        i, j = 0, 0
+        platforms_needed = 0
+        max_platforms = 0
+        n = len(arrival)
         
-        # Traverse the arrival and departure lists
-        while i < len(arrival) and j < len(departure):
-            # If next train is arriving before the current one departs, increase platform count
-            if arrival[i] <= departure[j]:
-                platforms += 1
+        # Traverse both arrays
+        while i < n and j < n:
+            # If the next train is arriving
+            if arrival[i] < departure[j]:
+                platforms_needed += 1
+                max_platforms = max(max_platforms, platforms_needed)
                 i += 1
-            else:
-                # If a train departs, reduce platform count
-                platforms -= 1
+            else:  # If the next train is departing
+                platforms_needed -= 1
                 j += 1
-            
-            # Update the result if the current number of platforms is the maximum so far
-            result = max(result, platforms)
         
-        # Return the minimum number of platforms required
-        return result
-    
-# Example usage
-solution = Solution()
-arrival = [900, 940, 950, 1100, 1500, 1800]  # Arrival times in 24-hour format
-departure = [910, 1200, 1120, 1130, 1900, 2000]  # Departure times in 24-hour format
+        return max_platforms
 
-# Calculate and print the result
-print("Minimum platforms required:", solution.min_platforms(arrival, departure))
+# Example usage
+arrival = ["9:00", "9:40", "9:50", "11:00", "15:00", "18:00"]
+departure = ["9:10", "12:00", "11:20", "11:30", "19:00", "20:00"]
+
+solution = Solution()
+print(solution.findMinPlatforms(arrival, departure))  # Output: 3
 
 
 """
@@ -247,6 +247,10 @@ class Solution:
         
         # Return the total profit
         return total_profit
+# Example usage
+jobs = [(2, 100), (1, 19), (2, 27), (1, 25), (3, 15)]
+solution = Solution()
+print(solution.job_sequencing(jobs))  # Output: 142
 """
     
 Time Complexity: O(n log n)
@@ -310,6 +314,25 @@ class Solution:
         
         # Return the distances from the source to all other nodes
         return [distances[i] for i in range(len(graph))]
+# Example usage
+graph = {
+    0: [(1, 4), (7, 8)],
+    1: [(0, 4), (2, 8), (7, 11)],
+    2: [(1, 8), (3, 7), (8, 2), (5, 4)],
+    3: [(2, 7), (4, 9), (5, 14)],
+    4: [(3, 9), (5, 10)],
+    5: [(4, 10), (3, 14), (2, 4), (6, 2)],
+    6: [(5, 2), (7, 1), (8, 6)],
+    7: [(0, 8), (1, 11), (8, 7), (6, 1)],
+    8: [(2, 2), (7, 7), (6, 6)]
+}
+
+source = 0
+solution = Solution()
+distances = solution.dijkstra(graph, source)
+
+# Output distances
+print("Distances:", [distances[i] for i in range(len(graph))])
 """      
 Time Complexity: O(E log V)
 Where E is the number of edges and V is the number of vertices.
@@ -419,6 +442,11 @@ class Solution:
             den = den * x
         
         return result
+# Example usage
+solution = Solution()
+num = 6
+den = 14
+print(solution.egyptian_fraction(num, den))  # Output: [3, 11, 231]
 """
 Time Complexity: O(n), where n is the number of unit fractions generated.
 Space Complexity: O(n), where n is the number of unit fractions stored in the result.
@@ -436,24 +464,36 @@ Explanation: We can increase 1 to 4 and decrease 15 to 12, resulting in the heig
 
 """
 class Solution:
-    def minimize_max_difference(self, heights: List[int], k: int) -> int:
-        n = len(heights)
-        if n == 1:
-            return 0  # If there's only one tower, no modification is needed
-        
-        # Sort the heights to consider smallest and largest heights
+    def minimize_difference(self, heights: List[int], k: int) -> int:
+        # Step 1: Sort the array
         heights.sort()
         
-        # Initialize the maximum difference before any changes
-        max_diff = heights[-1] - heights[0]
+        # Step 2: Calculate the initial difference
+        n = len(heights)
+        initial_difference = heights[-1] - heights[0]
         
-        # Iterate through the sorted array and adjust the heights
-        for i in range(1, n):
-            min_height = min(heights[0] + k, heights[i] - k)
-            max_height = max(heights[-1] - k, heights[i - 1] + k)
-            max_diff = min(max_diff, max_height - min_height)
+        # Step 3: Initialize the minimized difference
+        min_difference = initial_difference
         
-        return max_diff
+        # Step 4: Iterate through the array and find the minimized difference
+        for i in range(n - 1):
+            # Calculate the potential new max and min
+            high = max(heights[i] + k, heights[-1] - k)
+            low = min(heights[0] + k, heights[i + 1] - k)
+            
+            # Update the minimum difference
+            min_difference = min(min_difference, high - low)
+        
+        return min_difference
+
+
+# Example usage:
+solution = Solution()
+heights = [1, 5, 15, 10]
+k = 3
+result = solution.minimize_difference(heights, k)
+print(f"Minimum difference: {result}")
+    
 """Time Complexity: O(n log n)
 We sort the array first and then iterate through it once.
 Space Complexity: O(1)
@@ -472,28 +512,37 @@ Explanation: By arranging the numbers as "9534330", we form the largest possible
 """
 from functools import cmp_to_key
 
+from typing import List
+
 class Solution:
-    def largest_number(self, nums: List[int]) -> str:
-        # Custom comparator to compare which combination forms a larger number
-        def compare(x, y):
-            # Combine x and y in two possible orders and compare them
-            if x + y > y + x:
-                return -1  # If x + y is greater, x should come first
-            else:
-                return 1  # Otherwise, y should come first
+    def largestNumber(self, nums: List[int]) -> str:
+        """
+        Rearrange numbers to form the largest number.
         
-        # Convert the integers to strings to facilitate comparison
+        Parameters:
+        nums (List[int]): List of non-negative integers.
+
+        Returns:
+        str: Largest possible number as a string.
+        """
+        # Convert all integers to strings
         nums_str = list(map(str, nums))
         
-        # Sort the numbers based on the custom comparator
-        nums_str.sort(key=cmp_to_key(compare))
+        # Custom sort based on the order of concatenation
+        nums_str.sort(key=lambda x: x*10, reverse=True)
         
-        # Edge case: If the largest number is 0, return "0"
-        if nums_str[0] == '0':
-            return '0'
+        # Join sorted strings into the final number
+        result = ''.join(nums_str)
         
-        # Join the sorted numbers to form the largest number
-        return ''.join(nums_str)
+        # Handle edge case where the result is multiple zeros (e.g., [0, 0])
+        return '0' if result[0] == '0' else result
+
+
+# Example usage
+solution = Solution()
+nums = [3, 30, 34, 5, 9]
+print(solution.largestNumber(nums))  # Output: "9534330"
+
 """
 Time Complexity: O(n log n)
 We sort the numbers based on the custom comparator.
