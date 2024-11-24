@@ -307,20 +307,8 @@ Input: text1 = "abcde", text2 = "ace"
 Output: 3 (subsequence: "ace")
 
 Time Complexity: 
-𝑂
-(
-𝑚
-×
-𝑛
-)
 O(m×n)
 Space Complexity: 
-𝑂
-(
-𝑚
-×
-𝑛
-)
 O(m×n)
 """
 
@@ -353,22 +341,8 @@ Input: word1 = "horse", word2 = "ros"
 
 Output: 3
 
-Time Complexity: 
-𝑂
-(
-𝑚
-×
-𝑛
-)
-O(m×n)
-Space Complexity: 
-𝑂
-(
-𝑚
-×
-𝑛
-)
-O(m×n)
+Time Complexity: O(m×n)
+Space Complexity: O(m×n)
 """
 
 class Solution:
@@ -486,10 +460,8 @@ Input: nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
 
 Output: 6
 
-Time Complexity: 
-O(n)
-Space Complexity: 
-O(1)
+Time Complexity: O(n)
+Space Complexity: O(1)
 """
 
 
@@ -516,10 +488,8 @@ Input: m = 3, n = 7
 
 Output: 28
 
-Time Complexity: 
-O(m×n)
-Space Complexity: 
-O(m×n)
+Time Complexity: O(m×n)
+Space Complexity: O(m×n)
 """
 
 class Solution:
@@ -546,11 +516,8 @@ Input: s = "aaa"
 
 Output: 6
 
-Time Complexity: 
-O(n^2)
-Space Complexity: 
-
-O(n 2)
+Time Complexity: O(n^2)
+Space Complexity: O(n 2)
 """
 
 class Solution:
