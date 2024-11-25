@@ -178,10 +178,10 @@ class Solution:
         total_return = 0.0  # Total return accumulated
         
         # Step 4: Allocate budget
-        for ratio, cost, ret in investments:
+        for ratio, cost in investments:
             if budget >= cost:
                 # Take the full investment
-                total_return += ret
+                total_return += ratio * cost
                 budget -= cost
             else:
                 # Take a fractional part of the investment
