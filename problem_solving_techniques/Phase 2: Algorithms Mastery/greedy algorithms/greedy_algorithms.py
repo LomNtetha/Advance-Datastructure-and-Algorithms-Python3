@@ -1,5 +1,5 @@
 """
-1. Problem Setup:
+1. Problem:
 Suppose we have coin denominations of 25, 10, 5, and 1 (as in U.S. currency) and need to make 41 cents. Our goal is to use as few coins as possible to reach this amount.
 
 Complexity:
@@ -151,6 +151,53 @@ max_value = solution.fractional_knapsack(weights, values, capacity)
 
 # Print the result
 print(f"Maximum value in the knapsack: {max_value}")
+
+
+"""
+An investor has $50,000 to allocate across three investment options. Each option has a cost per unit (investment) and an expected return per unit. The goal is to maximize the total return while staying within the budget.
+
+Inputs:
+
+Investment options (costs and returns):
+Option 1: Cost = $10,000, Return = $15,000
+Option 2: Cost = $20,000, Return = $25,000
+Option 3: Cost = $15,000, Return = $18,000
+Budget: $50,000
+"""
+class Solution:
+    def fractional_allocation(self, costs: List[int], returns: List[int], budget: int) -> float:
+        # Step 1: Zip costs and returns together
+        zipped_items = zip(costs, returns)
+        
+        # Step 2: Calculate return-to-cost ratios and create a list of tuples
+        investments = [(r / c, c, r) for c, r in zipped_items]
+        
+        # Step 3: Sort investments by ratio in descending order
+        investments.sort(reverse=True, key=lambda x: x[0])
+        
+        total_return = 0.0  # Total return accumulated
+        
+        # Step 4: Allocate budget
+        for ratio, cost, ret in investments:
+            if budget >= cost:
+                # Take the full investment
+                total_return += ret
+                budget -= cost
+            else:
+                # Take a fractional part of the investment
+                total_return += ratio * budget
+                break
+        
+        return total_return
+
+# Example usage
+solution = Solution()
+costs = [10000, 20000, 15000]
+returns = [15000, 25000, 18000]
+budget = 50000
+
+max_return = solution.fractional_allocation(costs, returns, budget)
+print(f"Maximum return from the investment: ${max_return:.2f}")
 
 """
 Time Complexity: O(n log n)
