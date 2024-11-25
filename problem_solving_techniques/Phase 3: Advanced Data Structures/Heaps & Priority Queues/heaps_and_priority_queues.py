@@ -338,3 +338,61 @@ sol = Solution()
 nums = [1,1,1,2,2,3]
 k = 2
 print(sol.topKFrequent(nums, k))  # Output: [1, 2]
+
+"""
+Using a priority queue is an efficient way to implement Dijkstra's algorithm. The priority queue helps keep track of the next node to process (the one with the smallest distance) in 
+O(logV) time for each insertion and extraction, making the algorithm faster compared to a simple array or list for large graphs.
+
+
+"""
+
+import heapq
+from typing import Dict, List, Tuple
+
+class Solution:
+    def dijkstra(self, graph: Dict[int, List[Tuple[int, int]]], source: int) -> List[int]:
+        # Initialize distances as infinite for all nodes except the source
+        num_nodes = len(graph)
+        distances = [float('inf')] * num_nodes
+        distances[source] = 0
+        
+        # Priority queue: stores (distance, node)
+        priority_queue = [(0, source)]  # (distance to node, node index)
+        
+        while priority_queue:
+            # Extract the node with the smallest distance
+            current_distance, current_node = heapq.heappop(priority_queue)
+            
+            # If the current distance is greater than the stored distance, skip it (outdated entry)
+            if current_distance > distances[current_node]:
+                continue
+            
+            # Explore neighbors of the current node
+            for neighbor, weight in graph[current_node]:
+                distance = current_distance + weight
+                
+                # If a shorter path to the neighbor is found
+                if distance < distances[neighbor]:
+                    distances[neighbor] = distance
+                    heapq.heappush(priority_queue, (distance, neighbor))
+        
+        return distances
+
+# Example usage
+graph = {
+    0: [(1, 4), (7, 8)],
+    1: [(0, 4), (2, 8), (7, 11)],
+    2: [(1, 8), (3, 7), (8, 2), (5, 4)],
+    3: [(2, 7), (4, 9), (5, 14)],
+    4: [(3, 9), (5, 10)],
+    5: [(4, 10), (3, 14), (2, 4), (6, 2)],
+    6: [(5, 2), (7, 1), (8, 6)],
+    7: [(0, 8), (1, 11), (8, 7), (6, 1)],
+    8: [(2, 2), (7, 7), (6, 6)]
+}
+source_node = 0
+
+solution = Solution()
+distances = solution.dijkstra(graph, source_node)
+print(f"Shortest distances from node {source_node}: {distances}")
+
