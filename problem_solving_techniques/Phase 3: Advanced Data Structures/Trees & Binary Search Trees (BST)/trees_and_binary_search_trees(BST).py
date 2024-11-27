@@ -252,10 +252,8 @@ Write a function to check whether a binary tree is a valid binary search tree (B
 All nodes in the left subtree are smaller than the root.
 All nodes in the right subtree are larger than the root.
 Both left and right subtrees are also BSTs.
-Example Input:
 
-plaintext
-Copy code
+Example Input:
 root = [2, 1, 3]
 Tree structure:
 
@@ -282,9 +280,6 @@ Problem Statement:
 Given a binary search tree and two nodes, find their lowest common ancestor (LCA). The LCA of two nodes is the lowest node in the tree that has both nodes as descendants.
 
 Example Input:
-
-plaintext
-Copy code
 root = [6, 2, 8, 0, 4, 7, 9], p = 2, q = 8
 Tree structure:
         6
