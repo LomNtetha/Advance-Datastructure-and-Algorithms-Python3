@@ -359,3 +359,106 @@ nums = [1, 3, -1, -3, 5, 3, 6, 7]  # Input array
 k = 3  # Size of the sliding window
 solution = Solution()  # Create an instance of the Solution class
 print(solution.minSlidingWindow(nums, k))  # Output: [-1, -3, -3, -3, 3, 3]
+
+"""
+Problem Statement:
+You are developing a message processing system for customer service requests. Each request is a string containing a timestamp (in minutes) and a message, separated by a colon (:). The system needs to group messages that arrive within a 5-minute window and output them in chronological order. If multiple messages have the same timestamp, they must retain their original order.
+
+The grouping rule is:
+
+Each window starts with the timestamp of the first unprocessed message.
+Messages are included in the same group if their timestamps are within 5 minutes (inclusive) of the window's start time.
+Once a message falls outside this range, start a new group.
+Input:
+messages: An array of strings, where each string is formatted as <timestamp>:<message>. The timestamp is an integer (in minutes), and <message> is the content.
+Output:
+An array of arrays, where each inner array contains grouped messages in chronological order based on the 5-minute window.
+
+Example 1:
+Input:
+messages = [
+    "1:Hello",
+    "2:Hi",
+    "6:How are you?",
+    "7:I am fine",
+    "11:Thanks",
+    "15:Goodbye"
+]
+
+Output:
+[
+    ["1:Hello", "2:Hi"],           # Messages within [1, 5]
+    ["6:How are you?", "7:I am fine"],  # Messages within [6, 10]
+    ["11:Thanks"],                # Messages within [11, 15]
+    ["15:Goodbye"]                # Messages within [15, 19]
+]
+
+Example 2:
+messages = [
+    "3:Order placed",
+    "3:Order confirmed",
+    "8:Dispatched",
+    "12:Delivered"
+]
+
+Output:
+[
+    ["3:Order placed", "3:Order confirmed"],  # Messages within [3, 7]
+    ["8:Dispatched"],                         # Messages within [8, 12]
+    ["12:Delivered"]                          # Messages within [12, 16]
+]
+Explanation of Example 1:
+Start at the first message, 1:Hello. The first 5-minute window is [1, 5].
+
+Messages 1:Hello and 2:Hi fall in this range, so they are grouped together.
+The next unprocessed message is 6:How are you?, starting a new window [6, 10].
+
+Messages 6:How are you? and 7:I am fine fall in this range, so they are grouped.
+The next unprocessed message is 11:Thanks, starting a new window [11, 15].
+
+Only 11:Thanks falls in this range.
+The last message is 15:Goodbye, starting a new window [15, 19].
+
+Only 15:Goodbye falls in this range.
+Each group is output as an inner array.
+"""
+def group_messages(messages: List[str]) -> List[List[str]]:
+    result = []  # List to hold the grouped messages
+    current_group = []  # Temporary group for messages in the current window
+    start_time = None  # Start timestamp of the current window
+    
+    for message in messages:
+        # Parse the timestamp and the message
+        timestamp, content = message.split(":")
+        timestamp = int(timestamp)
+        
+        if start_time is None:  # Initialize the first window
+            start_time = timestamp
+        
+        # Check if the message falls within the 5-minute window
+        if timestamp - start_time < 5:
+            current_group.append(message)
+        else:
+            # Push the current group to the result and start a new group
+            result.append(current_group)
+            current_group = [message]
+            start_time = timestamp  # Update the start time for the new group
+    
+    # Add the last group to the result
+    if current_group:
+        result.append(current_group)
+    
+    return result
+
+# Example usage
+messages = [
+    "1:Hello",
+    "2:Hi",
+    "6:How are you?",
+    "7:I am fine",
+    "11:Thanks",
+    "15:Goodbye"
+]
+
+output = group_messages(messages)
+print(output)
