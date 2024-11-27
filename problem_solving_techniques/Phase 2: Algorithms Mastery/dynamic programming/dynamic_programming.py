@@ -1,3 +1,13 @@
+
+""""
+The given code solves the problem of finding the longest palindromic substring in a given string. The question is:
+
+"Given a string s, find the longest substring in s that is a palindrome. A palindrome is a string that reads the same backward as forward."
+Time Complexity: O(n^2)
+Space Complexity: O(n^2)
+
+
+"""
 class Solution:
     def longestPalindrome(self, s: str) -> str:
         n = len(s)  # Length of the input string
@@ -30,20 +40,63 @@ class Solution:
 solution = Solution()
 print(solution.longestPalindrome("babad"))  # Output: "bab" or "aba"
 
+
+""""
+15. Longest Palindromic Subsequence
+Problem: Find the longest palindromic subsequence in a string.
+
+Input: s = "bbbab"
+
+Output: 4 (subsequence: "bbbb")
+"""
+
+"""
+Time Complexity: 
+
+O(n2)
+Space Complexity: 
+
+O(n^2)
+"""
+
+class Solution:
+    def longest_palindrome_subseq(self, s: str) -> int:
+        n = len(s)
+        # Create a DP table initialized with 0
+        dp = [[0] * n for _ in range(n)]
+
+        # Fill the DP table
+        for i in range(n):
+            dp[i][i] = 1  # Single characters are palindromes
+
+        for length in range(2, n + 1):  # Length of subsequence
+            for i in range(n - length + 1):
+                j = i + length - 1  # End index
+                if s[i] == s[j]:  # Characters match
+                    dp[i][j] = dp[i + 1][j - 1] + 2
+                else:
+                    dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])  # Take the max of ignoring one end
+
+        return dp[0][n - 1]  # Return the length of the longest palindromic subsequence
+
+# Example usage
+sol = Solution()
+print(sol.longest_palindrome_subseq("bbbab"))  # Output: 4
+
 from typing import List
 
 """
  A cab service offers three types of passes. 1D, 7D, 30D. A T days pass can be used for a continuous
 
-# duration only. Consider the days of the year being labeled sequentially from 1 to 365. Travelling is
+duration only. Consider the days of the year being labeled sequentially from 1 to 365. Travelling is
 
-# required only on some selected days of the year(input). Given the cost of different passes and the
+required only on some selected days of the year(input). Given the cost of different passes and the
 
-# days on which travel is required, Calculate the minimum amount using which we can travel on all these days.
+days on which travel is required, Calculate the minimum amount using which we can travel on all these days.
 
-# Input: days = [1,4,6,7,8,20], costs = [2,7,15]
+Input: days = [1,4,6,7,8,20], costs = [2,7,15]
 
-# Output: 11(2 + 7 + 2)
+Output: 11(2 + 7 + 2)
 """
 
 """
@@ -61,6 +114,8 @@ Total Space Complexity:
 O(D), where 
 𝐷 is the last travel day.
 """
+
+
 class Solution:
     def min_cost_for_travel(self, days: List[int], costs: List[int]) -> int:
         dp = {}  # Dictionary to store minimum cost up to each travel day
@@ -546,45 +601,3 @@ class Solution:
 # Example usage
 sol = Solution()
 print(sol.count_substrings("aaa"))  # Output: 6
-
-""""
-15. Longest Palindromic Subsequence
-Problem: Find the longest palindromic subsequence in a string.
-
-Input: s = "bbbab"
-
-Output: 4 (subsequence: "bbbb")
-"""
-
-"""
-Time Complexity: 
-
-O(n2)
-Space Complexity: 
-
-O(n^2)
-"""
-
-class Solution:
-    def longest_palindrome_subseq(self, s: str) -> int:
-        n = len(s)
-        # Create a DP table initialized with 0
-        dp = [[0] * n for _ in range(n)]
-
-        # Fill the DP table
-        for i in range(n):
-            dp[i][i] = 1  # Single characters are palindromes
-
-        for length in range(2, n + 1):  # Length of subsequence
-            for i in range(n - length + 1):
-                j = i + length - 1  # End index
-                if s[i] == s[j]:  # Characters match
-                    dp[i][j] = dp[i + 1][j - 1] + 2
-                else:
-                    dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])  # Take the max of ignoring one end
-
-        return dp[0][n - 1]  # Return the length of the longest palindromic subsequence
-
-# Example usage
-sol = Solution()
-print(sol.longest_palindrome_subseq("bbbab"))  # Output: 4
