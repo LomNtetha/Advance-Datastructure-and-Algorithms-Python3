@@ -11,7 +11,6 @@ class TreeNode:
 Example Input:
 root = [1, None, 2, 3]
 The tree structure:
-
     1
      \
       2
