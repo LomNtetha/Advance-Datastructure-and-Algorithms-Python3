@@ -6,7 +6,6 @@ The given code solves the problem of finding the longest palindromic substring i
 Time Complexity: O(n^2)
 Space Complexity: O(n^2)
 
-
 """
 class Solution:
     def longestPalindrome(self, s: str) -> str:
@@ -32,7 +31,7 @@ class Solution:
                     # Update longest palindrome details if this substring is longer
                     if j - i + 1 > max_len:
                         start, max_len = i, j - i + 1  # Update start index and max length
-        
+
         # Return the longest palindromic substring found in s
         return s[start:start + max_len]
 
