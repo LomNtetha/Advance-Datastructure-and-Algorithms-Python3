@@ -228,6 +228,8 @@ class Solution:
         departure.sort()
         
         # Initialize pointers and platform counters
+        #i: Tracks the next arrival.
+        #j: Tracks the next departure.
         i, j = 0, 0
         platforms_needed = 0
         max_platforms = 0
@@ -264,7 +266,8 @@ We use only a few extra variables.
 """
 5. Job Sequencing Problem
 Problem:
-Given n jobs with their deadlines and profits, find the sequence of jobs that maximizes the total profit. Each job takes 1 unit of time, and a job must be completed by its deadline.
+Given n jobs with their deadlines and profits, find the sequence of jobs that maximizes the total profit. Each job takes 1 unit of time, and a job must be
+completed by its deadline.
 
 Example:
 Input: jobs = [(2, 100), (1, 19), (2, 27), (1, 25), (3, 15)]
