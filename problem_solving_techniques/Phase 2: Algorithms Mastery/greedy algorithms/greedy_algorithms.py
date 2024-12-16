@@ -355,12 +355,12 @@ class Solution:
             # Iterate over neighbors of the current node
             for neighbor, weight in graph[current_node]:
                 # Calculate the new distance to the neighbor
-                distance = current_distance + weight
+                dist = current_distance + weight
                 
                 # If a shorter distance is found, update and push it to the heap
-                if distance < distances[neighbor]:
-                    distances[neighbor] = distance
-                    heapq.heappush(min_heap, (distance, neighbor))
+                if dist < distances[neighbor]:
+                    distances[neighbor] = dist
+                    heapq.heappush(min_heap, (dist, neighbor))
         
         # Return the distances from the source to all other nodes
         return [distances[i] for i in range(len(graph))]
@@ -413,12 +413,12 @@ class Solution:
             # Iterate over neighbors of the current node
             for neighbor, weight in graph[current_node]:
                 # Calculate the new distance to the neighbor
-                distance = current_distance + weight
+                dist = current_distance + weight
                 
                 # If a shorter distance is found, update and push it to the heap
-                if distance < distances[neighbor]:
-                    distances[neighbor] = distance
-                    heapq.heappush(min_heap, (distance, neighbor))
+                if dist < distances[neighbor]:
+                    distances[neighbor] = dist
+                    heapq.heappush(min_heap, (dist, neighbor))
                     
                     # Update the path to this neighbor
                     paths[neighbor] = paths[current_node] + [neighbor]
