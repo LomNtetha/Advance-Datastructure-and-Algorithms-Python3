@@ -462,7 +462,8 @@ We use space to store distances and the heap.
 """
 7. Huffman Encoding
 Problem:
-Given a set of characters and their frequencies, your task is to build a Huffman Tree and determine the optimal binary code for each character, such that the total encoding length is minimized.
+Given a set of characters and their frequencies, your task is to build a Huffman Tree and determine the optimal binary code
+for each character, such that the total encoding length is minimized.
 
 Example:
 Input:
