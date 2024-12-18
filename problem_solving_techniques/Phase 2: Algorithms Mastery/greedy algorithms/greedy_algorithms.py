@@ -669,3 +669,97 @@ We sort the numbers based on the custom comparator.
 Space Complexity: O(n)
 We store the numbers as strings.
 """
+
+"""
+11. Best Time to Buy and Sell Stock (Single Transaction)
+Problem Statement:
+You are given an array prices where prices[i] is the price of a given stock on the 𝑖 𝑡ℎ  day.
+You want to maximize your profit by choosing a single day to buy one stock and a different day to sell.
+Return the maximum profit you can achieve. If no profit is possible, return 0.
+
+Example:
+Input: prices = [7, 1, 5, 3, 6, 4]
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6 - 1 = 5.
+
+Input: prices = [7, 6, 4, 3, 1]
+Output: 0
+Explanation: In this case, no transactions are done, and the maximum profit is 0.
+"""
+
+"""
+Type: Greedy
+Time Complexity: 
+O(n)
+Space Complexity: 
+O(1)
+"""
+class Solution:
+    def maxProfit(self, prices):
+        """
+        Find the maximum profit from a single stock transaction.
+        
+        Args:
+        prices (List[int]): Stock prices
+        
+        Returns:
+        int: Maximum profit
+        """
+        min_price = float('inf')  # Minimum price seen so far
+        max_profit = 0  # Maximum profit found so far
+
+        for price in prices:
+            min_price = min(min_price, price)  # Update minimum price
+            max_profit = max(max_profit, price - min_price)  # Update maximum profit
+        
+        return max_profit
+
+# Test
+print(Solution().maxProfit([7, 1, 5, 3, 6, 4]))  # Output: 5
+
+
+"""
+12. Best Time to Buy and Sell Stock II (Multiple Transactions)
+Problem Statement:
+You are given an array prices where prices[i] is the price of a given stock on the i th day.
+You can perform as many transactions as you like (buy one and sell one share of the stock multiple times).
+Return the maximum profit you can achieve.
+
+Example:
+Input: prices = [7, 1, 5, 3, 6, 4]
+Output: 7
+Explanation: Buy on day 2 (price = 1), sell on day 3 (price = 5), profit = 4. Then buy on day 4 (price = 3), sell on day 5 (price = 6), profit = 3.
+
+Input: prices = [1, 2, 3, 4, 5]
+Output: 4
+Explanation: Buy on day 1 (price = 1), sell on day 5 (price = 5).
+"""
+"""
+Type: Greedy
+Time Complexity: 
+O(n)
+Space Complexity: 
+O(1)
+"""
+
+class Solution:
+    def maxProfit(self, prices):
+        """
+        Find the maximum profit from multiple stock transactions.
+        
+        Args:
+        prices (List[int]): Stock prices
+        
+        Returns:
+        int: Maximum profit
+        """
+        profit = 0
+
+        for i in range(1, len(prices)):
+            if prices[i] > prices[i-1]:  # Sell every profitable transaction
+                profit += prices[i] - prices[i-1]
+        
+        return profit
+
+# Test
+print(Solution().maxProfit([7, 1, 5, 3, 6, 4]))  # Output: 7
