@@ -574,7 +574,8 @@ Space Complexity: O(n), where n is the number of unit fractions stored in the re
 """
 9. Greedy Algorithm to Minimize the Maximum Difference Between Heights
 Problem:
-Given heights of towers and an integer k, you are allowed to either increase or decrease the height of each tower by k (only once). Your task is to minimize the difference between the highest and the lowest towers after the modification.
+Given heights of towers and an integer k, you are allowed to either increase or decrease the height of each tower by k (only once).
+Your task is to minimize the difference between the highest and the lowest towers after the modification.
 
 Example:
 Input: heights = [1, 5, 15, 10], k = 3
