@@ -583,26 +583,25 @@ Output: 8
 Explanation: We can increase 1 to 4 and decrease 15 to 12, resulting in the heights [4, 5, 10, 12] with a difference of 12 - 4 = 8.
 
 """
+
 class Solution:
     def minimize_difference(self, heights: List[int], k: int) -> int:
-        # Step 1: Sort the array
+        # Step 1: Sort the array to process heights in order
         heights.sort()
         
-        # Step 2: Calculate the initial difference
+        # Step 2: Calculate the initial difference between max and min heights
         n = len(heights)
         initial_difference = heights[-1] - heights[0]
         
-        # Step 3: Initialize the minimized difference
+        # Step 3: Iterate through the array to find the minimized difference
         min_difference = initial_difference
-        
-        # Step 4: Iterate through the array and find the minimized difference
         for i in range(n - 1):
-            # Calculate the potential new max and min
-            high = max(heights[i] + k, heights[-1] - k)
-            low = min(heights[0] + k, heights[i + 1] - k)
+            # Adjust heights[i] and heights[i+1] for potential new min and max
+            new_max = max(heights[-1] - k, heights[i] + k)
+            new_min = min(heights[0] + k, heights[i + 1] - k)
             
             # Update the minimum difference
-            min_difference = min(min_difference, high - low)
+            min_difference = min(min_difference, new_max - new_min)
         
         return min_difference
 
@@ -613,6 +612,7 @@ heights = [1, 5, 15, 10]
 k = 3
 result = solution.minimize_difference(heights, k)
 print(f"Minimum difference: {result}")
+
     
 """Time Complexity: O(n log n)
 We sort the array first and then iterate through it once.
