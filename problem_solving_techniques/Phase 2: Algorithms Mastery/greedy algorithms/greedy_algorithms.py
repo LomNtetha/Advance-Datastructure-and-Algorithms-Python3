@@ -583,7 +583,6 @@ Output: 8
 Explanation: We can increase 1 to 4 and decrease 15 to 12, resulting in the heights [4, 5, 10, 12] with a difference of 12 - 4 = 8.
 
 """
-
 class Solution:
     def minimize_difference(self, heights: List[int], k: int) -> int:
         # Step 1: Sort the array to process heights in order
@@ -662,6 +661,22 @@ class Solution:
 solution = Solution()
 nums = [3, 30, 34, 5, 9]
 print(solution.largestNumber(nums))  # Output: "9534330"
+
+
+# The above is the most correct way where the below is the most simplest way
+def convert_large_number(nums):
+
+    nums_string = "".join(str(num) for num in nums)
+
+    sorted_nums_string = "".join(sorted(nums_string, reverse=True))
+    
+    return sorted_nums_string
+
+nums = [3, 30, 34, 5, 9]
+
+large = convert_large_number(nums)
+
+print(large)
 
 """
 Time Complexity: O(n log n)
