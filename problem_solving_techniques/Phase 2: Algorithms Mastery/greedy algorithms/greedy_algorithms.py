@@ -1,6 +1,7 @@
 """
 1. Problem:
-Suppose we have coin denominations of 25, 10, 5, and 1 (as in U.S. currency) and need to make 41 cents. Our goal is to use as few coins as possible to reach this amount.
+Suppose we have coin denominations of 25, 10, 5, and 1 (as in U.S. currency) and need to make 41 cents. Our goal is to use as few coins as possible
+to reach this amount.
 
 Complexity:
 Time Complexity: O(n), where 
@@ -48,7 +49,8 @@ print(f"Coins used: {coins_used}")
 """
 2. Activity Selection Problem
 Problem:
-Given n activities with their start and end times, select the maximum number of activities that can be performed by a single person, assuming that a person can only work on one activity at a time.
+Given n activities with their start and end times, select the maximum number of activities that can be performed by a single person, 
+assuming that a person can only work on one activity at a time.
 
 Example:
 Input: start = [1, 3, 0, 5, 8, 5], end = [2, 4, 6, 7, 9, 9]
@@ -154,7 +156,8 @@ print(f"Maximum value in the knapsack: {max_value}")
 
 
 """
-An investor has $50,000 to allocate across three investment options. Each option has a cost per unit (investment) and an expected return per unit. The goal is to maximize the total return while staying within the budget.
+An investor has $50,000 to allocate across three investment options. Each option has a cost per unit (investment) and an expected return per unit.
+The goal is to maximize the total return while staying within the budget.
 
 Inputs:
 
@@ -537,7 +540,8 @@ We store the nodes and Huffman codes.
 """
 8. Greedy Algorithm for Egyptian Fraction
 Problem:
-Given a fraction num/den, find its Egyptian Fraction representation. An Egyptian Fraction is a sum of distinct unit fractions where each fraction has a numerator of 1, i.e., 1/x.
+Given a fraction num/den, find its Egyptian Fraction representation. An Egyptian Fraction is a sum of distinct unit fractions where each fraction
+has a numerator of 1, i.e., 1/x.
 
 Example:
 Input: num = 6, den = 14
