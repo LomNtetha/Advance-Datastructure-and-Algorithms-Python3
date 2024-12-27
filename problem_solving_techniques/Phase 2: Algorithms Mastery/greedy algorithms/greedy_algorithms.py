@@ -212,7 +212,8 @@ We store the sorted list of items.
 """
 4. Minimum Number of Platforms Required for a Railway Station
 Problem:
-Given the arrival and departure times of trains at a railway station, find the minimum number of platforms required to accommodate all trains without delay.
+Given the arrival and departure times of trains at a railway station, find the minimum number of platforms required to accommodate
+all trains without delay.
 
 Example:
 Input: arrival = [9:00, 9:40, 9:50, 11:00, 15:00, 18:00], departure = [9:10, 12:00, 11:20, 11:30, 19:00, 20:00]
@@ -269,8 +270,8 @@ We use only a few extra variables.
 """
 5. Job Sequencing Problem
 Problem:
-Given n jobs with their deadlines and profits, find the sequence of jobs that maximizes the total profit. Each job takes 1 unit of time, and a job must be
-completed by its deadline.
+Given n jobs with their deadlines and profits, find the sequence of jobs that maximizes the total profit. Each job takes 1 unit of time,
+and a job must be completed by its deadline.
 
 Example:
 Input: jobs = [(2, 100), (1, 19), (2, 27), (1, 25), (3, 15)]
