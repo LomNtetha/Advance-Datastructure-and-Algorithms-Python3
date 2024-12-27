@@ -206,7 +206,8 @@ class Solution:
 """
 8. Balanced Binary Tree
 Problem Statement:
-Given the root of a binary tree, determine if it is height-balanced (i.e., for every node, the left and right subtrees differ in height by no more than 1).
+Given the root of a binary tree, determine if it is height-balanced (i.e., for every node, the left and right subtrees differ
+in height by no more than 1).
 
 Example:
 Input:
@@ -284,7 +285,8 @@ class Solution:
 """
 11. Same Tree
 Problem Statement:
-Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally identical and the nodes have the same value.
+Given two binary trees, write a function to check if they are the same or not. Two binary trees are considered the same if they are structurally
+identical and the nodes have the same value.
 
 Example:
 Input:
@@ -328,7 +330,8 @@ class Solution:
 """
 13. Path Sum
 Problem Statement:
-Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the values along the path equals targetSum.
+Given the root of a binary tree and an integer targetSum, return true if the tree has a root-to-leaf path such that adding up all the 
+values along the path equals targetSum.
 
 Example:
 Input:
@@ -353,7 +356,8 @@ class Solution:
 """
 14. Construct Binary Tree from Preorder and Inorder Traversal
 Problem Statement:
-Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal, construct the binary tree.
+Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal,
+construct the binary tree.
 
 Example:
 Input:
@@ -377,7 +381,8 @@ class Solution:
 """
 15. Binary Tree Right Side View
 Problem Statement:
-Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes you can see ordered from top to bottom.
+Given the root of a binary tree, imagine yourself standing on the right side of it, return the values of the nodes
+you can see ordered from top to bottom.
 
 Example:
 Input:
