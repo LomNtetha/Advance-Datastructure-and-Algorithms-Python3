@@ -144,7 +144,8 @@ O(n), where n is the number of elements in the stack.
 """
 4. Check Balanced Parentheses Using Stack
 Problem Statement:
-Given a string containing just the characters '(', ')', {, }, [, and ], determine if the input string is valid. An input string is valid if the brackets are closed in the correct order.
+Given a string containing just the characters '(', ')', {, }, [, and ], determine if the input string is valid.
+An input string is valid if the brackets are closed in the correct order.
 
 Example:
 
@@ -408,7 +409,8 @@ O(n), where n is the number of elements in the queue.
 """
 9. Monotonic Stack for Next Greater Element
 Problem Statement:
-Given an array, find the next greater element for each element in the array. For the element, output the next greater element in the array (if no greater element exists, output -1).
+Given an array, find the next greater element for each element in the array. For the element, output the next greater
+element in the array (if no greater element exists, output -1).
 
 Example:
 
@@ -673,7 +675,8 @@ O(m * n), to store the result.
 """
 15. Find Peak Element
 Problem Statement:
-A peak element is an element that is strictly greater than its neighbors. Given an array, find a peak element and return its index. If the array contains multiple peaks, return any of them.
+A peak element is an element that is strictly greater than its neighbors. Given an array, find a peak element and return its index.
+If the array contains multiple peaks, return any of them.
 
 Example:
 
@@ -809,7 +812,9 @@ O(n), where n is the number of columns in the matrix.
 """
 18. Coin Change Problem
 Problem Statement:
-You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money. You need to return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by any combination of the coins, return -1.
+You are given an integer array coins representing coins of different denominations and an integer amount representing a total amount of money.
+You need to return the fewest number of coins that you need to make up that amount. If that amount of money cannot be made up by 
+any combination of the coins, return -1.
 
 Example:
 
