@@ -87,9 +87,7 @@ print(sol.hasCycle(head))  # Output: True
 """
 Time Complexity:
 
-O(n), where 
-𝑛
-n is the number of nodes. The slow and fast pointers traverse the list once.
+O(n), where n is the number of nodes. The slow and fast pointers traverse the list once.
 Space Complexity:
 
 O(1). We use only two extra pointers, so space complexity is constant.
@@ -155,16 +153,11 @@ O(1). We merge the lists in place without using any extra space for the new list
 """
 4. Remove N-th Node From End of List
 Problem Statement:
-Given the head of a linked list, remove the 
-𝑛
-n-th node from the end of the list and return its head.
+Given the head of a linked list, remove the  n-th node from the end of the list and return its head.
 
 Example:
 
 Input: Linked list: 1 -> 2 -> 3 -> 4 -> 5, 
-𝑛
-=
-2
 n=2
 
 Output: Modified linked list: 1 -> 2 -> 3 -> 5
@@ -206,9 +199,7 @@ while new_head:
 """
 Time Complexity:
 
-O(n), where 
-𝑛
-n is the number of nodes in the list. We traverse the list twice.
+O(n), where n is the number of nodes in the list. We traverse the list twice.
 Space Complexity:
 
 O(1). We use a constant amount of space.
@@ -252,9 +243,7 @@ print(middle.val)  # Output: 3
 """
 Time Complexity:
 
-O(n), where 
-𝑛
-n is the number of nodes in the linked list. We only need to traverse the list once.
+O(n), where  n is the number of nodes in the linked list. We only need to traverse the list once.
 Space Complexity:
 
 O(1). We use only a constant amount of extra space.
@@ -308,7 +297,6 @@ n is the number of nodes in the linked list.
 Space Complexity:
 
 O(1). We use constant space.
-I’ll continue to provide the rest of the solutions in subsequent responses to keep this manageable! Let me know if you'd like to proceed with the next set!
 
 """
 """
@@ -358,9 +346,7 @@ print(sol.hasCycle(head))  # Output: True
 """
 Time Complexity:
 
-O(n), where 
-𝑛
-n is the number of nodes in the doubly linked list. We traverse the list once with two pointers.
+O(n), where n is the number of nodes in the doubly linked list. We traverse the list once with two pointers.
 Space Complexity:
 
 O(1). We use constant space with two pointers.
@@ -370,12 +356,7 @@ O(1). We use constant space with two pointers.
 8. Find the Intersection Node of Two Linked Lists
 Problem Statement:
 Given the heads of two singly linked lists, return the node where they intersect. If they do not intersect, return null.
-You must solve it in 
-𝑂
-(
-𝑛
-)
-O(n) time complexity without using extra space.
+You must solve it in O(n) time complexity without using extra space.
 
 Example:
 
@@ -412,11 +393,7 @@ print(intersection.val if intersection else "No intersection")  # Output: 3
 """
 Time Complexity:
 
-O(n + m), where 
-𝑛
-n and 
-𝑚
-m are the lengths of the two linked lists.
+O(n + m), where n and m are the lengths of the two linked lists.
 Space Complexity:
 
 O(1). We only use two pointers, so no extra space is used.
@@ -427,7 +404,6 @@ O(1). We only use two pointers, so no extra space is used.
 9. Merge K Sorted Linked Lists
 Problem Statement:
 Given 
-𝑘
 k sorted singly linked lists, merge them into a single sorted linked list.
 Assume that each of the lists is already sorted.
 
@@ -482,23 +458,19 @@ while merged_head:
 """
 Time Complexity:
 
-O(N log k), where 
-𝑁
-N is the total number of nodes across all lists and 
-𝑘
+O(N log k), where N is the total number of nodes across all lists and 
 k is the number of lists. We are using a heap to merge the lists.
 Space Complexity:
 
 O(k), because we store up to 
-𝑘
 k nodes in the heap at any point in time.
 """
 
 """
 10. Add Two Numbers Represented by Linked Lists
 Problem Statement:
-Given two non-empty linked lists representing two non-negative integers, where the digits are stored in reverse order, add the two numbers and return the sum as a linked list.
-You may assume the two numbers do not contain any leading zero, except the number 0 itself.
+Given two non-empty linked lists representing two non-negative integers, where the digits are stored in reverse order,
+add the two numbers and return the sum as a linked list. You may assume the two numbers do not contain any leading zero, except the number 0 itself.
 
 Example:
 
@@ -546,14 +518,10 @@ while result:
 """
 Time Complexity:
 
-O(n), where 
-𝑛
-n is the maximum length of the two linked lists.
+O(n), where n is the maximum length of the two linked lists.
 Space Complexity:
 
-O(n), where 
-𝑛
-n is the maximum length of the two linked lists.
+O(n), where n is the maximum length of the two linked lists.
 This concludes the next set of detailed questions and code examples. Let me know if you'd like further clarification or additional questions!
 
 """
@@ -593,9 +561,7 @@ print(middle.val)  # Output: 3
 """
 Time Complexity:
 
-O(n), where 
-𝑛
-n is the number of nodes in the linked list. We traverse the list once with two pointers.
+O(n), where n is the number of nodes in the linked list. We traverse the list once with two pointers.
 Space Complexity:
 O(1). We use constant space with two pointers.
 """
@@ -640,9 +606,7 @@ while result:
 """
 Time Complexity:
 
-O(n), where 
-𝑛
-n is the number of nodes in the linked list. We traverse the list once.
+O(n), where n is the number of nodes in the linked list. We traverse the list once.
 Space Complexity:
 
 O(1). We use constant space, modifying the list in-place.
@@ -695,9 +659,7 @@ while reversed_head:
 """
 Time Complexity:
 
-O(n), where 
-𝑛
-n is the number of nodes in the doubly linked list. We traverse the list once.
+O(n), where n is the number of nodes in the doubly linked list. We traverse the list once.
 Space Complexity:
 
 O(1). We use constant space, modifying the list in-place.
@@ -705,7 +667,8 @@ O(1). We use constant space, modifying the list in-place.
 """"
 14. Flatten a Multilevel Doubly Linked List
 Problem Statement:
-Given a doubly linked list where in addition to the next and prev pointers, each node has a child pointer, flatten the list such that all the nodes appear in a single level doubly linked list.
+Given a doubly linked list where in addition to the next and prev pointers, each node has a child pointer, flatten the list such that 
+all the nodes appear in a single level doubly linked list.
 
 Example:
 
@@ -762,9 +725,7 @@ while flattened_head:
 """
 Time Complexity:
 
-O(n), where 
-𝑛
-n is the total number of nodes (including both regular and child nodes).
+O(n), where n is the total number of nodes (including both regular and child nodes).
 Space Complexity:
 
 O(n), for the stack used to keep track of nodes.
@@ -813,13 +774,10 @@ while new_head:
 """
 Time Complexity:
 
-O(n), where 
-𝑛
-n is the number of nodes in the linked list. We traverse to the end of the list to insert the new node.
+O(n), where n is the number of nodes in the linked list. We traverse to the end of the list to insert the new node.
 Space Complexity:
 
 O(1). We only use constant space for the new node.
-These are the next set of detailed questions along with their Python code solutions, time, and space complexities. Let me know if you'd like more questions or further clarification!
 
 """
 
@@ -827,7 +785,8 @@ These are the next set of detailed questions along with their Python code soluti
 """
 16. Find the Intersection Point of Two Linked Lists
 Problem Statement:
-Given two singly linked lists, determine if they intersect. If they do, return the intersection node; otherwise, return None. The intersection is defined by the fact that the two lists share a common node (i.e., they merge at a specific node).
+Given two singly linked lists, determine if they intersect. If they do, return the intersection node; otherwise, return None.
+The intersection is defined by the fact that the two lists share a common node (i.e., they merge at a specific node).
 
 Example:
 
@@ -869,11 +828,7 @@ print(intersection_node.val if intersection_node else None)  # Output: 8
 """
 Time Complexity:
 
-O(n + m), where 
-𝑛
-n is the length of List A and 
-𝑚
-m is the length of List B. We traverse both lists once.
+O(n + m), where n is the length of List A and m is the length of List B. We traverse both lists once.
 Space Complexity:
 
 O(1). We use constant space with two pointers.
@@ -882,7 +837,8 @@ O(1). We use constant space with two pointers.
 """
 17. Flatten a Linked List with Next, Child Pointers
 Problem Statement:
-Given a doubly linked list where each node has a next pointer and a child pointer, flatten the list such that all the child nodes appear after the parent node but in a single level list.
+Given a doubly linked list where each node has a next pointer and a child pointer, flatten the list such that all the child nodes appear 
+after the parent node but in a single level list.
 
 Example:
 
@@ -951,18 +907,12 @@ O(n), for the stack used to traverse the list.
 """
 18. Reverse a Linked List in Groups of K
 Problem Statement:
-Given a linked list, reverse the nodes of the list in groups of size 
-𝑘
-k. If the number of nodes is not a multiple of 
-𝑘
-k, leave the last group as it is.
+Given a linked list, reverse the nodes of the list in groups of size k. If the number of nodes is not a multiple of k,
+leave the last group as it is.
 
 Example:
 
 Input: List: 1 -> 2 -> 3 -> 4 -> 5, 
-𝑘
-=
-3
 k=3
 
 Output: Reversed in groups: 3 -> 2 -> 1 -> 4 -> 5
@@ -1022,9 +972,7 @@ while result:
 """
 Time Complexity:
 
-O(n), where 
-𝑛
-n is the number of nodes in the list. We traverse each group once and reverse them in constant time.
+O(n), where n is the number of nodes in the list. We traverse each group once and reverse them in constant time.
 Space Complexity:
 
 O(1). We only use constant space for the operations.
@@ -1034,13 +982,9 @@ O(1). We only use constant space for the operations.
 """
 19. Partition a Linked List
 Problem Statement:
-Given a linked list and a value 
-𝑥
-x, partition the linked list such that all nodes with values less than 
-𝑥
-x come before nodes with values greater than or equal to 
-𝑥
-x. The relative order of the nodes should be preserved. Your task is to implement a function that rearranges the linked list based on this condition.
+Given a linked list and a value  x, partition the linked list such that all nodes with values less than  x come before nodes
+with values greater than or equal to x. The relative order of the nodes should be preserved.
+Your task is to implement a function that rearranges the linked list based on this condition.
 
 Example:
 
@@ -1104,9 +1048,7 @@ Output:
 Partitioned linked list: 1 -> 2 -> 2 -> 4 -> 3 -> 5
 Time Complexity:
 
-O(n), where 
-𝑛
-n is the number of nodes in the linked list. We traverse through the list once to rearrange the nodes.
+O(n), where n is the number of nodes in the linked list. We traverse through the list once to rearrange the nodes.
 Space Complexity:
 
 O(1). The solution uses only a constant amount of extra space, as we are rearranging the nodes in place.
