@@ -11,7 +11,8 @@ Output:
 9 (The subarray [5, 1, 3] has the largest sum: 5 + 1 + 3 = 9).
 Approach:
 
-Use a sliding window of size k. First, sum the first k elements, then slide the window one element at a time by adding the new element coming into the window and subtracting the element that is moving out of the window.
+Use a sliding window of size k. First, sum the first k elements, then slide the window one element at a time by adding the new element coming into 
+the window and subtracting the element that is moving out of the window.
 """
 
 """
@@ -61,8 +62,8 @@ nums = [1, 2, 3, 4, 5]
 target = 9
 Approach:
 
-Use two pointers to form a sliding window. Start both pointers at the beginning and move the right pointer to grow the sum until it equals or exceeds the target.
-If the sum exceeds the target, move the left pointer to reduce the sum.
+Use two pointers to form a sliding window. Start both pointers at the beginning and move the right pointer to grow the sum until it equals or 
+exceeds the target. If the sum exceeds the target, move the left pointer to reduce the sum.
 Time Complexity: O(n) – Each element is visited once.
 
 """
@@ -109,7 +110,8 @@ s = "abcabcbb"
 Output: 3 (The longest substring is "abc").
 Approach:
 
-Use a sliding window with two pointers (start and end) to maintain the current substring. Use a hash set to track the characters in the window. If a repeating character is found, move the start pointer to shrink the window until there are no repeating characters.
+Use a sliding window with two pointers (start and end) to maintain the current substring. Use a hash set to track the characters in the window. 
+If a repeating character is found, move the start pointer to shrink the window until there are no repeating characters.
 
 """
 
@@ -144,7 +146,8 @@ print(solution.lengthOfLongestSubstring(s))  # Output: 3
 
 """
 Minimum Size Subarray Sum
-Example Question: Given an array of positive integers nums and a positive integer target, find the minimal length of a contiguous subarray of which the sum is greater than or equal to target. If there is no such subarray, return 0.
+Example Question: Given an array of positive integers nums and a positive integer target, find the minimal length of a contiguous 
+subarray of which the sum is greater than or equal to target. If there is no such subarray, return 0.
 
 Input:
 
@@ -207,7 +210,8 @@ Output:
 [3, 3, 5, 5, 6, 7] (The maximum values for each window are [1,3,-1], [3,-1,-3], etc.)
 Approach:
 
-Use a deque (double-ended queue) to store the indices of elements in the current window in decreasing order of their values. The front of the deque contains the index of the largest element in the window. For each new element, remove elements from the back of the deque that are smaller than the current element since they cannot be the maximum.
+Use a deque (double-ended queue) to store the indices of elements in the current window in decreasing order of their values. 
+The front of the deque contains the index of the largest element in the window. For each new element, remove elements from the back of the deque that are smaller than the current element since they cannot be the maximum.
 
 """
 """
@@ -266,7 +270,8 @@ Output:
 3 (The longest substring with at most 2 distinct characters is "ece").
 Approach:
 
-Use a sliding window with two pointers to track the current substring. Use a dictionary to count the occurrences of characters in the window. When the number of distinct characters exceeds k, move the start pointer to reduce the size of the window.
+Use a sliding window with two pointers to track the current substring. Use a dictionary to count the occurrences of characters in the window. 
+When the number of distinct characters exceeds k, move the start pointer to reduce the size of the window.
 
 """
 """
@@ -362,7 +367,9 @@ print(solution.minSlidingWindow(nums, k))  # Output: [-1, -3, -3, -3, 3, 3]
 
 """
 Problem Statement:
-You are developing a message processing system for customer service requests. Each request is a string containing a timestamp (in minutes) and a message, separated by a colon (:). The system needs to group messages that arrive within a 5-minute window and output them in chronological order. If multiple messages have the same timestamp, they must retain their original order.
+You are developing a message processing system for customer service requests. Each request is a string containing a timestamp (in minutes) and a 
+message, separated by a colon (:). The system needs to group messages that arrive within a 5-minute window and output them in chronological order. 
+If multiple messages have the same timestamp, they must retain their original order.
 
 The grouping rule is:
 
@@ -370,7 +377,8 @@ Each window starts with the timestamp of the first unprocessed message.
 Messages are included in the same group if their timestamps are within 5 minutes (inclusive) of the window's start time.
 Once a message falls outside this range, start a new group.
 Input:
-messages: An array of strings, where each string is formatted as <timestamp>:<message>. The timestamp is an integer (in minutes), and <message> is the content.
+messages: An array of strings, where each string is formatted as <timestamp>:<message>. The timestamp is an integer (in minutes),
+and <message> is the content.
 Output:
 An array of arrays, where each inner array contains grouped messages in chronological order based on the 5-minute window.
 
