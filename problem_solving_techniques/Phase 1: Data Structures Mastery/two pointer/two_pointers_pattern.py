@@ -1,6 +1,7 @@
 """
 1. Sum of Two Elements (Two Sum II - Input Array is Sorted)
-Example Question: You are given a sorted array nums of integers and a target value target. Your goal is to find two numbers in the array whose sum equals the target. Return the indices of the two numbers.
+Example Question: You are given a sorted array nums of integers and a target value target. Your goal is to find two numbers in 
+the array whose sum equals the target. Return the indices of the two numbers.
 
 Input:
 
@@ -10,7 +11,8 @@ Approach:
 
 Use two pointers: one starting at the beginning (left = 0), and one at the end (right = len(nums) - 1).
 Move the pointers inward based on the sum of the elements they point to.
-If the sum is less than the target, increment the left pointer to increase the sum. If the sum is more than the target, decrement the right pointer to reduce the sum.
+If the sum is less than the target, increment the left pointer to increase the sum. If the sum is more than the target, 
+decrement the right pointer to reduce the sum.
 Time Complexity: O(n) – You are traversing the array once.
 
 """
@@ -267,7 +269,8 @@ print("Merged array:", solution.merge_sorted_arrays(nums1, nums2))
 
 """
 Partitioning Array (QuickSort Partition)
-Example Question: Given an unsorted array, partition it around a pivot such that elements less than the pivot come before all elements greater than the pivot.
+Example Question: Given an unsorted array, partition it around a pivot such that elements less than the pivot come before all elements 
+greater than the pivot.
 
 Input:
 
