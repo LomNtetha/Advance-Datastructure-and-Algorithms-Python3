@@ -209,7 +209,8 @@ print(sol.climb_stairs(5))  # Output: 8
 
 """
 3. House Robber
-Question: You are a robber trying to rob houses along a street. Each house has a certain amount of money, but you cannot rob two adjacent houses. Find the maximum amount of money you can rob.
+Question: You are a robber trying to rob houses along a street. Each house has a certain amount of money, but you cannot rob two adjacent houses.
+Find the maximum amount of money you can rob.
 Example:
 Input: houses = [2, 7, 9, 3, 1]
 Output: 12
@@ -241,7 +242,8 @@ print(sol.rob([2, 7, 9, 3, 1]))  # Output: 12
 
 """
 4. Coin Change
-Question: Given an array coins representing coin denominations and an integer amount, find the minimum number of coins needed to make up that amount. Return -1 if it is not possible.
+Question: Given an array coins representing coin denominations and an integer amount, find the minimum number of coins needed to make up that amount.
+Return -1 if it is not possible.
 Example:
 Input: coins = [1, 2, 5], amount = 11
 Output: 3 (5 + 5 + 1)
