@@ -38,7 +38,8 @@ print(f"The sum of the subarray from index {i} to {j} is: {result}")
 
 """
 Question: Subarray Sum Query with Prefix Sums
-You are given an array of integers, arr, and a list of queries. Each query specifies a pair of indices (i, j), representing the start and end indices of a subarray. For each query, return the sum of the elements within the subarray starting at index i and ending at index j (inclusive).
+You are given an array of integers, arr, and a list of queries. Each query specifies a pair of indices (i, j), representing the start 
+and end indices of a subarray. For each query, return the sum of the elements within the subarray starting at index i and ending at index j (inclusive).
 
 Input:
 
@@ -228,7 +229,8 @@ print(solution.maxSumSubarray(nums, k))  # Output: 9
 
 """
 Find the Minimum in Rotated Sorted Array
-Problem Statement: Suppose an array of length n sorted in ascending order is rotated between 1 and n times. Find the minimum element in this rotated sorted array.
+Problem Statement: Suppose an array of length n sorted in ascending order is rotated between 1 and n times. 
+Find the minimum element in this rotated sorted array.
 
 Example:
 
@@ -266,21 +268,16 @@ print(solution.findMin(nums))  # Output: 1
 
 
 """Problem Statement
-Given an array of integers and a target integer  𝑘
-k, determine if there exists a contiguous subarray whose sum equals 𝑘
-k.
+Given an array of integers and a target integer  k, determine if there exists a contiguous subarray whose sum equals k.
 
 Input:
 
 An array of integers arr (e.g., [1, 3, -2, 5, -1])
 An integer 
-𝑘
 k (e.g., 5)
 Output:
 
-A boolean value: True if there exists a subarray with sum equal to 
-𝑘
-k, False otherwise.
+A boolean value: True if there exists a subarray with sum equal to k, False otherwise.
 Example
 Input: arr = [1, 3, -2, 5, -1], k = 5
 Output: True (the subarray [3, -2, 5] has a sum of 5)
@@ -321,17 +318,12 @@ print(f"Is there a subarray with sum {k}? {sol.subarray_with_sum_k(arr, k)}")
 
 
 """
-Given an array of integers and a target integer 
-𝑘
-k, find the minimum length of a contiguous subarray whose sum is at least 
-𝑘
-k.
+Given an array of integers and a target integer k, find the minimum length of a contiguous subarray whose sum is at least k.
 
 Input:
 
 An array of integers arr (e.g., [2, 3, 1, 2, 4, 3])
 An integer 
-𝑘
 k (e.g., 7)
 Output:
 
@@ -343,7 +335,8 @@ Output: 2 (the subarray [4, 3] has a sum of 7)
 """
 """
 Time Complexity:
-O(n): The solution iterates through the array with a right pointer and potentially moves the left pointer through the array as well. Each pointer traverses the array at most once.
+O(n): The solution iterates through the array with a right pointer and potentially moves the left pointer through the array as well. 
+Each pointer traverses the array at most once.
 Space Complexity:
 O(1): The algorithm only uses a fixed amount of additional space (for variables like prefix_sum, min_len, and left), regardless of the input size.
 
@@ -416,22 +409,16 @@ sol = Solution()
 print(f"The maximum sum of a subarray is: {sol.max_subarray_sum(arr)}")
 
 """
-Given an array of integers and an integer 
-𝑘
-k, find how many contiguous subarrays have a sum that is divisible by 
-𝑘
-k.
+Given an array of integers and an integer k, find how many contiguous subarrays have a sum that is divisible by k.
 
 Input:
 
 An array of integers arr (e.g., [4, 5, 0, -2, -3, 1])
 An integer 
-𝑘
 k (e.g., 5)
 Output:
 
 An integer representing the count of subarrays whose sum is divisible by 
-𝑘
 k.
 Example
 Input: arr = [4, 5, 0, -2, -3, 1], k = 5
@@ -444,7 +431,6 @@ Time Complexity:
 O(n): The solution iterates through the array once, with constant-time operations for each element to update the prefix sum and check the hash map.
 Space Complexity:
 O(n): In the worst case, the hash map can store a count for every possible modulo result, which can be up to 
-𝑘
 k entries (at most k different modulo results).
 """
 class Solution:
