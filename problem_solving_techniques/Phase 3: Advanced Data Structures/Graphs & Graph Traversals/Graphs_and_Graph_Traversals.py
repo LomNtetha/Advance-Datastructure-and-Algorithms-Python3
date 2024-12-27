@@ -279,7 +279,9 @@ print(sol.has_cycle(graph))  # Output: True
 
 """
 Question:
-You are developing a text-based adventure game where players navigate through a series of interconnected rooms. Each room is represented as a node in a graph, and the connections between the rooms are represented as edges in the graph. Players can move from one room to another if there is a direct connection between them.
+You are developing a text-based adventure game where players navigate through a series of interconnected rooms. Each room is represented
+as a node in a graph, and the connections between the rooms are represented as edges in the graph. Players can move from one room to another
+if there is a direct connection between them.
 
 Your task is to implement a function that finds the shortest path between two rooms using the Breadth-First Search (BFS) algorithm.
 
@@ -398,7 +400,8 @@ print("Shortest Path:", shortest_path)
 """
 5. Find the Shortest Path Using Dijkstra's Algorithm
 Problem Statement:
-Given a graph represented as an adjacency list with edge weights and a starting node, find the shortest distance to all nodes using Dijkstra's algorithm.
+Given a graph represented as an adjacency list with edge weights and a starting node, find the shortest distance to all nodes
+using Dijkstra's algorithm.
 
 Example Input:
 graph = {
@@ -478,7 +481,8 @@ print(sol.dijkstra(graph, 0))  # Output: {0: 0, 1: 3, 2: 1, 3: 4}
 """
 6. Find the Shortest Path Using Bellman-Ford Algorithm
 Problem Statement:
-Given a directed graph with weighted edges, find the shortest path from a source node to all other nodes. The graph may contain negative weights, but no negative weight cycles.
+Given a directed graph with weighted edges, find the shortest path from a source node to all other nodes. The graph may contain negative weights,
+but no negative weight cycles.
 
 Example Input:
 edges = [(0, 1, 4), (0, 2, 1), (2, 1, 2), (1, 3, 1), (2, 3, 5)]
@@ -1156,7 +1160,8 @@ print(sol.kruskal_mst(edges, num_vertices))
 """
 14. Count the Number of Islands in a 2D Grid
 Problem Statement:
-Given a 2D grid representing water (0) and land (1), count the number of islands. An island is surrounded by water and connected horizontally or vertically.
+Given a 2D grid representing water (0) and land (1), count the number of islands. An island is surrounded by water and connected horizontally
+or vertically.
 
 Example Input:
 grid = [
@@ -1229,7 +1234,8 @@ print(sol.num_islands(grid))  # Output: 3
 """
 15. Floyd-Warshall Algorithm for All-Pairs Shortest Paths
 Problem Statement:
-Given a graph represented as an adjacency matrix, compute the shortest distances between all pairs of nodes using the Floyd-Warshall algorithm. If a node is unreachable, return inf for that pair.
+Given a graph represented as an adjacency matrix, compute the shortest distances between all pairs of nodes using the Floyd-Warshall algorithm.
+If a node is unreachable, return inf for that pair.
 
 Example Input:
 
@@ -1305,7 +1311,8 @@ print(sol.floyd_warshall(graph))
 """
 16. Bellman-Ford Algorithm for Single Source Shortest Path
 Problem Statement:
-Given a weighted graph and a starting node, compute the shortest path from the start to all other nodes using the Bellman-Ford algorithm. Detect negative weight cycles.
+Given a weighted graph and a starting node, compute the shortest path from the start to all other nodes using the Bellman-Ford algorithm.
+Detect negative weight cycles.
 
 Example Input:
 edges = [(0, 1, 4), (0, 2, 5), (1, 2, -2), (2, 3, 3)]
@@ -1515,10 +1522,97 @@ sol = Solution()
 graph = {0: [1], 1: [2], 2: [0], 3: [4]}
 print(sol.kosaraju(graph))
 
+class Solution:
+    def kosaraju(self, graph):
+        """
+        Implements Kosaraju's Algorithm to find the number of strongly connected components (SCCs) in a directed graph.
+
+        Parameters:
+        graph (dict): A directed graph represented as an adjacency list (dictionary).
+
+        Returns:
+        int: The count of strongly connected components in the graph.
+        """
+
+        def dfs(node, visited, stack):
+            """
+            Perform a Depth-First Search (DFS) and push nodes onto the stack in the order of completion.
+
+            Parameters:
+            node (int): The current node being visited.
+            visited (set): A set to track visited nodes.
+            stack (list): A stack to store nodes in their finishing order.
+            """
+            visited.add(node)  # Mark the current node as visited
+            for neighbor in graph.get(node, []):  # Iterate through the neighbors of the current node
+                if neighbor not in visited:  # If the neighbor has not been visited
+                    dfs(neighbor, visited, stack)  # Recursively visit the neighbor
+            stack.append(node)  # Add the node to the stack after exploring all its neighbors
+
+        def reverse_graph(graph):
+            """
+            Reverse the given graph's edges.
+
+            Parameters:
+            graph (dict): A directed graph represented as an adjacency list.
+
+            Returns:
+            dict: The reversed graph.
+            """
+            reversed_graph = {}
+            for node in graph:  # Iterate through each node in the graph
+                for neighbor in graph[node]:  # For each neighbor, reverse the direction of the edge
+                    reversed_graph.setdefault(neighbor, []).append(node)  # Add the reverse edge
+            return reversed_graph
+
+        def dfs_scc(node, visited, component):
+            """
+            Perform a DFS on the reversed graph to identify all nodes in a strongly connected component (SCC).
+
+            Parameters:
+            node (int): The current node being visited in the reversed graph.
+            visited (set): A set to track visited nodes.
+            component (list): A list to store all nodes in the current SCC.
+            """
+            visited.add(node)  # Mark the current node as visited
+            component.append(node)  # Add the node to the current SCC
+            for neighbor in reversed_graph.get(node, []):  # Iterate through the neighbors in the reversed graph
+                if neighbor not in visited:  # If the neighbor has not been visited
+                    dfs_scc(neighbor, visited, component)  # Recursively visit the neighbor
+
+        # Step 1: Perform a DFS on the original graph and record the finishing order of nodes in the stack
+        stack = []  # Stack to store nodes in the order of their finishing times
+        visited = set()  # Set to track visited nodes
+        for node in graph:  # Iterate through each node in the graph
+            if node not in visited:  # If the node has not been visited
+                dfs(node, visited, stack)  # Perform DFS from the node
+
+        # Step 2: Reverse the graph
+        reversed_graph = reverse_graph(graph)  # Get the reversed graph
+
+        # Step 3: Perform DFS on the reversed graph in the order of the stack to find SCCs
+        visited.clear()  # Clear the visited set for reuse
+        scc_count = 0  # Initialize the count of SCCs
+
+        while stack:  # While there are nodes in the stack
+            node = stack.pop()  # Pop the top node
+            if node not in visited:  # If the node has not been visited
+                scc_count += 1  # Increment the SCC count
+                dfs_scc(node, visited, [])  # Perform DFS to mark all nodes in the current SCC
+
+        return scc_count  # Return the total number of SCCs
+
+# Example Usage
+sol = Solution()
+graph = {0: [1], 1: [2], 2: [0], 3: [4]}  # A directed graph represented as an adjacency list
+print(sol.kosaraju(graph))  # Output: 2 (SCCs: {0, 1, 2} and {3, 4})
+
+
 """
 19. Detect Articulation Points (Critical Nodes) in a Graph
 Problem Statement:
-Given an undirected graph, find all articulation points (critical nodes) using Depth-First Search (DFS). A node is an articulation point if its removal increases the number of connected components.
+Given an undirected graph, find all articulation points (critical nodes) using Depth-First Search (DFS). 
+A node is an articulation point if its removal increases the number of connected components.
 
 Example Input:
 
@@ -1622,7 +1716,8 @@ print(sol.kosaraju(graph))  # Output: 2
 """
 20. Prim’s Algorithm for Minimum Spanning Tree
 Problem Statement:
-Given a weighted undirected graph, find the Minimum Spanning Tree (MST) using Prim's algorithm. The MST connects all vertices with the minimum possible total edge weight.
+Given a weighted undirected graph, find the Minimum Spanning Tree (MST) using Prim's algorithm. The MST connects all vertices with 
+the minimum possible total edge weight.
 
 Example Input:
 
