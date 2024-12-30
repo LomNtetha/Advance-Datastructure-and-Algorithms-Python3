@@ -13,26 +13,41 @@ Output: Reversed linked list: 5 -> 4 -> 3 -> 2 -> 1
 """
 class ListNode:
     def __init__(self, val=0, next=None):
+        # Initialize the node with a value and a reference to the next node
         self.val = val
         self.next = next
 
 class Solution:
     def reverseList(self, head: ListNode) -> ListNode:
+        # Initialize two pointers:
+        # 'prev' will hold the reversed part of the list (starting as None)
         prev = None
+        # 'current' will traverse through the original list
         current = head
         
+        # Traverse the list until all nodes are reversed
         while current:
+            # Save the next node to move the 'current' pointer later
             next_node = current.next
+            # Reverse the current node's pointer to point to the previous node
             current.next = prev
+            # Move 'prev' to the current node (this node is now part of the reversed list)
             prev = current
+            # Move to the next node in the original list
             current = next_node
             
+        # At the end, 'prev' will be the new head of the reversed list
         return prev
 
 # Example usage:
+# Creating a linked list: 1 -> 2 -> 3 -> 4 -> 5
 head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
+
+# Create an instance of the Solution class and reverse the linked list
 sol = Solution()
 reversed_head = sol.reverseList(head)
+
+# 'reversed_head' now points to the head of the reversed list: 5 -> 4 -> 3 -> 2 -> 1
 
 # Output the reversed list
 while reversed_head:
@@ -63,27 +78,40 @@ Output: True (The list contains a cycle)
 """
 class ListNode:
     def __init__(self, val=0, next=None):
+        # Initialize a node with a value and a reference to the next node
         self.val = val
         self.next = next
 
 class Solution:
     def hasCycle(self, head: ListNode) -> bool:
+        # Use two pointers, 'slow' and 'fast', both starting at the head of the list
         slow = head
         fast = head
         
+        # Traverse the list until 'fast' or 'fast.next' is None
         while fast and fast.next:
+            # Move 'slow' one step forward
             slow = slow.next
+            # Move 'fast' two steps forward
             fast = fast.next.next
             
+            # If 'slow' and 'fast' meet, a cycle exists in the list
             if slow == fast:
                 return True
+        
+        # If we exit the loop, no cycle was detected
         return False
 
 # Example usage:
+# Creating a linked list: 3 -> 2 -> 0 -> -4
 head = ListNode(3, ListNode(2, ListNode(0, ListNode(-4))))
-head.next.next.next.next = head.next  # Create cycle at node 2
+# Creating a cycle: Connecting the last node (-4) to the second node (2)
+head.next.next.next.next = head.next
+
+# Create an instance of the Solution class and check for a cycle
 sol = Solution()
 print(sol.hasCycle(head))  # Output: True
+
 """
 Time Complexity:
 
@@ -110,36 +138,56 @@ Output: Merged List: 1 -> 1 -> 2 -> 3 -> 4 -> 4
 
 class ListNode:
     def __init__(self, val=0, next=None):
+        # Initialize a node with a value and a reference to the next node
         self.val = val
         self.next = next
 
 class Solution:
     def mergeTwoLists(self, l1: ListNode, l2: ListNode) -> ListNode:
+        # Create a dummy node to simplify the merging process
         dummy = ListNode()
+        # Use 'current' to build the merged list
         current = dummy
         
+        # Traverse both lists while neither is exhausted
         while l1 and l2:
+            # Compare the values of the current nodes in l1 and l2
             if l1.val < l2.val:
+                # Attach the smaller node (l1) to the merged list
                 current.next = l1
+                # Move to the next node in l1
                 l1 = l1.next
             else:
+                # Attach the smaller node (l2) to the merged list
                 current.next = l2
+                # Move to the next node in l2
                 l2 = l2.next
+            # Move 'current' to the newly added node
             current = current.next
         
+        # Attach the remaining nodes of the non-exhausted list
         current.next = l1 if l1 else l2
+        
+        # Return the merged list starting from the node after 'dummy'
         return dummy.next
 
 # Example usage:
+# Creating two sorted linked lists:
+# l1: 1 -> 2 -> 4
+# l2: 1 -> 3 -> 4
 l1 = ListNode(1, ListNode(2, ListNode(4)))
 l2 = ListNode(1, ListNode(3, ListNode(4)))
+
+# Create an instance of the Solution class and merge the two lists
 sol = Solution()
 merged_head = sol.mergeTwoLists(l1, l2)
 
-# Output merged list
+# Output the merged linked list
+# Expected output: 1 -> 1 -> 2 -> 3 -> 4 -> 4
 while merged_head:
     print(merged_head.val, end=" -> ")
     merged_head = merged_head.next
+
 # Output: 1 -> 1 -> 2 -> 3 -> 4 -> 4
 """
 Time Complexity:
@@ -165,37 +213,49 @@ Output: Modified linked list: 1 -> 2 -> 3 -> 5
 
 class ListNode:
     def __init__(self, val=0, next=None):
+        # Initialize a node with a value and a reference to the next node
         self.val = val
         self.next = next
 
 class Solution:
     def removeNthFromEnd(self, head: ListNode, n: int) -> ListNode:
+        # Initialize two pointers, 'fast' and 'slow', both starting at the head
         fast = slow = head
         
+        # Move 'fast' n steps ahead
         for _ in range(n):
             fast = fast.next
         
+        # If 'fast' is None, it means we need to remove the first node
         if not fast:
             return head.next
         
+        # Move both 'fast' and 'slow' until 'fast' reaches the end
         while fast.next:
             fast = fast.next
             slow = slow.next
         
+        # 'slow.next' is the node to be removed; update the pointer to skip it
         slow.next = slow.next.next
+        
+        # Return the modified list starting from the head
         return head
 
 # Example usage:
+# Creating a linked list: 1 -> 2 -> 3 -> 4 -> 5
 head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
-n = 2
+n = 2  # Remove the 2nd node from the end
+
+# Create an instance of the Solution class and remove the nth node from the end
 sol = Solution()
 new_head = sol.removeNthFromEnd(head, n)
 
 # Output the modified list
+# Expected output: 1 -> 2 -> 3 -> 5
 while new_head:
     print(new_head.val, end=" -> ")
     new_head = new_head.next
-# Output: 1 -> 2 -> 3 -> 5
+
 """
 Time Complexity:
 
@@ -220,26 +280,37 @@ Output: Middle node: 3
 
 class ListNode:
     def __init__(self, val=0, next=None):
+        # Initialize a node with a value and a reference to the next node
         self.val = val
         self.next = next
 
 class Solution:
     def middleNode(self, head: ListNode) -> ListNode:
+        # Initialize two pointers, 'slow' and 'fast', both starting at the head of the list
         slow = fast = head
         
+        # Traverse the list with 'fast' moving twice as fast as 'slow'
         while fast and fast.next:
+            # Move 'slow' one step forward
             slow = slow.next
+            # Move 'fast' two steps forward
             fast = fast.next.next
-            
+        
+        # When 'fast' reaches the end, 'slow' will be at the middle
         return slow
 
 # Example usage:
+# Creating a linked list: 1 -> 2 -> 3 -> 4 -> 5
 head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
+
+# Create an instance of the Solution class and find the middle node
 sol = Solution()
 middle = sol.middleNode(head)
 
-# Output the middle node
-print(middle.val)  # Output: 3
+# Output the value of the middle node
+# Expected output: 3
+print(middle.val)
+
 """
 Time Complexity:
 
@@ -263,30 +334,42 @@ Output: Modified linked list: 1 -> 2 -> 3
 
 class ListNode:
     def __init__(self, val=0, next=None):
+        # Initialize a node with a value and a reference to the next node
         self.val = val
         self.next = next
 
 class Solution:
     def deleteDuplicates(self, head: ListNode) -> ListNode:
+        # Initialize a pointer to traverse the linked list
         current = head
         
+        # Traverse the list while 'current' and 'current.next' are not None
         while current and current.next:
+            # Check if the current node's value is the same as the next node's value
             if current.val == current.next.val:
+                # Skip the next node by updating the 'next' pointer to point to the node after the next
                 current.next = current.next.next
             else:
+                # Move to the next node if no duplicate is found
                 current = current.next
                 
+        # Return the modified list starting from the head
         return head
 
 # Example usage:
+# Creating a linked list: 1 -> 1 -> 2 -> 3 -> 3
 head = ListNode(1, ListNode(1, ListNode(2, ListNode(3, ListNode(3)))))
+
+# Create an instance of the Solution class and remove duplicates
 sol = Solution()
 new_head = sol.deleteDuplicates(head)
 
 # Output the modified list
+# Expected output: 1 -> 2 -> 3
 while new_head:
     print(new_head.val, end=" -> ")
     new_head = new_head.next
+
 # Output: 1 -> 2 -> 3
 """
 Time Complexity:
@@ -312,27 +395,35 @@ Input: Doubly Linked List: 3 <-> 2 <-> 0 <-> -4, with a cycle starting at node 2
 
 Output: True (The list contains a cycle)
 """
-
 class DoublyListNode:
     def __init__(self, val=0, prev=None, next=None):
+        # Initialize a node with a value, a reference to the previous node, and a reference to the next node
         self.val = val
         self.prev = prev
         self.next = next
 
 class Solution:
     def hasCycle(self, head: DoublyListNode) -> bool:
+        # Use two pointers: 'slow' moves one step at a time, 'fast' moves two steps at a time
         slow = head
         fast = head
         
+        # Traverse the list until 'fast' or 'fast.next' is None (indicating no cycle)
         while fast and fast.next:
+            # Move 'slow' one step forward
             slow = slow.next
+            # Move 'fast' two steps forward
             fast = fast.next.next
             
+            # If 'slow' and 'fast' meet, a cycle exists in the list
             if slow == fast:
                 return True
+        
+        # If the loop ends, no cycle was found
         return False
 
 # Example usage:
+# Create a doubly linked list: 3 <-> 2 <-> 0 <-> -4
 head = DoublyListNode(3)
 head.next = DoublyListNode(2)
 head.next.prev = head
@@ -340,9 +431,14 @@ head.next.next = DoublyListNode(0)
 head.next.next.prev = head.next
 head.next.next.next = DoublyListNode(-4)
 head.next.next.next.prev = head.next.next
-head.next.next.next.next = head.next  # Create cycle at node 2
+
+# Create a cycle by linking the last node back to the second node
+head.next.next.next.next = head.next  # Cycle at node with value 2
+
+# Create an instance of the Solution class and check for a cycle
 sol = Solution()
-print(sol.hasCycle(head))  # Output: True
+print(sol.hasCycle(head))  # Expected output: True
+
 """
 Time Complexity:
 
@@ -367,29 +463,45 @@ Output: Intersection node: 3
 
 class ListNode:
     def __init__(self, val=0, next=None):
+        # Initialize a singly linked list node with a value and a reference to the next node
         self.val = val
         self.next = next
 
 class Solution:
     def getIntersectionNode(self, headA: ListNode, headB: ListNode) -> ListNode:
+        # If either list is empty, there can't be an intersection
         if not headA or not headB:
             return None
         
+        # Initialize two pointers, one for each list
         ptrA, ptrB = headA, headB
         
+        # Traverse both lists; if one pointer reaches the end, redirect it to the other list
         while ptrA != ptrB:
+            # Move pointer A to the next node or to the head of list B if it reaches the end
             ptrA = ptrA.next if ptrA else headB
+            # Move pointer B to the next node or to the head of list A if it reaches the end
             ptrB = ptrB.next if ptrB else headA
         
+        # The intersection node (if any) is where ptrA == ptrB
         return ptrA
 
 # Example usage:
-# Create intersection at node with value 3
+# Create two linked lists with an intersection:
+# List A: 1 -> 2 -> 3 -> 4 -> 5
+# List B: 6 -> 7 -> 8 \
+#                     \
+#                      -> 3 -> 4 -> 5
 headA = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
-headB = ListNode(6, ListNode(7, ListNode(8, headA.next.next)))  # Intersection at node 3
+headB = ListNode(6, ListNode(7, ListNode(8, headA.next.next)))  # Intersection at node with value 3
+
+# Create an instance of the Solution class and find the intersection
 sol = Solution()
 intersection = sol.getIntersectionNode(headA, headB)
-print(intersection.val if intersection else "No intersection")  # Output: 3
+
+# Output the value of the intersection node or "No intersection" if there isn't one
+print(intersection.val if intersection else "No intersection")  # Expected output: 3
+
 """
 Time Complexity:
 
@@ -413,47 +525,64 @@ Input: List 1: 1 -> 4 -> 5 List 2: 1 -> 3 -> 4 List 3: 2 -> 6
 
 Output: Merged list: 1 -> 1 -> 2 -> 3 -> 4 -> 4 -> 5 -> 6"""
 
-
 import heapq
 
 class ListNode:
     def __init__(self, val=0, next=None):
+        # Initialize a singly linked list node with a value and a reference to the next node
         self.val = val
         self.next = next
 
 class Solution:
     def mergeKLists(self, lists):
+        # Initialize a min-heap to help with sorting the nodes
         heap = []
         
+        # Push the first node of each list into the heap
+        # Use (node value, index of list, node) as the heap elements
+        # Index is added to break ties in case two nodes have the same value
         for i, node in enumerate(lists):
-            if node:
+            if node:  # Only push non-empty lists
                 heapq.heappush(heap, (node.val, i, node))
         
+        # Create a dummy node to simplify list construction
         dummy = ListNode()
-        current = dummy
+        current = dummy  # This pointer will help build the merged list
         
+        # Continue until the heap is empty
         while heap:
+            # Pop the smallest element (node) from the heap
             val, i, node = heapq.heappop(heap)
+            # Add the node to the merged list
             current.next = node
             current = current.next
+            # If the popped node has a next node, push it into the heap
             if node.next:
                 heapq.heappush(heap, (node.next.val, i, node.next))
         
+        # Return the merged list, starting from the first real node (dummy.next)
         return dummy.next
 
 # Example usage:
+# Create k sorted linked lists:
+# List 1: 1 -> 4 -> 5
+# List 2: 1 -> 3 -> 4
+# List 3: 2 -> 6
 lists = [
     ListNode(1, ListNode(4, ListNode(5))),
     ListNode(1, ListNode(3, ListNode(4))),
     ListNode(2, ListNode(6))
 ]
+
+# Merge all the k sorted lists
 sol = Solution()
 merged_head = sol.mergeKLists(lists)
 
-# Output the merged list
+# Output the merged sorted list:
 while merged_head:
     print(merged_head.val, end=" -> ")
     merged_head = merged_head.next
+
 # Output: 1 -> 1 -> 2 -> 3 -> 4 -> 4 -> 5 -> 6
 """
 Time Complexity:
@@ -479,41 +608,61 @@ Input: List 1: 2 -> 4 -> 3 (represents 342) List 2: 5 -> 6 -> 4 (represents 465)
 Output: Sum: 7 -> 0 -> 8 (represents 807)
 """
 
-
 class ListNode:
     def __init__(self, val=0, next=None):
+        # Initialize a singly linked list node with a value and a reference to the next node
         self.val = val
         self.next = next
 
 class Solution:
     def addTwoNumbers(self, l1: ListNode, l2: ListNode) -> ListNode:
+        # Initialize carry to handle values greater than 9
         carry = 0
+        # Create a dummy node to simplify list construction
         dummy = ListNode()
+        # Pointer to track the current position in the result list
         current = dummy
         
+        # Loop through both lists until no nodes remain and there is no carry
         while l1 or l2 or carry:
+            # Extract values from l1 and l2, or use 0 if the list has ended
             val1 = l1.val if l1 else 0
             val2 = l2.val if l2 else 0
+            # Calculate the sum of the current digits plus the carry
             total = val1 + val2 + carry
+            # Update the carry for the next iteration
             carry = total // 10
+            # Create a new node with the single-digit result and append it
             current.next = ListNode(total % 10)
+            # Move the current pointer forward
             current = current.next
             
-            if l1: l1 = l1.next
-            if l2: l2 = l2.next
+            # Move to the next nodes in l1 and l2 if available
+            if l1: 
+                l1 = l1.next
+            if l2: 
+                l2 = l2.next
         
+        # Return the resulting list, starting from the first real node
         return dummy.next
 
 # Example usage:
-l1 = ListNode(2, ListNode(4, ListNode(3)))  # 342
-l2 = ListNode(5, ListNode(6, ListNode(4)))  # 465
+# Create two numbers represented by linked lists:
+# l1: 2 -> 4 -> 3 (represents the number 342)
+# l2: 5 -> 6 -> 4 (represents the number 465)
+l1 = ListNode(2, ListNode(4, ListNode(3)))
+l2 = ListNode(5, ListNode(6, ListNode(4)))
+
+# Add the two numbers
 sol = Solution()
 result = sol.addTwoNumbers(l1, l2)
 
-# Output the result
+# Output the result as a linked list:
+# The result represents 807, so it should output: 7 -> 0 -> 8
 while result:
     print(result.val, end=" -> ")
     result = result.next
+
 # Output: 7 -> 0 -> 8
 """
 Time Complexity:
@@ -542,22 +691,33 @@ Output: Middle node: 3
 """
 class ListNode:
     def __init__(self, val=0, next=None):
+        # Initialize a node in the linked list with a value and a reference to the next node
         self.val = val
         self.next = next
 
 class Solution:
     def middleNode(self, head: ListNode) -> ListNode:
+        # Initialize two pointers: slow and fast, both starting at the head
         slow, fast = head, head
+        
+        # Traverse the list: fast moves two steps at a time, slow moves one step at a time
         while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
+            slow = slow.next      # Move slow pointer one step
+            fast = fast.next.next # Move fast pointer two steps
+        
+        # When fast reaches the end of the list, slow will be at the middle
         return slow
 
 # Example usage:
+# Create a linked list: 1 -> 2 -> 3 -> 4 -> 5
 head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
+# Initialize the Solution object
 sol = Solution()
+# Get the middle node of the linked list
 middle = sol.middleNode(head)
+# Output the value of the middle node, which should be 3
 print(middle.val)  # Output: 3
+
 """
 Time Complexity:
 
@@ -580,28 +740,42 @@ Output: Modified list: 1 -> 2 -> 3
 
 class ListNode:
     def __init__(self, val=0, next=None):
+        # Initialize a node with a value (val) and a reference to the next node (next)
         self.val = val
         self.next = next
 
 class Solution:
     def deleteDuplicates(self, head: ListNode) -> ListNode:
+        # Initialize a pointer 'current' that starts at the head of the list
         current = head
+        
+        # Traverse the list until we reach the end
         while current and current.next:
+            # If the current node's value is equal to the next node's value
             if current.val == current.next.val:
+                # Skip the next node by linking to the next of the next node
                 current.next = current.next.next
             else:
+                # Otherwise, move the current pointer to the next node
                 current = current.next
+        
+        # Return the modified list (head remains the same, only next nodes are modified)
         return head
 
 # Example usage:
+# Create a linked list: 1 -> 1 -> 2 -> 3 -> 3
 head = ListNode(1, ListNode(1, ListNode(2, ListNode(3, ListNode(3)))))
+# Initialize the Solution object
 sol = Solution()
+# Call deleteDuplicates to remove duplicates from the list
 result = sol.deleteDuplicates(head)
 
-# Output the modified list
+# Output the modified list after removing duplicates
+# Expected output: 1 -> 2 -> 3
 while result:
-    print(result.val, end=" -> ")
+    print(result.val, end=" -> " if result.next else "")
     result = result.next
+
 # Output: 1 -> 2 -> 3
 """
 Time Complexity:
@@ -627,33 +801,45 @@ Output: Reversed list: 4 <-> 3 <-> 2 <-> 1
 
 class DoublyListNode:
     def __init__(self, val=0, prev=None, next=None):
+        # Initialize a node with a value (val), a reference to the previous node (prev), and a reference to the next node (next)
         self.val = val
         self.prev = prev
         self.next = next
 
 class Solution:
     def reverseDoublyLinkedList(self, head: DoublyListNode) -> DoublyListNode:
+        # Start with the head of the list
         current = head
+        
+        # Traverse the list and swap the prev and next pointers for each node
         while current:
             # Swap the next and prev pointers
             current.prev, current.next = current.next, current.prev
+            
             # Move to the next node in the original list, which is now the prev pointer
             current = current.prev
+        
+        # After the loop, 'current' will be None, so return the new head, which is the last node we processed (previous head's prev)
         return head.prev if head else None
 
 # Example usage:
+# Create a doubly linked list: 1 <-> 2 <-> 3 <-> 4
 head = DoublyListNode(1)
 head.next = DoublyListNode(2, head)
 head.next.next = DoublyListNode(3, head.next)
 head.next.next.next = DoublyListNode(4, head.next.next)
 
+# Initialize the Solution object
 sol = Solution()
+# Reverse the doubly linked list
 reversed_head = sol.reverseDoublyLinkedList(head)
 
 # Output the reversed list
+# Expected output: 4 <-> 3 <-> 2 <-> 1
 while reversed_head:
-    print(reversed_head.val, end=" <-> ")
+    print(reversed_head.val, end=" <-> " if reversed_head.next else "")
     reversed_head = reversed_head.next
+
 # Output: 4 <-> 3 <-> 2 <-> 1
 
 """
@@ -678,6 +864,7 @@ Output: Flattened list: 1 <-> 2 <-> 3 <-> 4 <-> 5
 """
 class Node:
     def __init__(self, val=0, next=None, prev=None, child=None):
+        # Initialize a node with value 'val', next node pointer 'next', previous node pointer 'prev', and child node pointer 'child'.
         self.val = val
         self.next = next
         self.prev = prev
@@ -685,42 +872,53 @@ class Node:
 
 class Solution:
     def flatten(self, head: Node) -> Node:
+        # If the head of the list is None (empty), return None
         if not head:
             return None
         
+        # Create a dummy node to simplify the handling of the first node and return the result later
         dummy = Node(0)
-        prev = dummy
-        stack = [head]
+        prev = dummy  # 'prev' will track the previous node in the flattened list
+        stack = [head]  # Stack to keep track of nodes that need to be processed
         
+        # Traverse the list using the stack
         while stack:
-            curr = stack.pop()
-            prev.next = curr
-            curr.prev = prev
-            prev = curr
+            curr = stack.pop()  # Get the next node to process
+            prev.next = curr  # Attach the current node to the flattened list
+            curr.prev = prev  # Set the previous pointer of the current node
+            prev = curr  # Move the 'prev' pointer to the current node
             
+            # If the current node has a next node, push it to the stack to process later
             if curr.next:
                 stack.append(curr.next)
             
+            # If the current node has a child, push the child node to the stack to process it next
+            # Then set the current node's child pointer to None because the child is now part of the flattened list
             if curr.child:
                 stack.append(curr.child)
                 curr.child = None
         
+        # Return the flattened list starting from the next node of the dummy (since dummy is just a placeholder)
         return dummy.next
 
 # Example usage:
+# Create a list: 1 <-> 2 <-> 3 with a child for node 3 (4 -> 5)
 head = Node(1)
 head.next = Node(2, prev=head)
 head.next.next = Node(3, prev=head.next)
-head.next.next.child = Node(4)
-head.next.next.child.next = Node(5, prev=head.next.next.child)
+head.next.next.child = Node(4)  # Node 3 has a child node 4
+head.next.next.child.next = Node(5, prev=head.next.next.child)  # Node 4 has a next node 5
 
+# Create a Solution object and flatten the list
 sol = Solution()
 flattened_head = sol.flatten(head)
 
-# Output the flattened list
+# Output the flattened list:
+# The expected output is: 1 <-> 2 <-> 3 <-> 4 <-> 5
 while flattened_head:
-    print(flattened_head.val, end=" <-> ")
+    print(flattened_head.val, end=" <-> " if flattened_head.next else "")
     flattened_head = flattened_head.next
+
 # Output: 1 <-> 2 <-> 3 <-> 4 <-> 5
 """
 Time Complexity:
@@ -746,30 +944,46 @@ Output: Modified list: 1 -> 2 -> 3 -> 4
 
 class ListNode:
     def __init__(self, val=0, next=None):
+        # Initialize the node with a value and a pointer to the next node
         self.val = val
         self.next = next
 
 class Solution:
     def addNodeAtEnd(self, head: ListNode, value: int) -> ListNode:
+        # Create a new node with the given value
         new_node = ListNode(value)
+        
+        # If the list is empty, return the new node as the new head of the list
         if not head:
             return new_node
         
+        # Traverse the list to find the last node
         current = head
-        while current.next:
+        while current.next:  # Iterate until we find the last node (i.e., current.next is None)
             current = current.next
+        
+        # Attach the new node at the end of the list
         current.next = new_node
+        
+        # Return the original head, as it hasn't changed
         return head
 
 # Example usage:
+# Create an initial list: 1 -> 2 -> 3
 head = ListNode(1, ListNode(2, ListNode(3)))
+
+# Create an instance of Solution
 sol = Solution()
+
+# Add a new node with value 4 at the end of the list
 new_head = sol.addNodeAtEnd(head, 4)
 
-# Output the modified list
+# Output the modified list:
+# The expected output is: 1 -> 2 -> 3 -> 4
 while new_head:
-    print(new_head.val, end=" -> ")
+    print(new_head.val, end=" -> " if new_head.next else "")
     new_head = new_head.next
+
 # Output: 1 -> 2 -> 3 -> 4
 """
 Time Complexity:
@@ -919,55 +1133,66 @@ Output: Reversed in groups: 3 -> 2 -> 1 -> 4 -> 5
 """
 class ListNode:
     def __init__(self, val=0, next=None):
+        # Initialize a node with a given value and a pointer to the next node
         self.val = val
         self.next = next
 
 class Solution:
     def reverseKGroup(self, head: ListNode, k: int) -> ListNode:
-        # Check if the list is empty or k is 1 (no need to reverse)
+        # Check if the list is empty or k is 1 (no need to reverse the list)
         if not head or k == 1:
             return head
         
-        # Function to reverse a segment of the list
+        # Function to reverse a segment of the linked list between start and end nodes
         def reverseLinkedList(start, end):
+            # Initialize previous and current pointers
             prev, curr = None, start
+            # Reverse the list between start and end nodes
             while curr != end:
-                next_node = curr.next
-                curr.next = prev
-                prev = curr
+                next_node = curr.next  # Save the next node
+                curr.next = prev       # Reverse the current node's next pointer
+                prev = curr            # Move prev and curr one step forward
                 curr = next_node
-            return prev
+            return prev  # Return the new head of the reversed segment
         
-        # Create a dummy node
+        # Create a dummy node to simplify edge cases (like reversing the first group)
         dummy = ListNode(0)
         dummy.next = head
         group_prev = dummy
+        
+        # Loop through the list and reverse every k nodes
         while True:
+            # Find the kth node from the current group_prev node
             kth_node = group_prev
-            # Find the kth node
             for _ in range(k):
                 kth_node = kth_node.next
+                # If we don't have enough nodes for another group, return the modified list
                 if not kth_node:
                     return dummy.next
+            
+            # Save the next node after the kth node, which will be the start of the next group
             group_next = kth_node.next
-            # Reverse the group
+            # Reverse the group of k nodes
             group_start = group_prev.next
             group_prev.next = reverseLinkedList(group_start, kth_node.next)
             group_start.next = group_next
+            # Move group_prev pointer to the end of the reversed group
             group_prev = group_start
         
-        return dummy.next
+        return dummy.next  # Return the new head of the modified list
 
 # Example usage:
+# Create a linked list: 1 -> 2 -> 3 -> 4 -> 5
 head = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
-k = 3
+k = 3  # We want to reverse nodes in groups of 3
 sol = Solution()
 result = sol.reverseKGroup(head, k)
 
-# Output the modified list
+# Output the modified list: 3 -> 2 -> 1 -> 4 -> 5
 while result:
-    print(result.val, end=" -> ")
+    print(result.val, end=" -> " if result.next else "")
     result = result.next
+
 # Output: 3 -> 2 -> 1 -> 4 -> 5
 """
 Time Complexity:
@@ -997,46 +1222,64 @@ Explanation: After partitioning around the value 3, the list becomes 1 -> 2 -> 2
 """
 class ListNode:
     def __init__(self, val=0, next=None):
+        # Initialize a node with a value and a pointer to the next node
         self.val = val
         self.next = next
 
 class Solution:
     def partition(self, head, x):
+        # If the head of the list is empty, return None (no partitioning needed)
         if not head:
             return None
         
-        # Create two dummy heads for partitions
-        smaller_head = ListNode(0)
-        greater_head = ListNode(0)
+        # Create two dummy nodes to act as the start of two separate partitions:
+        # one for values less than x and one for values greater than or equal to x
+        smaller_head = ListNode(0)  # Dummy node for the "smaller" partition
+        greater_head = ListNode(0)  # Dummy node for the "greater" partition
+        
+        # Pointers to the current node in each partition
         smaller = smaller_head
         greater = greater_head
         
+        # Pointer to traverse the original linked list
         current = head
+        
+        # Traverse the original list and partition the nodes
         while current:
             if current.val < x:
+                # If the current value is smaller than x, add it to the smaller partition
                 smaller.next = current
-                smaller = smaller.next
+                smaller = smaller.next  # Move the smaller pointer forward
             else:
+                # If the current value is greater than or equal to x, add it to the greater partition
                 greater.next = current
-                greater = greater.next
+                greater = greater.next  # Move the greater pointer forward
+            # Move to the next node in the original list
             current = current.next
         
-        # Link the two partitions
+        # After processing all nodes, ensure the "greater" partition ends by setting its next pointer to None
         greater.next = None
+        
+        # Link the end of the smaller partition to the head of the greater partition
         smaller.next = greater_head.next
         
+        # Return the start of the smaller partition, which is after the dummy node
         return smaller_head.next
 
-# Example
+# Example usage:
+# Create a linked list: 1 -> 4 -> 3 -> 2 -> 5 -> 2
 head = ListNode(1, ListNode(4, ListNode(3, ListNode(2, ListNode(5, ListNode(2))))))
-x = 3
+
+x = 3  # The value to partition the list around
 sol = Solution()
 partitioned_head = sol.partition(head, x)
 
-# Output partitioned list
+# Output the partitioned list
+# The output should be: 1 -> 2 -> 2 -> 4 -> 3 -> 5
 while partitioned_head:
-    print(partitioned_head.val, end=" -> ")
+    print(partitioned_head.val, end=" -> " if partitioned_head.next else "")
     partitioned_head = partitioned_head.next
+
 # Output: 1 -> 2 -> 2 -> 4 -> 3 -> 5 ->
 """
 Input:
