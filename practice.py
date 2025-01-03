@@ -1,22 +1,19 @@
-def coin_denominations(denominations,amount):
+def maxmum_activities(start,end):
 
-    denominations.sort(reverse=True)
+    activities = list(zip(start,end))
+    print(activities)
 
-    count = 0
-    coin_used = []
+    activities.sort(key=lambda x :x[1])
 
-    for coin in denominations:
-        while coin <= amount:
-            coin_used.append(coin)
-            count+=1
-            amount-=coin
-    return count, coin_used
+    print(f"sorted: {activities}")
 
-denominations = [16,10, 5, 25,1]
-amount = 41 
 
-number_of_cois, coin_used = coin_denominations(denominations,amount)
+    last_end = activities[0][1]
+    count = 1
+    selected_activities = [0]
 
-print(f"Here is coin used: {coin_used}")
+start = [1, 3, 0, 5, 8, 5]
+end = [2, 4, 6, 7, 9, 9]
 
-print(f"Here is coin used:{number_of_cois}")
+
+act = maxmum_activities(start, end)
