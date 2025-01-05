@@ -84,3 +84,34 @@ budget = 50000
 
 max_return = fractional_allocation(costs, returns, budget)
 print(f"Maximum return from the investment: ${max_return:.2f}")
+
+def max_platform_needed(arrival,departure):
+    arrival = [time.zfill(5) for time in arrival]
+    departure = [time.zfill(5) for time in departure]
+
+    arrival.sort()
+    departure.sort()
+    i,j = 0,0
+    maximum_platforms = 0
+    platform_needed = 0
+    n = len(arrival)
+
+    while i < n and j < n:
+
+        if arrival[i] < departure[j]:
+            platform_needed += 1
+            maximum_platforms = max(maximum_platforms, platform_needed)
+            i+=1
+        else:
+            platform_needed -= 1
+            j+=1
+
+    return maximum_platforms
+
+
+arrival = ["9:00", "9:40", "9:50", "11:00", "15:00", "18:00"]
+departure = ["9:10", "12:00", "11:20", "11:30", "19:00", "20:00"]
+
+max_platform = max_platform_needed(arrival,departure)
+
+print(f"The maximum platfor, needed is {max_platform}")
