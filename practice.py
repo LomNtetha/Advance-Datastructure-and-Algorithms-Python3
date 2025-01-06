@@ -117,32 +117,28 @@ maxi = max_platforms_needed(arrival,departure)
 
 print(f"Here is the max platfrom required: {maxi}")
 
+def job_Muximize_profit(jobs):
 
-class Solution:
-    def job_sequencing(self, jobs: List[Tuple[int, int]]) -> int:
-        # Sort jobs based on profit in descending order
-        jobs.sort(key=lambda x: x[1], reverse=True)
-        
-        # Find the maximum deadline
-        max_deadline = max(job[0] for job in jobs)
-        
-        # Initialize a list to keep track of the time slots (one slot for each deadline)
-        slots = [-1] * (max_deadline + 1)
-        print(slots)
-        total_profit = 0  # Variable to store the total profit
-        
-        # Iterate through the sorted jobs
-        for deadline, profit in jobs:
-            # Check if there is a free slot for this job (starting from the job's deadline)
-            for j in range(min(deadline, max_deadline), 0, -1):
-                if slots[j] == -1:  # If the slot is free
-                    slots[j] = profit  # Assign the job to this slot
-                    total_profit += profit  # Add the profit of this job
-                    break  # Move to the next job once the current one is scheduled
-        
-        # Return the total profit
-        return total_profit
-# Example usage
+    jobs.sort(key=lambda x:x[1],reverse = True)
+
+    maximum_deadline = max(job[0] for job in jobs)
+
+    slots = [-1] * (maximum_deadline + 1)
+
+    total_profit = 0
+
+    for dealine,profit in jobs:
+
+        for j in range(min(dealine,maximum_deadline),0,-1):
+            if slots[j] == -1:
+                slots[j] = profit
+                total_profit += profit
+                break
+    return total_profit
+
+    
 jobs = [(2, 100), (1, 19), (2, 27), (1, 25), (3, 15)]
-solution = Solution()
-print(solution.job_sequencing(jobs))  # Output: 142
+
+to_profit = job_Muximize_profit(jobs)
+
+print(f"The Total profit: {to_profit}")
