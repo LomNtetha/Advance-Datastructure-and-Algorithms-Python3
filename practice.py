@@ -117,28 +117,20 @@ maxi = max_platforms_needed(arrival,departure)
 
 print(f"Here is the max platfrom required: {maxi}")
 
-def job_Muximize_profit(jobs):
 
-    jobs.sort(key=lambda x:x[1],reverse = True)
-
-    maximum_deadline = max(job[0] for job in jobs)
-
-    slots = [-1] * (maximum_deadline + 1)
-
+def Job_squence_Max_proit(jobs):
+    jobs.sort(key=lambda x:x[1], reverse= True)
+    maximum_dealine = max(job[0] for job in jobs)
+    slots = [-1] * (maximum_dealine + 1)
     total_profit = 0
-
-    for dealine,profit in jobs:
-
-        for j in range(min(dealine,maximum_deadline),0,-1):
-            if slots[j] == -1:
-                slots[j] = profit
-                total_profit += profit
+    for dealine, profit in jobs:
+        for j in range(min(dealine,maximum_dealine),0,-1):
+            if slots[j]== -1:
+                slots[j]=profit
+                total_profit+=profit
                 break
+
     return total_profit
-
-    
 jobs = [(2, 100), (1, 19), (2, 27), (1, 25), (3, 15)]
-
-to_profit = job_Muximize_profit(jobs)
-
-print(f"The Total profit: {to_profit}")
+profit = Job_squence_Max_proit(jobs)
+print(f"Max Profit {profit}")
