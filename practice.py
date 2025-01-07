@@ -173,3 +173,23 @@ source = 0
 
 distance = dijistra_algorithm(graph, source)
 print(f"here is the distances: {distance}")
+
+def min_diffirence(heights,k):
+
+    heights.sort()
+
+    initial_difference = heights[-1] - heights[0]
+    n = len(heights)
+    minimum_difference  = initial_difference
+
+    for i in range(n-1):
+        new_max = max(heights[-1]-k, heights[i] + k)
+        new_min = min(heights[0] +k, heights[i+1] - k)
+
+        minimum_difference = min(minimum_difference, new_max - new_min)
+    return minimum_difference
+heights = [1, 5, 15, 10]
+k = 3
+min_diff = min_diffirence(heights,k)
+
+print (f"here is the minimum diff of towers,: {min_diff}")
