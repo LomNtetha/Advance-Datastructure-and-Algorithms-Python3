@@ -19,3 +19,29 @@ c, n = max_denominations(denominations, amount)
 
 print(f"here is the coin used: {c}")
 print (f"here is the number of coins {n}")
+
+def maximum_activities(start,end):
+    activities = list(zip(start,end))
+
+    activities.sort(key=lambda x:x[1])
+   
+
+    selected_activities = [0]
+    last_end_time = activities[0][1]
+    count = 1
+
+    for i in range(1, len(activities)):
+        if activities[i][0] >= last_end_time:
+            count += 1
+            selected_activities.append(i) 
+            last_end_time = activities[i][1]
+    return selected_activities,count
+    
+
+start = [1, 3, 0, 5, 8, 5]
+end = [2, 4, 6, 7, 9, 9]
+
+s,e = maximum_activities(start,end)
+
+print (s)
+print (e)
