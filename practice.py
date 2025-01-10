@@ -86,69 +86,35 @@ max_value = solution.fractional_knapsack(weights, values, capacity)
 # Print the result
 print(f"Maximum value in the knapsack: {max_value}")
 
-# def find_minimum_platforms(arrival,departure):
+def find_max_platforms(arrival, departure):
 
-#     arrival = [(time.zfill(5)) for time in arrival]
-#     departure = [(time.zfill(5)) for time in departure]
- 
+    arrival = [time.zfill(5) for time in arrival]
+    departure = [time.zfill(5) for time in departure]
+    arrival.sort()
+    departure.sort()
 
-#     arrival.sort()
-#     departure.sort()
+    platforms_needed = 0
+    max_platforms = 0
+    i,j = 0,0
+    n= len(arrival)
 
-#     platform_needed = 0
-#     max_platform = 0
-#     i,j = 0,0
+    while i < n and j < n:
+        if arrival[i] < departure[j]:
+            platforms_needed+= 1
+            max_platforms = max(max_platforms, platforms_needed)
+            i+=1
 
-#     for i, j in arrival,departure:
-#         if i <= arrival and j <= departure:
-#             platform_needed += 1
-#         elif j >= departure:
-#             platform_needed -= 1
-#     return platform_needed
-
-# arrival = ["9:00", "9:40", "9:50", "11:00", "15:00", "18:00"]
-# departure = ["9:10", "12:00", "11:20", "11:30", "19:00", "20:00"]
-
-# a, d = find_minimum_platforms(arrival, departure)
-
-# print (a)
-
-class Solution:
-    def findMinPlatforms(self, arrival, departure):
-
-        # Format arrival and departure times to ensure proper comparison
-        arrival = [time.zfill(5) for time in arrival]
-        departure = [time.zfill(5) for time in departure]
-        # Sort arrival and departure times
-        arrival.sort()
-        departure.sort()
-        
-        # Initialize pointers and platform counters
-        #i: Tracks the next arrival.
-        #j: Tracks the next departure.
-        i, j = 0, 0
-        platforms_needed = 0
-        max_platforms = 0
-        n = len(arrival)
-        
-        # Traverse both arrays
-        while i < n and j < n:
-            # If the next train is arriving
-            if arrival[i] < departure[j]:
-                platforms_needed += 1
-                max_platforms = max(max_platforms, platforms_needed)
-                i += 1
-            else:  # If the next train is departing
-                platforms_needed -= 1
-                j += 1
-        return max_platforms
-
-# Example usage
+        else:
+            platforms_needed -= 1
+            j+=1
+    return max_platforms
 arrival = ["9:00", "9:40", "9:50", "11:00", "15:00", "18:00"]
 departure = ["9:10", "12:00", "11:20", "11:30", "19:00", "20:00"]
 
-solution = Solution()
-print(solution.findMinPlatforms(arrival, departure))  # Output: 3
+max_platforms = find_max_platforms(arrival, departure)
+
+print(max_platforms)
+
 
 
 
