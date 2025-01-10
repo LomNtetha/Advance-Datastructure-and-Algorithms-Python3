@@ -115,6 +115,30 @@ max_platforms = find_max_platforms(arrival, departure)
 
 print(max_platforms)
 
+def find_max_profit(jobs):
 
+    jobs.sort(key=lambda x:x[1], reverse=True)
 
+    max_dealine = max(job[0] for job in jobs)
+
+    slots = [-1] * (max_dealine+1)
+
+    total_profit = 0
+     
+    
+
+    for dealine,profit in jobs:
+        for j in range(min(dealine,max_dealine),0,-1):
+
+            if slots[j]== -1:
+                slots[j] = profit
+                total_profit+=profit
+                break
+    return total_profit
+
+jobs = [(2, 100), (1, 19), (2, 27), (1, 25), (3, 15)]
+
+total  = find_max_profit(jobs)
+
+print(total)
 
