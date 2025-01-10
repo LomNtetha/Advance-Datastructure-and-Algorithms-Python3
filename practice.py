@@ -1,3 +1,6 @@
+from typing import List
+
+
 def max_denominations(denominations,amount):
 
     denominations.sort(reverse=True)
@@ -44,3 +47,43 @@ s,e = max_activities(start,end)
 print(s)
 print(e)
 
+class Solution:
+    def fractional_knapsack(self, weights: List[int], values: List[int], capacity: int) -> float:
+        # Step 1: Zip values and weights together
+        zipped_items = zip(values, weights)
+        
+        # Step 2: Calculate value-to-weight ratios and create a list of tuples
+        items_with_ratios = [(v / w, w) for v, w in zipped_items]
+        
+        # Step 3: Sort the items by value-to-weight ratio in descending order
+        items = sorted(items_with_ratios, reverse=True)
+        
+        total_value = 0.0  # Total value accumulated in the knapsack
+        
+        # Iterate through sorted items
+        for value_per_weight, weight in items:
+            # If the current item fits fully in the knapsack, take it
+            if capacity >= weight:
+                total_value += value_per_weight * weight
+                capacity -= weight
+            else:
+                # If only a fraction of the item fits, take the fraction and stop
+                total_value += value_per_weight * capacity
+                break
+        
+        # Return the maximum value that can be taken
+        return total_value
+    
+# Example usage:
+solution = Solution()
+weights = [10, 20, 30]  # Weights of items
+values = [60, 100, 120]  # Values of items
+capacity = 50  # Capacity of the knapsack
+
+# Call the fractional_knapsack method
+max_value = solution.fractional_knapsack(weights, values, capacity)
+
+# Print the result
+print(f"Maximum value in the knapsack: {max_value}")
+
+# pm2 start dist/app.js --name "app-mysosevba" && pm2 start dist/workers.js --name "workers-mysosevba" && pm2 start dist/api.js --name "api-mysosevba" && pm2 start dist/mirror.js --name "mirror-mysosevba"
