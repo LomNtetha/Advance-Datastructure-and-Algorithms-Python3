@@ -133,16 +133,18 @@ jobs = [(2, 100), (1, 19), (2, 27), (1, 25), (3, 15)]
 total_profit = find_maximum_profit(jobs)
 print(total_profit)
 
-def dijstra_algorithms(graph,source):
+def dijkstra_algorithms(graph,source):
 
-    distances = {i:float('inf')for i in graph}
+    distances = {i: float('inf') for i in graph}
+
     distances[source] = 0
-    min_heap = [(0,source)]
+
+    min_heap= [(0,source)]
 
     while min_heap:
-        current_distance,current_node = heapq.heappop(min_heap)
+        current_distance, current_node = heapq.heappop(min_heap)
 
-        if  current_distance > distances[current_node]:
+        if current_distance > distances[current_node]:
             continue
 
         for neighbor,weight in graph[current_node]:
@@ -150,10 +152,9 @@ def dijstra_algorithms(graph,source):
 
             if dist < distances[neighbor]:
                 distances[neighbor] = dist
-                
-                heapq.heappush(min_heap,(dist, neighbor))
-    return distances
-raph = {
+                heapq.heappush(min_heap,(dist,neighbor))
+    return [distances[i] for i in range(len(graph))]
+graph = {
     0: [(1, 4), (7, 8)],
     1: [(0, 4), (2, 8), (7, 11)],
     2: [(1, 8), (3, 7), (8, 2), (5, 4)],
@@ -166,3 +167,6 @@ raph = {
 }
 
 source = 0
+
+distance = dijkstra_algorithms(graph, source)
+print(f"here is dijkstra Algorithms {distance}")
