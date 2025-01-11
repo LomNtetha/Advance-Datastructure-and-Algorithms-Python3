@@ -1485,7 +1485,8 @@ class Solution:
             for neighbor in graph[node]:
                 in_degree[neighbor] += 1
         
-        queue = deque([node for node in graph if in_degree[node] == 0])
+        queue = deque([node for node in graph
+                        if in_degree[node] == 0])
         top_order = []
         
         while queue:
