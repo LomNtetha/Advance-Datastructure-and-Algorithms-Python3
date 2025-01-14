@@ -171,27 +171,24 @@ source = 0
 distance = dijkstra_algorithms(graph, source)
 print(f"here is dijkstra Algorithms {distance}")
 
-def minimize_diffirence(heights,k):
+
+def Minimize_difference(heights,k):
 
     heights.sort()
     n = len(heights)
 
-    min_difference = heights[-1]-heights[0]
+    mimum_difference = (heights[-1] -heights[0])
 
+    for i in  range(n-1):
+        new_max = max(heights[-1] -k, heights[i] +k)
+        new_min = min(heights[0] +k, heights[i + 1] - k)
 
-    for i in range(n-1):
+        mimum_difference = min(mimum_difference, (new_max - new_min))
 
-        new_max = max(heights[-1]-k, heights[i]+k)
-        new_min = min(heights[0]+k, heights[i +1] - k)
-
-        min_difference = min(min_difference, new_max-new_min)
-
-    return min_difference
-
-
+    return mimum_difference
 heights = [1, 5, 15, 10]
 k = 3
 
-new_min = minimize_diffirence(heights, k)
+min_diff = Minimize_difference(heights,k)
 
-print(new_min)
+print(min_diff)
