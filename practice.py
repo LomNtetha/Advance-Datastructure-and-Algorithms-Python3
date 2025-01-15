@@ -244,3 +244,33 @@ prices = [7, 1, 5, 3, 6, 4]
 pro = maxProfit_multipletimes(prices)
 
 print(pro)
+
+def bubble_sort(my_array):
+
+    n = len(my_array)
+
+    for i in range (n):
+        for j in range(0, n-i-1):
+            if my_array[j] > my_array[j+1]:
+                my_array[i],my_array[j+1], my_array[j+1],my_array[i]
+my_array = [64, 34, 25, 12, 22, 11, 90, 5]
+
+def bubble_sort_array_in_ascending_order(arr):
+    n = len(arr)  # Get the length of the array
+    # Traverse through all elements in the array
+    for i in range(n):
+        # Traverse the array from 0 to n-i-1
+        # The last i elements are already sorted
+        for j in range(0, n-i-1):
+             if arr[j] > arr[j+1]:  # Swap if the element found is greater than the next element
+         
+                arr[j], arr[j+1] = arr[j+1], arr[j]  # Swap the elements
+
+# Define the array to be sorted
+my_array = [64, 34, 25, 12, 22, 11, 90, 5]
+
+# Apply the bubble sort function
+bubble_sort_array_in_ascending_order(my_array)
+
+# Print the sorted array
+print("Sorted array:", my_array)
