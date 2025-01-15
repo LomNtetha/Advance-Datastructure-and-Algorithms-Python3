@@ -211,3 +211,18 @@ nums = [3, 30, 34, 5, 9]
 res = largest_number(nums)
 
 print(res)
+
+def maximum_profit(prices):
+
+    min_price = float('inf')
+    max_profit = 0
+
+    for price in prices:
+        min_price = min(price, min_price)
+        max_profit = max(max_profit, price-min_price)
+    return max_profit
+prices = [7, 1, 5, 3, 6, 4]
+
+profit = maximum_profit(prices)
+
+print(profit)
