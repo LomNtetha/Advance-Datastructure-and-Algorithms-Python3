@@ -226,3 +226,21 @@ prices = [7, 1, 5, 3, 6, 4]
 profit = maximum_profit(prices)
 
 print(profit)
+
+
+def maxProfit_multipletimes(prices):
+
+    profit = 0
+
+    for i in range(1, len(prices)):
+
+        if prices[i] > prices[i-1]:
+
+            profit += prices[i] - prices[i-1]
+    return profit
+
+prices = [7, 1, 5, 3, 6, 4]
+
+pro = maxProfit_multipletimes(prices)
+
+print(pro)
