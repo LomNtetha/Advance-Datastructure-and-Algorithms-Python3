@@ -194,10 +194,20 @@ class Solution:
     def reverse_string(self, s: str) -> str:
         # Base case: a string of length 0 or 1 is already reversed.
         if len(s) <= 1:
-            return s
+            result = s  # The string is already reversed.
+            return result
         
-        # Recursive case: last character + reverse of the rest.
-        return s[-1] + self.reverse_string(s[:-1])
+        # Recursive case: calculate the reversed string.
+        last_character = s[-1]
+        rest_reversed = Solution().reverse_string(s[:-1])
+        result = last_character + rest_reversed
+        return result
+
+# Example usage:
+sol = Solution()
+string = "hello"
+print(sol.reverse_string(string))  # Output: "olleh"
+
 
 # Complexity:
 # Time: O(n) - Each character is visited once.
@@ -217,13 +227,30 @@ class Solution:
     def is_palindrome(self, s: str) -> bool:
         # Base case: if the string has 0 or 1 character, it’s a palindrome.
         if len(s) <= 1:
-            return True
+            result = True  # Single character or empty string is a palindrome.
+            return result
         
-        # Recursive case: check first and last character and recurse.
-        if s[0] == s[-1]:
-            return self.is_palindrome(s[1:-1])
+        # Recursive case: check first and last characters.
+        first_character = s[0]
+        last_character = s[-1]
         
-        return False
+        # If first and last characters match, check the remaining substring.
+        if first_character == last_character:
+            result = Solution().is_palindrome(s[1:-1])
+            return result
+        
+        # If characters don’t match, it's not a palindrome.
+        result = False
+        return result
+
+# Example usage:
+sol = Solution()
+string = "racecar"
+print(sol.is_palindrome(string))  # Output: True
+
+string = "hello"
+print(sol.is_palindrome(string))  # Output: False
+
 
 # Complexity:
 # Time: O(n) - Half of the string is checked.
@@ -242,16 +269,27 @@ class Solution:
     def permutations(self, s: str) -> list:
         # Base case: a single character has only one permutation.
         if len(s) <= 1:
-            return [s]
+            result = [s]  # Only one possible permutation for a single character.
+            return result
         
-        # Recursive case: insert first character in all positions of each permutation.
-        result = []
-        first_char = s[0]
-        for perm in self.permutations(s[1:]):
+        # Recursive case: generate permutations.
+        result = []  # Initialize an empty list to store results.
+        first_char = s[0]  # Extract the first character.
+        remaining_permutations = Solution().permutations(s[1:])  # Get permutations of the rest of the string.
+        
+        # Insert the first character into all possible positions of each permutation.
+        for perm in remaining_permutations:
             for i in range(len(perm) + 1):
-                result.append(perm[:i] + first_char + perm[i:])
+                new_permutation = perm[:i] + first_char + perm[i:]
+                result.append(new_permutation)
         
-        return result
+        return result  # Return the complete list of permutations.
+
+# Example usage:
+sol = Solution()
+string = "abc"
+print(sol.permutations(string))  # Output: ['abc', 'bac', 'bca', 'acb', 'cab', 'cba']
+
 
 # Complexity:
 # Time: O(n!) - Permutations grow factorially with length.
@@ -273,7 +311,17 @@ class Solution:
             return 1
         
         # Recursive case: add paths from right and below cells.
-        return self.count_paths(m - 1, n) + self.count_paths(m, n - 1)
+        paths_from_top = self.count_paths(m - 1, n)  # Paths from the cell above
+        paths_from_left = self.count_paths(m, n - 1)  # Paths from the cell to the left
+        
+        total_paths = paths_from_top + paths_from_left  # Total paths from current cell
+        
+        return total_paths  # Return the total number of paths
+
+# Example usage:
+sol = Solution()
+print(sol.count_paths(3, 3))  # Output: 6
+
 
 # Complexity:
 # Time: O(2^(m+n)) - Each cell has two possible recursive paths.
@@ -307,6 +355,10 @@ class Solution:
         result = []
         generate("", n, n, result)
         return result
+
+# Example usage:
+sol = Solution()
+print(sol.generate_parentheses(3))  # Output: ['((()))', '(()())', '(())()', '()(())', '()()()']
 
 # Complexity:
 # Time: O(4^n / √n) - Catalan number growth rate.
