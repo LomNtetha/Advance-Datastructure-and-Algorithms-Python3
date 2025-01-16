@@ -15,8 +15,18 @@ class Solution:
         if n <= 1:
             return n
         
-        # Recursive case: return the sum of previous two Fibonacci numbers
-        return self.fibonacci(n - 1) + self.fibonacci(n - 2)
+        # Recursive calculations
+        fib1 = Solution().fibonacci(n - 1)
+        fib2 = Solution().fibonacci(n - 2)
+        
+        # Return the result of the sum of previous two Fibonacci numbers
+        result = fib1 + fib2
+        return result
+
+# Example usage:
+sol = Solution()
+print(sol.fibonacci(5))  # Output: 5
+
 
 # Complexity:
 # Time: O(2^n) - Each function call results in two further calls, leading to exponential growth.
@@ -30,15 +40,22 @@ Example:
 Input: n = 4
 Output: 24
 """
-
 class Solution:
     def factorial(self, n: int) -> int:
         # Base case: if n is 0 or 1, factorial is 1.
         if n == 0 or n == 1:
             return 1
         
-        # Recursive case: multiply n by the factorial of (n - 1).
-        return n * self.factorial(n - 1)
+        # Recursive calculation
+        fact = n * Solution().factorial(n - 1)
+        
+        # Return the result
+        return fact
+
+# Example usage:
+sol = Solution()
+print(sol.factorial(5))  # Output: 120
+
 
 # Complexity:
 # Time: O(n) - Linear calls to reduce n to the base case.
@@ -60,14 +77,24 @@ class Solution:
             return 1
         elif n < 0:
             # For negative powers, use reciprocal of positive power.
-            return 1 / self.power(x, -n)
+            result = 1 / Solution().power(x, -n)
+            return result
         
         # Recursive case: if n is even, split power; if odd, reduce by one.
         if n % 2 == 0:
-            half_power = self.power(x, n // 2)
-            return half_power * half_power
+            half_power = Solution().power(x, n // 2)
+            result = half_power * half_power
         else:
-            return x * self.power(x, n - 1)
+            reduced_power = Solution().power(x, n - 1)
+            result = x * reduced_power
+        
+        # Return the result
+        return result
+
+# Example usage:
+sol = Solution()
+print(sol.power(2, 10))  # Output: 1024.0
+print(sol.power(2, -2))  # Output: 0.25
 
 # Complexity:
 # Time: O(log n) - Exponent is halved in each step.
