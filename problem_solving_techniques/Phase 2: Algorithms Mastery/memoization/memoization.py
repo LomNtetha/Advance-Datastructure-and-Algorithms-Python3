@@ -7,24 +7,6 @@ Example:
 Input: n = 5
 Output: 5
 """
-
-
-class Solution:
-    def fibonacci(self, n: int, memo=None) -> int:
-        # Initialize memoization dictionary if not provided
-        if memo is None:
-            memo = {}
-        
-        # Base case: if n is 0 or 1, return n as it’s the base case
-        if n <= 1:
-            return n
-        
-        # Check if the result is already in the memo
-        if n not in memo:
-            # Recursive case: store the result in the memo
-            memo[n] = self.fibonacci(n - 1, memo) + self.fibonacci(n - 2, memo)
-        
-        return memo[n]
 class Solution:
     def fibonacci(self, n: int, memo=None) -> int:
         # Initialize memoization dictionary if not provided
