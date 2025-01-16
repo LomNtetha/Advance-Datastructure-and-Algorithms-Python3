@@ -115,8 +115,19 @@ class Solution:
         if n == 0:
             return 0
         
-        # Recursive case: last digit + sum of remaining digits.
-        return n % 10 + self.sum_of_digits(n // 10)
+        # Recursive case: calculate last digit and sum of remaining digits.
+        last_digit = n % 10
+        remaining_sum = Solution().sum_of_digits(n // 10)
+        result = last_digit + remaining_sum
+        
+        # Return the result
+        return result
+
+# Example usage:
+sol = Solution()
+print(sol.sum_of_digits(1234))  # Output: 10
+print(sol.sum_of_digits(9876))  # Output: 30
+
 
 # Complexity:
 # Time: O(d) - Where d is the number of digits in n.
@@ -133,24 +144,37 @@ Output: 3
 """
 class Solution:
     def binary_search(self, arr: list, left: int, right: int, x: int) -> int:
-        # Base case: If search space is exhausted, x is not in array.
+        # Base case: If search space is exhausted, x is not in the array.
         if right >= left:
             mid = left + (right - left) // 2
             
-            # Check if mid element is the target.
+            # Check if the mid element is the target.
             if arr[mid] == x:
-                return mid
+                result = mid  # Target found at the mid index.
+                return result
             
-            # Recursive case: if target is less, search left half.
+            # Recursive case: if target is less, search the left half.
             elif arr[mid] > x:
-                return self.binary_search(arr, left, mid - 1, x)
+                result = Solution().binary_search(arr, left, mid - 1, x)
+                return result
             
-            # Otherwise, search right half.
+            # Otherwise, search the right half.
             else:
-                return self.binary_search(arr, mid + 1, right, x)
+                result = Solution().binary_search(arr, mid + 1, right, x)
+                return result
         
-        # If element is not present, return -1.
+        # If the element is not present, return -1.
         return -1
+
+# Example usage:
+sol = Solution()
+array = [2, 3, 4, 10, 40]
+target = 10
+print(sol.binary_search(array, 0, len(array) - 1, target))  # Output: 3
+
+target_not_found = 5
+print(sol.binary_search(array, 0, len(array) - 1, target_not_found))  # Output: -1
+
 
 # Complexity:
 # Time: O(log n) - The array is halved each step.
