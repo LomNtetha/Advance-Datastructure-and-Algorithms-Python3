@@ -25,6 +25,26 @@ class Solution:
             memo[n] = self.fibonacci(n - 1, memo) + self.fibonacci(n - 2, memo)
         
         return memo[n]
+class Solution:
+    def fibonacci(self, n: int, memo=None) -> int:
+        # Initialize memoization dictionary if not provided
+        if memo is None:
+            memo = {}
+        
+        # Base case: if n is 0 or 1, return n as it’s the base case
+        if n <= 1:
+            return n
+        
+        # Check if the result is already in the memo
+        if n not in memo:
+            # Recursive case: store the result in the memo
+            memo[n] = self.fibonacci(n - 1, memo) + self.fibonacci(n - 2, memo)
+        
+        return memo[n]
+
+sol = Solution()
+print(sol.fibonacci(10))  # Output: 55
+
 
 # Complexity:
 # Time: O(n) - Each Fibonacci number is computed once.
@@ -56,6 +76,9 @@ class Solution:
             memo[n] = n * self.factorial(n - 1, memo)
         
         return memo[n]
+# Example usage
+sol = Solution()
+print(sol.factorial(5))  # Output: 120
 
 # Complexity:
 # Time: O(n) - Each factorial value is computed once.
