@@ -614,3 +614,48 @@ magazine = "aab"
 sol = Solution()
 print(f"Can construct '{ransomNote}' from '{magazine}'? {sol.canConstruct(ransomNote, magazine)}")
 
+"""
+This approach uses the collections.Counter class to count the frequencies of characters and check if the magazine contains enough characters to 
+fulfill the ransom note's requirements. It has a time complexity of O(n+m), 
+where n and m are the lengths of ransomNote and magazine, respectively.
+"""
+
+"""
+16. A string frequency problem involves counting the frequency of characters or words in a given string and performing operations based on that frequency.
+
+Problem:
+Write a function characterFrequency(s: str) -> List[Tuple[str, int]] that takes a string s as input and returns a list of tuples representing each character and its frequency, sorted by frequency in descending order. If two characters have the same frequency, they should be sorted alphabetically.
+
+Example Input:
+s = "tree"
+Expected Output:
+[('e', 2), ('r', 1), ('t', 1)]
+Explanation:
+Character frequencies:
+'e' appears 2 times,
+'r' appears 1 time,
+'t' appears 1 time.
+Sorting: By frequency in descending order. For characters with the same frequency, sort alphabetically.
+"""
+from collections import Counter
+from typing import List, Tuple
+
+class Solution:
+    def characterFrequency(self, s: str) -> List[Tuple[str, int]]:
+        """
+        Returns the frequency of each character in the string, sorted by
+        frequency (descending) and alphabetically for ties.
+        """
+        # Count frequencies of characters
+        freq = Counter(s)
+        
+        # Sort by frequency (descending) and alphabetically (ascending)
+        sorted_freq = sorted(freq.items(), key=lambda x: (-x[1], x[0]))
+        
+        return sorted_freq
+
+# Example usage
+s = "tree"
+sol = Solution()
+print(sol.characterFrequency(s))
+
