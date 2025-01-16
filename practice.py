@@ -273,4 +273,93 @@ my_array = [64, 34, 25, 12, 22, 11, 90, 5]
 bubble_sort_array_in_ascending_order(my_array)
 
 # Print the sorted array
-print("Sorted array:", my_array)
+print(f"{my_array}\n\n\n")
+
+
+class Solution:
+    def solveSudoku(self, board: list[list[str]]) -> None:
+        """
+        Solves a Sudoku puzzle by filling in the empty cells with valid digits (1-9).
+        
+        :param board: A 9x9 grid representing the Sudoku puzzle.
+        """
+        
+        # Helper function to check if placing a number 'num' in (row, col) is valid
+        def is_valid(row: int, col: int, num: str) -> bool:
+            """
+            Checks if placing 'num' at (row, col) is valid by ensuring it's not already
+            in the current row, column, or 3x3 subgrid.
+            
+            :param row: The row index
+            :param col: The column index
+            :param num: The number to place at (row, col)
+            :return: True if valid, False otherwise.
+            """
+            # Check if the number is already in the row
+            for i in range(9):
+                if board[row][i] == num:
+                    return False
+            
+            # Check if the number is already in the column
+            for i in range(9):
+                if board[i][col] == num:
+                    return False
+            
+            # Check if the number is already in the 3x3 subgrid
+            for i in range(3):
+                for j in range(3):
+                    if board[3 * (row // 3) + i][3 * (col // 3) + j] == num:
+                        return False
+            
+            return True
+        
+        # Backtracking function to try placing numbers in empty cells
+        def backtrack():
+            """
+            Uses backtracking to try filling in the empty cells.
+            """
+            # Loop through each cell in the 9x9 board
+            for i in range(9):
+                for j in range(9):
+                    if board[i][j] == ".":  # Find an empty cell
+                        # Try numbers from 1 to 9
+                        for num in map(str, range(1, 10)):
+                            if is_valid(i, j, num):
+                                board[i][j] = num  # Place the number
+                                
+                                # Recur to try filling the next cell
+                                if backtrack():
+                                    return True
+                                
+                                # If no valid solution, backtrack by resetting the cell
+                                board[i][j] = "."
+                        return False  # If no valid number was found for this empty cell
+            return True  # If the board is completely filled
+        
+        # Start the backtracking process
+        backtrack()
+
+
+# Example usage:
+sol = Solution()
+
+# Input Sudoku puzzle with empty cells represented as '.'
+board = [
+    ["5", "3", ".", ".", "7", ".", ".", ".", "."],
+    ["6", ".", ".", "1", "9", "5", ".", ".", "."],
+    [".", "9", "8", ".", ".", ".", ".", "6", "."],
+    ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
+    ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
+    ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
+    [".", "6", ".", ".", ".", ".", "2", "8", "."],
+    [".", ".", ".", "4", "1", "9", ".", ".", "5"],
+    [".", ".", ".", ".", "8", ".", ".", "7", "9"]
+]
+
+# Solve the Sudoku puzzle
+sol.solveSudoku(board)
+
+# Print the solved board
+for row in board:
+    print(row)
+
