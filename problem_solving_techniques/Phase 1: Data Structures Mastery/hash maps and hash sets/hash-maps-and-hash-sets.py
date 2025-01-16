@@ -1,5 +1,5 @@
 """
-Given an array of integers, return True if any value appears at least twice, otherwise return False.
+1. Given an array of integers, return True if any value appears at least twice, otherwise return False.
 
 Example:
 Input:
@@ -15,13 +15,29 @@ O(n) since the set may store up to n elements.
 
 """
 
+from typing import List
+
 class Solution:
     def containsDuplicate(self, nums: List[int]) -> bool:
-        # Compare the length of the list with the length of the set (which removes duplicates)
+        """
+        Check if there are any duplicate numbers in the input list.
+        Compare the length of the list with the length of the set (which removes duplicates).
+        """
         return len(nums) != len(set(nums))
+
+# Example input
+example_input = [1, 2, 3, 4, 5, 1]
+
+# Create an instance of Solution
+sol = Solution()
+
+# Call the containsDuplicate function and print the result
+print(f"Input: {example_input}")
+print(f"Contains Duplicate: {sol.containsDuplicate(example_input)}")
+
     
 """
-Given two strings s and t, return True if t is an anagram of s, and False otherwise.
+2 .Given two strings s and t, return True if t is an anagram of s, and False otherwise.
 
 Example:
 Input:
@@ -39,11 +55,26 @@ O(n) because we create new sorted versions of the strings.
 """
 class Solution:
     def isAnagram(self, s: str, t: str) -> bool:
-        # Sort both strings and compare them
+        """
+        Check if two strings are anagrams of each other.
+        An anagram is a word or phrase formed by rearranging the letters of another.
+        Sort both strings and compare them.
+        """
         return sorted(s) == sorted(t)
 
+# Example inputs
+s = "listen"
+t = "silent"
+
+# Create an instance of Solution
+sol = Solution()
+
+# Call the isAnagram function and print the result
+print(f"Are '{s}' and '{t}' anagrams? {sol.isAnagram(s, t)}")
+
+
 """
-Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique.
+3 .Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique.
 
 Example:
 Input:
@@ -59,13 +90,29 @@ O(n + m) due to the space needed for storing the sets.
 
 """
 
+from typing import List
+
 class Solution:
     def intersection(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        # Convert both arrays to sets and return the intersection
+        """
+        Find the intersection of two arrays.
+        Convert both arrays to sets and return the intersection as a list.
+        """
         return list(set(nums1) & set(nums2))
 
+# Example inputs
+nums1 = [1, 2, 2, 1]
+nums2 = [2, 2]
+
+# Create an instance of Solution
+sol = Solution()
+
+# Call the intersection function and print the result
+print(f"The intersection of {nums1} and {nums2} is: {sol.intersection(nums1, nums2)}")
+
+
 """
-Given an array of strings, group the anagrams together.
+4. Given an array of strings, group the anagrams together.
 
 Example:
 Input:
@@ -84,8 +131,14 @@ O(n * k) because we are storing the strings grouped by their sorted versions.
 
 """
 
+from typing import List
+from collections import defaultdict
+
 class Solution:
     def groupAnagrams(self, strs: List[str]) -> List[List[str]]:
+        """
+        Group anagrams from a list of strings.
+        """
         # Dictionary to group words that are anagrams
         anagrams = defaultdict(list)
         
@@ -97,9 +150,19 @@ class Solution:
         
         # Return the grouped anagrams
         return list(anagrams.values())
+
+# Example input
+strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+
+# Create an instance of Solution
+sol = Solution()
+
+# Call the groupAnagrams function and print the result
+print(f"Grouped anagrams for {strs}: {sol.groupAnagrams(strs)}")
+
     
 """
-Given an array of integers nums and an integer k, return the total number of continuous subarrays whose sum equals k.
+5. Given an array of integers nums and an integer k, return the total number of continuous subarrays whose sum equals k.
 
 Example:
 Input:
@@ -116,8 +179,13 @@ O(n) for the hash map storing cumulative sums.
 
 """
 
+from typing import List
+
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
+        """
+        Calculate the number of continuous subarrays whose sum equals k.
+        """
         # Initialize count and current sum
         count = 0
         curr_sum = 0
@@ -136,8 +204,19 @@ class Solution:
             hash_map[curr_sum] = hash_map.get(curr_sum, 0) + 1
             
         return count
+
+# Example input
+nums = [1, 1, 1]
+k = 2
+
+# Create an instance of Solution
+sol = Solution()
+
+# Call the subarraySum function and print the result
+print(f"Number of subarrays in {nums} that sum to {k}: {sol.subarraySum(nums, k)}")
+
 """
-Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
+6. Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
 
 Example:
 Input:
@@ -158,14 +237,17 @@ from typing import List
 
 class Solution:
     def longestConsecutive(self, nums: List[int]) -> int:
-        # Convert the list to a set to remove duplicates
+        """
+        Find the length of the longest consecutive elements sequence in the array.
+        """
+        # Convert the list to a set to remove duplicates and allow O(1) lookups
         num_set = set(nums)
         longest_streak = 0
         
         # Iterate through each number in the set
         for num in num_set:
-            # Only start counting when it's the start of a sequence
-            if num - 1 not in num_set:
+            # Only start counting when it's the beginning of a sequence
+            if num - 1 not in num_set:  # Start of a sequence
                 current_num = num
                 current_streak = 1
                 
@@ -174,13 +256,23 @@ class Solution:
                     current_num += 1
                     current_streak += 1
                 
-                # Update the longest streak found
+                # Update the longest streak found so far
                 longest_streak = max(longest_streak, current_streak)
         
         return longest_streak
 
+# Example input
+nums = [100, 4, 200, 1, 3, 2]
+
+# Create an instance of Solution
+sol = Solution()
+
+# Call the longestConsecutive function and print the result
+print(f"The length of the longest consecutive sequence in {nums}: {sol.longestConsecutive(nums)}")
+
+
 """
-Given two strings s and t, determine if they are isomorphic.
+7. Given two strings s and t, determine if they are isomorphic.
 
 Example:
 Input:
@@ -196,9 +288,14 @@ O(n) for the two dictionaries storing the mappings.
 """
 class Solution:
     def isIsomorphic(self, s: str, t: str) -> bool:
+        """
+        Determine if two strings s and t are isomorphic.
+        Two strings are isomorphic if the characters in s can be replaced 
+        to get t, preserving the order of characters.
+        """
         # Mappings for characters in s to t and vice versa
-        mapping_s_t = {}
-        mapping_t_s = {}
+        mapping_s_t = {}  # Maps characters from s to t
+        mapping_t_s = {}  # Maps characters from t to s
         
         # Iterate through both strings simultaneously
         for c1, c2 in zip(s, t):
@@ -209,10 +306,22 @@ class Solution:
             # If there is a mismatch in the mappings, return False
             elif mapping_s_t.get(c1) != c2 or mapping_t_s.get(c2) != c1:
                 return False
+        # If all characters satisfy the mapping, return True
         return True
+
+# Example input
+s = "egg"
+t = "add"
+
+# Create an instance of Solution
+sol = Solution()
+
+# Call the isIsomorphic function and print the result
+print(f"Are the strings '{s}' and '{t}' isomorphic? {sol.isIsomorphic(s, t)}")
+
     
 """
-Given a pattern and a string s, find if s follows the same pattern.
+8. Given a pattern and a string s, find if s follows the same pattern.
 
 Example:
 Input:
@@ -252,7 +361,7 @@ class Solution:
         return True
     
 """
-You are given two strings s and t where t is generated by shuffling the string s and adding one more letter at a random position.
+9. You are given two strings s and t where t is generated by shuffling the string s and adding one more letter at a random position.
 Find the extra letter added in t.
 
 Example:
@@ -295,7 +404,7 @@ class Solution:
         return chr(result)
     
 """
-Given an array nums of size n, return the majority element (the element that appears more than n / 2 times).
+10. Given an array nums of size n, return the majority element (the element that appears more than n / 2 times).
 
 Example:
 Input:
@@ -326,7 +435,7 @@ class Solution:
                 return num
             
 """
-Given two lists list1 and list2, find the common interest with the least index sum. If there is a tie, return all such common interests.
+11. Given two lists list1 and list2, find the common interest with the least index sum. If there is a tie, return all such common interests.
 
 Example:
 Input:
@@ -364,7 +473,7 @@ class Solution:
         return result
 
 """
-Given two strings s and p, return all the start indices of p's anagrams in s. You may return the answer in any order.
+12. Given two strings s and p, return all the start indices of p's anagrams in s. You may return the answer in any order.
 
 Example:
 Input:
@@ -408,7 +517,7 @@ class Solution:
         return result
     
 """
-Given an integer array nums and an integer k, return the k most frequent elements.
+13. Given an integer array nums and an integer k, return the k most frequent elements.
 
 Example:
 Input:
@@ -439,7 +548,7 @@ class Solution:
 
 
 """
-Write an algorithm to determine if a number is "happy." A happy number is a number that eventually reaches 1 when replaced
+14. Write an algorithm to determine if a number is "happy." A happy number is a number that eventually reaches 1 when replaced
 by the sum of the square of its digits. If it loops endlessly in a cycle, return False.
 
 Example:
@@ -464,3 +573,44 @@ class Solution:
             n = sum(int(digit) ** 2 for digit in str(n))  # Calculate the sum of squares of digits
         
         return n == 1  # Return True if n reaches 1, False otherwise
+    
+
+"""
+15. Ransom Note Problem:
+Write a function canConstruct(ransomNote: str, magazine: str) -> bool that determines if the string ransomNote can be constructed from the characters in the string magazine.
+
+Each character in magazine can only be used once.
+
+Example:
+Input:
+ransomNote = "aa"
+magazine = "aab"
+Output:
+True
+Explanation: The characters 'a' and 'a' in the ransom note can be constructed using the characters 'a' and 'a' in the magazine.
+"""
+
+from collections import Counter
+
+class Solution:
+    def canConstruct(self, ransomNote: str, magazine: str) -> bool:
+        """
+        Determines if ransomNote can be constructed from magazine.
+        """
+        # Count the frequency of each character in the magazine and ransom note
+        ransom_count = Counter(ransomNote)
+        magazine_count = Counter(magazine)
+        
+        # Check if magazine contains enough of each character
+        for char, count in ransom_count.items():
+            if magazine_count[char] < count:
+                return False
+        return True
+
+# Example usage
+ransomNote = "aa"
+magazine = "aab"
+
+sol = Solution()
+print(f"Can construct '{ransomNote}' from '{magazine}'? {sol.canConstruct(ransomNote, magazine)}")
+
