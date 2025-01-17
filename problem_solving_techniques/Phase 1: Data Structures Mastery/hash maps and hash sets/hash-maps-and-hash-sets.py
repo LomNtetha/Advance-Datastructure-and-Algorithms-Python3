@@ -66,10 +66,10 @@ s = "listen"
 t = "silent"
 
 # Create an instance of Solution
-sol = Solution()
+sol = Solution().isAnagram(s, t)
 
 # Call the isAnagram function and print the result
-print(f"Are '{s}' and '{t}' anagrams? {sol.isAnagram(s, t)}")
+print(f"Are '{s}' and '{t}' anagrams? {sol}")
 
 
 """
@@ -104,10 +104,10 @@ nums1 = [1, 2, 2, 1]
 nums2 = [2, 2]
 
 # Create an instance of Solution
-sol = Solution()
+sol = Solution().intersection(nums1, nums2)
 
 # Call the intersection function and print the result
-print(f"The intersection of {nums1} and {nums2} is: {sol.intersection(nums1, nums2)}")
+print(f"The intersection of {nums1} and {nums2} is: {sol}")
 
 
 """
@@ -154,10 +154,10 @@ class Solution:
 strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 
 # Create an instance of Solution
-sol = Solution()
+sol = Solution().groupAnagrams(strs)
 
 # Call the groupAnagrams function and print the result
-print(f"Grouped anagrams for {strs}: {sol.groupAnagrams(strs)}")
+print(f"Grouped anagrams for {strs}: {sol}")
 
     
 """
@@ -209,10 +209,10 @@ nums = [1, 1, 1]
 k = 2
 
 # Create an instance of Solution
-sol = Solution()
+sol = Solution().subarraySum(nums, k)
 
 # Call the subarraySum function and print the result
-print(f"Number of subarrays in {nums} that sum to {k}: {sol.subarraySum(nums, k)}")
+print(f"Number of subarrays in {nums} that sum to {k}: {sol}")
 
 """
 6. Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
@@ -264,10 +264,10 @@ class Solution:
 nums = [100, 4, 200, 1, 3, 2]
 
 # Create an instance of Solution
-sol = Solution()
+sol = Solution().longestConsecutive(nums)
 
 # Call the longestConsecutive function and print the result
-print(f"The length of the longest consecutive sequence in {nums}: {sol.longestConsecutive(nums)}")
+print(f"The length of the longest consecutive sequence in {nums}: {sol}")
 
 
 """
@@ -313,10 +313,10 @@ s = "egg"
 t = "add"
 
 # Create an instance of Solution
-sol = Solution()
+sol = Solution().isIsomorphic(s, t)
 
 # Call the isIsomorphic function and print the result
-print(f"Are the strings '{s}' and '{t}' isomorphic? {sol.isIsomorphic(s, t)}")
+print(f"Are the strings '{s}' and '{t}' isomorphic? {sol}")
 
     
 """
@@ -360,12 +360,11 @@ class Solution:
         return True
 
 # Example input
-solution = Solution()
 pattern = "abba"
 s = "dog cat cat dog"
-
+solution = Solution().wordPattern(pattern, s)
 # Print the output
-print(solution.wordPattern(pattern, s))  # Output: True
+print(solution)  # Output: True
 
     
 """
@@ -412,12 +411,13 @@ class Solution:
         return chr(result)
 
 # Example input
-solution = Solution()
+
 s = "abcd"
 t = "abcde"
+solution = Solution().findTheDifference(s, t)
 
 # Print the output
-print(solution.findTheDifference(s, t))  # Output: "e"
+print(solution)  # Output: "e"
 
 """
 10. Given an array nums of size n, return the majority element (the element that appears more than n / 2 times).
@@ -451,11 +451,11 @@ class Solution:
                 return num
 
 # Example input
-solution = Solution()
 nums = [3, 2, 3]
+solution = Solution().majorityElement(nums)
 
 # Print the output
-print(solution.majorityElement(nums))  # Output: 3
+print(solution)  # Output: 3
 
             
 """
@@ -506,12 +506,13 @@ class Solution:
         return result
 
 # Example input
-solution = Solution()
+
 list1 = ["Shogun", "Tapioca Express", "Burger King", "KFC"]
 list2 = ["KFC", "Shogun", "Burger King"]
+solution = Solution().findRestaurant(list1, list2)
 
 # Print the output
-print(solution.findRestaurant(list1, list2))  # Output: ['Shogun']
+print(solution)  # Output: ['Shogun']
 
 
 """
@@ -563,10 +564,12 @@ class Solution:
         return result
 
 # Example usage
-solution = Solution()
+
 s = "cbaebabacd"
 p = "abc"
-print(solution.findAnagrams(s, p))  # Output: [0, 6]
+solution = Solution().findAnagrams(s, p)
+
+print(solution)  # Output: [0, 6]
 
     
 """
@@ -601,10 +604,11 @@ class Solution:
         return [item for item, freq in count.most_common(k)]
 
 # Example usage
-solution = Solution()
+
 nums = [1,1,1,2,2,3]
 k = 2
-print(solution.topKFrequent(nums, k))  # Output: [1, 2]
+solution = Solution().topKFrequent(nums, k)
+print(solution)  # Output: [1, 2]
 
 
 
@@ -689,8 +693,8 @@ class Solution:
 ransomNote = "aa"
 magazine = "aab"
 
-sol = Solution()
-print(f"Can construct '{ransomNote}' from '{magazine}'? {sol.canConstruct(ransomNote, magazine)}")
+sol = Solution().canConstruct(ransomNote, magazine)
+print(f"Can construct '{ransomNote}' from '{magazine}'? {sol}")
 
 """
 This approach uses the collections.Counter class to count the frequencies of characters and check if the magazine contains enough characters to 
@@ -734,6 +738,6 @@ class Solution:
 
 # Example usage
 s = "tree"
-sol = Solution()
-print(sol.characterFrequency(s))
+sol = Solution().characterFrequency(s)
+print(sol)
 
