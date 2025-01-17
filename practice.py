@@ -276,90 +276,22 @@ bubble_sort_array_in_ascending_order(my_array)
 print(f"{my_array}\n\n\n")
 
 
+
+
+from typing import List
+
 class Solution:
-    def solveSudoku(self, board: list[list[str]]) -> None:
+    def containsDuplicate(self, nums: List[int]) -> bool:
         """
-        Solves a Sudoku puzzle by filling in the empty cells with valid digits (1-9).
-        
-        :param board: A 9x9 grid representing the Sudoku puzzle.
+        Check if there are any duplicate numbers in the input list.
+        Compare the length of the list with the length of the set (which removes duplicates).
         """
-        
-        # Helper function to check if placing a number 'num' in (row, col) is valid
-        def is_valid(row: int, col: int, num: str) -> bool:
-            """
-            Checks if placing 'num' at (row, col) is valid by ensuring it's not already
-            in the current row, column, or 3x3 subgrid.
-            
-            :param row: The row index
-            :param col: The column index
-            :param num: The number to place at (row, col)
-            :return: True if valid, False otherwise.
-            """
-            # Check if the number is already in the row
-            for i in range(9):
-                if board[row][i] == num:
-                    return False
-            
-            # Check if the number is already in the column
-            for i in range(9):
-                if board[i][col] == num:
-                    return False
-            
-            # Check if the number is already in the 3x3 subgrid
-            for i in range(3):
-                for j in range(3):
-                    if board[3 * (row // 3) + i][3 * (col // 3) + j] == num:
-                        return False
-            
-            return True
-        
-        # Backtracking function to try placing numbers in empty cells
-        def backtrack():
-            """
-            Uses backtracking to try filling in the empty cells.
-            """
-            # Loop through each cell in the 9x9 board
-            for i in range(9):
-                for j in range(9):
-                    if board[i][j] == ".":  # Find an empty cell
-                        # Try numbers from 1 to 9
-                        for num in map(str, range(1, 10)):
-                            if is_valid(i, j, num):
-                                board[i][j] = num  # Place the number
-                                
-                                # Recur to try filling the next cell
-                                if backtrack():
-                                    return True
-                                
-                                # If no valid solution, backtrack by resetting the cell
-                                board[i][j] = "."
-                        return False  # If no valid number was found for this empty cell
-            return True  # If the board is completely filled
-        
-        # Start the backtracking process
-        backtrack()
+        return len(nums) != len(set(nums))
 
+# Example input
+example_input = [1, 2, 3, 4, 5, 1]
 
-# Example usage:
+# Create an instance of Solution
 sol = Solution()
-
-# Input Sudoku puzzle with empty cells represented as '.'
-board = [
-    ["5", "3", ".", ".", "7", ".", ".", ".", "."],
-    ["6", ".", ".", "1", "9", "5", ".", ".", "."],
-    [".", "9", "8", ".", ".", ".", ".", "6", "."],
-    ["8", ".", ".", ".", "6", ".", ".", ".", "3"],
-    ["4", ".", ".", "8", ".", "3", ".", ".", "1"],
-    ["7", ".", ".", ".", "2", ".", ".", ".", "6"],
-    [".", "6", ".", ".", ".", ".", "2", "8", "."],
-    [".", ".", ".", "4", "1", "9", ".", ".", "5"],
-    [".", ".", ".", ".", "8", ".", ".", "7", "9"]
-]
-
-# Solve the Sudoku puzzle
-sol.solveSudoku(board)
-
-# Print the solved board
-for row in board:
-    print(row)
+print(f"Contains Duplicate: {sol.containsDuplicate(example_input)}")
 
