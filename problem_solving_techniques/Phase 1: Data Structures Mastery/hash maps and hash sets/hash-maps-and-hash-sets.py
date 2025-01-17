@@ -29,11 +29,10 @@ class Solution:
 example_input = [1, 2, 3, 4, 5, 1]
 
 # Create an instance of Solution
-sol = Solution()
+sol = Solution().containsDuplicate(example_input)
 
 # Call the containsDuplicate function and print the result
-print(f"Input: {example_input}")
-print(f"Contains Duplicate: {sol.containsDuplicate(example_input)}")
+print(f"Contains Duplicate: {sol}")
 
     
 """

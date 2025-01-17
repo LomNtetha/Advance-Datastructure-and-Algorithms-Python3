@@ -292,6 +292,6 @@ class Solution:
 example_input = [1, 2, 3, 4, 5, 1]
 
 # Create an instance of Solution
-sol = Solution()
-print(f"Contains Duplicate: {sol.containsDuplicate(example_input)}")
+sol = Solution().containsDuplicate(example_input)
+print(f"Contains Duplicate: {sol}")
 
