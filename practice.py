@@ -315,17 +315,21 @@ min_day = min_days_costs(days,costs)
 
 print(min_day)
 
-def ways_to_climp_stairs(n):
 
-    if n <= 2:
+def clim_stairs(n):
+
+    if n <=2:
         return n
     
-    dp = [0] * (n+1)
-    dp[1],dp[2] = 1, 2
+    dp = [0]*(n+1)
+    dp[1], dp[2] = 1,2
 
     for i in range(3, n+1):
-        dp[i] = dp[i-1]+dp[i-2]
+
+        dp[i] = dp[i - 1] + dp[i -2]
     return dp[n]
-n = 5
-ways = ways_to_climp_stairs(n)
+n =5
+
+ways = clim_stairs(n)
+
 print(ways)
