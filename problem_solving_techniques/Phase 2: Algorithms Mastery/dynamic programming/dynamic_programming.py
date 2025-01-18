@@ -90,7 +90,7 @@ print(solution.longestPalindrome("babad"))  # Output: 3
 from typing import List
 
 """
- A cab service offers three types of passes. 1D, 7D, 30D. A T days pass can be used for a continuous
+1.  A cab service offers three types of passes. 1D, 7D, 30D. A T days pass can be used for a continuous
 
 duration only. Consider the days of the year being labeled sequentially from 1 to 365. Travelling is
 
@@ -147,40 +147,6 @@ costs = [2, 7, 15]
 solution = Solution()
 print("Minimum cost to cover all travel days:", solution.min_cost_for_travel(days, costs))
 
-
-"""
-Fibonacci Sequence
-Question: Given a positive integer n, return the n-th Fibonacci number. The Fibonacci sequence is defined as follows:
-F(0) = 0, F(1) = 1
-F(n) = F(n-1) + F(n-2) for n > 1
-Example:
-Input: n = 7
-Output: 13
-Constraints: 0 <= n <= 30
-"""
-
-class Solution:
-    def fibonacci(self, n: int) -> int:
-        # Base case: return n if it's 0 or 1
-        if n <= 1:
-            return n
-        
-        # Initialize a list to store Fibonacci numbers
-        fib = [0] * (n + 1)
-        fib[1] = 1  # F(1) = 1
-        
-        # Fill the Fibonacci table
-        for i in range(2, n + 1):
-            fib[i] = fib[i - 1] + fib[i - 2]  # F(n) = F(n-1) + F(n-2)
-        
-        return fib[n]  # Return the nth Fibonacci number
-
-# Example usage
-sol = Solution()
-print(sol.fibonacci(7))  # Output: 13
-
-
-# print(fibonacci(7))  # Output: 13
 
 """
 2. Climbing Stairs
@@ -607,3 +573,38 @@ class Solution:
 # Example usage
 sol = Solution()
 print(sol.count_substrings("aaa"))  # Output: 6
+
+"""
+Fibonacci Sequence
+Question: Given a positive integer n, return the n-th Fibonacci number. The Fibonacci sequence is defined as follows:
+F(0) = 0, F(1) = 1
+F(n) = F(n-1) + F(n-2) for n > 1
+Example:
+Input: n = 7
+Output: 13
+Constraints: 0 <= n <= 30
+"""
+
+class Solution:
+    def fibonacci(self, n: int) -> int:
+        # Base case: return n if it's 0 or 1
+        if n <= 1:
+            return n
+        
+        # Initialize a list to store Fibonacci numbers
+        fib = [0] * (n + 1)
+        fib[1] = 1  # F(1) = 1
+        
+        # Fill the Fibonacci table
+        for i in range(2, n + 1):
+            fib[i] = fib[i - 1] + fib[i - 2]  # F(n) = F(n-1) + F(n-2)
+        
+        return fib[n]  # Return the nth Fibonacci number
+
+# Example usage
+sol = Solution()
+print(sol.fibonacci(7))  # Output: 13
+
+
+# print(fibonacci(7))  # Output: 13
+
