@@ -1,94 +1,4 @@
 
-""""
-The given code solves the problem of finding the longest palindromic substring in a given string. The question is:
-
-"Given a string s, find the longest substring in s that is a palindrome. A palindrome is a string that reads the same backward as forward."
-Time Complexity: O(n^2)
-Space Complexity: O(n^2)
-
-"""
-class Solution:
-    def longestPalindrome(self, s: str) -> str:
-        n = len(s)  # Length of the input string
-        if n <= 1:
-            return s  # If the string has 0 or 1 characters, it is already a palindrome
-        
-        # Initialize variables to store the start and maximum length of the longest palindrome
-        start, max_len = 0, 1  
-        
-        # Create a 2D list (table) to store whether a substring s[i:j+1] is a palindrome
-        dp = [[False] * n for _ in range(n)]
-        
-        # Expand palindromic substrings from each end of the string
-        for j in range(n):  # Right end of the substring
-            for i in range(j + 1):  # Left end of the substring
-                # Check if characters at positions i and j are the same
-                # For length 1 or 2 substrings, they are palindromes if the characters match
-                # For longer substrings, s[i:j+1] is a palindrome if s[i+1:j-1] is a palindrome
-                if s[i] == s[j] and (j - i <= 2 or dp[i + 1][j - 1]):
-                    dp[i][j] = True  # Mark the substring s[i:j+1] as a palindrome
-                    
-                    # Update longest palindrome details if this substring is longer
-                    if j - i + 1 > max_len:
-                        start, max_len = i, j - i + 1  # Update start index and max length
-
-        # Return the longest palindromic substring found in s
-        return s[start:start + max_len]
-
-# Example usage
-solution = Solution()
-print(solution.longestPalindrome("babad"))  # Output: "bab" or "aba"
-
-
-""""
-Longest Palindromic Subsequence
-Problem: Find the longest palindromic subsequence in a string.
-
-Input: s = "bbbab"
-
-Output: 4 (subsequence: "bbbb")
-"""
-
-"""
-Time Complexity: 
-
-O(n2)
-Space Complexity: 
-
-O(n^2)
-"""
-class Solution:
-    def longestPalindrome(self, s: str) -> int:
-        n = len(s)  # Length of the input string
-        if n <= 1:
-            return n  # If the string has 0 or 1 characters, its length is the answer
-        
-        # Initialize variables to store the start and maximum length of the longest palindrome
-        max_len = 1  
-        
-        # Create a 2D list (table) to store whether a substring s[i:j+1] is a palindrome
-        dp = [[False] * n for _ in range(n)]
-        
-        # Expand palindromic substrings from each end of the string
-        for j in range(n):  # Right end of the substring
-            for i in range(j + 1):  # Left end of the substring
-                # Check if characters at positions i and j are the same
-                # For length 1 or 2 substrings, they are palindromes if the characters match
-                # For longer substrings, s[i:j+1] is a palindrome if s[i+1:j-1] is a palindrome
-                if s[i] == s[j] and (j - i <= 2 or dp[i + 1][j - 1]):
-                    dp[i][j] = True  # Mark the substring s[i:j+1] as a palindrome
-                    
-                    # Update longest palindrome length if this substring is longer
-                    max_len = max(max_len, j - i + 1)
-
-        # Return the length of the longest palindromic substring
-        return max_len
-
-# Example usage
-solution = Solution()
-print(solution.longestPalindrome("babad"))  # Output: 3
-from typing import List
-
 """
 1.  A cab service offers three types of passes. 1D, 7D, 30D. A T days pass can be used for a continuous
 
@@ -608,3 +518,92 @@ print(sol.fibonacci(7))  # Output: 13
 
 # print(fibonacci(7))  # Output: 13
 
+""""
+The given code solves the problem of finding the longest palindromic substring in a given string. The question is:
+
+"Given a string s, find the longest substring in s that is a palindrome. A palindrome is a string that reads the same backward as forward."
+Time Complexity: O(n^2)
+Space Complexity: O(n^2)
+
+"""
+class Solution:
+    def longestPalindrome(self, s: str) -> str:
+        n = len(s)  # Length of the input string
+        if n <= 1:
+            return s  # If the string has 0 or 1 characters, it is already a palindrome
+        
+        # Initialize variables to store the start and maximum length of the longest palindrome
+        start, max_len = 0, 1  
+        
+        # Create a 2D list (table) to store whether a substring s[i:j+1] is a palindrome
+        dp = [[False] * n for _ in range(n)]
+        
+        # Expand palindromic substrings from each end of the string
+        for j in range(n):  # Right end of the substring
+            for i in range(j + 1):  # Left end of the substring
+                # Check if characters at positions i and j are the same
+                # For length 1 or 2 substrings, they are palindromes if the characters match
+                # For longer substrings, s[i:j+1] is a palindrome if s[i+1:j-1] is a palindrome
+                if s[i] == s[j] and (j - i <= 2 or dp[i + 1][j - 1]):
+                    dp[i][j] = True  # Mark the substring s[i:j+1] as a palindrome
+                    
+                    # Update longest palindrome details if this substring is longer
+                    if j - i + 1 > max_len:
+                        start, max_len = i, j - i + 1  # Update start index and max length
+
+        # Return the longest palindromic substring found in s
+        return s[start:start + max_len]
+
+# Example usage
+solution = Solution()
+print(solution.longestPalindrome("babad"))  # Output: "bab" or "aba"
+
+
+""""
+Longest Palindromic Subsequence
+Problem: Find the longest palindromic subsequence in a string.
+
+Input: s = "bbbab"
+
+Output: 4 (subsequence: "bbbb")
+"""
+
+"""
+Time Complexity: 
+
+O(n2)
+Space Complexity: 
+
+O(n^2)
+"""
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        n = len(s)  # Length of the input string
+        if n <= 1:
+            return n  # If the string has 0 or 1 characters, its length is the answer
+        
+        # Initialize variables to store the start and maximum length of the longest palindrome
+        max_len = 1  
+        
+        # Create a 2D list (table) to store whether a substring s[i:j+1] is a palindrome
+        dp = [[False] * n for _ in range(n)]
+        
+        # Expand palindromic substrings from each end of the string
+        for j in range(n):  # Right end of the substring
+            for i in range(j + 1):  # Left end of the substring
+                # Check if characters at positions i and j are the same
+                # For length 1 or 2 substrings, they are palindromes if the characters match
+                # For longer substrings, s[i:j+1] is a palindrome if s[i+1:j-1] is a palindrome
+                if s[i] == s[j] and (j - i <= 2 or dp[i + 1][j - 1]):
+                    dp[i][j] = True  # Mark the substring s[i:j+1] as a palindrome
+                    
+                    # Update longest palindrome length if this substring is longer
+                    max_len = max(max_len, j - i + 1)
+
+        # Return the length of the longest palindromic substring
+        return max_len
+
+# Example usage
+solution = Solution()
+print(solution.longestPalindrome("babad"))  # Output: 3
+from typing import List
