@@ -137,17 +137,18 @@ class Solution:
         dp = [float('inf')] * (amount + 1)
         dp[0] = 0  # 0 coins are needed to make amount 0
         
-        # Fill the DP table
+        # Calculate the minimum coins needed for all amounts
         for coin in coins:
             for x in range(coin, amount + 1):
                 dp[x] = min(dp[x], dp[x - coin] + 1)  # Min coins needed
-        
-        return dp[amount] if dp[amount] != float('inf') else -1  # Return the result
+
+        # Separate calculation and return result
+        result = dp[amount] if dp[amount] != float('inf') else -1
+        return result  # Return the result after calculation
 
 # Example usage
 sol = Solution()
 print(sol.coin_change([1, 2, 5], 11))  # Output: 3
-
 
 """
 5. Longest Increasing Subsequence
