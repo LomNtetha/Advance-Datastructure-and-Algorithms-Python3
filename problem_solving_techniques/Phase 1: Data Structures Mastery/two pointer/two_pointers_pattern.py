@@ -149,9 +149,11 @@ print(Solution().isPalindrome(s))  # Output: True
 
 
 """
-Given a string s, the goal is to find the longest palindromic substring. This solution utilizes the expand around center technique
- the overall time complexity is O(n^2)
+The given code solves the problem of finding the longest palindromic substring in a given string. The question is:
 
+"Given a string s, find the longest substring in s that is a palindrome. A palindrome is a string that reads the same backward as forward."
+Time Complexity: O(n^2)
+Space Complexity: O(n^2)
 
 """
 class Solution:
@@ -179,6 +181,44 @@ class Solution:
 
 solution = Solution()
 print(solution.longestPalindrome("babad"))  # Output: "bab" or "aba"
+
+"""
+Longest Palindromic Subsequence
+Problem: Find the longest palindromic subsequence in a string.
+
+Input: s = "bbbab"
+
+Output: 4 (subsequence: "bbbb")
+"""
+
+"""
+Time Complexity: 
+
+O(n2)
+Space Complexity: 
+
+O(n^2)
+"""
+
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        def expand_around_center(left: int, right: int) -> int:
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1
+                right += 1
+            return right - left - 1  # Length of the palindrome
+
+        max_len = 0
+        for i in range(len(s)):
+            # Check odd-length and even-length palindromes
+            max_len = max(max_len, expand_around_center(i, i), expand_around_center(i, i + 1))
+
+        return max_len
+
+# Example usage
+solution = Solution()
+print(solution.longestPalindrome("babad"))  # Output: 3
+
 
 
 """
