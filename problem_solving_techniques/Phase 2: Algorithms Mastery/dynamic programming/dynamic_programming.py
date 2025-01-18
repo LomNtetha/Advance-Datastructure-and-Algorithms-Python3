@@ -41,7 +41,7 @@ print(solution.longestPalindrome("babad"))  # Output: "bab" or "aba"
 
 
 """"
-15. Longest Palindromic Subsequence
+Longest Palindromic Subsequence
 Problem: Find the longest palindromic subsequence in a string.
 
 Input: s = "bbbab"
@@ -57,31 +57,36 @@ Space Complexity:
 
 O(n^2)
 """
-
 class Solution:
-    def longest_palindrome_subseq(self, s: str) -> int:
-        n = len(s)
-        # Create a DP table initialized with 0
-        dp = [[0] * n for _ in range(n)]
+    def longestPalindrome(self, s: str) -> int:
+        n = len(s)  # Length of the input string
+        if n <= 1:
+            return n  # If the string has 0 or 1 characters, its length is the answer
+        
+        # Initialize variables to store the start and maximum length of the longest palindrome
+        max_len = 1  
+        
+        # Create a 2D list (table) to store whether a substring s[i:j+1] is a palindrome
+        dp = [[False] * n for _ in range(n)]
+        
+        # Expand palindromic substrings from each end of the string
+        for j in range(n):  # Right end of the substring
+            for i in range(j + 1):  # Left end of the substring
+                # Check if characters at positions i and j are the same
+                # For length 1 or 2 substrings, they are palindromes if the characters match
+                # For longer substrings, s[i:j+1] is a palindrome if s[i+1:j-1] is a palindrome
+                if s[i] == s[j] and (j - i <= 2 or dp[i + 1][j - 1]):
+                    dp[i][j] = True  # Mark the substring s[i:j+1] as a palindrome
+                    
+                    # Update longest palindrome length if this substring is longer
+                    max_len = max(max_len, j - i + 1)
 
-        # Fill the DP table
-        for i in range(n):
-            dp[i][i] = 1  # Single characters are palindromes
-
-        for length in range(2, n + 1):  # Length of subsequence
-            for i in range(n - length + 1):
-                j = i + length - 1  # End index
-                if s[i] == s[j]:  # Characters match
-                    dp[i][j] = dp[i + 1][j - 1] + 2
-                else:
-                    dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])  # Take the max of ignoring one end
-
-        return dp[0][n - 1]  # Return the length of the longest palindromic subsequence
+        # Return the length of the longest palindromic substring
+        return max_len
 
 # Example usage
-sol = Solution()
-print(sol.longest_palindrome_subseq("bbbab"))  # Output: 4
-
+solution = Solution()
+print(solution.longestPalindrome("babad"))  # Output: 3
 from typing import List
 
 """
