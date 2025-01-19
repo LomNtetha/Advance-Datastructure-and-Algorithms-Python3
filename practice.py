@@ -352,3 +352,30 @@ nums = [2, 7, 9, 3, 1]
 number = rob(nums)
 
 print(number)
+
+def rob_circle(nums):
+
+    def linear_rob(houses):
+
+        prev, curr = 0, 0
+
+        for money in houses:
+
+            prev, curr = curr, max(curr, prev+money)
+        return curr
+        
+    if len(nums) == 1:
+        return nums[0]
+    if len(nums) == 2:
+        return max(nums[0], nums[1])
+    
+    exclude_last =  linear_rob(nums[:-1])
+    exclude_first = linear_rob(nums[1:])
+
+    return max(exclude_last, exclude_first)
+
+nums = [1, 2, 3, 1]
+
+numss = rob_circle(nums)
+
+print(numss)
