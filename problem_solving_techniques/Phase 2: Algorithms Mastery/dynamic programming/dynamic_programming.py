@@ -121,6 +121,29 @@ class Solution:
 sol = Solution()
 print(sol.rob([2, 7, 9, 3, 1]))  # Output: 12
 
+class Solution:
+    def rob(self, nums):
+        """
+        Find the maximum amount of money that can be robbed without alerting the police.
+        
+        Args:
+        nums (List[int]): Money in each house
+        
+        Returns:
+        int: Maximum money that can be robbed
+        """
+        prev = curr = 0  # Initialize DP variables for the two previous states
+        
+        for num in nums:
+            prev, curr = curr, max(curr, prev + num)  # Choose to rob or skip
+        
+        return curr  # Maximum money robbed
+
+# Test
+print(Solution().rob([2, 7, 9, 3, 1]))  # Output: 12
+
+
+
 """
 House Robber II
 You are a professional robber planning to rob houses along a street. Each house has a certain amount of money stashed. All houses at this place are arranged in a circle. That means the first house is the neighbor of the last one. Meanwhile, adjacent houses have a security system connected, and it will automatically contact the police if two adjacent houses were broken into on the same night.
