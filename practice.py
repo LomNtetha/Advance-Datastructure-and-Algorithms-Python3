@@ -333,3 +333,19 @@ n =5
 ways = clim_stairs(n)
 
 print(ways)
+
+
+def rob_house(nums):
+
+    prev = curr = 0
+
+    for num in nums:
+
+        prev,curr = curr, max(curr, prev + num)
+    return curr
+
+nums = [2, 7, 9, 3, 1]
+
+number = rob_house(nums)
+
+print(number)
