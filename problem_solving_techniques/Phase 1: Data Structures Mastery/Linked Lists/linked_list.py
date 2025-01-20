@@ -121,6 +121,72 @@ Space Complexity:
 O(1). We use only two extra pointers, so space complexity is constant.
 """
 
+"""
+
+7. Detect Cycle in a Doubly Linked List
+Problem Statement:
+Given a doubly linked list, determine if it has a cycle in it.
+A doubly linked list has a prev and next pointer for each node. Use the Floyd's Tortoise and Hare algorithm to detect the cycle.
+
+Example:
+
+Input: Doubly Linked List: 3 <-> 2 <-> 0 <-> -4, with a cycle starting at node 2.
+
+Output: True (The list contains a cycle)
+"""
+class DoublyListNode:
+    def __init__(self, val=0, prev=None, next=None):
+        # Initialize a node with a value, a reference to the previous node, and a reference to the next node
+        self.val = val
+        self.prev = prev
+        self.next = next
+
+class Solution:
+    def hasCycle(self, head: DoublyListNode) -> bool:
+        # Use two pointers: 'slow' moves one step at a time, 'fast' moves two steps at a time
+        slow = head
+        fast = head
+        
+        # Traverse the list until 'fast' or 'fast.next' is None (indicating no cycle)
+        while fast and fast.next:
+            # Move 'slow' one step forward
+            slow = slow.next
+            # Move 'fast' two steps forward
+            fast = fast.next.next
+            
+            # If 'slow' and 'fast' meet, a cycle exists in the list
+            if slow == fast:
+                return True
+        
+        # If the loop ends, no cycle was found
+        return False
+
+# Example usage:
+# Create a doubly linked list: 3 <-> 2 <-> 0 <-> -4
+head = DoublyListNode(3)
+head.next = DoublyListNode(2)
+head.next.prev = head
+head.next.next = DoublyListNode(0)
+head.next.next.prev = head.next
+head.next.next.next = DoublyListNode(-4)
+head.next.next.next.prev = head.next.next
+
+# Create a cycle by linking the last node back to the second node
+head.next.next.next.next = head.next  # Cycle at node with value 2
+
+# Create an instance of the Solution class and check for a cycle
+sol = Solution()
+print(sol.hasCycle(head))  # Expected output: True
+
+"""
+Time Complexity:
+
+O(n), where n is the number of nodes in the doubly linked list. We traverse the list once with two pointers.
+Space Complexity:
+
+O(1). We use constant space with two pointers.
+"""
+
 
 """
 3. Merge Two Sorted Linked Lists
@@ -381,71 +447,6 @@ Space Complexity:
 
 O(1). We use constant space.
 
-"""
-"""
-
-7. Detect Cycle in a Doubly Linked List
-Problem Statement:
-Given a doubly linked list, determine if it has a cycle in it.
-A doubly linked list has a prev and next pointer for each node. Use the Floyd's Tortoise and Hare algorithm to detect the cycle.
-
-Example:
-
-Input: Doubly Linked List: 3 <-> 2 <-> 0 <-> -4, with a cycle starting at node 2.
-
-Output: True (The list contains a cycle)
-"""
-class DoublyListNode:
-    def __init__(self, val=0, prev=None, next=None):
-        # Initialize a node with a value, a reference to the previous node, and a reference to the next node
-        self.val = val
-        self.prev = prev
-        self.next = next
-
-class Solution:
-    def hasCycle(self, head: DoublyListNode) -> bool:
-        # Use two pointers: 'slow' moves one step at a time, 'fast' moves two steps at a time
-        slow = head
-        fast = head
-        
-        # Traverse the list until 'fast' or 'fast.next' is None (indicating no cycle)
-        while fast and fast.next:
-            # Move 'slow' one step forward
-            slow = slow.next
-            # Move 'fast' two steps forward
-            fast = fast.next.next
-            
-            # If 'slow' and 'fast' meet, a cycle exists in the list
-            if slow == fast:
-                return True
-        
-        # If the loop ends, no cycle was found
-        return False
-
-# Example usage:
-# Create a doubly linked list: 3 <-> 2 <-> 0 <-> -4
-head = DoublyListNode(3)
-head.next = DoublyListNode(2)
-head.next.prev = head
-head.next.next = DoublyListNode(0)
-head.next.next.prev = head.next
-head.next.next.next = DoublyListNode(-4)
-head.next.next.next.prev = head.next.next
-
-# Create a cycle by linking the last node back to the second node
-head.next.next.next.next = head.next  # Cycle at node with value 2
-
-# Create an instance of the Solution class and check for a cycle
-sol = Solution()
-print(sol.hasCycle(head))  # Expected output: True
-
-"""
-Time Complexity:
-
-O(n), where n is the number of nodes in the doubly linked list. We traverse the list once with two pointers.
-Space Complexity:
-
-O(1). We use constant space with two pointers.
 """
 
 """
@@ -1060,9 +1061,9 @@ Input: List: 1 -> 2 -> 3 -> child -> 4 -> 5
 
 Output: Flattened list: 1 -> 2 -> 3 -> 4 -> 5
 """
-
 class Node:
     def __init__(self, val=0, next=None, prev=None, child=None):
+        # Initialize a node with value, next pointer, prev pointer, and child pointer
         self.val = val
         self.next = next
         self.prev = prev
@@ -1070,26 +1071,36 @@ class Node:
 
 class Solution:
     def flatten(self, head: Node) -> Node:
+        # Return None if the head is empty
         if not head:
             return None
         
+        # Create a dummy node to serve as a placeholder for the new flattened list
         dummy = Node(0)
-        prev = dummy
-        stack = [head]
+        prev = dummy  # Pointer to the previous node in the flattened list
+        stack = [head]  # Stack to manage nodes during depth-first traversal
         
         while stack:
+            # Pop the current node from the stack
             curr = stack.pop()
+            
+            # Link the current node to the flattened list
             prev.next = curr
             curr.prev = prev
-            prev = curr
+            prev = curr  # Move the prev pointer forward
             
+            # If the current node has a next node, push it onto the stack
             if curr.next:
                 stack.append(curr.next)
             
+            # If the current node has a child, push the child onto the stack
+            # Also, detach the child pointer after processing
             if curr.child:
                 stack.append(curr.child)
                 curr.child = None
         
+        # Detach the dummy node's next pointer from the dummy node
+        dummy.next.prev = None
         return dummy.next
 
 # Example usage:
@@ -1106,6 +1117,7 @@ flattened_head = sol.flatten(head)
 while flattened_head:
     print(flattened_head.val, end=" <-> ")
     flattened_head = flattened_head.next
+
 # Output: 1 <-> 2 <-> 3 <-> 4 <-> 5
 """
 Time Complexity:
