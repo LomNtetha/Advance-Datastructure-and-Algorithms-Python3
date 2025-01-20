@@ -6,9 +6,7 @@ Input:
 
 nums = [2, 1, 5, 1, 3, 2]
 k = 3
-Output:
-
-9 (The subarray [5, 1, 3] has the largest sum: 5 + 1 + 3 = 9).
+Output: 9 (The subarray [5, 1, 3] has the largest sum: 5 + 1 + 3 = 9).
 Approach:
 
 Use a sliding window of size k. First, sum the first k elements, then slide the window one element at a time by adding the new element coming into 
