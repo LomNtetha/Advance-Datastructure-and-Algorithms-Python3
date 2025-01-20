@@ -440,3 +440,18 @@ n = 5
 mm = climp_stairss(n)
 
 print(mm)
+
+
+def max_robari(houses):
+
+    prev = curr = 0
+
+    for house in houses:
+
+        prev, curr = curr,max(curr, prev + house)
+    
+    return curr
+houses = [2, 7, 9, 3, 1]
+
+prof = max_robari(houses)
+print(prof)
