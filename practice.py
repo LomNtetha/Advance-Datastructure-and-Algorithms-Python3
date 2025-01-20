@@ -379,3 +379,20 @@ nums = [1, 2, 3, 1]
 numss = rob_circle(nums)
 
 print(numss)
+
+class Solution:
+    def containsDuplicate(self, nums: List[int]) -> bool:
+        """
+        Check if there are any duplicate numbers in the input list.
+        Compare the length of the list with the length of the set (which removes duplicates).
+        """
+        results = len(nums) != len(set(nums))
+        
+        return results
+
+# Example input
+example_input = [1, 2, 3, 4, 5, 1]
+
+res = Solution().containsDuplicate(nums) # type: ignore
+
+print(res)
