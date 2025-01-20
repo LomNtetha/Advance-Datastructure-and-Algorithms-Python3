@@ -397,21 +397,20 @@ res = Solution().containsDuplicate(nums) # type: ignore
 
 print(res)
 
+def min_day_cost(days,costs):
 
-def minimum_cost_travels(days, costs):
     dp = {}
+
     days_for_travels = set(days)
 
-    for day in range(1, days[-1]+1):
-
+    for day in range(1,days[-1] +1):
         if day not in days_for_travels:
-            dp[day] = dp.get(day - 1, 0)
-
+            dp[day] = dp.get(day - 1 , 0)
         else:
             dp[day] = min(
-                dp.get(day - 1, 0) + costs[0],
-                dp.get(day - 7, 0)+ costs[1],
-                dp.get(day - 30, 0) + costs[2]
+                dp.get(day - 1 , 0) + costs[0],
+                dp.get(day - 7 , 0) + costs[1],
+                dp.get(day - 30 , 0) + costs[2]
 
             )
 
@@ -419,6 +418,6 @@ def minimum_cost_travels(days, costs):
 
 days = [1, 4, 6, 7, 8, 20]
 costs = [2, 7, 15]
-minnn = minimum_cost_travels(days, costs)
+n = min_day_cost(days,costs)
 
-print (minnn)
+print(n)
