@@ -425,8 +425,8 @@ print(n)
 
 def climp_stairss(n):
 
-    # if n <= 2:
-    #     return n
+    if n <= 2:
+        return n
     
     dp = [0] * (n + 1)
     dp[1], dp[2] = 1, 2
