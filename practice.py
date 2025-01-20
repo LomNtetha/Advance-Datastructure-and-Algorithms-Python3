@@ -313,7 +313,7 @@ days = [1, 4, 6, 7, 8, 20]
 costs = [2, 7, 15]
 min_day = min_days_costs(days,costs)
 
-print(min_day)
+print("correct min",min_day)
 
 
 def clim_stairs(n):
@@ -387,7 +387,7 @@ class Solution:
         Compare the length of the list with the length of the set (which removes duplicates).
         """
         results = len(nums) != len(set(nums))
-        
+
         return results
 
 # Example input
@@ -396,3 +396,29 @@ example_input = [1, 2, 3, 4, 5, 1]
 res = Solution().containsDuplicate(nums) # type: ignore
 
 print(res)
+
+
+def minimum_cost_travels(days, costs):
+    dp = {}
+    days_for_travels = set(days)
+
+    for day in range(1, days[-1]+1):
+
+        if day not in days_for_travels:
+            dp[day] = dp.get(day - 1, 0)
+
+        else:
+            dp[day] = min(
+                dp.get(day - 1, 0) + costs[0],
+                dp.get(day - 7, 0)+ costs[1],
+                dp.get(day - 30, 0) + costs[2]
+
+            )
+
+    return dp[days[-1]]
+
+days = [1, 4, 6, 7, 8, 20]
+costs = [2, 7, 15]
+minnn = minimum_cost_travels(days, costs)
+
+print (minnn)
