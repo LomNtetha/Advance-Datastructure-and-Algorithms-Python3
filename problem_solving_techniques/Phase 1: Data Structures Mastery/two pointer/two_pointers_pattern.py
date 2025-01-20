@@ -13,7 +13,7 @@ Use two pointers: one starting at the beginning (left = 0), and one at the end (
 Move the pointers inward based on the sum of the elements they point to.
 If the sum is less than the target, increment the left pointer to increase the sum. If the sum is more than the target, 
 decrement the right pointer to reduce the sum.
-Time Complexity: O(n) – You are traversing the array once.
+Time Complexity: O(n) You are traversing the array once.
 
 """
 
@@ -47,7 +47,7 @@ print(Solution().twoSum(numbers, target))  # Output: [1, 2] which means the elem
 
 
 """
-Problem: Reverse a string in-place using the two-pointer approach.
+2. Problem: Reverse a string in-place using the two-pointer approach.
 
 Approach: Use two pointers, swap the characters, and move towards the center.
 
@@ -80,7 +80,7 @@ Solution().reverseString(s)
 print(s)  # Output: ["o", "l", "l", "e", "h"]
 
 """
-Problem: Given a sorted array, remove duplicates in-place such that each element appears only once and return the new length.
+3. Problem: Given a sorted array, remove duplicates in-place such that each element appears only once and return the new length.
 
 Approach: Use two pointers – left keeps track of the last unique element, and right scans through the array.
 
@@ -108,7 +108,7 @@ length = Solution().removeDuplicates(nums)
 print(nums[:length])  # Output: [1, 2]
 
 """
-Problem: Determine if a given string is a palindrome considering only alphanumeric characters and ignoring case.
+4. Problem: Determine if a given string is a palindrome considering only alphanumeric characters and ignoring case.
 
 Approach: Use two pointers, one from the start and one from the end, comparing characters while ignoring non-alphanumeric ones.
 
@@ -149,7 +149,7 @@ print(Solution().isPalindrome(s))  # Output: True
 
 
 """
-The given code solves the problem of finding the longest palindromic substring in a given string. The question is:
+5. The given code solves the problem of finding the longest palindromic substring in a given string. The question is:
 
 "Given a string s, find the longest substring in s that is a palindrome. A palindrome is a string that reads the same backward as forward."
 Time Complexity: O(n^2)
@@ -183,7 +183,7 @@ solution = Solution()
 print(solution.longestPalindrome("babad"))  # Output: "bab" or "aba"
 
 """
-Longest Palindromic Subsequence
+6. Longest Palindromic Subsequence
 Problem: Find the longest palindromic subsequence in a string.
 
 Input: s = "bbbab"
@@ -222,11 +222,11 @@ print(solution.longestPalindrome("babad"))  # Output: 3
 
 
 """
-Problem: Given an array representing heights of vertical lines, find two lines that together with the x-axis form a container that holds the most water
+7. Problem: Given an array representing heights of vertical lines, find two lines that together with the x-axis form a container that holds the most water
 
-Approach: Use two pointers – calculate the area between the two lines, and move the pointer with the shorter line to try and find a larger area.
+Approach: Use two pointers calculate the area between the two lines, and move the pointer with the shorter line to try and find a larger area.
 
-Time Complexity: O(n) – Each pair of pointers is evaluated once.
+Time Complexity: O(n) Each pair of pointers is evaluated once.
 
 """
 
@@ -263,7 +263,7 @@ height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
 print(Solution().maxArea(height))  # Output: 49
 
 """
-Merging Two Sorted Arrays
+8. Merging Two Sorted Arrays
 Example Question: Given two sorted arrays nums1 and nums2, merge them into a single sorted array.
 
 Input:
@@ -308,7 +308,7 @@ print("Merged array:", solution.merge_sorted_arrays(nums1, nums2))
 
 
 """
-Partitioning Array (QuickSort Partition)
+9. Partitioning Array (QuickSort Partition)
 Example Question: Given an unsorted array, partition it around a pivot such that elements less than the pivot come before all elements 
 greater than the pivot.
 
@@ -351,7 +351,7 @@ solution = Solution()
 print("partitionArray",solution.partitionArray(nums, pivot))
 
 """
-Three Sum Problem
+10. Three Sum Problem
 Example Question: Given an array nums, find all unique triplets such that the sum of the three numbers is zero.
 
 Input:
@@ -405,7 +405,7 @@ solution = Solution()
 print(solution.threeSum(nums))
 
 """
-Trapping Rain Water
+11. Trapping Rain Water
 Example Question: Given n non-negative integers representing the height of bars, compute how much water it can trap after raining.
 
 Input:
@@ -419,24 +419,39 @@ Time Complexity: O(n) – Single pass through the array.
 """
 
 class Solution:
-    def trap(self, height: List[int]) -> int:
+    def trap(self, height: list[int]) -> int:
+        # If the input array is empty, no water can be trapped
         if not height:
             return 0
         
+        # Initialize pointers for the left and right ends of the array
         left, right = 0, len(height) - 1
+        
+        # Track the maximum heights from the left and right
         left_max, right_max = height[left], height[right]
+        
+        # Variable to store the total amount of trapped water
         water_trapped = 0
         
+        # Use two-pointer technique to traverse the array
         while left < right:
+            # If the max height on the left is smaller than the right
             if left_max < right_max:
+                # Move the left pointer to the right
                 left += 1
+                # Update the left_max to the maximum height encountered so far
                 left_max = max(left_max, height[left])
+                # Calculate the water trapped at the current position and add to the total
                 water_trapped += left_max - height[left]
             else:
+                # Otherwise, move the right pointer to the left
                 right -= 1
+                # Update the right_max to the maximum height encountered so far
                 right_max = max(right_max, height[right])
+                # Calculate the water trapped at the current position and add to the total
                 water_trapped += right_max - height[right]
         
+        # Return the total amount of trapped water
         return water_trapped
 
 # Example Usage
