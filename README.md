@@ -39,9 +39,9 @@ Before delving into this topic, it is highly recommended to have a foundational 
 - Monotonic Stack/Queue
 
 ### 5. Hashing & Hash Maps
-Topics to Learn:
-Hash Maps for Lookups (Key-Value Pairs)
-Hash Sets for Handling Duplicates
+#### Topics to Learn:
+- Hash Maps for Lookups (Key-Value Pairs)
+- Hash Sets for Handling Duplicates
 
 ## Phase 2: Algorithms Mastery
 ### 1. Recursion & Backtracking
@@ -83,7 +83,7 @@ Hash Sets for Handling Duplicates
 - Shifting Bits
 
 ### 2. Union-Find (Disjoint Set Union)
-####Topics to Learn:
+#### Topics to Learn:
 - Path Compression
 - Union by Rank
 
