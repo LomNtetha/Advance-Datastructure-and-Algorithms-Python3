@@ -437,3 +437,19 @@ n = 5
 new =climping_stairs(n)
 
 print(new)
+
+def maximize_rob(houses):
+
+    prev = curr = 0
+
+    for house in houses:
+
+        prev, curr = curr, max(curr, prev + house)
+
+    return curr
+
+houses = [2, 7, 9, 3, 1]
+
+rob = maximize_rob(houses)
+
+print(rob)
