@@ -453,3 +453,38 @@ houses = [2, 7, 9, 3, 1]
 rob = maximize_rob(houses)
 
 print(rob)
+
+
+def rob (nums):
+
+    def linear_rob(houses):
+        prev = curr = 0
+
+        for money in houses:
+
+            prev, curr = curr, max(curr, prev + money)
+         
+        return curr
+    
+    if len (nums) == 1:
+        return nums[0]
+    if len(nums) == 2:
+        return nums[1]
+    
+    exclude_last = linear_rob(nums[: -1])
+    exclude_first = linear_rob(nums[1:])
+
+    return max(exclude_last, exclude_first)
+    
+nums1 = [2,3,2]
+nums2 = [1,2,3,1]
+nums3 = [1,2,3]
+
+
+n1 = rob(nums1)
+n2 = rob(nums2)
+n3 = rob(nums3)
+
+print(n1)
+print(n2)
+print(n3)
