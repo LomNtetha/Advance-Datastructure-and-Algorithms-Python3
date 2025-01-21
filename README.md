@@ -23,17 +23,17 @@ This project serves as a structured roadmap to mastering Data Structures and Alg
 - Merging Two Linked Lists
 
 ### 3. Sorting & Searching
-Topics to Learn:
-Merge Sort
-Quick Sort (Advanced Understanding)
-Binary Search (Master this)
+#### Topics to Learn:
+- Merge Sort
+- Quick Sort (Advanced Understanding)
+- Binary Search (Master this)
 
 ### 4. Stacks & Queues
-Topics to Learn:
-Stack Operations (Push, Pop, Peek)
-Queue Operations (Enqueue, Dequeue)
-LIFO and FIFO Principles
-Monotonic Stack/Queue
+#### Topics to Learn:
+- Stack Operations (Push, Pop, Peek)
+- Queue Operations (Enqueue, Dequeue)
+- LIFO and FIFO Principles
+- Monotonic Stack/Queue
 
 ### 5. Hashing & Hash Maps
 Topics to Learn:
@@ -42,59 +42,51 @@ Hash Sets for Handling Duplicates
 
 ## Phase 2: Algorithms Mastery
 ### 1. Recursion & Backtracking
-Topics to Learn:
-Recursion Basics
-Backtracking (with Pruning)
+#### Topics to Learn:
+- Recursion Basics
+- Backtracking (with Pruning)
 ### 2. Greedy Algorithms
-Topics to Learn:
-When and Why Greedy Approaches Work
-Greedy Algorithms with Sorting
+#### Topics to Learn:
+- Greedy Algorithms
 
 ### 3. Dynamic Programming (DP)
-Topics to Learn:
-DP with Memoization (Top-Down)
-DP with Tabulation (Bottom-Up)
-State Transitions and Subproblem Optimization
+### Topics to Learn:
+- DP with Memoization (Top-Down)
+- DP with Tabulation (Bottom-Up)
 
 ## Phase 3: Advanced Data Structures
 ### 1. Trees & Binary Search Trees (BST)
-Topics to Learn:
-Binary Tree Traversals (Inorder, Preorder, Postorder)
-Depth-First Search (DFS)
-Breadth-First Search (BFS)
-BST Operations (Insertion, Deletion)
+#### Topics to Learn:
+- Binary Tree Traversals (Inorder, Preorder, Postorder)
+- Depth-First Search (DFS)
+- Breadth-First Search (BFS)
+- BST Operations (Insertion, Deletion)
 
 ### 2. Graphs & Graph Traversals
-Topics to Learn:
-DFS & BFS on Graphs
-Topological Sorting
-Cycle Detection
-Shortest Path Algorithms (Dijkstra, Bellman-Ford)
+#### Topics to Learn:
+- DFS & BFS on Graphs
 
 ### 3. Heaps & Priority Queues
-Topics to Learn:
-Min Heap vs Max Heap
-Priority Queue Basics
-Kth Smallest/Largest Problems
+#### Topics to Learn:
+- Min Heap vs Max Heap
+- Priority Queue Basics
+- Kth Smallest/Largest Problems
 
 ## Phase 4: Mastering Key Interview Concepts
 ### 1. Bit Manipulation
-Topics to Learn:
-XOR Operations
-Bitwise AND/OR
-Shifting Bits
+#### Topics to Learn:
+- XOR Operations
+- Bitwise AND/OR
+- Shifting Bits
 
 ### 2. Union-Find (Disjoint Set Union)
-Topics to Learn:
-Path Compression
-Union by Rank
-LeetCode Problems:
-Redundant Connection
-Number of Connected Components in a Graph
+####Topics to Learn:
+- Path Compression
+- Union by Rank
 
 ### 4. Topological Sort
-Topics to Learn:
-Kahn’s Algorithm
+### Topics to Learn:
+- Kahn’s Algorithm
 
 ## Why Follow This Roadmap?
 This roadmap is designed to build expertise in data structures and algorithms progressively. By mastering foundational concepts and solving curated LeetCode problems, you will gain the confidence and 
