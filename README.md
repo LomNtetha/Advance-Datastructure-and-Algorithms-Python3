@@ -1,7 +1,7 @@
 Mastering Data Structures and Algorithms: A Comprehensive Guide
 This project serves as a structured roadmap to mastering Data Structures and Algorithms, focusing on solving LeetCode problems and building a strong foundation for technical interviews. The guide is divided into four progressive phases, covering essential topics, algorithms, and advanced techniques.
 
-### Additional Details
+### Important Details
 Each topic has a dedicated document providing an overview, benefits, and real-world applications of the concept.
 Every technique is supported by a file containing 10 or more example problems with their solutions written in Python 3.
 Each solution is thoroughly commented for ease of understanding, including explanations of time complexity and space complexity.
