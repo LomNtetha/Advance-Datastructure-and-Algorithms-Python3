@@ -9,18 +9,18 @@ This project serves as a structured roadmap to mastering Data Structures and Alg
 
 ## Phase 1: Data Structures Mastery
 ### 1. Arrays & Strings (Start Here)
-Topics to Learn:
-Two Pointers Technique
-Sliding Window Technique
-Prefix Sums
-Searching Algorithms (Linear and Binary Search)
+#### Topics to Learn:
+- Two Pointers Technique
+- Sliding Window Technique
+- Prefix Sums
+- Searching Algorithms (Linear and Binary Search)
 
 ### 2. Linked Lists
-Topics to Learn:
-Singly vs Doubly Linked Lists
-Fast and Slow Pointer Technique (Floyd’s Cycle Detection)
-Reversing a Linked List
-Merging Two Linked Lists
+#### Topics to Learn:
+- Singly vs Doubly Linked Lists
+- Fast and Slow Pointer Technique (Floyd’s Cycle Detection)
+- Reversing a Linked List
+- Merging Two Linked Lists
 
 ### 3. Sorting & Searching
 Topics to Learn:
