@@ -1,4 +1,4 @@
-Mastering Data Structures and Algorithms: A Comprehensive Guide
+**Mastering Data Structures and Algorithms:** A Comprehensive Guide
 This project serves as a structured roadmap to mastering Data Structures and Algorithms, focusing on solving LeetCode problems and building a strong foundation for technical interviews. The guide is divided into four progressive phases, covering essential topics, algorithms, and advanced techniques.
 
 ### Important Details
@@ -8,7 +8,7 @@ This project serves as a structured roadmap to mastering Data Structures and Alg
 - For advanced topics that may be challenging to follow, each folder includes a comprehensive walkthrough document detailing the steps taken to arrive at the solution
 
 ### Recommendations
-Before delving into this topic, it is highly recommended to have a foundational understanding of Python. You can acquire this knowledge and obtain a free certificate from platforms like Sololearn. Ensure you are comfortable with concepts such as lists, dictionaries, sets, and list slicing.
+Before delving into this topic, it is highly recommended to have a foundational understanding of Python. You can acquire this knowledge and obtain a free certificate from platforms like **[SoloLearn](https://www.sololearn.com/)**. Ensure you are comfortable with concepts such as lists, dictionaries, sets, and list slicing.
 
 ## Phase 1: Data Structures Mastery
 ### 1. Arrays & Strings (Start Here)
