@@ -397,33 +397,30 @@ res = Solution().containsDuplicate(nums) # type: ignore
 
 print(res)
 
-def min_day_cost(days,costs):
-
+def min_cost_for_travels(days,costs):
     dp = {}
-
     days_for_travels = set(days)
 
-    for day in range(1,days[-1] +1):
+    for day in range(1, days[-1] +1):
+
         if day not in days_for_travels:
-            dp[day] = dp.get(day - 1 , 0)
+            dp[day] = dp.get(day - 1,0)
+
         else:
             dp[day] = min(
-                dp.get(day - 1 , 0) + costs[0],
-                dp.get(day - 7 , 0) + costs[1],
-                dp.get(day - 30 , 0) + costs[2]
-
+                dp.get(day - 1,0) + costs[0],
+                dp.get(day - 7,0) + costs[1],
+                dp.get(day - 30,0) + costs[2]
             )
-
     return dp[days[-1]]
-
 days = [1, 4, 6, 7, 8, 20]
 costs = [2, 7, 15]
-n = min_day_cost(days,costs)
 
-print(n)
+travelx= min_cost_for_travels(days,costs)
 
+print(travelx)
 
-def climp_stairss(n):
+def climping_stairs(n):
 
     if n <= 2:
         return n
@@ -431,27 +428,12 @@ def climp_stairss(n):
     dp = [0] * (n + 1)
     dp[1], dp[2] = 1, 2
 
-    for i in range(3, n+1):
-        dp[i] = dp[i-1] + dp[i -2]
-    return dp[n]
+    for i in range (3, n+1):
+        dp[i] = dp[i-1] + dp[i-2]
 
+    return dp[n]
 n = 5
 
-mm = climp_stairss(n)
+new =climping_stairs(n)
 
-print(mm)
-
-
-def max_robari(houses):
-
-    prev = curr = 0
-
-    for house in houses:
-
-        prev, curr = curr,max(curr, prev + house)
-    
-    return curr
-houses = [2, 7, 9, 3, 1]
-
-prof = max_robari(houses)
-print(prof)
+print(new)
