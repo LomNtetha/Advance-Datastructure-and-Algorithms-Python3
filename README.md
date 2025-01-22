@@ -8,7 +8,7 @@ This project serves as a structured roadmap to mastering Data Structures and Alg
 - For advanced topics that may be challenging to follow, each folder includes a comprehensive walkthrough document detailing the steps taken to arrive at the solution
 
 ### Recommendations
-Before delving into this topic, it is highly recommended to have a foundational understanding of Python. You can acquire this knowledge and obtain a free certificate from platforms like **[SoloLearn](https://www.sololearn.com/)**, **[W3schools](https://www.w3schools.com/python/)** etc. Ensure you are comfortable with concepts such as **Lists**, **Tuple**, **Sets**,**Dictionaries**,etc
+Before delving into this topic, it is highly recommended to have a foundational understanding of Python. You can acquire this knowledge and obtain a free certificate from platforms like **[SoloLearn](https://www.sololearn.com/)**, **[W3schools](https://www.w3schools.com/python/)** etc. Ensure you are proficient in the four fundamental data types in Python: **Lists**, **Tuple**, **Sets**, and **Dictionaries**, along with other foundational Python concepts.
 
 ## Phase 1: Data Structures Mastery
 ### 1. Arrays & Strings (Start Here)
