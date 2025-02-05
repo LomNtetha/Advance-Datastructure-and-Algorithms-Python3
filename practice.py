@@ -47,3 +47,31 @@ end = [2, 4, 6, 7, 9, 9]
 count, selected_activities = maximum_activities(start,end)
 print(f"number of ctivities {count}")
 print(f"selected activiies {selected_activities}")
+
+
+def fractional_knapsack(weights,values,capacity):
+
+    items = zip(values,weights)
+
+    items_with_ratio = [(v/w,w) for v,w in items]
+
+    items_with_ratio.sort(reverse=True)
+    total_value = 0.0
+
+    for value_per_weight,weight in items_with_ratio:
+        if capacity >= weight:
+            total_value += value_per_weight * weight
+            capacity -= weight
+
+        else:
+            total_value += value_per_weight * capacity
+            break
+    return total_value
+
+weights = [10, 20, 30]  # Weights of items
+values = [60, 100, 120]  # Values of items
+capacity = 50  # Capacity of the knapsack
+
+total_value = fractional_knapsack(weights,values,capacity)
+
+print(total_value)
