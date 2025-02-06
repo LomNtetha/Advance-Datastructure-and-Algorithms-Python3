@@ -205,4 +205,17 @@ max = max_platforms_needed(arrival,departure)
 
 print(max)
 
+def largest_number(nums):
+
+    nums_str = list(map(str,nums))
+    nums_str.sort(key=lambda x:x*10, reverse=True)
+
+    results = ''.join(nums_str)
+
+    return results
+nums = [3, 30, 34, 5, 9]
+
+res = largest_number(nums)
+
+print(res)
 
