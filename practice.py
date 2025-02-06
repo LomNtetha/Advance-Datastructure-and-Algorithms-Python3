@@ -201,9 +201,9 @@ def max_platforms_needed(arrival,departure):
 arrival = ["9:00", "9:40", "9:50", "11:00", "15:00", "18:00"]
 departure = ["9:10", "12:00", "11:20", "11:30", "19:00", "20:00"]
 
-max = max_platforms_needed(arrival,departure)
+max_pla = max_platforms_needed(arrival,departure)
 
-print(max)
+print(max_pla)
 
 def largest_number(nums):
 
@@ -218,4 +218,21 @@ nums = [3, 30, 34, 5, 9]
 res = largest_number(nums)
 
 print(res)
+
+def single_day_max_profit(prices):
+
+    min_prices = float('inf')
+    max_profit = 0
+
+    for price in prices:
+        min_prices = min(min_prices, price)
+        max_profit = max(max_profit, price - min_prices)
+        
+    return max_profit
+
+
+prices = [7, 1, 5, 3, 6, 4]
+
+best_profit = single_day_max_profit(prices)
+print(best_profit)
 
