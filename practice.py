@@ -1,4 +1,5 @@
 import heapq
+from typing import List, Tuple
 
 
 def make_denominations(denominations,amount):
@@ -120,6 +121,36 @@ source = 0
 dist = dijstra_algorithms(graph,source)
 
 print(dist)
+
+def job_sequencing(jobs):
+
+    jobs.sort(key=lambda x:x[1], reverse=True)
+
+    max_dealine = max(job[0] for job in jobs)
+
+    total_profit = 0
+    slots = [-1] * (max_dealine+1)
+
+    for dealine,profit in jobs:
+        for j in range(min(dealine,max_dealine),0, -1):
+            if slots[j] == -1:
+                slots[j] = profit
+                total_profit += profit
+
+                break
+
+    return total_profit
+
+
+        
+
+jobs = [(2, 100), (1, 19), (2, 27), (1, 25), (3, 15)]
+
+total_pro = job_sequencing(jobs)
+
+print(f"Total profit of job squence {total_pro}")
+
+
 
 def max_platforms_needed(arrival,departure):
 
