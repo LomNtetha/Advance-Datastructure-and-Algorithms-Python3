@@ -150,6 +150,28 @@ total_pro = job_sequencing(jobs)
 
 print(f"Total profit of job squence {total_pro}")
 
+def reduce_difference(heights,k):
+    heights.sort()
+
+    n = len(heights)
+    intial_difference = heights[-1] - heights[0]
+
+    min_difference = intial_difference
+
+    for i in range(n - 1):
+        new_max = max(heights[-1] -k, heights[i]+k)
+        new_min = min(heights[0] + k, heights[i+1]-k)
+
+        min_difference = min(min_difference, (new_max - new_min))
+
+    return min_difference
+
+heights = [1, 5, 15, 10]
+k = 3
+
+diff = reduce_difference(heights,k)
+print("minimum diffirence",diff)
+
 
 
 def max_platforms_needed(arrival,departure):
@@ -182,3 +204,5 @@ departure = ["9:10", "12:00", "11:20", "11:30", "19:00", "20:00"]
 max = max_platforms_needed(arrival,departure)
 
 print(max)
+
+
