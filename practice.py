@@ -1,3 +1,4 @@
+from collections import defaultdict
 import heapq
 from typing import List, Tuple
 
@@ -265,3 +266,19 @@ def remove_duplicates(example_input):
 example_input = [1, 2, 3, 4, 5, 1]
 unique_numbers = remove_duplicates(example_input)
 print(unique_numbers)
+
+
+def groupanagrams(strs):
+    anagrams = defaultdict(list)
+
+    for s in strs:
+        sorted_strs = ''.join(sorted(s))
+        anagrams[sorted_strs].append(s)
+    return list(anagrams.values())
+strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+
+ana = groupanagrams(strs)
+
+print(ana)
+
+
