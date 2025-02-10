@@ -250,3 +250,18 @@ pr = double_profit(prices)
 
 print(pr)
 
+## hash questions
+
+def contains_duplicate(example_input):
+
+    return len(example_input) != len(set(example_input))
+example_input = [1, 2, 3, 4, 5, 1]
+num = contains_duplicate(example_input)
+print(num)
+
+def remove_duplicates(example_input):
+    return list(set(example_input))
+
+example_input = [1, 2, 3, 4, 5, 1]
+unique_numbers = remove_duplicates(example_input)
+print(unique_numbers)
