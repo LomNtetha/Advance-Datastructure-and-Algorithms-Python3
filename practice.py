@@ -236,3 +236,17 @@ prices = [7, 1, 5, 3, 6, 4]
 best_profit = single_day_max_profit(prices)
 print(best_profit)
 
+def double_profit(prices):
+    profit =0
+
+    for i in range(1,len(prices)):
+        if prices[i] > prices[i-1]:
+            profit += prices[i] - prices[i-1]
+
+    return profit
+prices =[7, 1, 5, 3, 6, 4]
+
+pr = double_profit(prices)
+
+print(pr)
+
