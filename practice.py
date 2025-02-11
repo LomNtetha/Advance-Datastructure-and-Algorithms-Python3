@@ -369,3 +369,16 @@ nums = [2, 2, 1, 1, 1, 2, 2]
 
 n = majority_element(nums)
 print(n)
+
+
+def topkfrequentnum(nums, k):
+
+    count = Counter(nums)
+
+    return [item for item, freq in count.most_common(k)]
+
+nums = [1,1,1,2,2,3,3,3,3]
+k = 2
+
+topk = topkfrequentnum(nums,k)
+print(topk)
