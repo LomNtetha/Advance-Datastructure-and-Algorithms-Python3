@@ -304,4 +304,31 @@ tands = isIsomorphic(s,t)
 print(tands)
 
 
+def word_pattern(pattern,s):
+
+    words = s.split()
+
+    if len(pattern) != len(words):
+        return False
+    
+    mapping_char_word = {}
+    mapping_word_char = {}
+
+    for cha, word in zip(pattern, words):
+
+        if cha not in mapping_char_word and word not in mapping_word_char:
+            mapping_char_word[cha] = word
+            mapping_word_char[word] = cha
+        elif mapping_char_word.get(cha) != word or mapping_word_char.get(word) != cha:
+            return False
+    return True
+pattern = "abba"
+s = "dog cat cat dog"
+
+ans = word_pattern(pattern, s)
+
+print(ans)
+
+
+
 
