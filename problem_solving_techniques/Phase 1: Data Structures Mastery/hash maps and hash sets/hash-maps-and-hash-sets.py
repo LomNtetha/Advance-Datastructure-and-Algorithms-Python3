@@ -370,7 +370,8 @@ print(solution)  # Output: True
 
 """
 9. Ransom Note Problem:
-Write a function canConstruct(ransomNote: str, magazine: str) -> bool that determines if the string ransomNote can be constructed from the characters in the string magazine.
+Write a function canConstruct(ransomNote: str, magazine: str) -> bool that determines if the string ransomNote can be constructed from
+the characters in the string magazine.
 
 Each character in magazine can only be used once.
 
@@ -617,7 +618,8 @@ print(solution)  # Output: [1, 2]
 15. A string frequency problem involves counting the frequency of characters or words in a given string and performing operations based on that frequency.
 
 Problem:
-Write a function characterFrequency(s: str) -> List[Tuple[str, int]] that takes a string s as input and returns a list of tuples representing each character and its frequency, sorted by frequency in descending order. If two characters have the same frequency, they should be sorted alphabetically.
+Write a function characterFrequency(s: str) -> List[Tuple[str, int]] that takes a string s as input and returns a list of tuples representing
+each character and its frequency, sorted by frequency in descending order. If two characters have the same frequency, they should be sorted alphabetically.
 
 Example Input:
 s = "tree"
