@@ -345,3 +345,16 @@ magazine = "aab"
 
 sol = construct_ransmNote(ransomNote, magazine)
 print(f"Can construct '{ransomNote}' from '{magazine}'? {sol}")
+
+def findthedifference(s,t):
+
+    result = 0
+
+    for c in s+t:
+        result ^= ord(c)
+    return chr(result)
+s = "abcd"
+t = "abcde"
+
+extra = findthedifference(s,t)
+print(extra)
