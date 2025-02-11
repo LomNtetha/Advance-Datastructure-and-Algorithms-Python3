@@ -437,25 +437,16 @@ O(n) due to the hash map storing counts of elements.
 from typing import List
 
 class Solution:
-    def majorityElement(self, nums: List[int]) -> int:
-        # Create a hash map to count occurrences of each number
-        counts = {}
-        
-        # Count each element's frequency
-        for num in nums:
-            counts[num] = counts.get(num, 0) + 1
-        
-        # Return the element with more than n // 2 occurrences
-        for num, count in counts.items():
-            if count > len(nums) // 2:
-                return num
+    def majorityElement(self, nums):
+        counts = Counter(nums)
+        maximum_majority = max(counts, key=counts.get)
+        return maximum_majority
 
-# Example input
-nums = [3, 2, 3]
-solution = Solution().majorityElement(nums)
+# Example usage:
+nums = [2, 2, 1, 1, 1, 2, 2]
+solution = Solution()
+print(solution.majorityElement(nums))  # Output: 2
 
-# Print the output
-print(solution)  # Output: 3
 
             
 """
