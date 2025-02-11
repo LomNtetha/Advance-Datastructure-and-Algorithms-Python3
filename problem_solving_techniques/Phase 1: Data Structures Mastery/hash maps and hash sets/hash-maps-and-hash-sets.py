@@ -516,10 +516,87 @@ nums = [2, 2, 1, 1, 1, 2, 2]
 solution = Solution()
 print(solution.majorityElement(nums))  # Output: 2
 
+"""
+13. Given an integer array nums and an integer k, return the k most frequent elements.
 
+Example:
+Input:
+nums = [1, 1, 1, 2, 2, 3]
+k = 2
+Output: [1, 2]
+"""
+
+"""
+Time Complexity:
+O(n log k) due to using the heap to extract the top k elements.
+Space Complexity:
+O(n) for the hash map storing the frequency counts.
+
+"""
+
+from collections import Counter
+from typing import List
+
+class Solution:
+    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        # Step 1: Count the frequency of each element in nums
+        count = Counter(nums)
+        
+        # Step 2: Use the most_common method of Counter to get the k most frequent elements
+        # The most_common(k) method returns a list of tuples where each tuple contains (element, frequency)
+        # We extract only the elements (item) from these tuples and return them as a list
+        results = [item for item, freq in count.most_common(k)]
+        return results
+# Example usage
+
+nums = [1,1,1,2,2,3]
+k = 2
+solution = Solution().topKFrequent(nums, k)
+print(solution)  # Output: [1, 2]
+
+
+"""
+14. A string frequency problem involves counting the frequency of characters or words in a given string and performing operations based on that frequency.
+
+Problem:
+Write a function characterFrequency(s: str) -> List[Tuple[str, int]] that takes a string s as input and returns a list of tuples representing
+each character and its frequency, sorted by frequency in descending order. If two characters have the same frequency, they should be sorted alphabetically.
+
+Example Input:
+s = "tree"
+Expected Output:
+[('e', 2), ('r', 1), ('t', 1)]
+Explanation:
+Character frequencies:
+'e' appears 2 times,
+'r' appears 1 time,
+'t' appears 1 time.
+Sorting: By frequency in descending order. For characters with the same frequency, sort alphabetically.
+"""
+from collections import Counter
+from typing import List, Tuple
+
+class Solution:
+    def characterFrequency(self, s: str) -> List[Tuple[str, int]]:
+        """
+        Returns the frequency of each character in the string, sorted by
+        frequency (descending) and alphabetically for ties.
+        """
+        # Count frequencies of characters
+        freq = Counter(s)
+        
+        # Sort by frequency (descending) and alphabetically (ascending)
+        sorted_freq = sorted(freq.items(), key=lambda x: (-x[1], x[0]))
+        
+        return sorted_freq
+
+# Example usage
+s = "tree"
+sol = Solution().characterFrequency(s)
+print(sol)
             
 """
-13. Given two lists list1 and list2, find the common interest with the least index sum. If there is a tie, return all such common interests.
+15. Given two lists list1 and list2, find the common interest with the least index sum. If there is a tie, return all such common interests.
 
 Example:
 Input:
@@ -575,84 +652,6 @@ solution = Solution().findRestaurant(list1, list2)
 print(solution)  # Output: ['Shogun']
 
     
-"""
-14. Given an integer array nums and an integer k, return the k most frequent elements.
-
-Example:
-Input:
-nums = [1, 1, 1, 2, 2, 3]
-k = 2
-Output: [1, 2]
-"""
-
-"""
-Time Complexity:
-O(n log k) due to using the heap to extract the top k elements.
-Space Complexity:
-O(n) for the hash map storing the frequency counts.
-
-"""
-
-from collections import Counter
-from typing import List
-
-class Solution:
-    def topKFrequent(self, nums: List[int], k: int) -> List[int]:
-        # Step 1: Count the frequency of each element in nums
-        count = Counter(nums)
-        
-        # Step 2: Use the most_common method of Counter to get the k most frequent elements
-        # The most_common(k) method returns a list of tuples where each tuple contains (element, frequency)
-        # We extract only the elements (item) from these tuples and return them as a list
-        results = [item for item, freq in count.most_common(k)]
-        return results
-# Example usage
-
-nums = [1,1,1,2,2,3]
-k = 2
-solution = Solution().topKFrequent(nums, k)
-print(solution)  # Output: [1, 2]
-
-
-"""
-15. A string frequency problem involves counting the frequency of characters or words in a given string and performing operations based on that frequency.
-
-Problem:
-Write a function characterFrequency(s: str) -> List[Tuple[str, int]] that takes a string s as input and returns a list of tuples representing
-each character and its frequency, sorted by frequency in descending order. If two characters have the same frequency, they should be sorted alphabetically.
-
-Example Input:
-s = "tree"
-Expected Output:
-[('e', 2), ('r', 1), ('t', 1)]
-Explanation:
-Character frequencies:
-'e' appears 2 times,
-'r' appears 1 time,
-'t' appears 1 time.
-Sorting: By frequency in descending order. For characters with the same frequency, sort alphabetically.
-"""
-from collections import Counter
-from typing import List, Tuple
-
-class Solution:
-    def characterFrequency(self, s: str) -> List[Tuple[str, int]]:
-        """
-        Returns the frequency of each character in the string, sorted by
-        frequency (descending) and alphabetically for ties.
-        """
-        # Count frequencies of characters
-        freq = Counter(s)
-        
-        # Sort by frequency (descending) and alphabetically (ascending)
-        sorted_freq = sorted(freq.items(), key=lambda x: (-x[1], x[0]))
-        
-        return sorted_freq
-
-# Example usage
-s = "tree"
-sol = Solution().characterFrequency(s)
-print(sol)
 
 
 """
