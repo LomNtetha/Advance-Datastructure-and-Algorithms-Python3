@@ -358,3 +358,14 @@ t = "abcde"
 
 extra = findthedifference(s,t)
 print(extra)
+
+from typing import List
+
+def majority_element(nums):
+    counts = Counter(nums)
+
+    return max(counts,key=counts.get)
+nums = [2, 2, 1, 1, 1, 2, 2]
+
+n = majority_element(nums)
+print(n)
