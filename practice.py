@@ -328,7 +328,20 @@ s = "dog cat cat dog"
 ans = word_pattern(pattern, s)
 
 print(ans)
+from collections import Counter
+def construct_ransmNote(ransomNote,magazine):
 
+    ransomnote_count = Counter(ransomNote)
+    magazine_count = Counter(magazine)
 
+    for char, count in ransomnote_count.items():
 
+        if magazine_count[char] < count:
+            return False
+        
+    return True
+ransomNote = "aa"
+magazine = "aab"
 
+sol = construct_ransmNote(ransomNote, magazine)
+print(f"Can construct '{ransomNote}' from '{magazine}'? {sol}")
