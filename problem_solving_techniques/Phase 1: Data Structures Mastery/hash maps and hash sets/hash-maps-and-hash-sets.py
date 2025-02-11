@@ -508,8 +508,7 @@ from typing import List
 class Solution:
     def majorityElement(self, nums):
         counts = Counter(nums)
-        maximum_majority = max(counts, key=counts.get)
-        return maximum_majority
+        return max(counts, key=counts.get)
 
 # Example usage:
 nums = [2, 2, 1, 1, 1, 2, 2]
