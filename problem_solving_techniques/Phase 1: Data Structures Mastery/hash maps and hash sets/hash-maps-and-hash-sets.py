@@ -348,13 +348,13 @@ class Solution:
         word_to_char = {}
         
         # Iterate through the pattern and the corresponding words
-        for c, word in zip(pattern, words):
+        for cha, word in zip(pattern, words):
             # If the mapping doesn't exist, create it
-            if c not in char_to_word and word not in word_to_char:
-                char_to_word[c] = word
-                word_to_char[word] = c
+            if cha not in char_to_word and word not in word_to_char:
+                char_to_word[cha] = word
+                word_to_char[word] = cha
             # If there is a mismatch, return False
-            elif char_to_word.get(c) != word or word_to_char.get(word) != c:
+            elif char_to_word.get(cha) != word or word_to_char.get(word) != cha:
                 return False
         
         return True
