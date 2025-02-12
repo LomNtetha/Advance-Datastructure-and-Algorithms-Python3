@@ -264,149 +264,7 @@ height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
 print(Solution().maxArea(height))  # Output: 49
 
 """
-8. Merging Two Sorted Arrays
-Example Question: Given two sorted arrays nums1 and nums2, merge them into a single sorted array.
-
-Input:
-
-nums1 = [1, 2, 4]
-nums2 = [1, 3, 4]
-Approach:
-
-Use two pointers: one for each array (i for nums1 and j for nums2).
-Compare the elements at i and j, append the smaller one to the result, and move that pointer forward.
-Time Complexity: O(m + n) – You are traversing both arrays.
-
-"""
-
-
-class Solution:
-    def merge_sorted_arrays(self, nums1: List[int], nums2: List[int]) -> List[int]:
-        i, j, result = 0, 0, []  # Initialize pointers for nums1 and nums2, and result list
-        
-        # Traverse both arrays until reaching the end of one
-        while i < len(nums1) and j < len(nums2):
-            if nums1[i] <= nums2[j]:    # If nums1 element is smaller, add it to result
-                result.append(nums1[i])
-                i += 1                  # Move pointer in nums1 forward
-            else:                       # Otherwise, add nums2 element to result
-                result.append(nums2[j])
-                j += 1                  # Move pointer in nums2 forward
-
-        # Append any remaining elements from nums1 or nums2
-        result.extend(nums1[i:])         # Add remaining elements in nums1 (if any)
-        result.extend(nums2[j:])         # Add remaining elements in nums2 (if any)
-        
-        return result                    # Return the merged sorted list
-
-# Example test case
-solution = Solution()
-nums1 = [1, 2, 4]  # First sorted array
-nums2 = [1, 3, 4]  # Second sorted array
-
-# Print the merged and sorted result
-print("Merged array:", solution.merge_sorted_arrays(nums1, nums2))
-
-
-"""
-9. Partitioning Array (QuickSort Partition)
-Example Question: Given an unsorted array, partition it around a pivot such that elements less than the pivot come before all elements 
-greater than the pivot.
-
-Input:
-
-nums = [3, 2, 1, 5, 6, 4]
-Pivot = 3
-Approach:
-
-Use two pointers: one from the left and one from the right.
-Swap elements such that the elements less than the pivot are on the left and greater than the pivot are on the right.
-Time Complexity: O(n) – Each element is moved once.
-
-"""
-
-class Solution:
-    def partitionArray(self, nums: List[int], pivot: int) -> List[int]:
-        left, right = 0, len(nums) - 1
-        
-        while left <= right:
-            # Move left pointer until we find an element >= pivot
-            while left <= right and nums[left] < pivot:
-                left += 1
-            # Move right pointer until we find an element < pivot
-            while left <= right and nums[right] >= pivot:
-                right -= 1
-            
-            # If pointers haven't crossed, swap the elements
-            if left <= right:
-                nums[left], nums[right] = nums[right], nums[left]
-                left += 1
-                right -= 1
-
-        return nums
-
-# Example Usage
-nums = [3, 2, 1, 5, 6, 4]
-pivot = 3
-solution = Solution()
-print("partitionArray",solution.partitionArray(nums, pivot))
-
-"""
-10. Three Sum Problem
-Example Question: Given an array nums, find all unique triplets such that the sum of the three numbers is zero.
-
-Input:
-
-nums = [-1, 0, 1, 2, -1, -4]
-Approach:
-
-Sort the array and use a fixed pointer to loop through each number.
-For each number, use two pointers to find pairs whose sum with the current number equals zero.
-Time Complexity: O(n^2) – Looping through each element with two pointers for every element.
-"""
-
-class Solution:
-    def threeSum(self, nums: List[int]) -> List[List[int]]:
-        nums.sort()  # Step 1: Sort the array
-        result = []
-        
-        # Step 2: Loop through each number as the fixed pointer
-        for i in range(len(nums) - 2):
-            # Skip duplicate elements
-            if i > 0 and nums[i] == nums[i - 1]:
-                continue
-            
-            # Two-pointer approach
-            left, right = i + 1, len(nums) - 1
-            while left < right:
-                total = nums[i] + nums[left] + nums[right]
-                
-                if total == 0:
-                    result.append([nums[i], nums[left], nums[right]])
-                    
-                    # Skip duplicate elements for `left` and `right`
-                    while left < right and nums[left] == nums[left + 1]:
-                        left += 1
-                    while left < right and nums[right] == nums[right - 1]:
-                        right -= 1
-                    
-                    # Move both pointers inward after finding a valid triplet
-                    left += 1
-                    right -= 1
-                elif total < 0:
-                    left += 1  # Increase left pointer to get a larger sum
-                else:
-                    right -= 1  # Decrease right pointer to get a smaller sum
-        
-        return result
-
-# Example Usage
-nums = [-1, 0, 1, 2, -1, -4]
-solution = Solution()
-print(solution.threeSum(nums))
-
-"""
-11. Trapping Rain Water
+8. Trapping Rain Water
 Example Question: Given n non-negative integers representing the height of bars, compute how much water it can trap after raining.
 
 Input:
@@ -459,3 +317,146 @@ class Solution:
 height = [0,1,0,2,1,0,1,3,2,1,2,1]
 solution = Solution()
 print(solution.trap(height))  # Output: 6
+
+
+"""
+9. Merging Two Sorted Arrays
+Example Question: Given two sorted arrays nums1 and nums2, merge them into a single sorted array.
+
+Input:
+
+nums1 = [1, 2, 4]
+nums2 = [1, 3, 4]
+Approach:
+
+Use two pointers: one for each array (i for nums1 and j for nums2).
+Compare the elements at i and j, append the smaller one to the result, and move that pointer forward.
+Time Complexity: O(m + n) – You are traversing both arrays.
+
+"""
+
+
+class Solution:
+    def merge_sorted_arrays(self, nums1: List[int], nums2: List[int]) -> List[int]:
+        i, j, result = 0, 0, []  # Initialize pointers for nums1 and nums2, and result list
+        
+        # Traverse both arrays until reaching the end of one
+        while i < len(nums1) and j < len(nums2):
+            if nums1[i] <= nums2[j]:    # If nums1 element is smaller, add it to result
+                result.append(nums1[i])
+                i += 1                  # Move pointer in nums1 forward
+            else:                       # Otherwise, add nums2 element to result
+                result.append(nums2[j])
+                j += 1                  # Move pointer in nums2 forward
+
+        # Append any remaining elements from nums1 or nums2
+        result.extend(nums1[i:])         # Add remaining elements in nums1 (if any)
+        result.extend(nums2[j:])         # Add remaining elements in nums2 (if any)
+        
+        return result                    # Return the merged sorted list
+
+# Example test case
+solution = Solution()
+nums1 = [1, 2, 4]  # First sorted array
+nums2 = [1, 3, 4]  # Second sorted array
+
+# Print the merged and sorted result
+print("Merged array:", solution.merge_sorted_arrays(nums1, nums2))
+
+
+"""
+10. Partitioning Array (QuickSort Partition)
+Example Question: Given an unsorted array, partition it around a pivot such that elements less than the pivot come before all elements 
+greater than the pivot.
+
+Input:
+
+nums = [3, 2, 1, 5, 6, 4]
+Pivot = 3
+Approach:
+
+Use two pointers: one from the left and one from the right.
+Swap elements such that the elements less than the pivot are on the left and greater than the pivot are on the right.
+Time Complexity: O(n) – Each element is moved once.
+
+"""
+
+class Solution:
+    def partitionArray(self, nums: List[int], pivot: int) -> List[int]:
+        left, right = 0, len(nums) - 1
+        
+        while left <= right:
+            # Move left pointer until we find an element >= pivot
+            while left <= right and nums[left] < pivot:
+                left += 1
+            # Move right pointer until we find an element < pivot
+            while left <= right and nums[right] >= pivot:
+                right -= 1
+            
+            # If pointers haven't crossed, swap the elements
+            if left <= right:
+                nums[left], nums[right] = nums[right], nums[left]
+                left += 1
+                right -= 1
+
+        return nums
+
+# Example Usage
+nums = [3, 2, 1, 5, 6, 4]
+pivot = 3
+solution = Solution()
+print("partitionArray",solution.partitionArray(nums, pivot))
+
+"""
+11. Three Sum Problem
+Example Question: Given an array nums, find all unique triplets such that the sum of the three numbers is zero.
+
+Input:
+
+nums = [-1, 0, 1, 2, -1, -4]
+Approach:
+
+Sort the array and use a fixed pointer to loop through each number.
+For each number, use two pointers to find pairs whose sum with the current number equals zero.
+Time Complexity: O(n^2) – Looping through each element with two pointers for every element.
+"""
+
+class Solution:
+    def threeSum(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()  # Step 1: Sort the array
+        result = []
+        
+        # Step 2: Loop through each number as the fixed pointer
+        for i in range(len(nums) - 2):
+            # Skip duplicate elements
+            if i > 0 and nums[i] == nums[i - 1]:
+                continue
+            
+            # Two-pointer approach
+            left, right = i + 1, len(nums) - 1
+            while left < right:
+                total = nums[i] + nums[left] + nums[right]
+                
+                if total == 0:
+                    result.append([nums[i], nums[left], nums[right]])
+                    
+                    # Skip duplicate elements for `left` and `right`
+                    while left < right and nums[left] == nums[left + 1]:
+                        left += 1
+                    while left < right and nums[right] == nums[right - 1]:
+                        right -= 1
+                    
+                    # Move both pointers inward after finding a valid triplet
+                    left += 1
+                    right -= 1
+                elif total < 0:
+                    left += 1  # Increase left pointer to get a larger sum
+                else:
+                    right -= 1  # Decrease right pointer to get a smaller sum
+        
+        return result
+
+# Example Usage
+nums = [-1, 0, 1, 2, -1, -4]
+solution = Solution()
+print(solution.threeSum(nums))
