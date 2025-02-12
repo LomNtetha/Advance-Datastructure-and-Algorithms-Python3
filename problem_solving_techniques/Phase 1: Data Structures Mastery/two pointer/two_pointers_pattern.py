@@ -320,7 +320,52 @@ print(solution.trap(height))  # Output: 6
 
 
 """
-9. Merging Two Sorted Arrays
+9. Partitioning Array (QuickSort Partition)
+Example Question: Given an unsorted array, partition it around a pivot such that elements less than the pivot come before all elements 
+greater than the pivot.
+
+Input:
+
+nums = [3, 2, 1, 5, 6, 4]
+Pivot = 3
+Approach:
+
+Use two pointers: one from the left and one from the right.
+Swap elements such that the elements less than the pivot are on the left and greater than the pivot are on the right.
+Time Complexity: O(n) – Each element is moved once.
+
+"""
+
+class Solution:
+    def partitionArray(self, nums: List[int], pivot: int) -> List[int]:
+        left, right = 0, len(nums) - 1
+        
+        while left <= right:
+            # Move left pointer until we find an element >= pivot
+            while left <= right and nums[left] < pivot:
+                left += 1
+            # Move right pointer until we find an element < pivot
+            while left <= right and nums[right] >= pivot:
+                right -= 1
+            
+            # If pointers haven't crossed, swap the elements
+            if left <= right:
+                nums[left], nums[right] = nums[right], nums[left]
+                left += 1
+                right -= 1
+
+        return nums
+
+# Example Usage
+nums = [3, 2, 1, 5, 6, 4]
+pivot = 3
+solution = Solution()
+print("partitionArray",solution.partitionArray(nums, pivot))
+
+
+
+"""
+10. Merging Two Sorted Arrays
 Example Question: Given two sorted arrays nums1 and nums2, merge them into a single sorted array.
 
 Input:
@@ -363,49 +408,6 @@ nums2 = [1, 3, 4]  # Second sorted array
 # Print the merged and sorted result
 print("Merged array:", solution.merge_sorted_arrays(nums1, nums2))
 
-
-"""
-10. Partitioning Array (QuickSort Partition)
-Example Question: Given an unsorted array, partition it around a pivot such that elements less than the pivot come before all elements 
-greater than the pivot.
-
-Input:
-
-nums = [3, 2, 1, 5, 6, 4]
-Pivot = 3
-Approach:
-
-Use two pointers: one from the left and one from the right.
-Swap elements such that the elements less than the pivot are on the left and greater than the pivot are on the right.
-Time Complexity: O(n) – Each element is moved once.
-
-"""
-
-class Solution:
-    def partitionArray(self, nums: List[int], pivot: int) -> List[int]:
-        left, right = 0, len(nums) - 1
-        
-        while left <= right:
-            # Move left pointer until we find an element >= pivot
-            while left <= right and nums[left] < pivot:
-                left += 1
-            # Move right pointer until we find an element < pivot
-            while left <= right and nums[right] >= pivot:
-                right -= 1
-            
-            # If pointers haven't crossed, swap the elements
-            if left <= right:
-                nums[left], nums[right] = nums[right], nums[left]
-                left += 1
-                right -= 1
-
-        return nums
-
-# Example Usage
-nums = [3, 2, 1, 5, 6, 4]
-pivot = 3
-solution = Solution()
-print("partitionArray",solution.partitionArray(nums, pivot))
 
 """
 11. Three Sum Problem
