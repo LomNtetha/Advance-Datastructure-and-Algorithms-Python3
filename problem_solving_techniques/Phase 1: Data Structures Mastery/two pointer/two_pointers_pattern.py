@@ -222,7 +222,8 @@ print(solution.longestPalindrome("babad"))  # Output: 3
 
 
 """
-7. Problem: Given an array representing heights of vertical lines, find two lines that together with the x-axis form a container that holds the most water
+7. Problem: Given an array representing heights of vertical lines, find two lines that together with the x-axis form a container
+that holds the most water
 
 Approach: Use two pointers calculate the area between the two lines, and move the pointer with the shorter line to try and find a larger area.
 
