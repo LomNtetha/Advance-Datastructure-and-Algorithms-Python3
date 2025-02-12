@@ -123,7 +123,7 @@ O(1). We use only two extra pointers, so space complexity is constant.
 
 """
 
-7. Detect Cycle in a Doubly Linked List
+3. Detect Cycle in a Doubly Linked List
 Problem Statement:
 Given a doubly linked list, determine if it has a cycle in it.
 A doubly linked list has a prev and next pointer for each node. Use the Floyd's Tortoise and Hare algorithm to detect the cycle.
@@ -189,7 +189,7 @@ O(1). We use constant space with two pointers.
 
 
 """
-3. Merge Two Sorted Linked Lists
+4. Merge Two Sorted Linked Lists
 Problem Statement:
 Given the heads of two sorted linked lists, merge them into one sorted list. The list should be sorted in ascending order.
 
@@ -265,7 +265,7 @@ O(1). We merge the lists in place without using any extra space for the new list
 
 
 """
-4. Remove N-th Node From End of List
+5. Remove N-th Node From End of List
 Problem Statement:
 Given the head of a linked list, remove the  n-th node from the end of the list and return its head.
 
@@ -333,7 +333,7 @@ O(1). We use a constant amount of space.
 
 
 """
-5. Find the Middle of a Linked List
+6. Find the Middle of a Linked List
 Problem Statement:
 Given the head of a linked list, return the middle node of the list. If there are two middle nodes, return the second one.
 
@@ -387,7 +387,7 @@ O(1). We use only a constant amount of extra space.
 """
 
 """
-6. Remove Duplicates from Sorted Linked List
+7. Remove Duplicates from Sorted Linked List
 Problem Statement:
 Given a sorted linked list, remove the duplicates such that each element appears only once.
 
@@ -440,11 +440,8 @@ while new_head:
 """
 Time Complexity:
 
-O(n), where 
-𝑛
-n is the number of nodes in the linked list.
+O(n), where n is the number of nodes in the linked list.
 Space Complexity:
-
 O(1). We use constant space.
 
 """
@@ -1122,9 +1119,7 @@ while flattened_head:
 """
 Time Complexity:
 
-O(n), where 
-𝑛
-n is the total number of nodes in the list (including child nodes).
+O(n), where n is the total number of nodes in the list (including child nodes).
 Space Complexity:
 
 O(n), for the stack used to traverse the list.
