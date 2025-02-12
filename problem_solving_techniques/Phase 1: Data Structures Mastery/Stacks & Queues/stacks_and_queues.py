@@ -616,7 +616,8 @@ Problem Statement:
 Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations:
 
 get(key) - Retrieve the value of the key if the key exists, otherwise return -1.
-put(key, value) - Insert the value if the key is not already present. When the cache reaches its capacity, the least recently used item is evicted.
+put(key, value) - Insert the value if the key is not already present. When the cache reaches its capacity, the least recently
+used item is evicted.
 Example:
 
 Input:
@@ -677,7 +678,8 @@ O(capacity), where capacity is the maximum size of the cache.
 """
 12. Kth Smallest Element in a BST
 Problem Statement:
-Given the root of a binary search tree (BST) and an integer k, return the kth smallest value (1-indexed) of all the values of the nodes in the tree.
+Given the root of a binary search tree (BST) and an integer k, return the kth smallest value (1-indexed) of all the values of the
+nodes in the tree.
 
 Example:
 
@@ -888,7 +890,7 @@ Output:
 [ ["hit","hot","dot","dog","cog"], ["hit","hot","lot","log","cog"] ]
 """
 from collections import defaultdict, deque
-
+[]
 class Solution:
     def findLadders(self, beginWord, endWord, wordList):
         # Convert wordList to a set for faster lookup
