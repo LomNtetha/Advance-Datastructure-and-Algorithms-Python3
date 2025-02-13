@@ -1,5 +1,5 @@
 """
-Maximum Sum Subarray of Size K
+1. Maximum Sum Subarray of Size K
 Example Question: You are given an array of integers nums and an integer k. Find the maximum sum of a subarray of size k.
 
 Input:
@@ -51,7 +51,7 @@ solution = Solution()
 print(solution.maxSumSubarray(nums, k))  # Output: 9
 
 """
-Subarray with Sum Equal to Target
+2. Subarray with Sum Equal to Target
 Example Question: Given an array of positive integers, find the subarray that sums up to a given target.
 
 Input:
@@ -100,7 +100,7 @@ print(solution.subarraySum(nums, target))  # Output: [2, 3, 4]
 
 
 """
-Example Question: Given a string s, find the length of the longest substring without repeating characters.
+3. Example Question: Given a string s, find the length of the longest substring without repeating characters.
 
 Input:
 
@@ -143,7 +143,7 @@ print(solution.lengthOfLongestSubstring(s))  # Output: 3
 
 
 """
-Minimum Size Subarray Sum
+4. Minimum Size Subarray Sum
 Example Question: Given an array of positive integers nums and a positive integer target, find the minimal length of a contiguous 
 subarray of which the sum is greater than or equal to target. If there is no such subarray, return 0.
 
@@ -196,7 +196,7 @@ print(solution.minSubArrayLen(target, nums))  # Output: 2
 
 
 """
-Sliding Window Maximum
+5. Sliding Window Maximum
 Example Question: You are given an array nums and an integer k. You need to find the maximum value in each sliding window of size k.
 
 Input:
@@ -256,7 +256,7 @@ print(solution.maxSlidingWindow(nums, k))  # Output: [3, 3, 5, 5, 6, 7]
 
 
 """
- Longest Substring with At Most K Distinct Characters
+6. Longest Substring with At Most K Distinct Characters
 Example Question: Given a string s and an integer k, find the length of the longest substring that contains at most k distinct characters.
 
 Input:
@@ -312,7 +312,7 @@ print(solution.lengthOfLongestSubstringKDistinct(s, k))  # Output: 3
 
 
 """
-Prefix Sum Array for Range Minimum Query
+7. Prefix Sum Array for Range Minimum Query
 Problem Statement: Given an integer array nums, compute the minimum value for each subarray of length k.
 
 Example:
@@ -364,7 +364,7 @@ solution = Solution()  # Create an instance of the Solution class
 print(solution.minSlidingWindow(nums, k))  # Output: [-1, -3, -3, -3, 3, 3]
 
 """
-Problem Statement:
+8. Problem Statement:
 You are developing a message processing system for customer service requests. Each request is a string containing a timestamp (in minutes) and a 
 message, separated by a colon (:). The system needs to group messages that arrive within a 5-minute window and output them in chronological order. 
 If multiple messages have the same timestamp, they must retain their original order.

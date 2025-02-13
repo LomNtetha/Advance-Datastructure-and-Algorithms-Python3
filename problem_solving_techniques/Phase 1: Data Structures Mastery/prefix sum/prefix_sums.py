@@ -1,5 +1,5 @@
 """
-Given an array arr = [2, 4, 1, 6, 3], find the sum of elements between index i = 1 and j = 3.
+1. Given an array arr = [2, 4, 1, 6, 3], find the sum of elements between index i = 1 and j = 3.
 
 
 Consider arr = [2, 4, 1, 6, 3] and the prefix sum array prefix_sum = [2, 6, 7, 13, 16].
@@ -37,7 +37,7 @@ result = Solution.subarray_sum(arr, i, j)
 print(f"The sum of the subarray from index {i} to {j} is: {result}")
 
 """
-Question: Subarray Sum Query with Prefix Sums
+2. Question: Subarray Sum Query with Prefix Sums
 You are given an array of integers, arr, and a list of queries. Each query specifies a pair of indices (i, j), representing the start 
 and end indices of a subarray. For each query, return the sum of the elements within the subarray starting at index i and ending at index j (inclusive).
 
@@ -95,7 +95,7 @@ for i, j in queries:
 
 
 """
-Problem Statement: Given an integer array nums, and multiple queries, each query asks for the sum of elements between indices i and j inclusive.
+3. Problem Statement: Given an integer array nums, and multiple queries, each query asks for the sum of elements between indices i and j inclusive.
 
 Example:
 
@@ -150,7 +150,7 @@ result = Solution.query_sums(nums, queries)
 print(result)  # Output: [9, 8, 4]
 
 """
-Subarray Sum Equals K
+4. Subarray Sum Equals K
 Problem Statement: Given an integer array nums and an integer k, return the total number of continuous subarrays whose sum equals k.
 
 Example:
@@ -191,7 +191,7 @@ solution = Solution()
 print(solution.subarraySum(nums, k))  # Output: 2
 
 """
-Maximum Sum of a Subarray of Size K
+5. Maximum Sum of a Subarray of Size K
 Problem Statement: Given an integer array nums and an integer k, find the maximum sum of any contiguous subarray of size k.
 
 Example:
@@ -228,7 +228,7 @@ solution = Solution()
 print(solution.maxSumSubarray(nums, k))  # Output: 9
 
 """
-Find the Minimum in Rotated Sorted Array
+6. Find the Minimum in Rotated Sorted Array
 Problem Statement: Suppose an array of length n sorted in ascending order is rotated between 1 and n times. 
 Find the minimum element in this rotated sorted array.
 
@@ -267,7 +267,8 @@ solution = Solution()
 print(solution.findMin(nums))  # Output: 1
 
 
-"""Problem Statement
+"""
+7. Problem Statement
 Given an array of integers and a target integer  k, determine if there exists a contiguous subarray whose sum equals k.
 
 Input:
@@ -318,7 +319,7 @@ print(f"Is there a subarray with sum {k}? {sol.subarray_with_sum_k(arr, k)}")
 
 
 """
-Given an array of integers and a target integer k, find the minimum length of a contiguous subarray whose sum is at least k.
+8. Given an array of integers and a target integer k, find the minimum length of a contiguous subarray whose sum is at least k.
 
 Input:
 
@@ -368,7 +369,7 @@ sol = Solution()
 print(f"The length of the smallest subarray with sum ≥ {k}: {sol.min_subarray_len(arr, k)}")
 
 """
-Given an array of integers, find the maximum sum of any contiguous subarray.
+9. Given an array of integers, find the maximum sum of any contiguous subarray.
 
 Input:
 
@@ -409,7 +410,7 @@ sol = Solution()
 print(f"The maximum sum of a subarray is: {sol.max_subarray_sum(arr)}")
 
 """
-Given an array of integers and an integer k, find how many contiguous subarrays have a sum that is divisible by k.
+10. Given an array of integers and an integer k, find how many contiguous subarrays have a sum that is divisible by k.
 
 Input:
 
