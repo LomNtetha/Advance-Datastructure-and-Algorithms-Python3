@@ -9,8 +9,8 @@ k = 3
 Output: 9 (The subarray [5, 1, 3] has the largest sum: 5 + 1 + 3 = 9).
 Approach:
 
-Use a sliding window of size k. First, sum the first k elements, then slide the window one element at a time by adding the new element coming into 
-the window and subtracting the element that is moving out of the window.
+Use a sliding window of size k. First, sum the first k elements, then slide the window one element at a time by adding the new element
+coming into the window and subtracting the element that is moving out of the window.
 """
 
 """
@@ -154,7 +154,9 @@ target = 7
 Output: 2 (The subarray [4, 3] has the smallest length with sum 7).
 Approach:
 
-Use a sliding window to track the current sum of elements. Start with both pointers at the beginning of the array. Expand the window by moving the end pointer until the sum is greater than or equal to target. Then, shrink the window by moving the start pointer to find the smallest possible window that satisfies the condition.
+Use a sliding window to track the current sum of elements. Start with both pointers at the beginning of the array.
+Expand the window by moving the end pointer until the sum is greater than or equal to target. Then, shrink the window by moving
+the start pointer to find the smallest possible window that satisfies the condition.
 
 """
 
@@ -209,7 +211,8 @@ Output:
 Approach:
 
 Use a deque (double-ended queue) to store the indices of elements in the current window in decreasing order of their values. 
-The front of the deque contains the index of the largest element in the window. For each new element, remove elements from the back of the deque that are smaller than the current element since they cannot be the maximum.
+The front of the deque contains the index of the largest element in the window. For each new element, remove elements from 
+the back of the deque that are smaller than the current element since they cannot be the maximum.
 
 """
 """
