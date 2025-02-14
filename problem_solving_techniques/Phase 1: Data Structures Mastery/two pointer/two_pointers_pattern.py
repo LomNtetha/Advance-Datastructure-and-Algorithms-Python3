@@ -462,3 +462,43 @@ class Solution:
 nums = [-1, 0, 1, 2, -1, -4]
 solution = Solution()
 print(solution.threeSum(nums))
+
+
+"""
+6. Find the Minimum in Rotated Sorted Array
+Problem Statement: Suppose an array of length n sorted in ascending order is rotated between 1 and n times. 
+Find the minimum element in this rotated sorted array.
+
+Example:
+
+Input:
+
+nums = [3, 4, 5, 1, 2]
+Output:
+
+1
+Explanation: The array was rotated 3 times. The minimum element is 1.
+
+"""
+
+class Solution:
+    def findMin(self, nums: List[int]) -> int:
+        left, right = 0, len(nums) - 1
+        
+        while left < right:
+            mid = (left + right) // 2
+            
+            if nums[mid] > nums[right]:
+                # Minimum is in the right half
+                left = mid + 1
+            else:
+                # Minimum is in the left half including mid
+                right = mid
+        
+        # At the end of the loop, left == right, which is the minimum element
+        return nums[left]
+
+# Example Usage
+nums = [3, 4, 5, 1, 2]
+solution = Solution()
+print(solution.findMin(nums))  # Output: 1
