@@ -509,3 +509,23 @@ i, j = 1, 3
 
 prefixsum = sub_array_sum(arr,i,j)
 print(f"The total Prfix form {i} to {j}: {prefixsum}")
+
+def sub_array_with_queries(arr,queries,n,m):
+
+    prefix_sums = [0]* len(arrs)
+    prefix_sums[0] = arrs[0]
+
+    for k in range(1, len(arrs)):
+        prefix_sums[k] = prefix_sums[k -1] + arr[k]
+
+    if n == 0:
+        return prefix_sums[m]
+    else:
+        return prefix_sums[m]-prefix_sums[n-1]
+arrs = [3, 5, 2, 8, 6]
+queries = [(1, 3), (0, 4), (2, 4)]
+
+for n, m in queries:
+    prexis = sub_array_with_queries(arr,queries,n,m)
+
+    print(f" sum of sub array from {n} to {m}: {prexis}")
