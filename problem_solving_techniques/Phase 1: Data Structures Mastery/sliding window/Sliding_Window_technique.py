@@ -65,38 +65,29 @@ exceeds the target. If the sum exceeds the target, move the left pointer to redu
 Time Complexity: O(n) – Each element is visited once.
 
 """
-
 class Solution:
     def subarraySum(self, nums: List[int], target: int) -> Optional[List[int]]:
-        # Initialize the left pointer for the sliding window and the current sum
+      
         left = 0
         current_sum = 0
-        
-        # Iterate over each element with the right pointer to adjust the window size
+
         for right in range(len(nums)):
-            # Expand the window by adding the current number at right pointer to current_sum
-            current_sum += nums[right]
-            
-            # If current_sum exceeds target, shrink the window from the left side
-            while current_sum > target and left <= right:
-                # Subtract nums[left] from current_sum and move the left pointer to the right
+            current_sum += nums[right]  # Expand window
+
+            while current_sum > target:  # Shrink window if sum exceeds target
                 current_sum -= nums[left]
                 left += 1
             
-            # Check if current_sum is equal to the target
             if current_sum == target:
-                # If we find the sum, return the subarray from left to right (inclusive)
-                return nums[left:right + 1]
-        
-        # If no subarray is found that adds up to the target, return None
-        return None
+                return nums[left:right + 1]  # Return the subarray
 
-# Example Usage
+        return []  # Return empty if no subarray is found
+
+    # Example
 nums = [1, 2, 3, 4, 5]
 target = 9
 solution = Solution()
 print(solution.subarraySum(nums, target))  # Output: [2, 3, 4]
-
 
 
 """
