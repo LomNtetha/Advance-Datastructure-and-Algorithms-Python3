@@ -191,84 +191,7 @@ solution = Solution()
 print(solution.subarraySum(nums, k))  # Output: 2
 
 """
-5. Maximum Sum of a Subarray of Size K
-Problem Statement: Given an integer array nums and an integer k, find the maximum sum of any contiguous subarray of size k.
-
-Example:
-
-Input:
-
-
-nums = [2, 1, 5, 1, 3, 2]
-k = 3
-Output:
-
-9
-Explanation: The subarrays of size 3 are [2, 1, 5], [1, 5, 1], [5, 1, 3], and [1, 3, 2]. The maximum sum is 9 (from [5, 1, 3]).
-
-"""
-
-class Solution:
-    def maxSumSubarray(self, nums: List[int], k: int) -> int:
-        # Compute the sum of the first 'k' elements
-        window_sum = sum(nums[:k])
-        max_sum = window_sum
-        
-        # Slide the window across the array
-        for i in range(k, len(nums)):
-            window_sum += nums[i] - nums[i - k]
-            max_sum = max(max_sum, window_sum)
-        
-        return max_sum
-
-# Example Usage
-nums = [2, 1, 5, 1, 3, 2]
-k = 3
-solution = Solution()
-print(solution.maxSumSubarray(nums, k))  # Output: 9
-
-"""
-6. Find the Minimum in Rotated Sorted Array
-Problem Statement: Suppose an array of length n sorted in ascending order is rotated between 1 and n times. 
-Find the minimum element in this rotated sorted array.
-
-Example:
-
-Input:
-
-nums = [3, 4, 5, 1, 2]
-Output:
-
-1
-Explanation: The array was rotated 3 times. The minimum element is 1.
-
-"""
-
-class Solution:
-    def findMin(self, nums: List[int]) -> int:
-        left, right = 0, len(nums) - 1
-        
-        while left < right:
-            mid = (left + right) // 2
-            
-            if nums[mid] > nums[right]:
-                # Minimum is in the right half
-                left = mid + 1
-            else:
-                # Minimum is in the left half including mid
-                right = mid
-        
-        # At the end of the loop, left == right, which is the minimum element
-        return nums[left]
-
-# Example Usage
-nums = [3, 4, 5, 1, 2]
-solution = Solution()
-print(solution.findMin(nums))  # Output: 1
-
-
-"""
-7. Problem Statement
+5. Problem Statement
 Given an array of integers and a target integer  k, determine if there exists a contiguous subarray whose sum equals k.
 
 Input:
@@ -317,59 +240,8 @@ k = 5
 sol = Solution()
 print(f"Is there a subarray with sum {k}? {sol.subarray_with_sum_k(arr, k)}")
 
-
 """
-8. Given an array of integers and a target integer k, find the minimum length of a contiguous subarray whose sum is at least k.
-
-Input:
-
-An array of integers arr (e.g., [2, 3, 1, 2, 4, 3])
-An integer 
-k (e.g., 7)
-Output:
-
-An integer representing the minimum length of the subarray, or 0 if no such subarray exists.
-Example
-Input: arr = [2, 3, 1, 2, 4, 3], k = 7
-Output: 2 (the subarray [4, 3] has a sum of 7)
-
-"""
-"""
-Time Complexity:
-O(n): The solution iterates through the array with a right pointer and potentially moves the left pointer through the array as well. 
-Each pointer traverses the array at most once.
-Space Complexity:
-O(1): The algorithm only uses a fixed amount of additional space (for variables like prefix_sum, min_len, and left), regardless of the input size.
-
-
-"""
-class Solution:
-    def min_subarray_len(self, arr: List[int], k: int) -> int:
-        n = len(arr)  # Length of the input array
-        prefix_sum = 0  # Initialize prefix sum
-        min_len = n + 1  # Set min_len to a value larger than any possible length
-        left = 0  # Left pointer for the sliding window
-        
-        # Iterate through the array with the right pointer
-        for right in range(n):
-            prefix_sum += arr[right]  # Update prefix sum
-            
-            # Shrink the window from the left until the sum is less than k
-            while prefix_sum >= k:
-                min_len = min(min_len, right - left + 1)  # Update minimum length
-                prefix_sum -= arr[left]  # Remove the leftmost element from sum
-                left += 1  # Move the left pointer to the right
-        
-        return min_len if min_len <= n else 0  # Return the result
-
-# Example usage
-arr = [2, 3, 1, 2, 4, 3]
-k = 7
-sol = Solution()
-print(f"The length of the smallest subarray with sum ≥ {k}: {sol.min_subarray_len(arr, k)}")
-
-"""
-9. Given an array of integers, find the maximum sum of any contiguous subarray.
+6. Given an array of integers, find the maximum sum of any contiguous subarray.
 
 Input:
 
@@ -410,7 +282,7 @@ sol = Solution()
 print(f"The maximum sum of a subarray is: {sol.max_subarray_sum(arr)}")
 
 """
-10. Given an array of integers and an integer k, find how many contiguous subarrays have a sum that is divisible by k.
+7. Given an array of integers and an integer k, find how many contiguous subarrays have a sum that is divisible by k.
 
 Input:
 
