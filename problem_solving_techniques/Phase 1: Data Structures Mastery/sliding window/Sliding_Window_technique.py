@@ -471,3 +471,41 @@ messages = [
 
 output = group_messages(messages)
 print(output)
+
+
+"""
+8. Given an array of integers and a target integer k, find the minimum length of a contiguous subarray whose sum is at least k.
+
+Input:
+
+An array of integers arr (e.g., [2, 3, 1, 2, 4, 3])
+An integer 
+k (e.g., 7)
+Output:
+
+An integer representing the minimum length of the subarray, or 0 if no such subarray exists.
+Example
+Input: arr = [2, 3, 1, 2, 4, 3], k = 7
+Output: 2 (the subarray [4, 3] has a sum of 7)
+
+"""
+
+def min_subarray_length(arr, k):
+    left = 0
+    current_sum = 0
+    min_length = float('inf')
+
+    for right in range(len(arr)):
+        current_sum += arr[right]  # Expand window
+
+        while current_sum >= k:  # Shrink window if condition met
+            min_length = min(min_length, right - left + 1)
+            current_sum -= arr[left]  # Reduce sum
+            left += 1  # Move left pointer
+
+    return min_length if min_length != float('inf') else 0  # Return result
+
+# Example
+arr = [2, 3, 1, 2, 4, 3]
+k = 7
+print(min_subarray_length(arr, k))  # Output: 2 ([4,3] or [3,4])
