@@ -552,3 +552,30 @@ k = 3
 
 sub_k = sub_array_of_k(nums,k)
 print(f"the Maximum sub of array {k} is {sub_k}")
+
+
+
+
+class Solution:
+    def subarraySum(nums,target):
+
+        current_sum = 0
+        left = 0
+
+        for right in range(len(nums)):
+            current_sum += nums[right]
+
+            while current_sum > target:
+                current_sum -= nums[left]
+                left +=1
+
+            if current_sum == target:
+                # return nums[left:right+1]
+                return nums[left:right + 1] 
+        return []
+nums = [1, 2, 3, 4, 5]
+target = 9
+
+subsub = Solution.subarraySum(nums,target)
+
+print(subsub)
