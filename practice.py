@@ -1,6 +1,6 @@
 from collections import defaultdict
 import heapq
-from typing import List, Tuple
+from typing import List, Optional, Tuple
 
 
 def make_denominations(denominations,amount):
@@ -529,3 +529,26 @@ for n, m in queries:
     prexis = sub_array_with_queries(arr,queries,n,m)
 
     print(f" sum of sub array from {n} to {m}: {prexis}")
+
+def sub_array_of_k(nums,k):
+
+    current_sum = 0
+    max_sum = 0
+
+    for i in range(k):
+        current_sum += nums[i]
+    max_sum = current_sum
+
+    for i in range(k, len(nums)):
+
+        current_sum += nums[i] - nums[i-k]
+        max_sum = max(max_sum,current_sum)
+
+    return max_sum
+
+
+nums = [2, 1, 5, 1, 3, 2]
+k = 3
+
+sub_k = sub_array_of_k(nums,k)
+print(f"the Maximum sub of array {k} is {sub_k}")
