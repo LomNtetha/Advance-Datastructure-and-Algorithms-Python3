@@ -306,8 +306,8 @@ print(solution.lengthOfLongestSubstringKDistinct(s, k))  # Output: 3
 
 
 """
-7. Prefix Sum Array for Range Minimum Query
-Problem Statement: Given an integer array nums, compute the minimum value for each subarray of length k.
+7. Problem Statement:
+Given an integer array nums, compute the minimum value for each subarray of length k.
 
 Example:
 
