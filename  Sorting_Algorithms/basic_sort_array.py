@@ -121,7 +121,8 @@ print("Selection Sorted array without return function:", lst)
 
 """
 The insertion sort works by dividing the array into two parts: a sorted and an unsorted section.
-It iterates through the unsorted section, picks each element (key), and places it in its correct position in the sorted section by shifting larger elements to the right.
+It iterates through the unsorted section, picks each element (key), and places it in its correct position in the sorted section 
+by shifting larger elements to the right.
 
 """
 def insertion_sort(arr):
