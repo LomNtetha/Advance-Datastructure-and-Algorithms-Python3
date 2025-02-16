@@ -363,7 +363,3 @@ print(sol.generate_parentheses(3))  # Output: ['((()))', '(()())', '(())()', '()
 # Complexity:
 # Time: O(4^n / √n) - Catalan number growth rate.
 # Space: O(4^n / √n) - Result storage size.
-
-"""
-Each question explores a different recursion concept and is aimed at reinforcing an understanding of recursive calls, base cases, and the effects on space and time complexity. Let me know if you'd like more on any particular question or
-"""

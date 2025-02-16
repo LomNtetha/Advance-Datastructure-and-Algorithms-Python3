@@ -346,7 +346,3 @@ class Solution:
 # Complexity:
 # Time: O(n^2) - Each length can be checked with all possible cuts.
 # Space: O(n) - Space used by the memoization dictionary.
-"""
-These questions are frequently encountered in coding interviews and can effectively demonstrate understanding
-of memoization techniques and dynamic programming principles.
-"""

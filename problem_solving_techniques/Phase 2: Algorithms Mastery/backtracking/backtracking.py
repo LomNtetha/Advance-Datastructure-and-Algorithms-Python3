@@ -467,7 +467,3 @@ for row in board:
 # Complexity:
 # Time: O(9^(m*n)) - The maximum depth of the recursion can be up to 81 cells (9x9).
 # Space: O(1) - The board size is fixed (9x9).
-"""
-These questions and solutions cover a range of common backtracking problems that you may encounter in coding interviews.
-Each solution includes a detailed explanation, example inputs and outputs, and comments to help you understand the logic.
-"""

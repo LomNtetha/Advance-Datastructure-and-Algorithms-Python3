@@ -258,7 +258,8 @@ cons = [1, 1, 1, 64, 23, 64, 22, 22, 22]
 print(find_three_consecutive_numbers(cons))
 
 """
-Write a Python function that takes a list of digits as input and generates all possible permutations of the digits. Each permutation should be printed as a space-separated string.
+Write a Python function that takes a list of digits as input and generates all possible permutations of the digits.
+Each permutation should be printed as a space-separated string.
 """
 from itertools import permutations
 
@@ -294,7 +295,8 @@ for comb in combinations:
     print(comb)
 
 """
-Write a Python script that takes a list containing a mix of strings and nested lists as input. Using itertools.combinations, generate and print all possible 2-element combinations from the list. Each combination should be labeled with its index number.
+Write a Python script that takes a list containing a mix of strings and nested lists as input. Using itertools.combinations,
+generate and print all possible 2-element combinations from the list. Each combination should be labeled with its index number.
 """
 
 from itertools import combinations
