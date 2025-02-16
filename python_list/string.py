@@ -42,7 +42,8 @@ solution = Solution()
 print(solution.removeDuplicates(results))  # Output: "geksfor"
 
 """
-Write a Python class with a method that takes a string as input and checks whether the number of occurrences of the word "cat" is equal to the number of occurrences of the word "hat". Return True if the counts match, otherwise return False.
+Write a Python class with a method that takes a string as input and checks whether the number of occurrences of the word "cat"
+is equal to the number of occurrences of the word "hat". Return True if the counts match, otherwise return False.
 
 Key Points:
 
@@ -71,7 +72,9 @@ str2 = "bazingaa"
 print(solution.cat_hat(str2))  # Output: True
 
 """
-Write a Python class with a method that determines whether two given strings are anagrams of each other. Two strings are considered anagrams if they have the same characters in the same frequency, regardless of the order. Return True if the strings are anagrams, otherwise return False.
+Write a Python class with a method that determines whether two given strings are anagrams of each other. 
+Two strings are considered anagrams if they have the same characters in the same frequency, regardless of the order. 
+Return True if the strings are anagrams, otherwise return False.
 
 Key Points:
 
@@ -101,7 +104,8 @@ print(solution.isAnagram("g", "g"))            # Output: True
 
 
 """
-Now, lets look into this through a question. Given a string of braces named bound_by, and a string named tag_name. The task is to print a new string such that tag_name is in the middle of bound_by.
+Now, lets look into this through a question. Given a string of braces named bound_by, and a string named tag_name. 
+The task is to print a new string such that tag_name is in the middle of bound_by.
 
 Example 1:
 
