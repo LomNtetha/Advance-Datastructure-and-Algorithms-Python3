@@ -409,8 +409,22 @@ print(printer_queue.print_job())  # Output: No jobs in queue
 # Space Complexity: O(N)
 """
 8. Expression Evaluation (Stack)
-📌 Scenario:
-Mathematical expressions like 2 + (3 * 5) require a stack-based evaluation."""
+📌 Scenario: Mathematical expressions such as 2 + (3 * 5) require correct evaluation of operators and operands, respecting parentheses. For this, we can use stacks to ensure that parentheses and operators are handled correctly in the expression. We will focus on validating whether the parentheses in an expression are balanced before performing actual evaluations.
+
+Given an expression with various types of parentheses (round (), curly {}, and square []), you need to determine if the parentheses are balanced (i.e., every opening parenthesis has a corresponding closing parenthesis, and they are properly nested).
+
+Problem:
+Write a function is_balanced(expression) that checks if an expression has balanced parentheses. The expression may contain numbers, operators, and multiple types of parentheses.
+
+Requirements:
+Balanced Parentheses: An expression is considered balanced if:
+
+Every opening parenthesis ((, {, [) has a corresponding closing parenthesis (), }, ]).
+The parentheses are properly nested, meaning the innermost pair is closed first.
+There are no unmatched parentheses.
+Input: A string expression containing numbers, operators, and parentheses of any type.
+
+Output: Return True if the parentheses are balanced, otherwise return False.."""
 
 
 def is_balanced(expression):
