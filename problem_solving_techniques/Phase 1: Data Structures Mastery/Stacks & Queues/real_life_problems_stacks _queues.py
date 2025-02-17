@@ -85,7 +85,8 @@ This ensures that the first caller in the queue is assisted before newer calls.
 
 ### Example Usage:
 #### Input Operations:
-call_center.receive_call("Call 1") call_center.receive_call("Call 2") call_center.receive_call("Call 3") print(call_center.answer_call()) # "Call 1" print(call_center.get_pending_calls()) # ["Call 2", "Call 3"]
+call_center.receive_call("Call 1") call_center.receive_call("Call 2") call_center.receive_call("Call 3") 
+print(call_center.answer_call()) # "Call 1" print(call_center.get_pending_calls()) # ["Call 2", "Call 3"]
 
 #### Output:
 Received Call: Call 1 Received Call: Call 2 Received Call: Call 3 Answered Call: Call 1 Pending Calls: ['Call 2', 'Call 3']
@@ -142,10 +143,12 @@ This helps in analyzing stock trends.
 
 ### Example Usage:
 #### Input:
-stock_spanner.next(100) stock_spanner.next(80) stock_spanner.next(60) stock_spanner.next(70) stock_spanner.next(60) stock_spanner.next(75) stock_spanner.next(85)
+stock_spanner.next(100) stock_spanner.next(80) stock_spanner.next(60) stock_spanner.next(70) stock_spanner.next(60)
+stock_spanner.next(75) stock_spanner.next(85)
 
 #### Output:
-Stock Price: 100, Span: 1 Stock Price: 80, Span: 1 Stock Price: 60, Span: 1 Stock Price: 70, Span: 2 Stock Price: 60, Span: 1 Stock Price: 75, Span: 4 Stock Price: 85, Span: 6
+Stock Price: 100, Span: 1 Stock Price: 80, Span: 1 Stock Price: 60, Span: 1 Stock Price: 70,
+Span: 2 Stock Price: 60, Span: 1 Stock Price: 75, Span: 4 Stock Price: 85, Span: 6
 """
 
 class StockSpanner:
@@ -196,7 +199,8 @@ This means the **first passenger to arrive gets their ticket processed first** (
 
 ### Example Usage:
 #### Input:
-ticket_counter.issue_ticket("Alice") ticket_counter.issue_ticket("Bob") ticket_counter.issue_ticket("Charlie") ticket_counter.serve_passenger() # "Alice" ticket_counter.get_waiting_passengers() # ["Bob", "Charlie"]
+ticket_counter.issue_ticket("Alice") ticket_counter.issue_ticket("Bob") ticket_counter.issue_ticket("Charlie") ticket_counter.
+serve_passenger() # "Alice" ticket_counter.get_waiting_passengers() # ["Bob", "Charlie"]
 
 #### Output:
 Ticket Issued: Alice Ticket Issued: Bob Ticket Issued: Charlie Served Passenger: Alice Waiting Passengers: ['Bob', 'Charlie']
@@ -409,12 +413,17 @@ print(printer_queue.print_job())  # Output: No jobs in queue
 # Space Complexity: O(N)
 """
 8. Expression Evaluation (Stack)
-📌 Scenario: Mathematical expressions such as 2 + (3 * 5) require correct evaluation of operators and operands, respecting parentheses. For this, we can use stacks to ensure that parentheses and operators are handled correctly in the expression. We will focus on validating whether the parentheses in an expression are balanced before performing actual evaluations.
+📌 Scenario: Mathematical expressions such as 2 + (3 * 5) require correct evaluation of operators and operands, 
+respecting parentheses. For this, we can use stacks to ensure that parentheses and operators are handled correctly in the expression. 
+We will focus on validating whether the parentheses in an expression are balanced before performing actual evaluations.
 
-Given an expression with various types of parentheses (round (), curly {}, and square []), you need to determine if the parentheses are balanced (i.e., every opening parenthesis has a corresponding closing parenthesis, and they are properly nested).
+Given an expression with various types of parentheses (round (), curly {}, and square []), 
+you need to determine if the parentheses are balanced (i.e., every opening parenthesis has a corresponding closing parenthesis, 
+and they are properly nested).
 
 Problem:
-Write a function is_balanced(expression) that checks if an expression has balanced parentheses. The expression may contain numbers, operators, and multiple types of parentheses.
+Write a function is_balanced(expression) that checks if an expression has balanced parentheses. The expression may contain numbers, 
+operators, and multiple types of parentheses.
 
 Requirements:
 Balanced Parentheses: An expression is considered balanced if:
