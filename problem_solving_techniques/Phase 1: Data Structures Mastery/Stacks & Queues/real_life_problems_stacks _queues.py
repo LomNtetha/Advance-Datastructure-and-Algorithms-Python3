@@ -438,18 +438,39 @@ Output: Return True if the parentheses are balanced, otherwise return False.."""
 
 def is_balanced(expression):
     """Checks if an expression has balanced parentheses."""
+    
+    # Stack to keep track of opening parentheses
     stack = []
+    
+    # Dictionary to match closing parentheses with corresponding opening parentheses
     pairs = {')': '(', '}': '{', ']': '['}
     
+    # Iterate through each character in the expression
     for char in expression:
+        # If the character is an opening parenthesis, push it onto the stack
         if char in pairs.values():
             stack.append(char)
+        
+        # If the character is a closing parenthesis
         elif char in pairs:
+            # If the stack is empty or the top of the stack doesn't match the expected opening parenthesis, return False
             if not stack or stack.pop() != pairs[char]:
                 return False
+    
+    # Return True if the stack is empty (all opening parentheses had a matching closing parenthesis)
     return not stack
 
 # Example Input and Output:
+
+expression = "{[()]}"
+print(f"Input Expression: {expression}")
+result = is_balanced(expression)
+print(f"Is the expression balanced? {result}")  # Output: True
+
+expression = "{[(])}"
+print(f"\nInput Expression: {expression}")
+result = is_balanced(expression)
+print(f"Is the expression balanced? {result}")  # Output: False
 
 expression = "2 + (3 * 5)"
 print(f"Input Expression: {expression}")
@@ -459,7 +480,9 @@ print(f"Is the expression balanced? {result}")  # Output: True
 expression = "2 + (3 * 5"
 print(f"\nInput Expression: {expression}")
 result = is_balanced(expression)
-print(f"Is the expression balanced? {result}")  # Output: False
+print(f"Is the expression balanced? {result}")  # Output: 
+
+
 
 # Time Complexity: O(N)
 # Space Complexity: O(N)
