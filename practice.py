@@ -579,3 +579,26 @@ target = 9
 subsub = Solution.subarraySum(nums,target)
 
 print(subsub)
+
+
+def maximu_request_in_k(requests,k):
+
+    maximum_request = 0
+    sum_windo = 0
+    left =0
+
+    for right in range(len(requests)):
+        sum_windo += requests[right]
+
+        if right >= k - 1:
+             maximum_request = max(maximum_request, sum_windo)
+             sum_windo -= requests[left]
+             left +=1
+    return maximum_request
+    
+requests = [10, 3, 15, 8, 25, 18, 12, 20]  # Number of requests per second
+K = 3  # Window size in seconds
+
+mmm_request = maximu_request_in_k(requests, k)
+
+print(mmm_request)
