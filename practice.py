@@ -622,3 +622,33 @@ s = 4
 
 usages = more_power_usage(power, s)
 print(usages)
+
+def suspesious_transactions(transactions,t,threshold):
+
+    max_transaction = 0
+    normal_transactions = 0
+    left = 0
+
+    for right in range(len(transactions)):
+        normal_transactions += transactions[right]
+
+        if right > t -1:
+
+            if normal_transactions > threshold:
+                print("fraud detected on  the following window")
+                return  (transactions[left:right +1])
+
+            normal_transactions -= transactions[left]
+            max_transaction = max(max_transaction, normal_transactions)
+            left += 1
+
+    return "No Fraud detected"
+
+
+transactions = [1000, 2000, 1500, 500, 120000, 3000, 700]  # Daily transaction amounts
+t = 3  # Window size (number of consecutive days to check)
+threshold = 5000  # Fraud detection threshold
+
+fraud = suspesious_transactions(transactions,t,threshold)
+
+print (fraud)
