@@ -22,19 +22,19 @@ def max_requests_in_window(requests, K):
 
     max_requests = 0  # Stores the maximum requests found in any K-second window
     window_sum = 0  # Stores the sum of requests in the current window
-    start = 0  # Left boundary of the sliding window
+    left = 0  # Left boundary of the sliding window
 
     # Iterate over each second (right boundary of the sliding window)
-    for end in range(len(requests)):
-        window_sum += requests[end]  # Add current second's requests to the window sum
+    for right in range(len(requests)):
+        window_sum += requests[right]  # Add current second's requests to the window sum
 
         # Ensure the window size reaches exactly K before calculating max
-        if end >= K - 1:
+        if right >= K - 1:
             max_requests = max(max_requests, window_sum)  # Update max requests if this window has more
             
             # Slide the window: remove the oldest request from the sum
-            window_sum -= requests[start]
-            start += 1  # Move the left boundary forward
+            window_sum -= requests[left]
+            left += 1  # Move the left boundary forward
 
     return max_requests  # Return the maximum found within any K-second window
 
