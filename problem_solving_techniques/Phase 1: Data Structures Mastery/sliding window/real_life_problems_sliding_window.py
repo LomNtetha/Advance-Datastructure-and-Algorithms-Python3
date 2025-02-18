@@ -52,7 +52,8 @@ print("Maximum requests in a 3-second window:", max_requests_in_window(requests,
 """
 2. Identify Peak Demand Period in an Electricity Grid
 Problem Statement:
-An electricity grid logs power consumption every hour. Given an array representing hourly consumption, find the hourly window of size K that had the highest power usage.
+An electricity grid logs power consumption every hour. Given an array representing hourly consumption, 
+find the hourly window of size K that had the highest power usage.
 
 Example Input:
 power_usage = [100, 200, 150, 300, 250, 400, 350, 500]
@@ -100,7 +101,8 @@ print("Maximum power usage in a 4-hour window:", max_power_usage(power_usage, K)
 """
 3. Detect Anomalous Temperature Fluctuations
 Problem Statement:
-A weather monitoring station records temperature every minute. Given a list of temperatures, determine the smallest window size where the difference between the maximum and minimum temperature exceeds a given threshold T.
+A weather monitoring station records temperature every minute. Given a list of temperatures, 
+determine the smallest window size where the difference between the maximum and minimum temperature exceeds a given threshold T.
 
 Example Input:
 temperatures = [30, 32, 35, 40, 50, 55, 60, 30, 40]
@@ -169,7 +171,8 @@ print("Smallest window with temperature difference > 20:", smallest_window_temp_
 """
 4. Detect Suspicious Financial Transactions
 Problem Statement:
-A bank monitors transactions per day. If the total transaction amount in any K-day window exceeds a given fraud threshold, the system raises an alert.
+A bank monitors transactions per day. If the total transaction amount in any K-day window exceeds a given 
+fraud threshold, the system raises an alert.
 
 Example Input:
 transactions = [1000, 2000, 1500, 500, 1200, 3000, 700]
@@ -278,7 +281,8 @@ print("Longest streak of good reviews in a 4-day window:", longest_good_reviews(
 """
 6. Find the Maximum Number of Customers in a Store Within a Time Window
 Problem Statement:
-A store records the number of customers entering every minute. Given an array representing the number of customers per minute and a time window K (in minutes), find the maximum number of customers present in any K-minute window.
+A store records the number of customers entering every minute. Given an array representing the number of customers 
+per minute and a time window K (in minutes), find the maximum number of customers present in any K-minute window.
 
 Example Input:
 customers = [5, 3, 8, 10, 2, 4, 1, 6, 7]
@@ -330,7 +334,8 @@ print("Maximum customers in a 3-minute window:", max_customers(customers, K))
 """
 7. Find the Longest Period of Stable Internet Speed
 Problem Statement:
-A company monitors internet speed every second. Given an array where each element represents internet speed (in Mbps), find the longest contiguous period where the speed fluctuation does not exceed K Mbps.
+A company monitors internet speed every second. Given an array where each element represents internet speed (in Mbps), 
+find the longest contiguous period where the speed fluctuation does not exceed K Mbps.
 
 Example Input:
 speeds = [20, 21, 19, 23, 22, 25, 26, 27, 28, 24, 22]
@@ -360,7 +365,8 @@ print("Longest stable internet speed period:", longest_stable_speed(speeds, K))
 """
 8. Find the Minimum Time Required to Read a Book
 Problem Statement:
-A student is reading a book and keeps track of the number of pages read per hour. Given an array where each element represents pages read per hour, find the minimum time required to read at least T pages.
+A student is reading a book and keeps track of the number of pages read per hour. Given an array where each element represents 
+pages read per hour, find the minimum time required to read at least T pages.
 
 Example Input:
 pages_per_hour = [10, 20, 30, 40, 50, 60]
@@ -410,7 +416,8 @@ print("Minimum time to read at least 100 pages:", min_reading_time(pages_per_hou
 """
 9. Find the Most Popular Product in an Online Store (Mode in a Sliding Window)
 Problem Statement:
-An online store records product IDs of items sold every second. Given a list of product IDs, find the most frequently sold product in any K-second window.
+An online store records product IDs of items sold every second. Given a list of product IDs, 
+find the most frequently sold product in any K-second window.
 
 Example Input:
 products = [1, 2, 2, 3, 3, 3, 4, 5, 2, 3]
@@ -466,7 +473,8 @@ print("Most popular product in a 4-second window:", most_popular_product(product
 """
 10. Find the Longest Stretch of Working Hours Without a Break
 Problem Statement:
-A company monitors employees’ working hours. Given an array where 1 represents work and 0 represents a break, find the longest contiguous stretch of working hours that allows up to K breaks.
+A company monitors employees’ working hours. Given an array where 1 represents work and 0 represents a break, 
+find the longest contiguous stretch of working hours that allows up to K breaks.
 
 Example Input:
 work_hours = [1, 1, 0, 1, 1, 1, 0, 1, 1, 1]
