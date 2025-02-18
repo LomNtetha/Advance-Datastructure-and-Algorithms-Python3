@@ -12,24 +12,40 @@ Maximum requests in a 3-second window: 51
 """
 
 def max_requests_in_window(requests, K):
-    max_requests = 0
-    window_sum = 0
-    start = 0
+    """
+    This function finds the maximum number of requests received in any K-second window.
 
+    :param requests: List of integers where each element represents the number of requests received in a second.
+    :param K: Integer representing the size of the time window (in seconds).
+    :return: Maximum number of requests received within any K-second window.
+    """
+
+    max_requests = 0  # Stores the maximum requests found in any K-second window
+    window_sum = 0  # Stores the sum of requests in the current window
+    start = 0  # Left boundary of the sliding window
+
+    # Iterate over each second (right boundary of the sliding window)
     for end in range(len(requests)):
-        window_sum += requests[end]  # Add next second's requests
-        
-        if end >= K - 1:  # Once window reaches size K
-            max_requests = max(max_requests, window_sum)
-            window_sum -= requests[start]  # Remove oldest second's requests
-            start += 1  # Move window
+        window_sum += requests[end]  # Add current second's requests to the window sum
 
-    return max_requests
+        # Ensure the window size reaches exactly K before calculating max
+        if end >= K - 1:
+            max_requests = max(max_requests, window_sum)  # Update max requests if this window has more
+            
+            # Slide the window: remove the oldest request from the sum
+            window_sum -= requests[start]
+            start += 1  # Move the left boundary forward
+
+    return max_requests  # Return the maximum found within any K-second window
+
 
 # Example Usage
-requests = [10, 3, 15, 8, 25, 18, 12, 20]
-K = 3
+requests = [10, 3, 15, 8, 25, 18, 12, 20]  # Number of requests per second
+K = 3  # Window size in seconds
+
+# Output the maximum number of requests seen in any 3-second window
 print("Maximum requests in a 3-second window:", max_requests_in_window(requests, K))
+
 # Time Complexity: O(N)
 # Space Complexity: O(1)
 
@@ -45,24 +61,40 @@ Example Output:
 Maximum power usage in a 4-hour window: 1400
 """
 def max_power_usage(power_usage, K):
-    max_usage = 0
-    window_usage = 0
-    start = 0
+    """
+    This function finds the maximum power usage recorded within any K-hour window.
 
+    :param power_usage: List of integers where each element represents power usage in an hour.
+    :param K: Integer representing the size of the time window (in hours).
+    :return: Maximum power usage recorded within any K-hour window.
+    """
+
+    max_usage = 0  # Stores the maximum power usage found in any K-hour window
+    window_usage = 0  # Stores the sum of power usage in the current sliding window
+    start = 0  # Left boundary of the sliding window
+
+    # Iterate over each hour (right boundary of the sliding window)
     for end in range(len(power_usage)):
-        window_usage += power_usage[end]
+        window_usage += power_usage[end]  # Add current hour's power usage to the window sum
 
-        if end >= K - 1:  # Window size reaches K
-            max_usage = max(max_usage, window_usage)
+        # Ensure the window size reaches exactly K before calculating max
+        if end >= K - 1:
+            max_usage = max(max_usage, window_usage)  # Update max usage if this window has more
+            
+            # Slide the window: remove the oldest hour's power usage from the sum
             window_usage -= power_usage[start]
-            start += 1  # Move window
+            start += 1  # Move the left boundary forward
 
-    return max_usage
+    return max_usage  # Return the maximum found within any K-hour window
+
 
 # Example Usage
-power_usage = [100, 200, 150, 300, 250, 400, 350, 500]
-K = 4
+power_usage = [100, 200, 150, 300, 250, 400, 350, 500]  # Power usage in different hours
+K = 4  # Window size in hours
+
+# Output the maximum power usage recorded in any 4-hour window
 print("Maximum power usage in a 4-hour window:", max_power_usage(power_usage, K))
+
 # Time Complexity: O(N)
 # Space Complexity: O(1)
 """
@@ -80,36 +112,57 @@ Smallest window with temperature difference > 20: 3
 from collections import deque
 
 def smallest_window_temp_difference(temps, T):
+    """
+    This function finds the smallest window where the temperature difference 
+    exceeds the given threshold T.
+
+    :param temps: List of integers where each element represents the temperature at a time.
+    :param T: Integer representing the temperature difference threshold.
+    :return: Size of the smallest window where the max-min temperature exceeds T, or -1 if none exists.
+    """
+
+    # Deques to maintain max and min temperatures within the window
     min_deque, max_deque = deque(), deque()
-    start = 0
-    min_window = float('inf')
 
+    start = 0  # Left boundary of the sliding window
+    min_window = float('inf')  # Store the minimum window size found
+
+    # Iterate over each temperature reading (right boundary of the sliding window)
     for end in range(len(temps)):
-        # Maintain decreasing order for max values
+
+        # Maintain decreasing order in max_deque (stores max values)
         while max_deque and temps[max_deque[-1]] < temps[end]:
-            max_deque.pop()
-        max_deque.append(end)
+            max_deque.pop()  # Remove elements that are smaller than the current value
+        max_deque.append(end)  # Add current index
 
-        # Maintain increasing order for min values
+        # Maintain increasing order in min_deque (stores min values)
         while min_deque and temps[min_deque[-1]] > temps[end]:
-            min_deque.pop()
-        min_deque.append(end)
+            min_deque.pop()  # Remove elements that are greater than the current value
+        min_deque.append(end)  # Add current index
 
-        # Check if the temperature difference exceeds threshold
+        # Shrink the window from the left until the max-min difference is <= T
         while temps[max_deque[0]] - temps[min_deque[0]] > T:
-            min_window = min(min_window, end - start + 1)
-            start += 1
+            min_window = min(min_window, end - start + 1)  # Update minimum window size
+            
+            start += 1  # Move left boundary forward
+
+            # Remove elements that are out of the new window
             if min_deque[0] < start:
                 min_deque.popleft()
             if max_deque[0] < start:
                 max_deque.popleft()
 
+    # If no valid window was found, return -1
     return min_window if min_window != float('inf') else -1
 
+
 # Example Usage
-temperatures = [30, 32, 35, 40, 50, 55, 60, 30, 40]
-T = 20
+temperatures = [30, 32, 35, 40, 50, 55, 60, 30, 40]  # Temperature readings
+T = 20  # Threshold difference
+
+# Output the smallest window size where temperature difference exceeds 20
 print("Smallest window with temperature difference > 20:", smallest_window_temp_difference(temperatures, T))
+
 # Time Complexity: O(N)
 # Space Complexity: O(K)
 
@@ -126,25 +179,44 @@ Example Output:
 Fraud detected in a 3-day window!
 """
 def detect_fraud(transactions, K, threshold):
-    window_sum = 0
-    start = 0
+    """
+    Detects fraud in a series of daily transactions by checking if 
+    the sum of transactions in any K-day window exceeds a given threshold.
 
+    :param transactions: List of integers where each element represents the transaction amount for a day.
+    :param K: Integer representing the size of the sliding window (number of days).
+    :param threshold: Integer representing the fraud threshold.
+    :return: A string indicating whether fraud was detected or not.
+    """
+
+    window_sum = 0  # Tracks the sum of transactions in the current K-day window
+    start = 0  # Left boundary of the sliding window
+
+    # Iterate through each day's transaction (right boundary of the window)
     for end in range(len(transactions)):
-        window_sum += transactions[end]
+        window_sum += transactions[end]  # Add the current day's transaction to the window sum
 
-        if end >= K - 1:  # Check fraud condition
+        # When the window reaches the required size (K days)
+        if end >= K - 1:  
+            # Check if the sum of transactions in the current window exceeds the fraud threshold
             if window_sum > threshold:
                 return "Fraud detected in a {}-day window!".format(K)
-            window_sum -= transactions[start]
-            start += 1
 
-    return "No fraud detected"
+            # Remove the oldest transaction from the window before sliding forward
+            window_sum -= transactions[start]
+            start += 1  # Move the left boundary of the window
+
+    return "No fraud detected"  # If no fraud case is found, return this message
+
 
 # Example Usage
-transactions = [1000, 2000, 1500, 500, 1200, 3000, 700]
-K = 3
-threshold = 5000
+transactions = [1000, 2000, 1500, 500, 1200, 3000, 700]  # Daily transaction amounts
+K = 3  # Window size (number of consecutive days to check)
+threshold = 5000  # Fraud detection threshold
+
+# Output whether fraud was detected
 print(detect_fraud(transactions, K, threshold))
+
 # Time Complexity: O(N)
 # Space Complexity: O(1)
 
@@ -159,28 +231,48 @@ reviews = [1, 1, 0, 1, 1, 1, 0, 1, 1]
 K = 4
 Example Output:
 Longest streak of good reviews in a 4-day window: 3"""
-
 def longest_good_reviews(reviews, K):
-    max_good = 0
-    window_good = 0
-    start = 0
+    """
+    Finds the maximum number of good reviews (represented by 1s) 
+    in any K-day sliding window.
 
+    :param reviews: List of integers where 1 represents a good review and 0 represents a bad review.
+    :param K: Integer representing the size of the sliding window (number of days).
+    :return: Maximum count of good reviews in any K-day window.
+    """
+
+    max_good = 0  # Stores the maximum count of good reviews in any K-day window
+    window_good = 0  # Tracks the count of good reviews in the current window
+    start = 0  # Left boundary of the sliding window
+
+    # Iterate through the reviews list, treating each day as the right boundary of the window
     for end in range(len(reviews)):
+        # If the current day's review is good (1), increase the count in the window
         if reviews[end] == 1:
             window_good += 1
 
-        if end >= K - 1:  # When window size reaches K
+        # Once the window reaches size K
+        if end >= K - 1:
+            # Update the maximum number of good reviews found in any window
             max_good = max(max_good, window_good)
+
+            # Before sliding the window, check if the outgoing element was a good review
             if reviews[start] == 1:
-                window_good -= 1
+                window_good -= 1  # Reduce the count if we're removing a good review
+
+            # Move the left boundary of the window forward
             start += 1
 
-    return max_good
+    return max_good  # Return the maximum good reviews found in any K-day window
+
 
 # Example Usage
-reviews = [1, 1, 0, 1, 1, 1, 0, 1, 1]
-K = 4
+reviews = [1, 1, 0, 1, 1, 1, 0, 1, 1]  # 1 represents a good review, 0 represents a bad review
+K = 4  # Window size (number of days to check)
+
+# Output the maximum number of good reviews in any 4-day window
 print("Longest streak of good reviews in a 4-day window:", longest_good_reviews(reviews, K))
+
 # Time Complexity: O(N)
 # Space Complexity: O(1)
 """
@@ -195,24 +287,44 @@ Example Output:
 Maximum customers in a 3-minute window: 21
 """
 def max_customers(customers, K):
-    max_count = 0
-    window_sum = 0
-    start = 0
+    """
+    Finds the maximum number of customers present in any K-minute sliding window.
 
+    :param customers: List of integers where each element represents the number of customers 
+                      arriving in that particular minute.
+    :param K: Integer representing the size of the sliding window (number of minutes).
+    :return: Maximum number of customers in any K-minute window.
+    """
+
+    max_count = 0  # Stores the maximum number of customers seen in any K-minute window
+    window_sum = 0  # Stores the sum of customers in the current sliding window
+    start = 0  # Marks the left boundary of the sliding window
+
+    # Iterate through each minute in the customers list
     for end in range(len(customers)):
-        window_sum += customers[end]
+        window_sum += customers[end]  # Add the current minute's customer count to the window
 
+        # When the window reaches the required size K
         if end >= K - 1:
+            # Update max_count to store the highest number of customers in any K-minute window
             max_count = max(max_count, window_sum)
-            window_sum -= customers[start]
-            start += 1
 
-    return max_count
+            # Remove the outgoing element (customer count from the start of the window)
+            window_sum -= customers[start]
+
+            # Move the left boundary of the window forward
+            start += 1  
+
+    return max_count  # Return the maximum number of customers found in any K-minute window
+
 
 # Example Usage
-customers = [5, 3, 8, 10, 2, 4, 1, 6, 7]
-K = 3
+customers = [5, 3, 8, 10, 2, 4, 1, 6, 7]  # Customer count per minute
+K = 3  # Window size (3-minute window)
+
+# Output the maximum number of customers in any 3-minute window
 print("Maximum customers in a 3-minute window:", max_customers(customers, K))
+
 # Time Complexity: O(N)
 # Space Complexity: O(1)
 """
@@ -257,24 +369,41 @@ Example Output:
 Minimum time to read at least 100 pages: 3
 """
 def min_reading_time(pages_per_hour, T):
-    min_hours = float('inf')
-    start = 0
-    window_sum = 0
+    """
+    Finds the minimum number of hours required to read at least T pages, given a list
+    of pages read per hour.
 
+    :param pages_per_hour: List of integers representing the number of pages read per hour.
+    :param T: Integer representing the target number of pages to be read.
+    :return: Minimum number of hours to read at least T pages, or 0 if not possible.
+    """
+    min_hours = float('inf')  # Initialize the minimum hours as infinity (no valid window found yet)
+    start = 0  # Marks the left boundary of the sliding window
+    window_sum = 0  # Sum of pages read in the current window
+
+    # Iterate through the list of pages read per hour
     for end in range(len(pages_per_hour)):
-        window_sum += pages_per_hour[end]
+        window_sum += pages_per_hour[end]  # Add the pages read in the current hour to the window sum
 
+        # While the sum of pages in the window is greater than or equal to the target (T)
         while window_sum >= T:
+            # Update the minimum hours required to read at least T pages
             min_hours = min(min_hours, end - start + 1)
-            window_sum -= pages_per_hour[start]
-            start += 1
 
+            # Slide the window to the right by removing the pages at the start
+            window_sum -= pages_per_hour[start]
+            start += 1  # Move the left boundary of the window
+
+    # If we found a valid window, return the minimum hours; otherwise, return 0 (no valid window)
     return min_hours if min_hours != float('inf') else 0
 
 # Example Usage
-pages_per_hour = [10, 20, 30, 40, 50, 60]
-T = 100
+pages_per_hour = [10, 20, 30, 40, 50, 60]  # Pages read per hour
+T = 100  # Target pages to read
+
+# Output the minimum time (in hours) to read at least 100 pages
 print("Minimum time to read at least 100 pages:", min_reading_time(pages_per_hour, T))
+
 # Time Complexity: O(N)
 # Space Complexity: O(1)
 
@@ -290,26 +419,47 @@ Example Output:
 Most popular product in a 4-second window: 3
 from collections import Counter
 """
-def most_popular_product(products, K):
-    freq = Counter()
-    start = 0
-    max_product = None
+from collections import Counter
 
+def most_popular_product(products, K):
+    """
+    Finds the most popular product within a sliding window of size K.
+
+    :param products: List of product IDs (can be any hashable data type).
+    :param K: Integer representing the size of the sliding window.
+    :return: The most popular product in the current window, or None if no products are present.
+    """
+    freq = Counter()  # Counter to keep track of product frequencies in the current window
+    start = 0  # Left boundary of the sliding window
+    max_product = None  # Variable to store the most popular product
+
+    # Iterate through the products list
     for end in range(len(products)):
+        # Add the current product to the frequency counter
         freq[products[end]] += 1
+
+        # Once the window reaches size K, we need to evaluate the most popular product
         if end >= K - 1:
+            # Get the product with the maximum frequency in the current window
             max_product = max(freq, key=freq.get)
-            freq[products[start]] -= 1
+
+            # Slide the window by removing the product at the start
+            freq[products[start]] -= 1  # Decrease frequency of the product at the start of the window
+
+            # If the product at the start is no longer in the window, remove it from the counter
             if freq[products[start]] == 0:
                 del freq[products[start]]
+
+            # Move the start of the window to the right (slide window)
             start += 1
 
-    return max_product
+    return max_product  # Return the most popular product in the final window
 
 # Example Usage
 products = [1, 2, 2, 3, 3, 3, 4, 5, 2, 3]
 K = 4
 print("Most popular product in a 4-second window:", most_popular_product(products, K))
+
 
 # Time Complexity: O(N)
 # Space Complexity: O(K)
@@ -324,26 +474,40 @@ K = 1
 Longest work stretch with at most 1 break: 6
 """
 def longest_work_stretch(work_hours, K):
-    start = 0
-    max_length = 0
-    breaks = 0
+    """
+    Finds the longest stretch of work hours with at most K breaks (0 hours) in a sliding window.
 
+    :param work_hours: List of work hours where 1 represents work and 0 represents a break.
+    :param K: Integer representing the maximum number of breaks allowed in the stretch.
+    :return: The length of the longest stretch of work hours with at most K breaks.
+    """
+    start = 0  # Left boundary of the sliding window
+    max_length = 0  # To store the maximum stretch length of work hours
+    breaks = 0  # To keep track of the number of breaks in the current window
+
+    # Iterate through the work_hours list
     for end in range(len(work_hours)):
+        # If the current hour is a break (0), increment the break count
         if work_hours[end] == 0:
             breaks += 1
 
+        # If the number of breaks exceeds the allowed limit K, shrink the window from the left
         while breaks > K:
+            # If the hour at the start of the window is a break (0), decrement the break count
             if work_hours[start] == 0:
                 breaks -= 1
+            # Move the start of the window to the right (slide window)
             start += 1
 
+        # Update the maximum length of the work stretch by calculating the window size
         max_length = max(max_length, end - start + 1)
 
-    return max_length
+    return max_length  # Return the longest stretch found
 
 # Example Usage
 work_hours = [1, 1, 0, 1, 1, 1, 0, 1, 1, 1]
 K = 1
 print("Longest work stretch with at most 1 break:", longest_work_stretch(work_hours, K))
+
 # Time Complexity: O(N)
 # Space Complexity: O(1)
