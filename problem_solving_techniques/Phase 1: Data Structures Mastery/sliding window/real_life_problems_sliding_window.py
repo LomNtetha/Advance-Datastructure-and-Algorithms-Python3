@@ -8,7 +8,7 @@ Example Input:
 requests = [10, 3, 15, 8, 25, 18, 12, 20]
 K = 3
 Example Output:
-Maximum requests in a 3-second window: 51
+Maximum requests in a 3-second window: 55
 """
 
 def max_requests_in_window(requests, K):
