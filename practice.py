@@ -602,3 +602,23 @@ K = 3  # Window size in seconds
 mmm_request = maximu_request_in_k(requests, k)
 
 print(mmm_request)
+
+def more_power_usage(power,s):
+
+    sum_window = 0
+    max_power_usage = 0
+    left = 0
+
+    for right in range(len(power)):
+        sum_window+=power[right]
+
+        if right >= s - 1:
+            max_power_usage = max(max_power_usage, sum_window)
+            sum_window -= power[left]
+            left += 1
+    return max_power_usage
+power = [100, 200, 150, 300, 250, 400, 350, 500]
+s = 4
+
+usages = more_power_usage(power, s)
+print(usages)
