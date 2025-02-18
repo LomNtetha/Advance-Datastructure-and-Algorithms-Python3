@@ -183,3 +183,167 @@ K = 4
 print("Longest streak of good reviews in a 4-day window:", longest_good_reviews(reviews, K))
 # Time Complexity: O(N)
 # Space Complexity: O(1)
+"""
+6. Find the Maximum Number of Customers in a Store Within a Time Window
+Problem Statement:
+A store records the number of customers entering every minute. Given an array representing the number of customers per minute and a time window K (in minutes), find the maximum number of customers present in any K-minute window.
+
+Example Input:
+customers = [5, 3, 8, 10, 2, 4, 1, 6, 7]
+K = 3
+Example Output:
+Maximum customers in a 3-minute window: 21
+"""
+def max_customers(customers, K):
+    max_count = 0
+    window_sum = 0
+    start = 0
+
+    for end in range(len(customers)):
+        window_sum += customers[end]
+
+        if end >= K - 1:
+            max_count = max(max_count, window_sum)
+            window_sum -= customers[start]
+            start += 1
+
+    return max_count
+
+# Example Usage
+customers = [5, 3, 8, 10, 2, 4, 1, 6, 7]
+K = 3
+print("Maximum customers in a 3-minute window:", max_customers(customers, K))
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+"""
+7. Find the Longest Period of Stable Internet Speed
+Problem Statement:
+A company monitors internet speed every second. Given an array where each element represents internet speed (in Mbps), find the longest contiguous period where the speed fluctuation does not exceed K Mbps.
+
+Example Input:
+speeds = [20, 21, 19, 23, 22, 25, 26, 27, 28, 24, 22]
+K = 5
+Example Output:
+Longest stable internet speed period: 7
+"""
+def longest_stable_speed(speeds, K):
+    start = 0
+    max_length = 0
+
+    for end in range(len(speeds)):
+        while max(speeds[start:end+1]) - min(speeds[start:end+1]) > K:
+            start += 1
+
+        max_length = max(max_length, end - start + 1)
+
+    return max_length
+
+# Example Usage
+speeds = [20, 21, 19, 23, 22, 25, 26, 27, 28, 24, 22]
+K = 5
+print("Longest stable internet speed period:", longest_stable_speed(speeds, K))
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+
+"""
+8. Find the Minimum Time Required to Read a Book
+Problem Statement:
+A student is reading a book and keeps track of the number of pages read per hour. Given an array where each element represents pages read per hour, find the minimum time required to read at least T pages.
+
+Example Input:
+pages_per_hour = [10, 20, 30, 40, 50, 60]
+T = 100
+Example Output:
+Minimum time to read at least 100 pages: 3
+"""
+def min_reading_time(pages_per_hour, T):
+    min_hours = float('inf')
+    start = 0
+    window_sum = 0
+
+    for end in range(len(pages_per_hour)):
+        window_sum += pages_per_hour[end]
+
+        while window_sum >= T:
+            min_hours = min(min_hours, end - start + 1)
+            window_sum -= pages_per_hour[start]
+            start += 1
+
+    return min_hours if min_hours != float('inf') else 0
+
+# Example Usage
+pages_per_hour = [10, 20, 30, 40, 50, 60]
+T = 100
+print("Minimum time to read at least 100 pages:", min_reading_time(pages_per_hour, T))
+# Time Complexity: O(N)
+# Space Complexity: O(1)
+
+"""
+9. Find the Most Popular Product in an Online Store (Mode in a Sliding Window)
+Problem Statement:
+An online store records product IDs of items sold every second. Given a list of product IDs, find the most frequently sold product in any K-second window.
+
+Example Input:
+products = [1, 2, 2, 3, 3, 3, 4, 5, 2, 3]
+K = 4
+Example Output:
+Most popular product in a 4-second window: 3
+from collections import Counter
+"""
+def most_popular_product(products, K):
+    freq = Counter()
+    start = 0
+    max_product = None
+
+    for end in range(len(products)):
+        freq[products[end]] += 1
+        if end >= K - 1:
+            max_product = max(freq, key=freq.get)
+            freq[products[start]] -= 1
+            if freq[products[start]] == 0:
+                del freq[products[start]]
+            start += 1
+
+    return max_product
+
+# Example Usage
+products = [1, 2, 2, 3, 3, 3, 4, 5, 2, 3]
+K = 4
+print("Most popular product in a 4-second window:", most_popular_product(products, K))
+
+# Time Complexity: O(N)
+# Space Complexity: O(K)
+"""
+10. Find the Longest Stretch of Working Hours Without a Break
+Problem Statement:
+A company monitors employees’ working hours. Given an array where 1 represents work and 0 represents a break, find the longest contiguous stretch of working hours that allows up to K breaks.
+
+Example Input:
+work_hours = [1, 1, 0, 1, 1, 1, 0, 1, 1, 1]
+K = 1
+Longest work stretch with at most 1 break: 6
+"""
+def longest_work_stretch(work_hours, K):
+    start = 0
+    max_length = 0
+    breaks = 0
+
+    for end in range(len(work_hours)):
+        if work_hours[end] == 0:
+            breaks += 1
+
+        while breaks > K:
+            if work_hours[start] == 0:
+                breaks -= 1
+            start += 1
+
+        max_length = max(max_length, end - start + 1)
+
+    return max_length
+
+# Example Usage
+work_hours = [1, 1, 0, 1, 1, 1, 0, 1, 1, 1]
+K = 1
+print("Longest work stretch with at most 1 break:", longest_work_stretch(work_hours, K))
+# Time Complexity: O(N)
+# Space Complexity: O(1)
