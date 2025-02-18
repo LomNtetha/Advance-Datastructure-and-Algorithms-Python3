@@ -72,19 +72,19 @@ def max_power_usage(power_usage, K):
 
     max_usage = 0  # Stores the maximum power usage found in any K-hour window
     window_usage = 0  # Stores the sum of power usage in the current sliding window
-    start = 0  # Left boundary of the sliding window
+    left = 0  # Left boundary of the sliding window
 
     # Iterate over each hour (right boundary of the sliding window)
-    for end in range(len(power_usage)):
-        window_usage += power_usage[end]  # Add current hour's power usage to the window sum
+    for right in range(len(power_usage)):
+        window_usage += power_usage[right]  # Add current hour's power usage to the window sum
 
         # Ensure the window size reaches exactly K before calculating max
-        if end >= K - 1:
+        if right >= K - 1:
             max_usage = max(max_usage, window_usage)  # Update max usage if this window has more
             
             # Slide the window: remove the oldest hour's power usage from the sum
-            window_usage -= power_usage[start]
-            start += 1  # Move the left boundary forward
+            window_usage -= power_usage[left]
+            left += 1  # Move the left boundary forward
 
     return max_usage  # Return the maximum found within any K-hour window
 
@@ -126,32 +126,32 @@ def smallest_window_temp_difference(temps, T):
     # Deques to maintain max and min temperatures within the window
     min_deque, max_deque = deque(), deque()
 
-    start = 0  # Left boundary of the sliding window
+    left = 0  # Left boundary of the sliding window
     min_window = float('inf')  # Store the minimum window size found
 
     # Iterate over each temperature reading (right boundary of the sliding window)
-    for end in range(len(temps)):
+    for right in range(len(temps)):
 
         # Maintain decreasing order in max_deque (stores max values)
-        while max_deque and temps[max_deque[-1]] < temps[end]:
+        while max_deque and temps[max_deque[-1]] < temps[right]:
             max_deque.pop()  # Remove elements that are smaller than the current value
-        max_deque.append(end)  # Add current index
+        max_deque.append(right)  # Add current index
 
         # Maintain increasing order in min_deque (stores min values)
-        while min_deque and temps[min_deque[-1]] > temps[end]:
+        while min_deque and temps[min_deque[-1]] > temps[right]:
             min_deque.pop()  # Remove elements that are greater than the current value
-        min_deque.append(end)  # Add current index
+        min_deque.append(right)  # Add current index
 
         # Shrink the window from the left until the max-min difference is <= T
         while temps[max_deque[0]] - temps[min_deque[0]] > T:
-            min_window = min(min_window, end - start + 1)  # Update minimum window size
+            min_window = min(min_window, right - left + 1)  # Update minimum window size
             
-            start += 1  # Move left boundary forward
+            left += 1  # Move left boundary forward
 
             # Remove elements that are out of the new window
-            if min_deque[0] < start:
+            if min_deque[0] < left:
                 min_deque.popleft()
-            if max_deque[0] < start:
+            if max_deque[0] < left:
                 max_deque.popleft()
 
     # If no valid window was found, return -1
@@ -193,21 +193,21 @@ def detect_fraud(transactions, K, threshold):
     """
 
     window_sum = 0  # Tracks the sum of transactions in the current K-day window
-    start = 0  # Left boundary of the sliding window
+    left = 0  # Left boundary of the sliding window
 
     # Iterate through each day's transaction (right boundary of the window)
-    for end in range(len(transactions)):
-        window_sum += transactions[end]  # Add the current day's transaction to the window sum
+    for right in range(len(transactions)):
+        window_sum += transactions[right]  # Add the current day's transaction to the window sum
 
         # When the window reaches the required size (K days)
-        if end >= K - 1:  
+        if right >= K - 1:  
             # Check if the sum of transactions in the current window exceeds the fraud threshold
             if window_sum > threshold:
                 return "Fraud detected in a {}-day window!".format(K)
 
             # Remove the oldest transaction from the window before sliding forward
-            window_sum -= transactions[start]
-            start += 1  # Move the left boundary of the window
+            window_sum -= transactions[left]
+            left += 1  # Move the left boundary of the window
 
     return "No fraud detected"  # If no fraud case is found, return this message
 
@@ -246,25 +246,25 @@ def longest_good_reviews(reviews, K):
 
     max_good = 0  # Stores the maximum count of good reviews in any K-day window
     window_good = 0  # Tracks the count of good reviews in the current window
-    start = 0  # Left boundary of the sliding window
+    left = 0  # Left boundary of the sliding window
 
     # Iterate through the reviews list, treating each day as the right boundary of the window
-    for end in range(len(reviews)):
+    for right in range(len(reviews)):
         # If the current day's review is good (1), increase the count in the window
-        if reviews[end] == 1:
+        if reviews[right] == 1:
             window_good += 1
 
         # Once the window reaches size K
-        if end >= K - 1:
+        if right >= K - 1:
             # Update the maximum number of good reviews found in any window
             max_good = max(max_good, window_good)
 
             # Before sliding the window, check if the outgoing element was a good review
-            if reviews[start] == 1:
+            if reviews[left] == 1:
                 window_good -= 1  # Reduce the count if we're removing a good review
 
             # Move the left boundary of the window forward
-            start += 1
+            left += 1
 
     return max_good  # Return the maximum good reviews found in any K-day window
 
@@ -302,22 +302,22 @@ def max_customers(customers, K):
 
     max_count = 0  # Stores the maximum number of customers seen in any K-minute window
     window_sum = 0  # Stores the sum of customers in the current sliding window
-    start = 0  # Marks the left boundary of the sliding window
+    left = 0  # Marks the left boundary of the sliding window
 
     # Iterate through each minute in the customers list
-    for end in range(len(customers)):
-        window_sum += customers[end]  # Add the current minute's customer count to the window
+    for right in range(len(customers)):
+        window_sum += customers[right]  # Add the current minute's customer count to the window
 
         # When the window reaches the required size K
-        if end >= K - 1:
+        if right >= K - 1:
             # Update max_count to store the highest number of customers in any K-minute window
             max_count = max(max_count, window_sum)
 
-            # Remove the outgoing element (customer count from the start of the window)
-            window_sum -= customers[start]
+            # Remove the outgoing element (customer count from the left of the window)
+            window_sum -= customers[left]
 
             # Move the left boundary of the window forward
-            start += 1  
+            left += 1  
 
     return max_count  # Return the maximum number of customers found in any K-minute window
 
@@ -344,14 +344,14 @@ Example Output:
 Longest stable internet speed period: 7
 """
 def longest_stable_speed(speeds, K):
-    start = 0
+    left = 0
     max_length = 0
 
-    for end in range(len(speeds)):
-        while max(speeds[start:end+1]) - min(speeds[start:end+1]) > K:
-            start += 1
+    for right in range(len(speeds)):
+        while max(speeds[left:right+1]) - min(speeds[left:right+1]) > K:
+            left += 1
 
-        max_length = max(max_length, end - start + 1)
+        max_length = max(max_length, right - left + 1)
 
     return max_length
 
@@ -384,21 +384,21 @@ def min_reading_time(pages_per_hour, T):
     :return: Minimum number of hours to read at least T pages, or 0 if not possible.
     """
     min_hours = float('inf')  # Initialize the minimum hours as infinity (no valid window found yet)
-    start = 0  # Marks the left boundary of the sliding window
+    left = 0  # Marks the left boundary of the sliding window
     window_sum = 0  # Sum of pages read in the current window
 
     # Iterate through the list of pages read per hour
-    for end in range(len(pages_per_hour)):
-        window_sum += pages_per_hour[end]  # Add the pages read in the current hour to the window sum
+    for right in range(len(pages_per_hour)):
+        window_sum += pages_per_hour[right]  # Add the pages read in the current hour to the window sum
 
         # While the sum of pages in the window is greater than or equal to the target (T)
         while window_sum >= T:
             # Update the minimum hours required to read at least T pages
-            min_hours = min(min_hours, end - start + 1)
+            min_hours = min(min_hours, right - left + 1)
 
-            # Slide the window to the right by removing the pages at the start
-            window_sum -= pages_per_hour[start]
-            start += 1  # Move the left boundary of the window
+            # Slide the window to the right by removing the pages at the left
+            window_sum -= pages_per_hour[left]
+            left += 1  # Move the left boundary of the window
 
     # If we found a valid window, return the minimum hours; otherwise, return 0 (no valid window)
     return min_hours if min_hours != float('inf') else 0
@@ -437,28 +437,28 @@ def most_popular_product(products, K):
     :return: The most popular product in the current window, or None if no products are present.
     """
     freq = Counter()  # Counter to keep track of product frequencies in the current window
-    start = 0  # Left boundary of the sliding window
+    left = 0  # Left boundary of the sliding window
     max_product = None  # Variable to store the most popular product
 
     # Iterate through the products list
-    for end in range(len(products)):
+    for right in range(len(products)):
         # Add the current product to the frequency counter
-        freq[products[end]] += 1
+        freq[products[right]] += 1
 
         # Once the window reaches size K, we need to evaluate the most popular product
-        if end >= K - 1:
+        if right >= K - 1:
             # Get the product with the maximum frequency in the current window
             max_product = max(freq, key=freq.get)
 
-            # Slide the window by removing the product at the start
-            freq[products[start]] -= 1  # Decrease frequency of the product at the start of the window
+            # Slide the window by removing the product at the left
+            freq[products[left]] -= 1  # Decrease frequency of the product at the left of the window
 
-            # If the product at the start is no longer in the window, remove it from the counter
-            if freq[products[start]] == 0:
-                del freq[products[start]]
+            # If the product at the left is no longer in the window, remove it from the counter
+            if freq[products[left]] == 0:
+                del freq[products[left]]
 
-            # Move the start of the window to the right (slide window)
-            start += 1
+            # Move the left of the window to the right (slide window)
+            left += 1
 
     return max_product  # Return the most popular product in the final window
 
@@ -489,26 +489,26 @@ def longest_work_stretch(work_hours, K):
     :param K: Integer representing the maximum number of breaks allowed in the stretch.
     :return: The length of the longest stretch of work hours with at most K breaks.
     """
-    start = 0  # Left boundary of the sliding window
+    left = 0  # Left boundary of the sliding window
     max_length = 0  # To store the maximum stretch length of work hours
     breaks = 0  # To keep track of the number of breaks in the current window
 
     # Iterate through the work_hours list
-    for end in range(len(work_hours)):
+    for right in range(len(work_hours)):
         # If the current hour is a break (0), increment the break count
-        if work_hours[end] == 0:
+        if work_hours[right] == 0:
             breaks += 1
 
         # If the number of breaks exceeds the allowed limit K, shrink the window from the left
         while breaks > K:
-            # If the hour at the start of the window is a break (0), decrement the break count
-            if work_hours[start] == 0:
+            # If the hour at the left of the window is a break (0), decrement the break count
+            if work_hours[left] == 0:
                 breaks -= 1
-            # Move the start of the window to the right (slide window)
-            start += 1
+            # Move the left of the window to the right (slide window)
+            left += 1
 
         # Update the maximum length of the work stretch by calculating the window size
-        max_length = max(max_length, end - start + 1)
+        max_length = max(max_length, right - left + 1)
 
     return max_length  # Return the longest stretch found
 
