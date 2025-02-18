@@ -652,3 +652,25 @@ threshold = 5000  # Fraud detection threshold
 fraud = suspesious_transactions(transactions,t,threshold)
 
 print (fraud)
+
+
+def longest_review(reviews,r):
+
+    max_review = 0
+    current_review = 0
+    left = 0
+
+    for right in range(len(reviews)):
+        current_review += reviews[right]
+
+        if right >= r -1:
+            current_review -= reviews[left]
+            left +=1
+            max_review = max(max_review, current_review)
+    return max_review
+reviews = [1, 1, 0, 1, 1, 1, 0, 1, 1]  # 1 represents a good review, 0 represents a bad review
+r = 4 
+ 
+rev = longest_review(reviews, r)
+
+print(rev)
