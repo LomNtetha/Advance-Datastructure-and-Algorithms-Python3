@@ -674,3 +674,26 @@ r = 4
 rev = longest_review(reviews, r)
 
 print(rev)
+
+
+def make_denominations(denomination,amounts):
+
+    denomination.sort(reverse=True)
+    num_coins = 0
+    coins_name = []
+
+    for coin in denomination:
+        if coin <= amounts:
+            num_coins +=1
+            coins_name.append(coin)
+            amounts -= coin
+    return num_coins, coins_name
+
+
+denomination = [25,10, 5, 1,16]
+amounts = 41  # Target amount in cents
+
+n,c = make_denominations(denomination,amounts)
+
+print(f"the number of coins: {n}")
+print (f"the coins : {c}")
