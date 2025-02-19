@@ -1,7 +1,8 @@
 """
 Problem 1: Continuous Temperature Analysis
 Problem Statement
-A meteorological agency wants to analyze temperature fluctuations over a period of N days. Given a list of daily temperatures, they frequently need to determine the average temperature for various ranges of days [L, R].
+A meteorological agency wants to analyze temperature fluctuations over a period of N days. Given a list of daily temperatures, 
+they frequently need to determine the average temperature for various ranges of days [L, R].
 
 Constraints:
 
@@ -53,7 +54,8 @@ print(average_temperature(temperatures, queries))
 """
 Problem 2: Website Traffic Analysis
 Problem Statement
-A website administrator wants to analyze the traffic pattern of their website. Given daily visitor counts, the admin wants to find out how many visitors a particular section of the website received between days L and R multiple times.
+A website administrator wants to analyze the traffic pattern of their website. Given daily visitor counts, 
+the admin wants to find out how many visitors a particular section of the website received between days L and R multiple times.
 
 Constraints:
 
@@ -100,7 +102,8 @@ print(total_visitors(visitors, queries))
 
 """Problem 3: Bank Account Transactions
 Problem Statement
-A bank maintains a record of daily transactions for a customer. Given the transaction history, the bank wants to provide an efficient way for customers to check their balance over any date range.
+A bank maintains a record of daily transactions for a customer. Given the transaction history, 
+the bank wants to provide an efficient way for customers to check their balance over any date range.
 
 Constraints:
 
