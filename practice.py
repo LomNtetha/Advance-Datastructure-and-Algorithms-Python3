@@ -25,3 +25,32 @@ print(c)
 print(s)
 
 
+def kanapsack_fractions(weights,values,capacity):
+
+    items = zip(values,weights)
+
+    items_ratios = [(v/w,w )for v,w in items]
+
+    sort_items = sorted(items_ratios, reverse=True)
+
+    total_value = 0.0
+
+    for item_weight, weight in sort_items:
+
+        if capacity >= weight:
+            total_value += item_weight * weight
+            capacity -= weight
+
+        else:
+            total_value += item_weight * capacity
+            break
+
+    return total_value
+    
+weights = [10, 20, 30]
+values = [60, 100, 120]
+capacity = 50
+
+t = kanapsack_fractions(weights,values,capacity)
+
+print(t)
