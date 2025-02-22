@@ -1,3 +1,6 @@
+import heapq
+
+
 def maximum_activities(start,end):
     activities = list(zip(start,end))
 
@@ -107,3 +110,47 @@ def job_sequence(jobs):
 jobs = [(2, 100), (1, 19), (2, 27), (1, 25), (3, 15)]
 tol_profit = job_sequence(jobs)
 print(tol_profit)
+
+def dijkstra_algorithms(graph,source):
+
+    distances = {i: float('inf') for i in graph}
+
+    distances[source] = 0
+
+    min_heap = [(0, source)]
+
+
+
+    while min_heap:
+        current_distance, current_node = heapq.heappop(min_heap)
+        if current_distance > distances[current_node]:
+
+            continue
+
+        for neighbor, weight in graph[current_node]:
+            dist = current_distance + weight
+
+            if dist < distances[neighbor]:
+                distances[neighbor] = dist
+                heapq.heappush(min_heap,(dist, neighbor))
+
+    return [distances[i] for i in range(len(graph))]
+
+
+
+graph = {
+    0: [(1, 4), (7, 8)],
+    1: [(0, 4), (2, 8), (7, 11)],
+    2: [(1, 8), (3, 7), (8, 2), (5, 4)],
+    3: [(2, 7), (4, 9), (5, 14)],
+    4: [(3, 9), (5, 10)],
+    5: [(4, 10), (3, 14), (2, 4), (6, 2)],
+    6: [(5, 2), (7, 1), (8, 6)],
+    7: [(0, 8), (1, 11), (8, 7), (6, 1)],
+    8: [(2, 2), (7, 7), (6, 6)]
+}
+source = 0
+
+dista = dijkstra_algorithms(graph,source)
+
+print (dista)
