@@ -86,3 +86,24 @@ platformwww = maxi_platforms_needed(arrival, departure)
 
 print(platformwww)
 
+def job_sequence(jobs):
+
+    jobs.sort(key=lambda x:x[1], reverse = True)
+
+    max_dealine = jobs[-1][0]
+    slots =  [-1] * (max_dealine + 1)
+    total_profit = 0
+
+    for dealine, profit in jobs:
+        for j in range(min(dealine, max_dealine), 0, -1):
+            if  slots[j] == -1:
+                slots[j] = profit
+                total_profit += profit
+                break
+
+    return total_profit
+
+   
+jobs = [(2, 100), (1, 19), (2, 27), (1, 25), (3, 15)]
+tol_profit = job_sequence(jobs)
+print(tol_profit)
