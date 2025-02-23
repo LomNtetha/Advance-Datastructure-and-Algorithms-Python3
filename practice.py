@@ -154,3 +154,29 @@ source = 0
 dista = dijkstra_algorithms(graph,source)
 
 print (dista)
+
+
+def minimize_height_difference(heights, k):
+
+    heights.sort()
+    n = len(heights)
+
+    initial_difference = heights[-1] - heights[0]
+
+    min_difference = initial_difference
+    
+    for i in range(n - 1):
+        new_max = max(heights[-1] - k, heights[i] + k)
+        new_min = min(heights[0] + k, heights[i+1] - k)
+
+        min_difference = min(min_difference,new_max - new_min)
+
+    return min_difference
+    
+
+heights = [1, 5, 15, 10]
+k = 3
+
+mindiff = minimize_height_difference(heights, k)
+
+print(mindiff)
