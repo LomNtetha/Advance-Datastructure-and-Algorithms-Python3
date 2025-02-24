@@ -201,3 +201,19 @@ nums = [3, 30, 34, 5, 9]
 strnumber = possible_large_number(nums)
 
 print (strnumber)
+
+def maxprofit(prices):
+
+    min_profit = float('inf')
+    max_profit = 0
+    
+
+    for price in prices:
+        min_profit = min(min_profit,price)
+        max_profit = max(max_profit, price - min_profit)
+    return max_profit
+
+prices = [7, 1, 5, 3, 6, 4]
+
+mm = maxprofit(prices)
+print(mm)
