@@ -809,7 +809,8 @@ print(result)  # Output: [1, 2]
 
 
 """
-Using a priority queue is an efficient way to implement Dijkstra's algorithm. The priority queue helps keep track of the next node to process (the one with the smallest distance) in 
+Using a priority queue is an efficient way to implement Dijkstra's algorithm. The priority queue helps keep track of the next 
+node to process (the one with the smallest distance) in 
 O(logV) time for each insertion and extraction, making the algorithm faster compared to a simple array or list for large graphs.
 
 
