@@ -1,15 +1,10 @@
+"""
 Problem 1: Task Scheduling with Priority
 Statement: You are given a list of tasks with their priorities. Schedule the tasks in order of priority (highest priority first).
 
 Example Input:
-
-python
-Copy
 tasks = [("Task A", 3), ("Task B", 1), ("Task C", 2)]
-Solution:
-
-python
-Copy
+"""
 import heapq
 
 def schedule_tasks(tasks):
@@ -32,18 +27,15 @@ def schedule_tasks(tasks):
 # Example Usage
 tasks = [("Task A", 3), ("Task B", 1), ("Task C", 2)]
 print(schedule_tasks(tasks))  # Output: ['Task A', 'Task C', 'Task B']
+
+"""
 Problem 2: Merge K Sorted Lists
 Statement: Given k sorted lists, merge them into a single sorted list.
 
 Example Input:
-
-python
-Copy
 lists = [[1, 4, 5], [1, 3, 4], [2, 6]]
-Solution:
 
-python
-Copy
+"""
 import heapq
 
 def merge_k_sorted_lists(lists):
@@ -71,19 +63,14 @@ def merge_k_sorted_lists(lists):
 # Example Usage
 lists = [[1, 4, 5], [1, 3, 4], [2, 6]]
 print(merge_k_sorted_lists(lists))  # Output: [1, 1, 2, 3, 4, 4, 5, 6]
+"""
 Problem 3: Find the Kth Largest Element
 Statement: Given an array of integers, find the kth largest element.
 
 Example Input:
-
-python
-Copy
 nums = [3, 2, 1, 5, 6, 4]
 k = 2
-Solution:
-
-python
-Copy
+"""
 import heapq
 
 def find_kth_largest(nums, k):
@@ -103,19 +90,15 @@ def find_kth_largest(nums, k):
 nums = [3, 2, 1, 5, 6, 4]
 k = 2
 print(find_kth_largest(nums, k))  # Output: 5
+
+"""
 Problem 4: Top K Frequent Elements
 Statement: Given an array of integers, return the k most frequent elements.
 
 Example Input:
-
-python
-Copy
 nums = [1, 1, 1, 2, 2, 3]
 k = 2
-Solution:
-
-python
-Copy
+"""
 import heapq
 from collections import Counter
 
@@ -137,18 +120,17 @@ def top_k_frequent(nums, k):
 nums = [1, 1, 1, 2, 2, 3]
 k = 2
 print(top_k_frequent(nums, k))  # Output: [2, 1]
+
+"""
 Problem 5: Minimum Cost to Connect Ropes
-Statement: Given n ropes of different lengths, connect them into one rope with minimum cost. The cost of connecting two ropes is equal to the sum of their lengths.
+Statement: Given n ropes of different lengths, connect them into one rope with minimum cost. The cost of connecting two ropes is equal to 
+the sum of their lengths.
 
 Example Input:
+"""
 
-python
-Copy
 ropes = [4, 3, 2, 6]
-Solution:
 
-python
-Copy
 import heapq
 
 def min_cost_to_connect_ropes(ropes):
@@ -170,19 +152,14 @@ def min_cost_to_connect_ropes(ropes):
 # Example Usage
 ropes = [4, 3, 2, 6]
 print(min_cost_to_connect_ropes(ropes))  # Output: 29
+"""
 Problem 6: Sliding Window Maximum
 Statement: Given an array and a window size k, find the maximum element in each sliding window.
 
 Example Input:
-
-python
-Copy
 nums = [1, 3, -1, -3, 5, 3, 6, 7]
 k = 3
-Solution:
-
-python
-Copy
+"""
 import heapq
 
 def sliding_window_max(nums, k):
@@ -205,21 +182,17 @@ def sliding_window_max(nums, k):
 nums = [1, 3, -1, -3, 5, 3, 6, 7]
 k = 3
 print(sliding_window_max(nums, k))  # Output: [3, 3, 5, 5, 6, 7]
+
+"""
 Problem 7: K Closest Points to Origin
 Statement: Given a list of points on a plane, find the k closest points to the origin.
 
 Example Input:
-
-python
-Copy
 points = [(1, 3), (-2, 2), (5, 8), (0, 1)]
 k = 2
 Solution:
-
-python
-Copy
 import heapq
-
+"""
 def k_closest_points(points, k):
     """
     Finds the k closest points to the origin using a max-heap.
@@ -238,18 +211,14 @@ def k_closest_points(points, k):
 points = [(1, 3), (-2, 2), (5, 8), (0, 1)]
 k = 2
 print(k_closest_points(points, k))  # Output: [(-2, 2), (0, 1)]
+
+"""
 Problem 8: Median of a Data Stream
 Statement: Design a data structure to find the median of a stream of integers.
 
 Example Input:
-
-python
-Copy
 stream = [5, 15, 1, 3]
-Solution:
-
-python
-Copy
+"""
 import heapq
 
 class MedianFinder:
@@ -282,18 +251,15 @@ stream = [5, 15, 1, 3]
 for num in stream:
     mf.add_num(num)
 print(mf.find_median())  # Output: 4.0
+
+"""
 Problem 9: Maximum Number of Events
 Statement: Given a list of events with start and end times, find the maximum number of events you can attend.
 
 Example Input:
-
-python
-Copy
 events = [(1, 4), (4, 6), (2, 5)]
-Solution:
 
-python
-Copy
+"""
 import heapq
 
 def max_events(events):
@@ -322,23 +288,18 @@ def max_events(events):
 # Example Usage
 events = [(1, 4), (4, 6), (2, 5)]
 print(max_events(events))  # Output: 2
+"""
 Problem 10: Kth Smallest Element in a Sorted Matrix
 Statement: Given a sorted matrix, find the kth smallest element.
 
 Example Input:
-
-python
-Copy
 matrix = [
   [1, 5, 9],
   [10, 11, 13],
   [12, 13, 15]
 ]
 k = 8
-Solution:
-
-python
-Copy
+"""
 import heapq
 
 def kth_smallest(matrix, k):
