@@ -180,3 +180,24 @@ k = 3
 mindiff = minimize_height_difference(heights, k)
 
 print(mindiff)
+
+def possible_large_number(nums):
+
+    num_str = list(map(str,nums))
+
+    num_str.sort(key=lambda x:x*10, reverse=True)
+
+    print(num_str)
+
+    results = ''.join(num_str)
+
+    return results
+
+
+
+
+nums = [3, 30, 34, 5, 9]
+
+strnumber = possible_large_number(nums)
+
+print (strnumber)
