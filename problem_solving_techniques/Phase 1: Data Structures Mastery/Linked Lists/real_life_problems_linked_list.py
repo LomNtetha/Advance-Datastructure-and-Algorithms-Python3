@@ -1,3 +1,4 @@
+"""
 Problem 1: Task Scheduler
 Statement: You are given a list of tasks with dependencies represented as a linked list. Each task points to the task that must be completed before it. Implement a task scheduler that processes tasks in the correct order.
 
@@ -5,7 +6,7 @@ Example Input:
 
 # Task A -> Task B -> Task C -> None
 # Task A must be completed before Task B, and Task B before Task C.
-
+"""
 class TaskNode:
     def __init__(self, name):
         self.name = name
@@ -35,13 +36,15 @@ schedule_tasks(task_a)
 # Processing task: Task B
 # Processing task: Task C
 
-
+"""
 Problem 2: Browser History Management
 Statement: Implement a browser history using a linked list. Each node represents a visited URL, and you should support operations like visiting a new URL, going back, and going forward.
 
 Example Input:
 # Visit: "google.com" -> "facebook.com" -> "youtube.com"
 # Go back once, then go forward once.
+
+"""
 class BrowserHistoryNode:
     def __init__(self, url):
         self.url = url
@@ -102,11 +105,14 @@ history.visit("youtube.com")
 history.back(1)
 history.forward(1)
 history.print_history()  # Output: youtube.com -> facebook.com -> google.com
+
+"""
 Problem 3: Music Playlist
 Statement: Implement a music playlist using a circular linked list. Each node represents a song, and the playlist should loop back to the first song after the last song.
 
 Example Input:
 # Playlist: Song A -> Song B -> Song C -> (loops back to Song A)
+"""
 class SongNode:
     def __init__(self, title):
         self.title = title
@@ -159,13 +165,15 @@ playlist.play()
 # Now playing: Song A
 # Now playing: Song B
 # Now playing: Song C
+
+"""
 Problem 4: Undo Functionality in a Text Editor
 Statement: Implement an undo functionality for a text editor using a linked list. Each node represents a state of the text, and you can undo to the previous state.
 
 Example Input:
 # Text states: "Hello" -> "Hello World" -> "Hello World!"
 # Undo once.
-
+"""
 class TextStateNode:
     def __init__(self, text):
         self.text = text
@@ -210,11 +218,14 @@ editor.add_text("Hello World!")
 editor.undo()
 print(editor.get_current_text())  # Output: Hello 
 
+"""
 Problem 5: Train Route Management
 Statement: Represent a train route as a linked list, where each node is a station. Implement functionality to add a station, remove a station, and display the route.
 
 Example Input:
 # Route: Station A -> Station B -> Station C
+
+"""
 class StationNode:
     def __init__(self, name):
         self.name = name
@@ -278,12 +289,13 @@ route.display_route()  # Output: Station A -> Station B -> Station C
 route.remove_station("Station B")
 route.display_route()  # Output: Station A -> Station C
 
+"""
 Problem 6: Reservation System
 Statement: Implement a reservation system for a restaurant using a linked list. Each node represents a reservation, and you should support operations like adding a reservation, canceling a reservation, and displaying all reservations.
 
 Example Input:
 # Reservations: "Alice, 7 PM" -> "Bob, 8 PM" -> "Charlie, 9 PM"
-
+"""
 class ReservationNode:
     def __init__(self, name, time):
         self.name = name
@@ -353,6 +365,7 @@ system.display_reservations()
 # Output:
 # Alice, 7 PM
 # Charlie, 9 PM
+"""
 Problem 7: Transaction Log
 Statement: Implement a transaction log using a linked list. Each node represents a transaction, and you should support operations like adding a transaction, reversing the log (to undo transactions), and displaying the log.
 
@@ -361,10 +374,7 @@ Example Input:
 python
 Copy
 # Transactions: "Deposit $100" -> "Withdraw $50" -> "Deposit $200"
-Solution:
-
-python
-Copy
+"""
 class TransactionNode:
     def __init__(self, description):
         self.description = description
@@ -431,18 +441,13 @@ log.display_log()
 # Deposit $200
 # Withdraw $50
 # Deposit $100
+"""
 Problem 8: Social Media Feed
 Statement: Implement a social media feed using a linked list. Each node represents a post, and you should support operations like adding a post, deleting a post, and displaying the feed in reverse chronological order.
 
 Example Input:
-
-python
-Copy
 # Posts: "Post 1" -> "Post 2" -> "Post 3"
-Solution:
-
-python
-Copy
+"""
 class PostNode:
     def __init__(self, content):
         self.content = content
@@ -506,18 +511,15 @@ feed.display_feed()
 # Output:
 # Post 3
 # Post 1
+
+"""
 Problem 9: Call Log Management
 Statement: Implement a call log using a linked list. Each node represents a call, and you should support operations like adding a call, deleting the oldest call, and displaying the call log.
 
 Example Input:
-
-python
-Copy
 # Calls: "Call 1" -> "Call 2" -> "Call 3"
-Solution:
 
-python
-Copy
+"""
 class CallNode:
     def __init__(self, details):
         self.details = details
@@ -578,12 +580,13 @@ log.display_log()
 # Call 2
 # Call 3
 
+"""
 Problem 10: File System Navigation
 Statement: Implement a file system navigation system using a linked list. Each node represents a directory, and you should support operations like navigating to the next directory, going back to the previous directory, and displaying the current path.
 
 Example Input:
 # Path: "Home" -> "Documents" -> "Projects"
-
+"""
 class DirectoryNode:
     def __init__(self, name):
         self.name = name
