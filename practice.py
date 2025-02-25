@@ -284,3 +284,27 @@ houses = [2, 7, 9, 3, 1]
 quick_robbers = rob(houses)
 
 print(f"Asd quick robbers we get: ${quick_robbers}")
+
+def rob_houses_in_circle(nums):
+
+    def linear_rob(houses):
+        prev, curr = 0,0
+        for money in houses:
+            prev, curr = curr, max(curr, prev + money )
+        return curr
+    
+    if len(nums) == 1:
+        return nums[0]
+    if len(nums) == 2:
+        return max(nums[0], nums[1])
+    
+    exlcude_last = linear_rob(nums[:-1])
+    exclude_first = linear_rob(nums[1:])
+
+    return max(exlcude_last,exclude_first)
+
+houses = [1, 2, 3, 1]
+
+rob_in_circle = rob_houses_in_circle(houses)
+
+print(rob_in_circle)
