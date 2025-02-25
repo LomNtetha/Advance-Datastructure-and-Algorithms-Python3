@@ -142,6 +142,9 @@ class Solution:
 # Test
 print(Solution().rob([2, 7, 9, 3, 1]))  # Output: 12
 
+# Time Complexity: O(n) (linear time)
+# Space Complexity: O(1) (constant space)
+
 
 
 """
