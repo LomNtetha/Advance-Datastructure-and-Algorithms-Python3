@@ -1,6 +1,7 @@
 """
 Problem 1: Task Scheduler
-Statement: You are given a list of tasks with dependencies represented as a linked list. Each task points to the task that must be completed before it. Implement a task scheduler that processes tasks in the correct order.
+Statement: You are given a list of tasks with dependencies represented as a linked list. Each task points to the task that must be completed before it. 
+Implement a task scheduler that processes tasks in the correct order.
 
 Example Input:
 
@@ -38,7 +39,8 @@ schedule_tasks(task_a)
 
 """
 Problem 2: Browser History Management
-Statement: Implement a browser history using a linked list. Each node represents a visited URL, and you should support operations like visiting a new URL, going back, and going forward.
+Statement: Implement a browser history using a linked list. Each node represents a visited URL, and you should support operations 
+like visiting a new URL, going back, and going forward.
 
 Example Input:
 # Visit: "google.com" -> "facebook.com" -> "youtube.com"
@@ -108,7 +110,8 @@ history.print_history()  # Output: youtube.com -> facebook.com -> google.com
 
 """
 Problem 3: Music Playlist
-Statement: Implement a music playlist using a circular linked list. Each node represents a song, and the playlist should loop back to the first song after the last song.
+Statement: Implement a music playlist using a circular linked list. Each node represents a song, and the playlist should loop back 
+to the first song after the last song.
 
 Example Input:
 # Playlist: Song A -> Song B -> Song C -> (loops back to Song A)
@@ -168,7 +171,8 @@ playlist.play()
 
 """
 Problem 4: Undo Functionality in a Text Editor
-Statement: Implement an undo functionality for a text editor using a linked list. Each node represents a state of the text, and you can undo to the previous state.
+Statement: Implement an undo functionality for a text editor using a linked list. Each node represents a state of the text, 
+and you can undo to the previous state.
 
 Example Input:
 # Text states: "Hello" -> "Hello World" -> "Hello World!"
@@ -220,7 +224,8 @@ print(editor.get_current_text())  # Output: Hello
 
 """
 Problem 5: Train Route Management
-Statement: Represent a train route as a linked list, where each node is a station. Implement functionality to add a station, remove a station, and display the route.
+Statement: Represent a train route as a linked list, where each node is a station. Implement functionality to add a station, 
+remove a station, and display the route.
 
 Example Input:
 # Route: Station A -> Station B -> Station C
@@ -291,7 +296,8 @@ route.display_route()  # Output: Station A -> Station C
 
 """
 Problem 6: Reservation System
-Statement: Implement a reservation system for a restaurant using a linked list. Each node represents a reservation, and you should support operations like adding a reservation, canceling a reservation, and displaying all reservations.
+Statement: Implement a reservation system for a restaurant using a linked list. Each node represents a reservation, 
+and you should support operations like adding a reservation, canceling a reservation, and displaying all reservations.
 
 Example Input:
 # Reservations: "Alice, 7 PM" -> "Bob, 8 PM" -> "Charlie, 9 PM"
@@ -367,7 +373,8 @@ system.display_reservations()
 # Charlie, 9 PM
 """
 Problem 7: Transaction Log
-Statement: Implement a transaction log using a linked list. Each node represents a transaction, and you should support operations like adding a transaction, reversing the log (to undo transactions), and displaying the log.
+Statement: Implement a transaction log using a linked list. Each node represents a transaction, and you should support 
+operations like adding a transaction, reversing the log (to undo transactions), and displaying the log.
 
 Example Input:
 
@@ -443,7 +450,8 @@ log.display_log()
 # Deposit $100
 """
 Problem 8: Social Media Feed
-Statement: Implement a social media feed using a linked list. Each node represents a post, and you should support operations like adding a post, deleting a post, and displaying the feed in reverse chronological order.
+Statement: Implement a social media feed using a linked list. Each node represents a post, and you should support operations 
+like adding a post, deleting a post, and displaying the feed in reverse chronological order.
 
 Example Input:
 # Posts: "Post 1" -> "Post 2" -> "Post 3"
@@ -514,7 +522,8 @@ feed.display_feed()
 
 """
 Problem 9: Call Log Management
-Statement: Implement a call log using a linked list. Each node represents a call, and you should support operations like adding a call, deleting the oldest call, and displaying the call log.
+Statement: Implement a call log using a linked list. Each node represents a call, and you should support operations like adding a call, 
+deleting the oldest call, and displaying the call log.
 
 Example Input:
 # Calls: "Call 1" -> "Call 2" -> "Call 3"
@@ -582,7 +591,8 @@ log.display_log()
 
 """
 Problem 10: File System Navigation
-Statement: Implement a file system navigation system using a linked list. Each node represents a directory, and you should support operations like navigating to the next directory, going back to the previous directory, and displaying the current path.
+Statement: Implement a file system navigation system using a linked list. Each node represents a directory, 
+and you should support operations like navigating to the next directory, going back to the previous directory, and displaying the current path.
 
 Example Input:
 # Path: "Home" -> "Documents" -> "Projects"
