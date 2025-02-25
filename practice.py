@@ -272,3 +272,15 @@ n = 5
 
 numbers_to_climp = ways_to_climp_stairs(n)
 print(f"Numbers to climp the stairs are: { numbers_to_climp}")
+
+def rob(houses):
+    prev = curr = 0
+
+    for house in houses:
+        prev,curr = curr, max(curr, prev + house)
+    return curr
+houses = [2, 7, 9, 3, 1]
+
+quick_robbers = rob(houses)
+
+print(f"Asd quick robbers we get: ${quick_robbers}")
