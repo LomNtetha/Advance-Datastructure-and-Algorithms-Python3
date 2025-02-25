@@ -223,8 +223,8 @@ class Solution:
         
         # Calculate the minimum coins needed for all amounts
         for coin in coins:
-            for x in range(coin, amount + 1):
-                dp[x] = min(dp[x], dp[x - coin] + 1)  # Min coins needed
+            for i in range(coin, amount + 1):
+                dp[i] = min(dp[i], dp[i - coin] + 1)  # Min coins needed
 
         # Separate calculation and return result
         result = dp[amount] if dp[amount] != float('inf') else -1
