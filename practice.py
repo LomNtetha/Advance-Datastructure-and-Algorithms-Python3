@@ -256,3 +256,25 @@ costs = [2, 7, 15]
 min_travel_day = minimum_travel_day_cost(days,costs)
 
 print(f"The minimum travel day is: {min_travel_day}")
+
+def ways_to_climp_stairs(n):
+ 
+
+
+ if n <= 2:
+     return n
+ 
+ dp = [0] * (n +1)
+ dp[1],dp[2] = 1, 2
+
+ for i in range(3, n+1):
+     
+     dp[i] = dp[i -1] + dp[i - 2]
+     
+ return dp[n]
+     
+n = 5
+
+nums_to_climp = ways_to_climp_stairs(n)
+
+print(nums_to_climp)
