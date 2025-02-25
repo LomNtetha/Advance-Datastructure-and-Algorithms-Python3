@@ -309,19 +309,19 @@ robs = rob_house_incircle(nums)
 
 print(f"I rob quick in a circle: {robs}")
 
-def coin_denomination_dp(coins,amount):
-    dp = [float('inf')] * (amount + 1)
+def dp_denominations(coins, amount):
+
+    dp = [float('inf')] * (amount+1)
     dp[0] = 0
 
     for coin in coins:
-        for i in range(coin, amount + 1):
-            dp[i] = min(dp[i], dp[i - coin] +1)
-
+        for i in range(coin, amount+1):
+            dp[i] = min(dp[i], dp[i - coin] + 1)
     results = dp[amount] if dp[amount] != float('inf') else -1
     return results
+
 coins = [1, 2, 5]
 amount = 11
 
-dp_denomination = coin_denomination_dp(coins,amount)
-
-print(dp_denomination)
+number_coin = dp_denominations(coins, amount)
+print(f"Total number of coin adding up to 11: {number_coin}")
