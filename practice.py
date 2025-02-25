@@ -285,12 +285,12 @@ quick_robbers = rob(houses)
 
 print(f"Asd quick robbers we get: ${quick_robbers}")
 
-def rob_houses_in_circle(nums):
-
+def rob_house_incircle(nums):
     def linear_rob(houses):
-        prev, curr = 0,0
+        prev,curr = 0,0
+
         for money in houses:
-            prev, curr = curr, max(curr, prev + money )
+            prev,curr = curr,max(curr, prev + money)
         return curr
     
     if len(nums) == 1:
@@ -298,13 +298,13 @@ def rob_houses_in_circle(nums):
     if len(nums) == 2:
         return max(nums[0], nums[1])
     
-    exlcude_last = linear_rob(nums[:-1])
+    exclude_last = linear_rob(nums[:-1])
     exclude_first = linear_rob(nums[1:])
 
-    return max(exlcude_last,exclude_first)
+    return max(exclude_last, exclude_first)
 
-houses = [1, 2, 3, 1]
+nums = [1, 2, 3, 1]
 
-rob_in_circle = rob_houses_in_circle(houses)
+robs = rob_house_incircle(nums)
 
-print(rob_in_circle)
+print(f"I rob quick in a circle: {robs}")
