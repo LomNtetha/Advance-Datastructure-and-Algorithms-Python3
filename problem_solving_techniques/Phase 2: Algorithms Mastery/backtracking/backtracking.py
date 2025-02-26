@@ -120,6 +120,15 @@ class Solution:
         
         backtrack(0, [], target)
         return result
+    
+# Example usage:
+candidates = [2, 3, 6, 7]
+target = 7
+solution = Solution()
+output = solution.combinationSum(candidates, target)
+
+print("Input:", candidates, "Target:", target)
+print("Output:", output)
 
 # Complexity:
 # Time: O(2^t) - Where t is the target; in the worst case, we can explore each number multiple times.
@@ -165,6 +174,14 @@ class Solution:
         
         backtrack(0)
         return result
+    
+# Example usage:
+n = 4
+solution = Solution()
+output = solution.solveNQueens(n)
+
+print("Input: n =", n)
+print("Output:", output)
 
 # Complexity:
 # Time: O(N!) - Each row has N options and there are N rows.
@@ -212,6 +229,13 @@ class Solution:
         
         backtrack(0, "")
         return result
+# Example usage:
+digits = "23"
+solution = Solution()
+output = solution.letterCombinations(digits)
+
+print("Input: digits =", digits)
+print("Output:", output)
 
 # Complexity:
 # Time: O(4^n) - Each digit can represent up to 4 letters.
@@ -253,7 +277,14 @@ class Solution:
         
         backtrack(0, [], target)
         return result
+# Example usage:
+candidates = [10, 1, 2, 7, 6, 1, 5]
+target = 8
+solution = Solution()
+output = solution.combinationSum2(candidates, target)
 
+print("Input: candidates =", candidates, ", target =", target)
+print("Output:", output)
 # Complexity:
 # Time: O(2^n) - Each element can be included or excluded, while avoiding duplicates.
 # Space: O(n) - Space for the recursion stack.
@@ -302,6 +333,18 @@ class Solution:
                     return True
         
         return False
+# Example usage:
+board = [
+    ["A", "B", "C", "E"],
+    ["S", "F", "C", "S"],
+    ["A", "D", "E", "E"]
+]
+word = "ABCCED"
+solution = Solution()
+output = solution.exist(board, word)
+
+print("Input: board =", board, ", word =", word)
+print("Output:", output)
 
 # Complexity:
 # Time: O(m * n * 4^k) - m: rows, n: cols, k: length of the word; exploring 4 directions.
@@ -338,6 +381,13 @@ class Solution:
         
         backtrack(0, [])
         return result
+# Example usage:
+s = "aab"
+solution = Solution()
+output = solution.partition(s)
+
+print("Input: s =", s)
+print("Output:", output)
 
 # Complexity:
 # Time: O(2^n) - Each character can either be included or excluded in the partitioning.
@@ -372,6 +422,13 @@ class Solution:
         
         backtrack(1, [], n)
         return result
+# Example usage:
+k, n = 3, 7
+solution = Solution()
+output = solution.combinationSum3(k, n)
+
+print("Input: k =", k, ", n =", n)
+print("Output:", output)
 
 # Complexity:
 # Time: O(2^n) - Each number can either be included or excluded.
