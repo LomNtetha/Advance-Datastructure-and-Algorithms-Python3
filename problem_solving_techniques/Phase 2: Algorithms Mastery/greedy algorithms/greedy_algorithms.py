@@ -230,6 +230,32 @@ max_return = solution.fractional_allocation(costs, returns, budget)
 print(f"Maximum return from the investment: ${max_return:.2f}")
 
 """
+Statement: Allocate a budget to projects such that the total cost does not exceed the budget and the maximum number of projects are funded.
+
+Example Input:
+projects = [10, 20, 30, 40]  # Cost of each project
+budget = 50  
+"""
+def max_funded_projects(projects, budget):
+    projects.sort()  # Sort projects by cost
+    funded = []
+    total_cost = 0
+
+    for cost in projects:
+        if total_cost + cost <= budget:
+            funded.append(cost)
+            total_cost += cost
+        else:
+            break  # Stop when budget is exceeded
+
+    return funded, len(funded)
+
+projects = [10, 20, 30, 40]
+budget = 50
+print(max_funded_projects(projects, budget))  # Output: ([10, 20], 2)
+
+
+"""
 Time Complexity: O(n log n)
 We sort the items based on their value-to-weight ratio.
 Space Complexity: O(n)
@@ -742,3 +768,102 @@ class Solution:
 
 # Test
 print(Solution().maxProfit([7, 1, 5, 3, 6, 4]))  # Output: 7
+
+"""
+Technique: Greedy Algorithm (Load Balancing - Manual Min Selection)
+
+Statement: Assign tasks to workers such that no worker is overloaded. Each task has a certain workload, and each worker has a capacity.
+
+Example Input:
+tasks = [2, 3, 4]  # Workload of each task
+workers = [5, 5]    # Capacity of each worker
+"""
+
+def assign_tasks(tasks, workers):
+    tasks.sort(reverse=True)  # Sort tasks in descending order
+    worker_loads = [0] * len(workers)  # Track each worker's assigned load
+
+    for task in tasks:
+        # Find the worker with the minimum current load who can take the task
+        min_worker = -1
+        min_load = float('inf')
+        
+        for i in range(len(workers)):
+            if worker_loads[i] + task <= workers[i] and worker_loads[i] < min_load:
+                min_worker = i
+                min_load = worker_loads[i]
+
+        if min_worker == -1:  # No worker can take this task
+            return "Task assignment not possible"
+
+        worker_loads[min_worker] += task  # Assign task to the selected worker
+
+    return worker_loads
+
+tasks = [2, 3, 4]
+workers = [5, 5]
+print(assign_tasks(tasks, workers))  # Output: [5, 4] or [4, 5] (valid distributions)
+
+"""
+Technique: Greedy Algorithm (Interval Scheduling with Room Assignment)
+Statement: Schedule meetings in rooms such that no two meetings overlap in the same room.
+
+Example Input:
+meetings = [(1, 4), (3, 5), (6, 8)]  # (start, end) times
+rooms = 2                              # Number of room
+"""
+def schedule_meetings(meetings, rooms):
+    meetings.sort()  # Sort by start time
+    room_end_times = [0] * rooms  # Track when each room is free
+
+    for start, end in meetings:
+        assigned = False
+        
+        for i in range(rooms):  # Try to place the meeting in an available room
+            if room_end_times[i] <= start:  # Room is free
+                room_end_times[i] = end  # Assign the room
+                assigned = True
+                break
+
+        if not assigned:  # If no room is free
+            return "Not enough rooms available"
+
+    return "Meetings scheduled successfully"
+
+meetings = [(1, 4), (3, 5), (6, 8)]
+rooms = 2
+print(schedule_meetings(meetings, rooms))  # Output: "Meetings scheduled successfully"
+
+"""
+Statement: Plan a travel itinerary such that the total cost does not exceed the budget and all destinations are visited.
+
+Example Input:
+
+destinations = [("Paris", 500), ("London", 400), ("Rome", 300)]  # (destination, cost)
+budget = 1000
+"""
+
+def plan_itinerary(destinations, budget):
+    destinations.sort(key=lambda x: x[1])  # Sort by cost (ascending)
+    itinerary = []
+    total_cost = 0
+
+    for city, cost in destinations:
+        if total_cost + cost <= budget:  # Check if we can afford this destination
+            itinerary.append(city)
+            total_cost += cost
+        else:
+            break  # Stop if we exceed the budget
+
+    return itinerary, total_cost  # Return planned itinerary and total cost
+
+# Example Input
+destinations = [("Paris", 500), ("London", 400), ("Rome", 300)]
+budget = 1000
+
+# Output
+itinerary, total_spent = plan_itinerary(destinations, budget)
+print("Planned Itinerary:", itinerary)  # Example Output: ['Rome', 'London']
+print("Total Cost:", total_spent)  # Example Output: 700
+
+
