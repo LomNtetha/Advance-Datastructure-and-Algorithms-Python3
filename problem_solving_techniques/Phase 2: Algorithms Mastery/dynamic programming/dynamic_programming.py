@@ -692,3 +692,53 @@ class Solution:
 solution = Solution()
 print(solution.longestPalindrome("babad"))  # Output: 3
 from typing import List
+
+"""
+Efficient Approach: Dynamic Programming + Bitmasking (Held-Karp
+Statement: You are given a list of cities and the distances between them. 
+Find the shortest route that visits all cities exactly once and returns to the starting city (Traveling Salesman Problem).
+
+Example Input:
+distances = [
+    [0, 10, 15, 20],
+    [10, 0, 35, 25],
+    [15, 35, 0, 30],
+    [20, 25, 30, 0]
+]
+"""
+
+from functools import lru_cache
+
+class Solution:
+    def tsp(self, distances: list[list[int]]) -> int:
+        n = len(distances)
+        VISITED_ALL = (1 << n) - 1  # All cities visited (Bitmask: 111...111)
+
+        @lru_cache(None)
+        def dp(mask, pos):
+            """Recursively find the shortest path."""
+            if mask == VISITED_ALL:  # All cities visited, return to start
+                return distances[pos][0]
+
+            min_cost = float('inf')
+            for city in range(n):
+                if not (mask & (1 << city)):  # If city not visited
+                    new_cost = distances[pos][city] + dp(mask | (1 << city), city)
+                    min_cost = min(min_cost, new_cost)
+
+            return min_cost
+
+        return dp(1, 0)  # Start from city 0 with only city 0 visited
+
+# Example Input
+distances = [
+    [0, 10, 15, 20],
+    [10, 0, 35, 25],
+    [15, 35, 0, 30],
+    [20, 25, 30, 0]
+]
+
+# Output
+solution = Solution()
+print(solution.tsp(distances))  # Output: Shortest possible route cost
+
