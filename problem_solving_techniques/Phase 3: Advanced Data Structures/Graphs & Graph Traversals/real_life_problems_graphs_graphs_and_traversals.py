@@ -1,20 +1,15 @@
+"""
 Problem 1: Social Network Friend Recommendation
 Problem Statement: Given a social network represented as a graph, recommend friends for a user based on mutual friends. If two users are not directly connected but share mutual friends, recommend them as potential friends.
 
 Example Input:
-
-python
-Copy
 graph = {
     'Alice': ['Bob', 'Charlie'],
     'Bob': ['Alice', 'Charlie', 'David'],
     'Charlie': ['Alice', 'Bob'],
     'David': ['Bob']
 }
-Solution:
-
-python
-Copy
+"""
 from collections import defaultdict, deque
 
 def recommend_friends(graph, user):
@@ -55,23 +50,19 @@ print(recommend_friends(graph, 'Alice'))  # Output: ['David']
 
 # Time Complexity: O(V + E), where V is the number of users and E is the number of friendships.
 # Space Complexity: O(V), for storing visited nodes and the queue.
+"""
 Problem 2: Flight Route Planning
 Problem Statement: Given a graph of flight routes, find the shortest path (minimum number of stops) between two airports.
 
 Example Input:
 
-python
-Copy
 graph = {
     'JFK': ['LAX', 'ATL'],
     'LAX': ['JFK', 'ATL'],
     'ATL': ['JFK', 'LAX', 'ORD'],
     'ORD': ['ATL']
 }
-Solution:
-
-python
-Copy
+"""
 from collections import deque
 
 def shortest_flight_path(graph, start, end):
@@ -110,18 +101,14 @@ print(shortest_flight_path(graph, 'JFK', 'ORD'))  # Output: ['JFK', 'ATL', 'ORD'
 
 # Time Complexity: O(V + E), where V is the number of airports and E is the number of routes.
 # Space Complexity: O(V), for storing visited nodes and the queue.
+"""
 Problem 3: Course Prerequisite Scheduling
 Problem Statement: Given a list of courses and their prerequisites, determine if it is possible to complete all courses without cyclic dependencies.
 
 Example Input:
-
-python
-Copy
 prerequisites = [[1, 0], [2, 0], [3, 1], [3, 2]]
-Solution:
+"""
 
-python
-Copy
 from collections import defaultdict, deque
 
 def can_finish_courses(num_courses, prerequisites):
@@ -159,23 +146,18 @@ print(can_finish_courses(4, prerequisites))  # Output: True
 
 # Time Complexity: O(V + E), where V is the number of courses and E is the number of prerequisites.
 # Space Complexity: O(V + E), for storing the graph and in-degree array.
+"""
 Problem 4: Delivery Route Optimization
 Problem Statement: Given a graph representing delivery locations and distances, find the shortest path for a delivery truck to visit all locations and return to the starting point.
 
 Example Input:
-
-python
-Copy
 graph = [
     [0, 10, 15, 20],
     [10, 0, 35, 25],
     [15, 35, 0, 30],
     [20, 25, 30, 0]
 ]
-Solution:
-
-python
-Copy
+"""
 from itertools import permutations
 
 def shortest_delivery_route(graph):
@@ -214,23 +196,19 @@ print(shortest_delivery_route(graph))  # Output: (80, [0, 1, 3, 2, 0])
 
 # Time Complexity: O((n-1)!), where n is the number of locations.
 # Space Complexity: O(n), for storing the optimal route.
+"""
 Problem 5: Network Packet Routing
-Problem Statement: Given a network topology represented as a graph, find the shortest path for a packet to travel from a source node to a destination node.
+Problem Statement: Given a network topology represented as a graph, find the shortest path for a packet to travel 
+from a source node to a destination node.
 
 Example Input:
-
-python
-Copy
 graph = {
     'A': {'B': 1, 'C': 4},
     'B': {'A': 1, 'C': 2, 'D': 5},
     'C': {'A': 4, 'B': 2, 'D': 1},
     'D': {'B': 5, 'C': 1}
 }
-Solution:
-
-python
-Copy
+"""
 import heapq
 
 def dijkstra_shortest_path(graph, start, end):
@@ -276,23 +254,13 @@ print(dijkstra_shortest_path(graph, 'A', 'D'))  # Output: (4, ['A', 'B', 'C', 'D
 
 # Time Complexity: O((V + E) log V), where V is the number of nodes and E is the number of edges.
 # Space Complexity: O(V), for storing distances and the priority queue.
-Let me know if you'd like the remaining 5 problems!
-
-ye plase
-Here are the remaining 5 detailed real-life problem statements involving graphs and graph traversals, complete with example inputs, Python solutions, and complexity analysis.
-
+"""
 Problem 6: Website Crawling
 Problem Statement: Given a starting URL, crawl a website by following all links on the page and build a graph of interconnected pages.
 
 Example Input:
-
-python
-Copy
 start_url = "https://example.com"
-Solution:
-
-python
-Copy
+"""
 import requests
 from bs4 import BeautifulSoup
 from collections import defaultdict, deque
@@ -331,23 +299,19 @@ print(crawl_website(start_url, max_pages=5))
 
 # Time Complexity: O(N * M), where N is the number of pages and M is the number of links per page.
 # Space Complexity: O(N), for storing visited URLs and the graph.
+"""
 Problem 7: Disease Spread Simulation
 Problem Statement: Simulate the spread of a disease in a population represented as a graph, where nodes are individuals and edges represent interactions.
 
 Example Input:
-
-python
-Copy
 graph = {
     'A': ['B', 'C'],
     'B': ['A', 'D'],
     'C': ['A', 'D'],
     'D': ['B', 'C']
 }
-Solution:
+"""
 
-python
-Copy
 from collections import deque
 
 def simulate_disease_spread(graph, start_node, infection_probability=0.5):
@@ -382,23 +346,18 @@ print(simulate_disease_spread(graph, 'A'))  # Output: Random subset of nodes
 
 # Time Complexity: O(V + E), where V is the number of individuals and E is the number of interactions.
 # Space Complexity: O(V), for storing infected individuals and the queue.
+"""
 Problem 8: Power Grid Failure Analysis
 Problem Statement: Given a power grid represented as a graph, identify critical nodes whose failure would disconnect the grid.
 
 Example Input:
-
-python
-Copy
 graph = {
     'A': ['B', 'C'],
     'B': ['A', 'C', 'D'],
     'C': ['A', 'B', 'D'],
     'D': ['B', 'C']
 }
-Solution:
-
-python
-Copy
+"""
 def find_critical_nodes(graph):
     """
     Identifies critical nodes in a power grid.
@@ -434,23 +393,19 @@ print(find_critical_nodes(graph))  # Output: ['B', 'C']
 
 # Time Complexity: O(V * (V + E)), where V is the number of nodes and E is the number of edges.
 # Space Complexity: O(V), for storing visited nodes.
+
+"""
 Problem 9: Traffic Light Optimization
 Problem Statement: Given a road network represented as a graph, optimize traffic light timings to minimize congestion at intersections.
 
 Example Input:
-
-python
-Copy
 graph = {
     'A': ['B', 'C'],
     'B': ['A', 'D'],
     'C': ['A', 'D'],
     'D': ['B', 'C']
 }
-Solution:
-
-python
-Copy
+"""
 from collections import defaultdict, deque
 
 def optimize_traffic_lights(graph):
@@ -486,7 +441,7 @@ print(optimize_traffic_lights(graph))  # Output: {'A': 0, 'B': 1, 'C': 1, 'D': 0
 
 # Time Complexity: O(V + E), where V is the number of intersections and E is the number of roads.
 # Space Complexity: O(V), for storing colors and the queue
-"
+"""
 Problem 10: Recommendation System for Movies
 Problem Statement: Given a graph of users and their movie ratings, recommend movies to a user based on what similar users have liked.
 
@@ -497,7 +452,7 @@ graph = {
     'Bob': {'Movie1': 4, 'Movie3': 2},
     'Charlie': {'Movie2': 5, 'Movie3': 4}
 }
-"
+"""
 from collections import defaultdict
 
 def recommend_movies(graph, user):
