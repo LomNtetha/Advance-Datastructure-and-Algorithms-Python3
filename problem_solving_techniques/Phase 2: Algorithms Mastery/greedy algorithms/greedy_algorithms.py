@@ -97,6 +97,33 @@ print(f"Maximum number of activities: {max_activities}")
 print(f"Indices of selected activities: {selected_activities}")
 
 """
+Statement: You are given a list of transactions with start and end times. Schedule the maximum number of transactions without overlapping.
+
+Example Input:
+transactions = [(1, 4), (3, 5), (0, 6), (5, 7), (8, 9)]
+"""
+def max_transactions(transactions):
+    # Sort transactions based on their end time
+    transactions.sort(key=lambda x: x[1])
+
+    selected = []
+    last_end = float('-inf')
+
+    for start, end in transactions:
+        if start >= last_end:  # If the transaction does not overlap
+            selected.append((start, end))
+            last_end = end  # Update the last selected transaction's end time
+
+    return selected
+
+# Example usage
+transactions = [(1, 4), (3, 5), (0, 6), (5, 7), (8, 9)]
+result = max_transactions(transactions)
+
+print("Maximum Non-Overlapping Transactions:", result)
+
+
+"""
 Time Complexity: O(n log n)
 We sort the activities based on their end times.
 Space Complexity: O(n)
