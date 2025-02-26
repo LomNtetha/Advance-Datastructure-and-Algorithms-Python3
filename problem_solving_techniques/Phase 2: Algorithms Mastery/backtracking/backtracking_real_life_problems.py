@@ -37,7 +37,8 @@ print(schedule_transactions(transactions))
 
 """
 Problem 2: Resource Allocation
-Statement: Allocate resources to tasks such that no resource is over-allocated. Each task requires a certain number of resources, and each resource has a limit.
+Statement: Allocate resources to tasks such that no resource is over-allocated. Each task requires a certain number of resources, 
+and each resource has a limit.
 
 Example Input:
 
@@ -231,7 +232,8 @@ print(plan_itinerary(destinations, budget))
 # Output: [('Paris', 500), ('Rome', 300)] (One possible itinerary)
 """
 Problem 7: Inventory Management
-Statement: You are given a list of items with their quantities and a target quantity. Find all combinations of items that sum up to the target quantity.
+Statement: You are given a list of items with their quantities and a target quantity. 
+Find all combinations of items that sum up to the target quantity.
 
 Example Input:
 items = [2, 3, 5]  # Quantities of each item
@@ -302,7 +304,8 @@ print(schedule_projects(projects))
 # Output: [[(1, 2), (2, 3), (3, 5)]] (One possible schedule)
 """
 Problem 9: Route Optimization
-Statement: You are given a list of cities and the distances between them. Find the shortest route that visits all cities exactly once and returns to the starting city (Traveling Salesman Problem).
+Statement: You are given a list of cities and the distances between them. 
+Find the shortest route that visits all cities exactly once and returns to the starting city (Traveling Salesman Problem).
 
 Example Input:
 distances = [
