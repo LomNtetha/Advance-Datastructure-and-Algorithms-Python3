@@ -28,6 +28,13 @@ class Solution:
         
         backtrack(0, [])
         return result
+# Example usage:
+nums = [1, 2, 3]
+solution = Solution()
+output = solution.subsets(nums)
+
+print("Input:", nums)
+print("Output:", output)
 
 # Complexity:
 # Time: O(2^n) - Each element can be included or excluded.
@@ -67,6 +74,15 @@ class Solution:
         
         backtrack([], [False] * len(nums))
         return result
+    
+
+# Example usage:
+nums = [1, 2, 3]
+solution = Solution()
+output = solution.permute(nums)
+
+print("Input:", nums)
+print("Output:", output)
 
 # Complexity:
 # Time: O(n!) - There are n! permutations of n elements.
