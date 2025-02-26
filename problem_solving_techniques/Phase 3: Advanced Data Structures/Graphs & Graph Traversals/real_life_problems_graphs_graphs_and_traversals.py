@@ -1,6 +1,7 @@
 """
 Problem 1: Social Network Friend Recommendation
-Problem Statement: Given a social network represented as a graph, recommend friends for a user based on mutual friends. If two users are not directly connected but share mutual friends, recommend them as potential friends.
+Problem Statement: Given a social network represented as a graph, recommend friends for a user based on mutual friends. 
+If two users are not directly connected but share mutual friends, recommend them as potential friends.
 
 Example Input:
 graph = {
@@ -148,7 +149,8 @@ print(can_finish_courses(4, prerequisites))  # Output: True
 # Space Complexity: O(V + E), for storing the graph and in-degree array.
 """
 Problem 4: Delivery Route Optimization
-Problem Statement: Given a graph representing delivery locations and distances, find the shortest path for a delivery truck to visit all locations and return to the starting point.
+Problem Statement: Given a graph representing delivery locations and distances, find the shortest path for a delivery truck 
+to visit all locations and return to the starting point.
 
 Example Input:
 graph = [
@@ -301,7 +303,8 @@ print(crawl_website(start_url, max_pages=5))
 # Space Complexity: O(N), for storing visited URLs and the graph.
 """
 Problem 7: Disease Spread Simulation
-Problem Statement: Simulate the spread of a disease in a population represented as a graph, where nodes are individuals and edges represent interactions.
+Problem Statement: Simulate the spread of a disease in a population represented as a graph, 
+where nodes are individuals and edges represent interactions.
 
 Example Input:
 graph = {
