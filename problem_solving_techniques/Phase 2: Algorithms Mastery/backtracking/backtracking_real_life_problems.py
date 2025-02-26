@@ -34,6 +34,8 @@ def schedule_transactions(transactions):
 transactions = [(1, 4), (3, 5), (0, 6), (5, 7), (8, 9)]
 print(schedule_transactions(transactions))
 # Output: [(1, 4), (5, 7), (8, 9)]
+
+"""
 Problem 2: Resource Allocation
 Statement: Allocate resources to tasks such that no resource is over-allocated. Each task requires a certain number of resources, and each resource has a limit.
 
@@ -41,6 +43,7 @@ Example Input:
 
 tasks = [2, 3, 1]  # Resource requirements for each task
 resources = 4       # Total resources available
+"""
 def allocate_resources(tasks, resources):
     """
     Allocates resources to tasks using backtracking.
@@ -71,12 +74,15 @@ tasks = [2, 3, 1]
 resources = 4
 print(allocate_resources(tasks, resources))
 # Output: [2, 2, 0] (One possible allocation)
+
+"""
 Problem 3: Budget Allocation
 Statement: Allocate a budget to projects such that the total cost does not exceed the budget and the maximum number of projects are funded.
 
 Example Input:
 projects = [10, 20, 30, 40]  # Cost of each project
-budget = 50                   # Total budget
+budget = 50   
+   """             # Total budget
 def allocate_budget(projects, budget):
     """
     Allocates budget to projects using backtracking.
@@ -106,12 +112,16 @@ projects = [10, 20, 30, 40]
 budget = 50
 print(allocate_budget(projects, budget))
 # Output: [10, 40] (One possible allocation)
+
+"""
 Problem 4: Task Assignment
 Statement: Assign tasks to workers such that no worker is overloaded. Each task has a certain workload, and each worker has a capacity.
 
 Example Input:
 tasks = [2, 3, 4]  # Workload of each task
 workers = [5, 5]    # Capacity of each worker
+"""
+
 def assign_tasks(tasks, workers):
     """
     Assigns tasks to workers using backtracking.
@@ -142,13 +152,15 @@ tasks = [2, 3, 4]
 workers = [5, 5]
 print(assign_tasks(tasks, workers))
 # Output: [5, 4] (One possible assignment)
+
+"""
 Problem 5: Meeting Room Scheduling
 Statement: Schedule meetings in rooms such that no two meetings overlap in the same room.
 
 Example Input:
 meetings = [(1, 4), (3, 5), (6, 8)]  # (start, end) times
 rooms = 2                              # Number of rooms
-Solution:
+"""
 def schedule_meetings(meetings, rooms):
     """
     Schedules meetings in rooms using backtracking.
@@ -179,6 +191,7 @@ meetings = [(1, 4), (3, 5), (6, 8)]
 rooms = 2
 print(schedule_meetings(meetings, rooms))
 # Output: [[(1, 4), (6, 8)], [(3, 5)]] (One possible schedule)
+"""
 Problem 6: Travel Itinerary Planning
 Statement: Plan a travel itinerary such that the total cost does not exceed the budget and all destinations are visited.
 
@@ -186,6 +199,7 @@ Example Input:
 
 destinations = [("Paris", 500), ("London", 400), ("Rome", 300)]  # (destination, cost)
 budget = 1000
+"""
 def plan_itinerary(destinations, budget):
     """
     Plans a travel itinerary using backtracking.
@@ -215,14 +229,14 @@ destinations = [("Paris", 500), ("London", 400), ("Rome", 300)]
 budget = 1000
 print(plan_itinerary(destinations, budget))
 # Output: [('Paris', 500), ('Rome', 300)] (One possible itinerary)
-
+"""
 Problem 7: Inventory Management
 Statement: You are given a list of items with their quantities and a target quantity. Find all combinations of items that sum up to the target quantity.
 
 Example Input:
 items = [2, 3, 5]  # Quantities of each item
 target = 8          # Target quantity
-
+"""
 def inventory_combinations(items, target):
     """
     Finds all combinations of items that sum up to the target quantity using backtracking.
@@ -252,12 +266,13 @@ items = [2, 3, 5]
 target = 8
 print(inventory_combinations(items, target))
 # Output: [[2, 2, 2, 2], [2, 3, 3], [3, 5]]
+"""
 Problem 8: Project Planning
 Statement: You are given a list of projects with their durations and deadlines. Schedule the projects such that all deadlines are met.
 
 Example Input:
 projects = [(2, 3), (1, 2), (3, 5)]  # (duration, deadline)
-
+"""
 def schedule_projects(projects):
     """
     Schedules projects to meet all deadlines using backtracking.
@@ -285,6 +300,7 @@ def schedule_projects(projects):
 projects = [(2, 3), (1, 2), (3, 5)]
 print(schedule_projects(projects))
 # Output: [[(1, 2), (2, 3), (3, 5)]] (One possible schedule)
+"""
 Problem 9: Route Optimization
 Statement: You are given a list of cities and the distances between them. Find the shortest route that visits all cities exactly once and returns to the starting city (Traveling Salesman Problem).
 
@@ -295,6 +311,7 @@ distances = [
     [15, 35, 0, 30],
     [20, 25, 30, 0]
 ]
+"""
 def tsp(distances):
     """
     Solves the Traveling Salesman Problem using backtracking.
@@ -335,6 +352,7 @@ distances = [
 path, distance = tsp(distances)
 print("Best Path:", path, "Distance:", distance)
 # Output: Best Path: [0, 1, 3, 2] Distance: 80
+"""
 Problem 10: Team Formation
 Statement: You are given a list of employees and their skills. Form teams such that each team has all required skills.
 
@@ -345,6 +363,8 @@ employees = [
     {"name": "Charlie", "skills": ["Python", "Java"]}
 ]
 required_skills = ["Python", "SQL", "Java"]
+"""
+
 def form_teams(employees, required_skills):
     """
     Forms teams with all required skills using backtracking.
