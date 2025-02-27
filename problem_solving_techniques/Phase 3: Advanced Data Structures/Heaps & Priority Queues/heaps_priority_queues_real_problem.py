@@ -57,7 +57,8 @@ print(schedule_tasks(tasks))
 """
 Problem 2: Merging K Sorted Logs
 Scenario:
-A system collects logs from multiple servers. Each server's logs are sorted by timestamp. The goal is to merge all logs into a single sorted log file.
+A system collects logs from multiple servers. Each server's logs are sorted by timestamp. 
+The goal is to merge all logs into a single sorted log file.
 
 Example Input:
 logs = [
