@@ -1,68 +1,109 @@
 """
-Problem 1: Task Scheduling with Priority
-Statement: You are given a list of tasks with their priorities. Schedule the tasks in order of priority (highest priority first).
+Problem 1: Task Scheduling
+Problem Statement: You are given a list of tasks with their respective deadlines and execution times. Schedule the tasks in such a way 
+that the maximum lateness is minimized. Use a min-heap to prioritize tasks with the earliest deadlines.
 
 Example Input:
-tasks = [("Task A", 3), ("Task B", 1), ("Task C", 2)]
+
+tasks = [
+    {"name": "Task1", "deadline": 5, "execution_time": 2},
+    {"name": "Task2", "deadline": 3, "execution_time": 1},
+    {"name": "Task3", "deadline": 8, "execution_time": 3}
+]
 """
+
 import heapq
 
 def schedule_tasks(tasks):
     """
-    Schedules tasks based on priority using a max-heap.
-    Time Complexity: O(n log n) for heap construction, O(n log n) for extraction.
-    Space Complexity: O(n) for the heap.
+    Schedules tasks to minimize maximum lateness using a min-heap.
+    :param tasks: List of tasks with deadlines and execution times.
+    :return: List of scheduled tasks.
     """
-    # Use a max-heap by negating priorities
-    max_heap = [(-priority, task) for task, priority in tasks]
-    heapq.heapify(max_heap)  # Convert list into a heap, O(n) time
-
-    scheduled_tasks = []
-    while max_heap:
-        priority, task = heapq.heappop(max_heap)  # Extract the highest priority task
-        scheduled_tasks.append(task)
+    # Sort tasks by deadline (earliest deadline first)
+    tasks.sort(key=lambda x: x["deadline"])
     
-    return scheduled_tasks
+    # Min-heap to store the execution times of scheduled tasks
+    heap = []
+    current_time = 0
+    
+    for task in tasks:
+        execution_time = task["execution_time"]
+        deadline = task["deadline"]
+        
+        # Push the execution time into the heap
+        heapq.heappush(heap, execution_time)
+        current_time += execution_time
+        
+        # If the current time exceeds the deadline, remove the task with the longest execution time
+        if current_time > deadline:
+            longest_task = heapq.heappop(heap)
+            current_time -= longest_task
+    
+    # The heap now contains the optimal schedule
+    return [task for task in tasks if task["execution_time"] in heap]
 
-# Example Usage
-tasks = [("Task A", 3), ("Task B", 1), ("Task C", 2)]
-print(schedule_tasks(tasks))  # Output: ['Task A', 'Task C', 'Task B']
+# Example usage
+tasks = [
+    {"name": "Task1", "deadline": 5, "execution_time": 2},
+    {"name": "Task2", "deadline": 3, "execution_time": 1},
+    {"name": "Task3", "deadline": 8, "execution_time": 3}
+]
+print(schedule_tasks(tasks))
+
+# Time Complexity: O(N log N), where N is the number of tasks.
+# Space Complexity: O(N), for the heap.
 
 """
-Problem 2: Merge K Sorted Lists
-Statement: Given k sorted lists, merge them into a single sorted list.
+Problem 2: Merging K Sorted Logs
+Scenario:
+A system collects logs from multiple servers. Each server's logs are sorted by timestamp. The goal is to merge all logs into a single sorted log file.
 
 Example Input:
-lists = [[1, 4, 5], [1, 3, 4], [2, 6]]
+logs = [
+    [(1, "Log A1"), (4, "Log A2"), (5, "Log A3")],
+    [(2, "Log B1"), (3, "Log B2"), (6, "Log B3")],
+    [(0, "Log C1"), (7, "Log C2")]
+]
+Each list represents logs from a different server, where each log entry is (timestamp, log_message).
+
 
 """
 import heapq
 
-def merge_k_sorted_lists(lists):
+def merge_logs(logs):
     """
-    Merges k sorted lists into one sorted list using a min-heap.
-    Time Complexity: O(n log k), where n is the total number of elements.
-    Space Complexity: O(k) for the heap.
+    Merges k sorted log lists using a min heap.
+    :param logs: List of sorted logs from different servers.
+    :return: Merged sorted logs.
     """
     min_heap = []
-    merged_list = []
+    merged_logs = []
 
-    # Push the first element of each list into the heap
-    for i, lst in enumerate(lists):
-        if lst:
-            heapq.heappush(min_heap, (lst[0], i, 0))  # (value, list index, element index)
+    # Push the first element of each log with index reference
+    for i, log_list in enumerate(logs):
+        if log_list:
+            heapq.heappush(min_heap, (log_list[0][0], i, 0, log_list[0][1]))
 
     while min_heap:
-        val, list_idx, element_idx = heapq.heappop(min_heap)
-        merged_list.append(val)
-        if element_idx + 1 < len(lists[list_idx]):
-            heapq.heappush(min_heap, (lists[list_idx][element_idx + 1], list_idx, element_idx + 1))
+        timestamp, list_idx, elem_idx, log_msg = heapq.heappop(min_heap)
+        merged_logs.append((timestamp, log_msg))
 
-    return merged_list
+        # Push next log from the same list
+        if elem_idx + 1 < len(logs[list_idx]):
+            heapq.heappush(min_heap, (logs[list_idx][elem_idx + 1][0], list_idx, elem_idx + 1, logs[list_idx][elem_idx + 1][1]))
 
-# Example Usage
-lists = [[1, 4, 5], [1, 3, 4], [2, 6]]
-print(merge_k_sorted_lists(lists))  # Output: [1, 1, 2, 3, 4, 4, 5, 6]
+    return merged_logs
+
+# Example usage
+logs = [
+    [(1, "Log A1"), (4, "Log A2"), (5, "Log A3")],
+    [(2, "Log B1"), (3, "Log B2"), (6, "Log B3")],
+    [(0, "Log C1"), (7, "Log C2")]
+]
+
+print(merge_logs(logs))
+
 """
 Problem 3: Find the Kth Largest Element
 Statement: Given an array of integers, find the kth largest element.
@@ -92,34 +133,41 @@ k = 2
 print(find_kth_largest(nums, k))  # Output: 5
 
 """
-Problem 4: Top K Frequent Elements
-Statement: Given an array of integers, return the k most frequent elements.
+Problem 3: Finding Top K Frequent Words
+Scenario:
+A social media analytics platform wants to identify the top K most frequent words from user posts.
 
 Example Input:
-nums = [1, 1, 1, 2, 2, 3]
+words = ["apple", "banana", "apple", "orange", "banana", "apple", "grape"]
 k = 2
+Find the top 2 most frequent words.
 """
-import heapq
 from collections import Counter
+import heapq
 
-def top_k_frequent(nums, k):
+def top_k_frequent(words, k):
     """
-    Finds the k most frequent elements using a min-heap.
-    Time Complexity: O(n log k).
-    Space Complexity: O(n) for the frequency map and heap.
+    Returns the top k most frequent words.
+    :param words: List of words.
+    :param k: Number of top frequent words to return.
+    :return: List of top k frequent words.
     """
-    freq_map = Counter(nums)
+    freq_map = Counter(words)
     min_heap = []
-    for num, freq in freq_map.items():
-        heapq.heappush(min_heap, (freq, num))
+
+    # Push (frequency, word) into a min heap
+    for word, freq in freq_map.items():
+        heapq.heappush(min_heap, (freq, word))
         if len(min_heap) > k:
             heapq.heappop(min_heap)
-    return [num for freq, num in min_heap]
 
-# Example Usage
-nums = [1, 1, 1, 2, 2, 3]
+    return sorted([heapq.heappop(min_heap)[1] for _ in range(k)], reverse=True)
+
+# Example usage
+words = ["apple", "banana", "apple", "orange", "banana", "apple", "grape"]
 k = 2
-print(top_k_frequent(nums, k))  # Output: [2, 1]
+print(top_k_frequent(words, k))
+
 
 """
 Problem 5: Minimum Cost to Connect Ropes
@@ -186,12 +234,15 @@ print(sliding_window_max(nums, k))  # Output: [3, 3, 5, 5, 6, 7]
 """
 Problem 7: K Closest Points to Origin
 Statement: Given a list of points on a plane, find the k closest points to the origin.
+Given a list of points on a 2D plane, find the k closest points to the origin (0, 0). The distance between two points (x1, y1) and (x2, y2)
+is calculated using the Euclidean distance formula:
 
 Example Input:
 points = [(1, 3), (-2, 2), (5, 8), (0, 1)]
 k = 2
-Solution:
-import heapq
+ Output: 
+ 
+[(-2, 2), (0, 1)]
 """
 def k_closest_points(points, k):
     """
@@ -212,12 +263,53 @@ points = [(1, 3), (-2, 2), (5, 8), (0, 1)]
 k = 2
 print(k_closest_points(points, k))  # Output: [(-2, 2), (0, 1)]
 
+def k_closest_points(points, k):
+    # Calculate squared distances and store them with the points
+    points_with_distances = [(x**2 + y**2, (x, y)) for x, y in points]
+    
+    # Sort the points based on the squared distance
+    points_with_distances.sort(key=lambda x: x[0])
+    
+    # Extract the first k points
+    closest_points = [point for (_, point) in points_with_distances[:k]]
+    
+    return closest_points
+
+# Example usage:
+points = [(1, 3), (-2, 2), (5, 8), (0, 1)]
+k = 2
+print(k_closest_points(points, k))  # Output: [(-2, 2), (0, 1)]
+
 """
 Problem 8: Median of a Data Stream
-Statement: Design a data structure to find the median of a stream of integers.
+Statement:
+Design a data structure that can efficiently find the median of a stream of integers. The median is the middle value in 
+an ordered list of numbers. If the list has an odd number of elements, the median is the middle element. If the list has 
+an even number of elements, the median is the average of the two middle elements.
+
+The data structure should support two operations:
+
+addNum(int num): Adds an integer num to the data structure.
+
+findMedian(): Returns the median of all the numbers added so far.
 
 Example Input:
 stream = [5, 15, 1, 3]
+Example Output:
+
+python
+Copy
+# After adding 5:
+Median = 5
+
+# After adding 15:
+Median = (5 + 15) / 2 = 10
+
+# After adding 1:
+Median = 5
+
+# After adding 3:
+Median = (3 + 5) / 2 = 4
 """
 import heapq
 
@@ -252,42 +344,7 @@ for num in stream:
     mf.add_num(num)
 print(mf.find_median())  # Output: 4.0
 
-"""
-Problem 9: Maximum Number of Events
-Statement: Given a list of events with start and end times, find the maximum number of events you can attend.
 
-Example Input:
-events = [(1, 4), (4, 6), (2, 5)]
-
-"""
-import heapq
-
-def max_events(events):
-    """
-    Finds the maximum number of events you can attend using a min-heap.
-    Time Complexity: O(n log n).
-    Space Complexity: O(n) for the heap.
-    """
-    events.sort()
-    min_heap = []
-    count = 0
-    day = 1
-    i = 0
-    while i < len(events) or min_heap:
-        while i < len(events) and events[i][0] == day:
-            heapq.heappush(min_heap, events[i][1])
-            i += 1
-        while min_heap and min_heap[0] < day:
-            heapq.heappop(min_heap)
-        if min_heap:
-            heapq.heappop(min_heap)
-            count += 1
-        day += 1
-    return count
-
-# Example Usage
-events = [(1, 4), (4, 6), (2, 5)]
-print(max_events(events))  # Output: 2
 """
 Problem 10: Kth Smallest Element in a Sorted Matrix
 Statement: Given a sorted matrix, find the kth smallest element.
