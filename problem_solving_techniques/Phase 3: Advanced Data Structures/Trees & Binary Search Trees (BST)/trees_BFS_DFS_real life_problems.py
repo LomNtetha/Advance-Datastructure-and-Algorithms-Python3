@@ -1,11 +1,12 @@
 """
 1. Social Media Friend Suggestion System (BFS)
 Problem Statement:
-In a social media application, users have a list of friends. To suggest new friends, we want to find friends of friends (FoF) who are not already directly connected to the user.
+In a social media application, users have a list of friends. To suggest new friends, we want to find friends of friends (FoF) 
+who are not already directly connected to the user.
 
 Example Input:
 
-"""
+
 
 connections = {
     "Alice": ["Bob", "Charlie"],
@@ -15,14 +16,11 @@ connections = {
     "Eve": ["Charlie"]
 }
 user = "Alice"
+
 Expected Output:
-
-
-
 ["David", "Eve"]
-Solution:
 
-
+"""
 
 from collections import deque
 
@@ -61,17 +59,13 @@ print(friend_suggestions(connections, "Alice"))
 # Time Complexity: O(V+E), where V is the number of users and E is the number of connections.
 # Space Complexity: O(V), for the visited set and queue.
 
+"""
 2. Path Finding in a City Grid (BFS)
 Problem Statement:
-A city is represented as an 
-𝑁
-×
-𝑀
-N×M grid where 0 represents open paths and 1 represents blocked roads. Find the shortest path from the top-left (0,0) to the bottom-right (N-1,M-1).
+A city is represented as an N×M grid where 0 represents open paths and 1 represents blocked roads. Find the shortest path from 
+the top-left (0,0) to the bottom-right (N-1,M-1).
 
 Example Input:
-
-
 
 grid = [
     [0, 0, 1, 0],
@@ -79,14 +73,11 @@ grid = [
     [1, 0, 0, 0],
     [1, 1, 1, 0]
 ]
+
 Expected Output:
 
-
-
 Shortest Path Length: 5
-Solution:
-
-
+"""
 
 from collections import deque
 
@@ -120,34 +111,17 @@ grid = [
 ]
 
 print(f"Shortest Path Length: {shortest_path(grid)}")
-Complexity:
-Time Complexity: 
-𝑂
-(
-𝑁
-×
-𝑀
-)
-O(N×M), where 
-𝑁
-N is rows and 
-𝑀
-M is columns.
-Space Complexity: 
-𝑂
-(
-𝑁
-×
-𝑀
-)
-O(N×M), for the visited set and queue.
+# Complexity:
+# Time Complexity: O(N×M), where N is rows and M is columns.
+# Space Complexity: O(N×M), for the visited set and queue.
+                    
+"""
 3. Building Management - Elevator System (BFS)
 Problem Statement:
-An elevator system has N floors. You start at floor S and want to reach floor T. You can move up U floors or down D floors. Find the minimum number of button presses to reach T.
+An elevator system has N floors. You start at floor S and want to reach floor T. You can move up U floors or down D floors. 
+Find the minimum number of button presses to reach T.
 
 Example Input:
-
-
 
 N = 10  # Total floors
 S = 1   # Start floor
@@ -156,12 +130,9 @@ U = 3   # Up movement
 D = 1   # Down movement
 Expected Output:
 
-
-
 Minimum button presses: 3
-Solution:
 
-
+"""
 
 def min_button_presses(N, S, T, U, D):
     if S == T:
@@ -183,26 +154,17 @@ def min_button_presses(N, S, T, U, D):
     return -1  # No way to reach target floor
 
 print(f"Minimum button presses: {min_button_presses(10, 1, 7, 3, 1)}")
-Complexity:
-Time Complexity: 
-𝑂
-(
-𝑁
-)
-O(N), as we process each floor once.
-Space Complexity: 
-𝑂
-(
-𝑁
-)
-O(N), for visited set.
+
+# Complexity:
+# Time Complexity: O(N), as we process each floor once.
+# Space Complexity: O(N), for visited set.
+"""
 4. Virus Spread in a Network (BFS)
 Problem Statement:
-A computer network is represented as a graph. A virus starts from a given node and spreads to connected computers in 1 minute per connection. Find how many minutes until all computers are infected.
+A computer network is represented as a graph. A virus starts from a given node and spreads to connected computers in 1 minute per connection. 
+Find how many minutes until all computers are infected.
 
 Example Input:
-
-
 
 network = {
     1: [2, 3],
@@ -214,13 +176,10 @@ network = {
 start = 1
 Expected Output:
 
-
-
 Minutes until all computers are infected: 2
-Solution:
 
 
-
+"""
 def virus_spread(network, start):
     queue = deque([(start, 0)])  # (current node, minutes)
     visited = set([start])
@@ -246,17 +205,17 @@ network = {
 }
 
 print(f"Minutes until all computers are infected: {virus_spread(network, 1)}")
-Complexity:
-Time Complexity: 
-O(V+E)
-Space Complexity: 
-O(V)
+# Complexity:
+# Time Complexity: O(V+E)
+# Space Complexity: O(V)
+"""
+5. Product Recommendation System (DFS)
+Problem Statement:
+An e-commerce website wants to recommend products to customers based on product categories. 
+The category structure is a tree where each node represents a category, and leaf nodes represent products. 
+Given a category, list all products under that category.
 
-## 5. **Product Recommendation System (DFS)**
-### Problem Statement:
-An e-commerce website wants to recommend products to customers based on product categories. The category structure is a tree where each node represents a category, and leaf nodes represent products. Given a category, list all products under that category.
-
-### Example Input:
+ Example Input:
 
 categories = {
     "Electronics": ["Phones", "Laptops"],
@@ -267,13 +226,10 @@ categories = {
 }
 category = "Electronics"
 
-### Expected Output:
+ Expected Output:
 
 ['iPhone', 'Samsung Galaxy', 'MacBook', 'Dell Inspiron']
-
-
-### Solution:
-
+"""
 def get_products(categories, category):
     result = []
 
@@ -287,19 +243,27 @@ def get_products(categories, category):
     dfs(category)
     return result
 
+categories = {
+    "Electronics": ["Phones", "Laptops"],
+    "Phones": ["iPhone", "Samsung Galaxy"],
+    "Laptops": ["MacBook", "Dell Inspiron"],
+    "Clothing": ["T-Shirts", "Jeans"],
+    "T-Shirts": ["Nike Tee", "Adidas Tee"]
+}
+
 print(get_products(categories, "Electronics"))
 
-### Complexity:
-- **Time Complexity**: O(N), where N is the total number of categories and products.
-- **Space Complexity**: O(N), for the recursion stack.
+#  Complexity:
+# - Time Complexity: O(N), where N is the total number of categories and products.
+# - Space Complexity: O(N), for the recursion stack.
 
----
 
-## 6. **Company Organizational Hierarchy (DFS)**
-### Problem Statement:
+"""
+ 6. Company Organizational Hierarchy (DFS)
+ Problem Statement:
 A company has an organizational hierarchy represented by a tree. Given the CEO node, list all employees under the CEO in the order of reporting.
 
-### Example Input:
+ Example Input:
 
 org = {
     "CEO": ["Manager1", "Manager2"],
@@ -307,12 +271,12 @@ org = {
     "Manager2": ["Employee3"]
 }
 
-### Expected Output:
+ Expected Output:
 
 ['Manager1', 'Employee1', 'Employee2', 'Manager2', 'Employee3']
 
+"""
 
-### Solution:
 
 def get_employees(org, ceo):
     result = []
@@ -325,20 +289,24 @@ def get_employees(org, ceo):
 
     dfs(ceo)
     return result
+org = {
+    "CEO": ["Manager1", "Manager2"],
+    "Manager1": ["Employee1", "Employee2"],
+    "Manager2": ["Employee3"]
+}
 
 print(get_employees(org, "CEO"))
 
-### Complexity:
-- **Time Complexity**: O(N)
-- **Space Complexity**: O(N)
+#  Complexity:
+# - Time Complexity: O(N)
+# - Space Complexity: O(N)
 
----
-
-## 7. **Route Optimization in Delivery Services (BFS)**
-### Problem Statement:
+"""
+ 7. Route Optimization in Delivery Services (BFS)
+ Problem Statement:
 A delivery service needs to find the shortest route between two locations on a city map represented as a graph.
 
-### Example Input:
+ Example Input:
 
 city_map = {
     "A": ["B", "C"],
@@ -350,9 +318,9 @@ city_map = {
 start = "A"
 end = "E"
 
-### Expected Output:
+ Expected Output:
 
-['A', 'C', 'D', 'E']
+['A', 'C', 'D', 'E']"""
 
 from collections import deque
 
@@ -371,18 +339,28 @@ def shortest_route(city_map, start, end):
 
     return []
 
+city_map = {
+    "A": ["B", "C"],
+    "B": ["A", "D"],
+    "C": ["A", "D"],
+    "D": ["B", "C", "E"],
+    "E": ["D"]
+}
+start = "A"
+end = "E"
+
 print(shortest_route(city_map, "A", "E"))
 
-### Complexity:
-- **Time Complexity**: O(V + E)
-- **Space Complexity**: O(V)
+#  Complexity:
+# - Time Complexity: O(V + E)
+# - Space Complexity: O(V)
 
-
-## 8. **File System Explorer (DFS)**
-### Problem Statement:
+"""
+ 8. File System Explorer (DFS)
+ Problem Statement:
 Given a file system directory structure represented as a tree, list all files under a directory recursively.
 
-### Example Input:
+ Example Input:
 file_system = {
     "root": ["folder1", "folder2"],
     "folder1": ["file1.txt", "folder3"],
@@ -390,9 +368,9 @@ file_system = {
     "folder2": ["file3.txt"]
 }
 
-### Expected Output:
+ Expected Output:
 ['file1.txt', 'file2.txt', 'file3.txt']
-
+"""
 def list_files(file_system, directory):
     files = []
 
@@ -405,19 +383,24 @@ def list_files(file_system, directory):
 
     dfs(directory)
     return files
-
+file_system = {
+    "root": ["folder1", "folder2"],
+    "folder1": ["file1.txt", "folder3"],
+    "folder3": ["file2.txt"],
+    "folder2": ["file3.txt"]
+}
 print(list_files(file_system, "root"))
 
-### Complexity:
-- **Time Complexity**: O(N)
-- **Space Complexity**: O(N)
+#  Complexity:
+# - Time Complexity: O(N)
+# - Space Complexity: O(N)
 
-
-## 9. **Airport Connection System (BFS)**
-### Problem Statement:
+"""
+ 9. Airport Connection System (BFS)
+ Problem Statement:
 Given airports and their direct flight connections, find the shortest path from one airport to another.
 
-### Example Input:
+ Example Input:
 flights = {
     "JFK": ["LAX", "ATL"],
     "LAX": ["ORD"],
@@ -428,9 +411,11 @@ flights = {
 start = "JFK"
 end = "MIA"
 
-### Expected Output:
+ Expected Output:
 
 ['JFK', 'ATL', 'MIA']
+
+"""
 from collections import deque
 
 def shortest_flight_path(flights, start, end):
@@ -448,31 +433,40 @@ def shortest_flight_path(flights, start, end):
 
     return []
 
+flights = {
+    "JFK": ["LAX", "ATL"],
+    "LAX": ["ORD"],
+    "ATL": ["ORD", "MIA"],
+    "ORD": ["MIA"],
+    "MIA": []
+}
+start = "JFK"
+end = "MIA"
+
 print(shortest_flight_path(flights, "JFK", "MIA"))
 
-### Complexity:
-- **Time Complexity**: O(V + E)
-- **Space Complexity**: O(V)
+#  Complexity:
+# - Time Complexity: O(V + E)
+# - Space Complexity: O(V)
 
----
 
-## 10. **Word Ladder Transformation (BFS)**
-### Problem Statement:
-Given two words and a dictionary, find the shortest transformation sequence from the start word to the end word such that only one letter can be changed at a time.
+"""
+ 10. Word Ladder Transformation (BFS)
+ Problem Statement:
+Given two words and a dictionary, find the shortest transformation sequence from the start word to the end word such that only one 
+letter can be changed at a time.
 
-### Example Input:
+ Example Input:
 
 start = "hit"
 end = "cog"
 dictionary = {"hot", "dot", "dog", "lot", "log", "cog"}
 
-### Expected Output:
+ Expected Output:
 
 ['hit', 'hot', 'dot', 'dog', 'cog']
 
-
-### Solution:
-
+"""
 from collections import deque
 
 def word_ladder(start, end, dictionary):
@@ -495,11 +489,11 @@ def word_ladder(start, end, dictionary):
 
 print(word_ladder("hit", "cog", {"hot", "dot", "dog", "lot", "log"}))
 
-### Complexity:
-- **Time Complexity**: O(N * 26^L)
-- **Space Complexity**: O(N)
+#  Complexity:
+# - Time Complexity: O(N * 26^L)
+# - Space Complexity: O(N)
 
-
+"""
 10. Product Recommendation System (BFS)
 
 Problem Statement:
@@ -518,8 +512,8 @@ product = "Laptop"
 Expected Output:
 
 ["Mouse", "Keyboard", "Headphones"]
+"""
 
-Solution:
 
 def recommend_products(purchases, product):
     queue = deque([product])
@@ -536,11 +530,19 @@ def recommend_products(purchases, product):
 
     return list(recommendations)
 
+purchases = {
+    "Laptop": ["Mouse", "Keyboard"],
+    "Mouse": ["Laptop", "Headphones"],
+    "Keyboard": ["Laptop", "Mouse"]
+}
+product = "Laptop"
+
+
 print(recommend_products(purchases, "Laptop"))
 
-Complexity:
+# Complexity:
 
-Time Complexity: O(V + E)
+# Time Complexity: O(V + E)
 
-Space Complexity: O(V)
+# Space Complexity: O(V)
 
