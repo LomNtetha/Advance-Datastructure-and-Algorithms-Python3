@@ -295,10 +295,8 @@ findMedian(): Returns the median of all the numbers added so far.
 
 Example Input:
 stream = [5, 15, 1, 3]
-Example Output:
 
-python
-Copy
+Example Output:
 # After adding 5:
 Median = 5
 
