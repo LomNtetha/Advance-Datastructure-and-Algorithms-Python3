@@ -392,3 +392,26 @@ t = "add"
 yes_no = Isormphorbic(s,t)
 
 print(yes_no)
+
+def word_pattern(pattern,s):
+
+    words = s.split()
+
+    if len(pattern) != len(words):
+        return False
+    
+    mapping_cha_word = {}
+    mapping_word_cha = {}
+
+    for cha,word in zip(pattern,s):
+
+        if cha not in mapping_cha_word and  word not in mapping_word_cha:
+            mapping_cha_word[cha] = word
+            mapping_word_cha[word] = cha
+
+        elif mapping_cha_word.get(cha) != word or  mapping_word_cha != cha:
+            return False
+    return True
+
+pattern = "abba"
+s = "dog cat cat dog"
