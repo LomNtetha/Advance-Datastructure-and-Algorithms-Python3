@@ -371,3 +371,24 @@ nums = [100, 4, 200, 1, 3, 2]
 longeststrke = the_longest_strike(nums)
 
 print(longeststrke)
+
+
+def Isormphorbic(s,t):
+
+    mapping_s_t = {}
+    mapping_t_s = {}
+
+    for c1,c2 in zip(s,t):
+        if c1 not in mapping_s_t and c2 not in mapping_t_s:
+            mapping_s_t[c1] = c2
+            mapping_t_s[c2] = c1
+
+        elif mapping_s_t.get(c1) != c2 or mapping_t_s.get(c2) != c1:
+            return False
+    return True
+s = "egg"
+t = "add"
+
+yes_no = Isormphorbic(s,t)
+
+print(yes_no)
