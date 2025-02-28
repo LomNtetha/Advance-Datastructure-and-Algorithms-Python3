@@ -325,3 +325,22 @@ amount = 11
 
 number_coin = dp_denominations(coins, amount)
 print(f"Total number of coin adding up to 11: {number_coin}")
+
+from collections import defaultdict
+
+def group_anagrams(strs):
+
+    anagramss= defaultdict(list)
+
+    for s in strs:
+
+        sorted_strs = ''.join(sorted(s))
+
+        anagramss[sorted_strs].append(s)
+    return list(anagramss.values())
+
+
+strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+
+ana = group_anagrams(strs)
+print(ana)
