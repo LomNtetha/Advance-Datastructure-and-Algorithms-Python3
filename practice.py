@@ -415,3 +415,20 @@ def word_pattern(pattern,s):
 
 pattern = "abba"
 s = "dog cat cat dog"
+from collections import Counter
+
+def canconstructransome(ransomNote,magazine):
+
+    ransome_count = Counter(ransomNote)
+    magazine_count = Counter(magazine)
+
+    for char,count in ransome_count.items():
+        if magazine_count[char]< count:
+            return False
+    return True
+
+ransomNote = "aa"
+magazine = "aab"
+
+count_can = canconstructransome(ransomNote, magazine)
+print(count_can)
