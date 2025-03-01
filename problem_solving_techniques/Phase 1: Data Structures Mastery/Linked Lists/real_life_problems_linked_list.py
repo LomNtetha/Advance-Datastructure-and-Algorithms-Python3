@@ -377,9 +377,6 @@ Statement: Implement a transaction log using a linked list. Each node represents
 operations like adding a transaction, reversing the log (to undo transactions), and displaying the log.
 
 Example Input:
-
-python
-Copy
 # Transactions: "Deposit $100" -> "Withdraw $50" -> "Deposit $200"
 """
 class TransactionNode:
