@@ -432,3 +432,15 @@ magazine = "aab"
 
 count_can = canconstructransome(ransomNote, magazine)
 print(count_can)
+
+def findthedifference(s,t):
+    result = 0
+
+    for c in s + t:
+        result ^= ord(c)
+    return chr(result)
+
+s = "abcd"
+t = "abcde"
+diff = findthedifference(s,t)
+print(diff)
