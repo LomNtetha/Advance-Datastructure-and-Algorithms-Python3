@@ -444,3 +444,31 @@ s = "abcd"
 t = "abcde"
 diff = findthedifference(s,t)
 print(diff)
+
+class ListNode:
+    def __init__(self,val =0,next = None):
+        self.val = val
+        self.next = next
+    
+    def reverselinked(head):
+
+        prev = None
+        current = head 
+
+        while current:
+            next_node = current.next
+            current.next = prev
+            prev = current
+            current = next_node
+        return prev
+
+
+head = ListNode(1,ListNode(2,ListNode(3,ListNode(4,ListNode(5)))))
+
+reve = ListNode.reverselinked(head)
+
+while reve:
+    print(reve.val, end=" -> ")
+    reve = reve.next
+# Output: 5 -> 4 -> 3 -> 2 -> 1
+
