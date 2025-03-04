@@ -473,39 +473,24 @@ while reve:
 # Output: 5 -> 4 -> 3 -> 2 -> 1
 
 class ListNode:
-    def __init__(self, val=0, next=None):
-        # Initialize a node with a value and a reference to the next node
+    def __init__(self, val = 0, next = None):
         self.val = val
         self.next = next
 
-class Solution:
-    def hasCycle(self, head: ListNode) -> bool:
-        # Use two pointers, 'slow' and 'fast', both starting at the head of the list
+    def hascycle(head):
         slow = head
         fast = head
-        
-        # Traverse the list until 'fast' or 'fast.next' is None
+
         while fast and fast.next:
-            # Move 'slow' one step forward
             slow = slow.next
-            # Move 'fast' two steps forward
             fast = fast.next.next
-            
-            # If 'slow' and 'fast' meet, a cycle exists in the list
+
             if slow == fast:
                 return True
-        
-        # If we exit the loop, no cycle was detected
         return False
-
-# Example usage:
-# Creating a linked list: 3 -> 2 -> 0 -> -4
 head = ListNode(3, ListNode(2, ListNode(0, ListNode(-4))))
-# Creating a cycle: Connecting the last node (-4) to the second node (2)
 head.next.next.next.next = head.next
 
-# Create an instance of the Solution class and check for a cycle
-sol = Solution()
-print(sol.hasCycle(head))  # Output: True
+hascircle = ListNode.hascycle(head)
 
-
+print(hascircle)
