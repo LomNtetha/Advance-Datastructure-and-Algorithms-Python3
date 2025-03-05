@@ -48,16 +48,14 @@ print(stack.peek())      # Output: 2 (the top element of the stack)
 print(stack.pop())       # Output: 2 (removes and returns the top element)
 print(stack.pop())       # Output: 1 (removes and returns the next top element)
 
-"""
-Time Complexity:
+# """
+# Time Complexity:
+# push: O(1)
+# pop: O(1)
+# peek: O(1)
+# Space Complexity: O(n), where n is the number of elements in the stack.
+# """
 
-push: O(1)
-pop: O(1)
-peek: O(1)
-Space Complexity:
-
-O(n), where n is the number of elements in the stack.
-"""
 """
 2. Implement a Queue with Enqueue and Dequeue Operations
 Problem Statement:
@@ -98,15 +96,13 @@ queue.enqueue(2)         # Enqueue the value 2 into the queue
 print(queue.dequeue())   # Output: 1 (removes and returns the front element)
 print(queue.dequeue())   # Output: 2 (removes and returns the next front element)
 
-"""
-Time Complexity:
+# """
+# Time Complexity:
+# enqueue: O(1)
+# dequeue: O(n) (since we shift all elements in the list)
 
-enqueue: O(1)
-dequeue: O(n) (since we shift all elements in the list)
-Space Complexity:
-
-O(n), where n is the number of elements in the queue.
-"""
+# Space Complexity:O(n), where n is the number of elements in the queue.
+# """
 
 """
 3. Implement a Stack Using Two Queues
@@ -159,15 +155,12 @@ print(stack.pop())          # Output: 2 (removes and returns the last pushed ele
 stack.push(3)               # Push the value 3 onto the stack
 print(stack.pop())          # Output: 3 (removes and returns the last pushed element)
 
-"""
-Time Complexity:
 
-push: O(1)
-pop: O(n)
-Space Complexity:
+# Time Complexity:
+# push: O(1)
+# pop: O(n)
+# Space Complexity: O(n), where n is the number of elements in the stack.
 
-O(n), where n is the number of elements in the stack.
-"""
 
 """
 4. Check Balanced Parentheses Using Stack
@@ -220,14 +213,10 @@ sol = Solution()
 print(sol.isValid("{[()]}"))  # Output: True (all brackets are matched correctly)
 print(sol.isValid("{[(])}"))  # Output: False (mismatched brackets)
 
-"""
-Time Complexity:
 
-O(n), where n is the length of the string.
-Space Complexity:
+# Time Complexity:O(n), where n is the length of the string.
+# Space Complexity:O(n), due to the stack storage.
 
-O(n), due to the stack storage.
-"""
 
 """
 5. Reverse a Stack
@@ -300,14 +289,11 @@ while not stack.is_empty():
     print(stack.pop(), end=" -> ")  # Print each element followed by "->"
 
 # Output: 4 -> 3 -> 2 -> 1
-"""
-Time Complexity:
 
-O(n), where n is the number of elements in the stack.
-Space Complexity:
+# Time Complexity: O(n), where n is the number of elements in the stack.
 
-O(n), due to recursion stack.
-"""
+# Space Complexity: O(n), due to recursion stack.
+
 
 """
 6. Implement Min Stack
@@ -369,14 +355,11 @@ print(min_stack.getMin())  # Output: 1, as 1 is the minimum value
 min_stack.pop()          # Pop the top element (2)
 print(min_stack.getMin())  # Output: 1, as 1 is still the minimum value
 
-"""
-Time Complexity:
 
-O(1) for push, pop, top, and getMin.
-Space Complexity:
+# Time Complexity: O(1) for push, pop, top, and getMin.
 
-O(n), where n is the number of elements in the stack.
-"""
+# Space Complexity: O(n), where n is the number of elements in the stack.
+
 
 """
 7. Sliding Window Maximum (Deque/Queue)
@@ -486,16 +469,12 @@ print(queue.dequeue())  # Output: 1 (first element in the queue is dequeued)
 queue.enqueue(3)  # Add 3 to the queue
 print(queue.dequeue())  # Output: 2 (second element in the queue is dequeued)
 
+# Time Complexity:
+# enqueue: O(1)
+# dequeue: O(n), in the worst case.
 
-"""
-Time Complexity:
+# Space Complexity: O(n), where n is the number of elements in the queue.
 
-enqueue: O(1)
-dequeue: O(n), in the worst case.
-Space Complexity:
-
-O(n), where n is the number of elements in the queue.
-"""
 
 """
 9. Monotonic Stack for Next Greater Element
@@ -536,14 +515,9 @@ class Solution:
 sol = Solution()
 print(sol.nextGreaterElements([4, 5, 2, 10]))  # Output: [5, 10, 10, -1]
 
-"""
-Time Complexity:
+# Time Complexity: O(n), where n is the number of elements in the array.
 
-O(n), where n is the number of elements in the array.
-Space Complexity:
-
-O(n), where n is the number of elements in the array.
-"""
+# Space Complexity: O(n), where n is the number of elements in the array.
 
 
 """
@@ -599,16 +573,10 @@ class Solution:
 sol = Solution()
 print(sol.minSlidingWindow([1,3,-1,-3,5,3,6,7], 3))  # Output: [-1, -3, -3, -3, 3, 3]
 
-"""
-Time Complexity:
 
-O(n), where n is the number of elements in the array.
-Space Complexity:
+# Time Complexity: O(n), where n is the number of elements in the array.
 
-O(k), where k is the size of the sliding window.
-Let me know if you need more questions or further explanations on any of the problems.
-"""
-
+# Space Complexity: O(k), where k is the size of the sliding window.
 
 """
 11. LRU Cache Implementation
@@ -666,15 +634,13 @@ print(cache.get(1))  # Output: -1  (Key 1 evicted)
 print(cache.get(3))  # Output: 3  (Access key 3)
 print(cache.get(4))  # Output: 4  (Access key 4)
 
-"""
-Time Complexity:
 
-get: O(1)
-put: O(1)
-Space Complexity:
+# Time Complexity:
+# get: O(1)
+# put: O(1)
 
-O(capacity), where capacity is the maximum size of the cache.
-"""
+# Space Complexity:O(capacity), where capacity is the maximum size of the cache.
+
 """
 12. Kth Smallest Element in a BST
 Problem Statement:
@@ -716,14 +682,14 @@ root.left.right = TreeNode(2)      # Create the right child of the left node wit
 sol = Solution()                   # Create an instance of the Solution class
 print(sol.kthSmallest(root, 1))    # Output: 1, as 1 is the 1st smallest element in the BST
 
-"""
-Time Complexity:
 
-O(n), where n is the number of nodes in the tree.
-Space Complexity:
+# Time Complexity:
 
-O(n), due to the space needed for the inorder traversal.
-"""
+# O(n), where n is the number of nodes in the tree.
+# Space Complexity:
+
+# O(n), due to the space needed for the inorder traversal.
+
 
 """
 13. Merge Intervals
@@ -764,14 +730,11 @@ sol = Solution()
 # The merged result is [[1, 6], [8, 10], [15, 18]]
 print(sol.merge([[1,3], [2,6], [8,10], [15,18]]))  # Output: [[1, 6], [8, 10], [15, 18]]
 
-"""
-Time Complexity:
 
-O(n log n), where n is the number of intervals (due to sorting).
-Space Complexity:
+# Time Complexity: O(n log n), where n is the number of intervals (due to sorting).
 
-O(n), where n is the number of intervals.
-"""
+# Space Complexity: O(n), where n is the number of intervals.
+
 
 """
 14. Spiral Matrix
@@ -819,14 +782,10 @@ sol = Solution()
 # For the matrix [[1,2,3], [4,5,6], [7,8,9]], the output is [1, 2, 3, 6, 9, 8, 7, 4, 5]
 print(sol.spiralOrder([[1,2,3],[4,5,6],[7,8,9]]))  # Output: [1, 2, 3, 6, 9, 8, 7, 4, 5]
 
-"""
-Time Complexity:
+# Time Complexity: O(m * n), where m is the number of rows and n is the number of columns in the matrix.
 
-O(m * n), where m is the number of rows and n is the number of columns in the matrix.
-Space Complexity:
+# Space Complexity: O(m * n), to store the result.
 
-O(m * n), to store the result.
-"""
 
 """
 15. Find Peak Element
@@ -866,14 +825,9 @@ sol = Solution()
 # For the array [1, 2, 3, 1], the peak element is 3 (at index 2)
 print(sol.findPeakElement([1, 2, 3, 1]))  # Output: 2
 
-"""
-Time Complexity:
 
-O(log n), where n is the length of the array.
-Space Complexity:
-
-O(1)
-"""
+# Time Complexity: O(log n), where n is the length of the array.
+# Space Complexity: O(1)
 
 """
 16. Word Ladder II
@@ -941,14 +895,10 @@ sol = Solution()
 # Example input: start from "hit", end at "cog", and the wordList includes ["hot", "dot", "dog", "lot", "log", "cog"]
 print(sol.findLadders("hit", "cog", ["hot","dot","dog","lot","log","cog"]))
 
-"""
-Time Complexity:
+# Time Complexity: O(n * L * 26), where n is the number of words in the word list and L is the length of each word.
 
-O(n * L * 26), where n is the number of words in the word list and L is the length of each word.
-Space Complexity:
+# Space Complexity: O(n * L), where n is the number of words and L is the length of each word.
 
-O(n * L), where n is the number of words and L is the length of each word.
-"""
 
 """
 17. Maximal Rectangle
@@ -1023,14 +973,9 @@ sol = Solution()
 # Expected output: 6
 print(sol.maximalRectangle([["1","0","1","0","0"],["1","0","1","1","1"],["1","1","1","1","1"],["1","0","0","1","0"]]))
 
-"""
-Time Complexity:
+# Time Complexity: O(m * n), where m is the number of rows and n is the number of columns in the matrix.
 
-O(m * n), where m is the number of rows and n is the number of columns in the matrix.
-Space Complexity:
-
-O(n), where n is the number of columns in the matrix.
-"""
+# Space Complexity: O(n), where n is the number of columns in the matrix.
 
 """
 18. Coin Change Problem
@@ -1073,11 +1018,7 @@ sol = Solution()
 # Expected output: 3 (since 11 can be made using 5 + 5 + 1)
 print(sol.coinChange([1, 2, 5], 11))  # Output: 3
 
-"""
-Time Complexity:
 
-O(amount * n), where n is the number of coins.
-Space Complexity:
+# Time Complexity: O(amount * n), where n is the number of coins.
 
-O(amount), where amount is the target amount.
-"""
+# Space Complexity: O(amount), where amount is the target amount.
