@@ -184,34 +184,34 @@ False
 """
 
 class Solution:
-    def isValid(self, s: str) -> bool:
-        # Initialize an empty stack to keep track of opening brackets
+    def is_valid(self, expression):
+        """Checks if an expression has balanced parentheses."""
+        
+        # Stack to keep track of opening parentheses
         stack = []
         
-        # Create a mapping of closing brackets to their corresponding opening brackets
-        mapping = {")": "(", "}": "{", "]": "["}
+        # Dictionary to match closing parentheses with corresponding opening parentheses
+        pairs = {')': '(', '}': '{', ']': '['}
         
-        # Iterate over each character in the input string
-        for char in s:
-            # If the character is a closing bracket
-            if char in mapping:
-                # Pop the top element from the stack if it's not empty, otherwise use a placeholder '#'
-                top_element = stack.pop() if stack else '#'
-                
-                # Check if the popped element matches the corresponding opening bracket
-                if mapping[char] != top_element:
-                    return False  # Return False if there's a mismatch
-            else:
-                # If the character is an opening bracket, push it onto the stack
+        # Iterate through each character in the expression
+        for char in expression:
+            # If the character is an opening parenthesis, push it onto the stack
+            if char in pairs.values():
                 stack.append(char)
+            
+            # If the character is a closing parenthesis
+            elif char in pairs:
+                # If the stack is empty or the top of the stack doesn't match the expected opening parenthesis, return False
+                if not stack or stack.pop() != pairs[char]:
+                    return False
         
-        # If the stack is empty at the end, all brackets were matched; otherwise, return False
+        # Return True if the stack is empty (all opening parentheses had a matching closing parenthesis)
         return not stack
 
-# Example usage:
+# Create an instance of Solution
 sol = Solution()  
-print(sol.isValid("{[()]}"))  # Output: True (all brackets are matched correctly)
-print(sol.isValid("{[(])}"))  # Output: False (mismatched brackets)
+print(sol.is_valid("{[()]}"))  # Output: True (all brackets are matched correctly)
+print(sol.is_valid("{[(])}"))  # Output: False (mismatched brackets)
 
 
 # Time Complexity:O(n), where n is the length of the string.
