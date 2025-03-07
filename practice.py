@@ -494,3 +494,27 @@ head.next.next.next.next = head.next
 hascircle = ListNode.hascycle(head)
 
 print(hascircle)
+
+def is_valid(expressions):
+
+    stack = []
+
+    pairs = {")":"(","}":"{","]":"["}
+    # pairs = {')': '(', '}': '{', ']': '['}
+
+    for char in expressions:
+        if char in pairs.values():
+            stack.append(char)
+
+        elif char in pairs:
+            if  not stack or stack.pop != pairs[char]:
+                return False
+
+    return not stack
+
+expressions = ["{[()]}"]
+
+close = is_valid(expressions)
+print(close)
+
+
