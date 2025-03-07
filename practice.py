@@ -518,3 +518,30 @@ close = is_valid(expressions)
 print(close)
 
 
+def adding_numbers_target(nums,target):
+
+    left,right = 0, len(nums) - 1
+
+
+    while left < right:
+
+        total_num = nums[left] + nums[right]
+
+        if total_num == target:
+            return [ left +1, right +1]
+        
+        elif total_num < target:
+            left +=1
+        else:
+            right-=1
+            
+
+nums = [2, 7, 11, 15]
+target = 9
+
+
+taget = adding_numbers_target(nums, target)
+
+print(taget)
+
+
