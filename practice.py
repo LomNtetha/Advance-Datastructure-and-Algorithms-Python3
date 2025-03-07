@@ -560,4 +560,12 @@ s = ["h", "e", "l", "l", "o"]
 revse = reverse_string_two_pointer(s)
 print(revse)
 
+def removeduplicate(nums):
+    remove_dupl = list(set(nums))
+    return remove_dupl
+nums = [1, 1, 2]
+
+remov_dup = removeduplicate(nums)
+print(remov_dup)
+
 
