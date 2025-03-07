@@ -568,4 +568,28 @@ nums = [1, 1, 2]
 remov_dup = removeduplicate(nums)
 print(remov_dup)
 
+def is_palindrome(palindromes):
+
+    left, right = 0, len(palindromes) -1
+
+    while left < right:
+
+        while left < right and not palindromes[left].isalnum(): 
+            left += 1
+        while left < right and not palindromes[right].isalnum():
+            right -= 1
+        
+        if palindromes[left].lower() != palindromes[right].lower():
+            return False
+        
+        left += 1
+        right -= 1
+    return True
+
+palindromes = "A man, a plan, a canal: Panama"
+
+ppp = is_palindrome(palindromes)
+
+print(ppp)
+
 
