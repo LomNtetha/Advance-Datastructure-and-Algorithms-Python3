@@ -650,3 +650,26 @@ height = [0,1,0,2,1,0,1,3,2,1,2,1]
 max_watertrapped = max_trapped_watter(height)
 
 print(max_watertrapped)
+
+def prefix_sum_range(arr,i,j):
+
+    prefix_sum = [0] * len(arr)
+
+    prefix_sum[0] = arr[0]
+
+    for k in range(1, len(arr)):
+
+        prefix_sum[k] = prefix_sum[k -1] + arr[k]
+
+    if i == 0:
+        return prefix_sum[j]
+    
+    else:
+        return prefix_sum[j] - prefix_sum[i - 1]
+
+arr = [2, 4, 1, 6, 3]
+i, j = 1, 3
+
+prefix = prefix_sum_range(arr,i,j)
+
+print(prefix)
