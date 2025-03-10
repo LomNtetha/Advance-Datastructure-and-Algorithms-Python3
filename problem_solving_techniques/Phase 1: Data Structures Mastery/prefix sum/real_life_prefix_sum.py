@@ -44,34 +44,6 @@ for i, j in queries:
     temp_results.append(process_temperatures(temperatures, i, j))
 
 print(temp_results)  # Prints a list of computed values rounded to 2 decimal places
-
-def preprocess_prefix_sum(arr):
-    """ Computes the prefix sum array for the given array. """
-    n = len(arr)
-    prefix_sum = [0] * (n + 1)
-    
-    for i in range(n):
-        prefix_sum[i + 1] = prefix_sum[i] + arr[i]
-    
-    return prefix_sum
-
-def average_temperature(temperatures, queries):
-    """ Returns the average temperature for each (L, R) range. """
-    prefix_sum = preprocess_prefix_sum(temperatures)
-    result = []
-    
-    for L, R in queries:
-        total_sum = prefix_sum[R + 1] - prefix_sum[L]
-        count = R - L + 1
-        result.append(round(total_sum / count, 2))  # Rounding to 2 decimal places
-    
-    return result
-
-# Example usage
-temperatures = [30, 32, 35, 40, 38, 37, 36]
-queries = [(1, 3), (2, 5), (0, 6)]
-print(average_temperature(temperatures, queries))
-# Time Complexity
 # Preprocessing: O(N)
 # Query Execution: O(1) per query
 # Total Complexity: O(N + Q), where Q is the number of queries.
