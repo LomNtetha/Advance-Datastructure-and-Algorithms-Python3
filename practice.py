@@ -698,3 +698,26 @@ queries = [(1, 3), (0, 4), (2, 4)]
 for i , j in queries:
     resultss =  sub_prefix_sum(arr, i, j)
     print(f"The total range from {i} to {j}: {resultss}")
+
+
+def website_visitors(visitors,l,r):
+    prefix_sum = [0] * len(visitors)
+    prefix_sum[0] = visitors[0]
+
+    for k in range(1, len(visitors)):
+        prefix_sum[k] = prefix_sum[k-1] + visitors[k]
+        
+    if l == 0:
+        return prefix_sum[r]
+    
+    else:
+        return prefix_sum[r] - prefix_sum[l-1]
+
+visitors = [120, 150, 200, 180, 170, 160, 140]
+queries = [(0, 3), (2, 5), (1, 6)]
+
+rest_pref = []
+
+for l,r in queries:
+    rest_pref.append(website_visitors(visitors,l,r))
+print(rest_pref)
