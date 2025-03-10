@@ -18,6 +18,33 @@ Output
 [32.33, 38.75, 35.43]
 (Results are rounded to 2 decimal places for clarity.)
 """
+
+def process_temperatures(temperatures, i, j):
+    # Initialize prefix sum array
+    prefix_sum = [0] * len(temperatures)
+    prefix_sum[0] = temperatures[0]
+
+    # Compute prefix sum
+    for k in range(1, len(temperatures)):
+        prefix_sum[k] = prefix_sum[k - 1] + temperatures[k]
+
+    # Compute the range sum and average
+    if i == 0:
+        return round(prefix_sum[j] / (j - i + 1), 2)  # Fix: Return average instead of sum
+    else:
+        return round((prefix_sum[j] - prefix_sum[i - 1]) / (j - i + 1), 2)  
+
+# Temperature data and queries
+temperatures = [30, 32, 35, 40, 38, 37, 36]
+queries = [(1, 3), (2, 5), (0, 6)]
+
+# Process queries
+temp_results = []
+for i, j in queries:
+    temp_results.append(process_temperatures(temperatures, i, j))
+
+print(temp_results)  # Prints a list of computed values rounded to 2 decimal places
+
 def preprocess_prefix_sum(arr):
     """ Computes the prefix sum array for the given array. """
     n = len(arr)
