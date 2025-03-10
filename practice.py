@@ -675,27 +675,26 @@ prefix = prefix_sum_range(arr,i,j)
 print(prefix)
 
 
-def sub_array_sum(arr,i,j):
+
+
+def sub_prefix_sum(arr,i,j):
+
 
     prefix_sum = [0] * len(arr)
     prefix_sum[0] = arr[0]
 
 
     for k in range(1, len(arr)):
-
-        prefix_sum[k]= prefix_sum[k - 1] + arr[k]
+        prefix_sum[k] = prefix_sum[k - 1] + arr[k]
 
     if i == 0:
         return prefix_sum[j]
     else:
-        return prefix_sum[j] - prefix_sum[i-1]
+        return prefix_sum[j] - prefix_sum[i -1]
 
-# Example usage
 arr = [3, 5, 2, 8, 6]
 queries = [(1, 3), (0, 4), (2, 4)]
 
-
-for i, j in queries:
-    res = sub_array_sum(arr,i,j)
-
-    print(f"the results between {i} to {j} is : {res}")
+for i , j in queries:
+    resultss =  sub_prefix_sum(arr, i, j)
+    print(f"The total range from {i} to {j}: {resultss}")
