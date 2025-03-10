@@ -96,30 +96,40 @@ queries = [(0, 3), (2, 5), (1, 6)]
 Output
 [650, 710, 1000]
 """
-def preprocess_prefix_sum(arr):
-    """ Computes the prefix sum array for the given visitor counts. """
-    n = len(arr)
-    prefix_sum = [0] * (n + 1)
-    
-    for i in range(n):
-        prefix_sum[i + 1] = prefix_sum[i] + arr[i]
-    
-    return prefix_sum
+def website_visitors(visitors, l, r):
+    # Initialize prefix sum array with the same length as visitors
+    prefix_sum = [0] * len(visitors)
 
-def total_visitors(visitors, queries):
-    """ Returns the total visitors for each (L, R) range. """
-    prefix_sum = preprocess_prefix_sum(visitors)
-    result = []
-    
-    for L, R in queries:
-        result.append(prefix_sum[R + 1] - prefix_sum[L])
-    
-    return result
+    # Set the first element of prefix sum to be the first visitor count
+    prefix_sum[0] = visitors[0]
 
-# Example usage
+    # Compute prefix sum array
+    for k in range(1, len(visitors)):
+        prefix_sum[k] = prefix_sum[k - 1] + visitors[k]  # Accumulate visitor counts
+
+    # If the range starts from index 0, return the total sum up to index r
+    if l == 0:
+        return prefix_sum[r]
+    else:
+        # Otherwise, return the sum of visitors from index l to r
+        return prefix_sum[r] - prefix_sum[l - 1]  # Subtract the sum before index l
+
+# List of daily website visitors
 visitors = [120, 150, 200, 180, 170, 160, 140]
+
+# List of queries (each tuple represents a range [l, r])
 queries = [(0, 3), (2, 5), (1, 6)]
-print(total_visitors(visitors, queries))
+
+# List to store results of visitor count queries
+rest_pref = []
+
+# Process each query and append the result
+for l, r in queries:
+    rest_pref.append(website_visitors(visitors, l, r))
+
+# Print the results for each query
+print(rest_pref)  # Expected Output: [650, 710, 1000]
+
 # Time Complexity
 # Preprocessing: O(N)
 # Query Execution: O(1) per query
