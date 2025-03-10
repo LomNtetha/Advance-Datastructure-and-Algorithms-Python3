@@ -721,3 +721,27 @@ rest_pref = []
 for l,r in queries:
     rest_pref.append(website_visitors(visitors,l,r))
 print(rest_pref)
+
+def maximum_num_of_request(requests,k):
+
+    current_window = 0
+    left = 0
+    maximum_request = 0
+
+
+    for right in range(len(requests)):
+        current_window += requests[right]
+
+        if right >= k - 1:
+            maximum_request = max(maximum_request, current_window)
+
+            current_window -= requests[left]
+            left+= 1
+    return maximum_request
+
+requests = [10, 3, 15, 8, 25, 18, 12, 20]  # Number of requests per second
+K = 3  # Window size in seconds
+
+currnts = maximum_num_of_request(requests,k)
+
+print(currnts)
