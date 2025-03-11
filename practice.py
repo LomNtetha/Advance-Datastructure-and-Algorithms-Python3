@@ -745,3 +745,44 @@ K = 3  # Window size in seconds
 currnts = maximum_num_of_request(requests,k)
 
 print(currnts)
+
+def group_message(messages):
+
+    result = []
+    current_group = []
+    start_time = None
+
+    for message in messages:
+
+        timestamp, msg = message.split(":")
+        timestamp = int(timestamp)
+
+        if start_time is None:
+            start_time = timestamp
+
+        if timestamp - start_time < 5:
+            current_group.append(message)
+
+        else:
+            result.append(current_group)
+            current_group = [message]
+            start_time = timestamp
+    if current_group:
+        result.append(current_group)
+
+    return result
+
+
+
+messages = [
+    "1:Hello",
+    "2:Hi",
+    "6:How are you?",
+    "7:I am fine",
+    "11:Thanks",
+    "15:Goodbye"
+]
+
+timestap_messages = group_message(messages)
+
+print(timestap_messages)
