@@ -753,7 +753,6 @@ def group_message(messages):
     start_time = None
 
     for message in messages:
-
         timestamp, msg = message.split(":")
         timestamp = int(timestamp)
 
@@ -767,12 +766,11 @@ def group_message(messages):
             result.append(current_group)
             current_group = [message]
             start_time = timestamp
+
     if current_group:
         result.append(current_group)
 
     return result
-
-
 
 messages = [
     "1:Hello",
@@ -783,6 +781,6 @@ messages = [
     "15:Goodbye"
 ]
 
-timestap_messages = group_message(messages)
+new_stamp = group_message(messages)
 
-print(timestap_messages)
+print(new_stamp)
