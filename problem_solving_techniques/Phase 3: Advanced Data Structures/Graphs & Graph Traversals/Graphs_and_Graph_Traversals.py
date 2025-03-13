@@ -322,29 +322,32 @@ The shortest path from "Entrance" to "Bedroom" passes through all intermediate r
 from collections import deque
 
 def find_shortest_path(graph, start, end):
+    # Check if both start and end rooms exist in the graph
     if start not in graph or end not in graph:
-        return None  # One of the rooms does not exist
+        return None  # Return None if either room does not exist
     
-    queue = deque([[start]])  # Initialize queue with the start room
-    visited = set()  # Track visited rooms
+    queue = deque([[start]])  # Initialize queue with a list containing the start room
+    visited = set()  # Set to keep track of visited rooms to prevent cycles
     
     while queue:
-        path = queue.popleft()  # Get the current path
-        room = path[-1]  # Get the last room in the path
+        path = queue.popleft()  # Get the first path from the queue
+        room = path[-1]  # Get the last room in the current path
         
+        # If we reached the destination, return the path
         if room == end:
-            return path  # Return the shortest path when destination is reached
+            return path  # Shortest path found
         
+        # If the room has not been visited, process its neighbors
         if room not in visited:
             visited.add(room)  # Mark the room as visited
             
-            for neighbor in graph[room]:
+            for neighbor in graph[room]:  # Loop through adjacent rooms
                 if neighbor not in visited:
-                    new_path = list(path)  # Copy current path
-                    new_path.append(neighbor)  # Extend path with neighbor
-                    queue.append(new_path)  # Add new path to the queue
+                    new_path = list(path)  # Create a copy of the current path
+                    new_path.append(neighbor)  # Append the neighboring room
+                    queue.append(new_path)  # Add the new path to the queue
     
-    return None  # No path found
+    return None  # Return None if no path is found
 
 # Example graph representation as an adjacency list
 graph = {
@@ -358,7 +361,8 @@ graph = {
 # Test case
 start = "Entrance"
 end = "Bedroom"
-print(find_shortest_path(graph, start, end))
+print(find_shortest_path(graph, start, end))  # Expected output: ['Entrance', 'Hallway', 'Kitchen', 'Living Room', 'Bedroom']
+
 
 
 
