@@ -1,7 +1,12 @@
 """
 1. Depth-First Search (DFS) on a Graph
 Problem Statement:
-Given a graph represented as an adjacency list, perform DFS starting from a given node and return the order of traversal.
+You are given a directed graph represented as an adjacency list, where each key represents a node, and its corresponding
+value is a list of nodes that it connects to. Your task is to implement the Depth-First Search (DFS) algorithm starting 
+from a given node and return the order of traversal.
+
+DFS is a graph traversal technique that explores as far as possible along each branch before backtracking. 
+It can be implemented using recursion or an explicit stack.
 
 Example Input:
 
@@ -13,10 +18,7 @@ graph = {
 }
 start = 0
 Example Output:
-
 [0, 1, 2, 3]
-Solution:
-
 """
 
 class Solution:
