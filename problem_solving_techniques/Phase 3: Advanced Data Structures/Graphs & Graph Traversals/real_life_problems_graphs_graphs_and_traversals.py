@@ -71,11 +71,12 @@ print(recommend_friends(graph, 'Alice'))  # Output: ['David']
 """
 Problem 2: Flight Route Planning
 Problem Statement
-You are given a graph representing flight routes between airports. Each node in the graph represents an airport, and edges represent direct flights between airports. Your task is to find the shortest path (minimum number of stops) between two given airports. If there are multiple paths with the same number of stops, any of them can be returned. If no path exists, return None.
+You are given a graph representing flight routes between airports. Each node in the graph represents an airport, and edges 
+represent direct flights between airports. Your task is to find the shortest path (minimum number of stops) 
+between two given airports. If there are multiple paths with the same number of stops, any of them can be returned. 
+If no path exists, return None.
 
 Example Input
-python
-Copy
 graph = {
     'JFK': ['LAX', 'ATL'],
     'LAX': ['JFK', 'ATL'],
@@ -413,9 +414,10 @@ print(crawl_website(start_url, max_pages=5))
 """
 Problem 7: Disease Spread Simulation
 Problem Statement
-You are given a population represented as a graph, where each node represents an individual, and edges represent interactions between individuals. 
-Your task is to simulate the spread of a disease through this population. The simulation should start with one or more infected individuals 
-and propagate the disease based on interactions. Each interaction has a certain probability of transmitting the disease.
+You are given a population represented as a graph, where each node represents an individual, and edges represent 
+interactions between individuals. Your task is to simulate the spread of a disease through this population. 
+The simulation should start with one or more infected individuals and propagate the disease based on interactions. 
+ interaction has a certain probability of transmitting the disease.
 
 Example Input
 graph = {
