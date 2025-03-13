@@ -319,81 +319,46 @@ Explanation:
 The shortest path from "Entrance" to "Bedroom" passes through all intermediate rooms in the order shown.
 
 """
-
 from collections import deque
 
-class Solution:
-    def __init__(self):
-        self.graph = {}  # Represents the rooms and their connections as an adjacency list
-
-    def add_room(self, room):
-        """
-        Adds a room to the graph.
-        :param room: The name of the room (node)
-        """
-        if room not in self.graph:
-            self.graph[room] = []
-
-    def connect_rooms(self, room1, room2):
-        """
-        Creates a two-way connection between two rooms.
-        :param room1: First room
-        :param room2: Second room
-        """
-        self.graph[room1].append(room2)
-        self.graph[room2].append(room1)
-
-    def find_shortest_path(self, start, end):
-        """
-        Finds the shortest path between two rooms using BFS.
-        :param start: Starting room
-        :param end: Destination room
-        :return: List representing the shortest path or None if no path exists
-        """
-        if start not in self.graph or end not in self.graph:
-            return None  # Return None if either room doesn't exist
-
-        visited = set()  # To keep track of visited rooms
-        queue = deque([[start]])  # Queue to store paths, starting with the `start` room
-
-        while queue:
-            path = queue.popleft()  # Get the next path from the queue
-            room = path[-1]  # Get the last room in the current path
-
-            if room in visited:
-                continue
-
-            visited.add(room)
-
-            # Check if we've reached the destination
-            if room == end:
-                return path
-
-            # Add connected rooms to the queue
-            for neighbor in self.graph[room]:
+def find_shortest_path(graph, start, end):
+    if start not in graph or end not in graph:
+        return None  # One of the rooms does not exist
+    
+    queue = deque([[start]])  # Initialize queue with the start room
+    visited = set()  # Track visited rooms
+    
+    while queue:
+        path = queue.popleft()  # Get the current path
+        room = path[-1]  # Get the last room in the path
+        
+        if room == end:
+            return path  # Return the shortest path when destination is reached
+        
+        if room not in visited:
+            visited.add(room)  # Mark the room as visited
+            
+            for neighbor in graph[room]:
                 if neighbor not in visited:
-                    new_path = path + [neighbor]
-                    queue.append(new_path)
+                    new_path = list(path)  # Copy current path
+                    new_path.append(neighbor)  # Extend path with neighbor
+                    queue.append(new_path)  # Add new path to the queue
+    
+    return None  # No path found
 
-        return None  # No path found
+# Example graph representation as an adjacency list
+graph = {
+    "Entrance": ["Hallway"],
+    "Hallway": ["Entrance", "Kitchen"],
+    "Kitchen": ["Hallway", "Living Room"],
+    "Living Room": ["Kitchen", "Bedroom"],
+    "Bedroom": ["Living Room"]
+}
 
-
-# Example Usage
-solution = Solution()
-solution.add_room("Entrance")
-solution.add_room("Hallway")
-solution.add_room("Kitchen")
-solution.add_room("Living Room")
-solution.add_room("Bedroom")
-
-solution.connect_rooms("Entrance", "Hallway")
-solution.connect_rooms("Hallway", "Kitchen")
-solution.connect_rooms("Kitchen", "Living Room")
-solution.connect_rooms("Living Room", "Bedroom")
-
-# Find the shortest path
-shortest_path = solution.find_shortest_path("Entrance", "Bedroom")
-print("Shortest Path:", shortest_path)
+# Test case
+start = "Entrance"
+end = "Bedroom"
+print(find_shortest_path(graph, start, end))
 
 
 
