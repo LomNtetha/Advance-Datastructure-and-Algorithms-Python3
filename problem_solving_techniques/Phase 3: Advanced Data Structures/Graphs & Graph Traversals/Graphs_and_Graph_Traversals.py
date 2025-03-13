@@ -602,7 +602,8 @@ print(sol.find_all_paths(graph, 0, 3))
 """
 8. Check if a Graph is Bipartite
 Problem Statement:
-Determine if a graph is bipartite (i.e., can its vertices be divided into two disjoint sets such that no two vertices within the same set are adjacent).
+Determine if a graph is bipartite (i.e., can its vertices be divided into two disjoint sets such that no vertices
+within the same set are adjacent).
 
 Example Input:
 graph = {
