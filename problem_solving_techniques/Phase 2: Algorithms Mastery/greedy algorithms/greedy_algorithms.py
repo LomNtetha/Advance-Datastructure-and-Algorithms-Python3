@@ -122,13 +122,9 @@ result = max_transactions(transactions)
 
 print("Maximum Non-Overlapping Transactions:", result)
 
+# Time Complexity: O(n log n) We sort the activities based on their end times.
+# Space Complexity: O(n) We store the sorted list of activities.
 
-"""
-Time Complexity: O(n log n)
-We sort the activities based on their end times.
-Space Complexity: O(n)
-We store the sorted list of activities.
-"""
 
 """
 3. Fractional Knapsack Problem
@@ -254,13 +250,9 @@ projects = [10, 20, 30, 40]
 budget = 50
 print(max_funded_projects(projects, budget))  # Output: ([10, 20], 2)
 
+# Time Complexity: O(n log n) We sort the items based on their value-to-weight ratio.
+# Space Complexity: O(n) We store the sorted list of items.
 
-"""
-Time Complexity: O(n log n)
-We sort the items based on their value-to-weight ratio.
-Space Complexity: O(n)
-We store the sorted list of items.
-"""
 
 """
 4. Minimum Number of Platforms Required for a Railway Station
@@ -312,12 +304,9 @@ solution = Solution()
 print(solution.findMinPlatforms(arrival, departure))  # Output: 3
 
 
-"""
-Time Complexity: O(n log n)
-We sort the arrival and departure times.
-Space Complexity: O(1)
-We use only a few extra variables.
-"""
+# Time Complexity: O(n log n) We sort the arrival and departure times.
+# Space Complexity: O(1) We use only a few extra variables.
+
 
 """
 5. Job Sequencing Problem
@@ -357,13 +346,11 @@ class Solution:
 jobs = [(2, 100), (1, 19), (2, 27), (1, 25), (3, 15)]
 solution = Solution()
 print(solution.job_sequencing(jobs))  # Output: 142
-"""
-    
-Time Complexity: O(n log n)
-We sort the jobs by profit and then iterate over the jobs and slots.
-Space Complexity: O(d)
-We use a list of size equal to the maximum deadline d.
-"""
+
+
+# Time Complexity: O(n log n) We sort the jobs by profit and then iterate over the jobs and slots.
+# Space Complexity: O(d) We use a list of size equal to the maximum deadline d.
+
 
 """
 6. Dijkstra’s Shortest Path Algorithm
@@ -440,12 +427,9 @@ distances = solution.dijkstra(graph, source)
 # Output distances
 print("Distances:", [distances[i] for i in range(len(graph))])
 
-"""      
-Time Complexity: O(E log V)
-Where E is the number of edges and V is the number of vertices.
-Space Complexity: O(V)
-We use space to store distances and the heap.
-"""
+# Time Complexity: O(E log V) Where E is the number of edges and V is the number of vertices.
+# Space Complexity: O(V) We use space to store distances and the heap.
+
 
 
 """
@@ -515,12 +499,10 @@ class Solution:
         code_map = {}
         build_code(root, '', code_map)  # Start building the code from the root
         return code_map
-"""
-Time Complexity: O(n log n)
-Building the heap and tree takes O(n log n), where n is the number of characters.
-Space Complexity: O(n)
-We store the nodes and Huffman codes.
-"""
+    
+# Time Complexity: O(n log n) Building the heap and tree takes O(n log n), where n is the number of characters.
+# Space Complexity: O(n) We store the nodes and Huffman codes.
+
 
 
 """
@@ -556,10 +538,10 @@ solution = Solution()
 num = 6
 den = 14
 print(solution.egyptian_fraction(num, den))  # Output: [3, 11, 231]
-"""
-Time Complexity: O(n), where n is the number of unit fractions generated.
-Space Complexity: O(n), where n is the number of unit fractions stored in the result.
-"""
+
+# Time Complexity: O(n), where n is the number of unit fractions generated.
+# Space Complexity: O(n), where n is the number of unit fractions stored in the result.
+
 
 """
 9. Greedy Algorithm to Minimize the Maximum Difference Between Heights
@@ -603,11 +585,9 @@ result = solution.minimize_difference(heights, k)
 print(f"Minimum difference: {result}")
 
     
-"""Time Complexity: O(n log n)
-We sort the array first and then iterate through it once.
-Space Complexity: O(1)
-We use only a few extra variables.
-"""
+# Time Complexity: O(n log n) We sort the array first and then iterate through it once.
+# Space Complexity: O(1) We use only a few extra variables.
+
 
 """
 10. Largest Number
@@ -652,28 +632,11 @@ solution = Solution()
 nums = [3, 30, 34, 5, 9]
 print(solution.largestNumber(nums))  # Output: "9534330"
 
+# Time Complexity: O(n log n)
+# We sort the numbers based on the custom comparator.
+# Space Complexity: O(n)
+# We store the numbers as strings.
 
-# The above is the most correct way where the below is the most simplest way
-def convert_large_number(nums):
-
-    nums_string = "".join(str(num) for num in nums)
-
-    sorted_nums_string = "".join(sorted(nums_string, reverse=True))
-    
-    return sorted_nums_string
-
-nums = [3, 30, 34, 5, 9]
-
-large = convert_large_number(nums)
-
-print(large)
-
-"""
-Time Complexity: O(n log n)
-We sort the numbers based on the custom comparator.
-Space Complexity: O(n)
-We store the numbers as strings.
-"""
 
 """
 11. Best Time to Buy and Sell Stock (Single Transaction)
@@ -692,13 +655,7 @@ Output: 0
 Explanation: In this case, no transactions are done, and the maximum profit is 0.
 """
 
-"""
-Type: Greedy
-Time Complexity: 
-O(n)
-Space Complexity: 
-O(1)
-"""
+
 class Solution:
     def maxProfit(self, prices):
         """
@@ -723,6 +680,10 @@ class Solution:
 print(Solution().maxProfit([7, 1, 5, 3, 6, 4]))  # Output: 5
 
 
+# Time Complexity: O(n) We iterate through the prices list once
+# Space Complexity: O(1) We use only a few extra variables (`min_price` and `max_profit`)
+
+
 """
 12. Best Time to Buy and Sell Stock II (Multiple Transactions)
 Problem Statement:
@@ -738,13 +699,6 @@ Explanation: Buy on day 2 (price = 1), sell on day 3 (price = 5), profit = 4. Th
 Input: prices = [1, 2, 3, 4, 5]
 Output: 4
 Explanation: Buy on day 1 (price = 1), sell on day 5 (price = 5).
-"""
-"""
-Type: Greedy
-Time Complexity: 
-O(n)
-Space Complexity: 
-O(1)
 """
 
 class Solution:
@@ -768,6 +722,15 @@ class Solution:
 
 # Test
 print(Solution().maxProfit([7, 1, 5, 3, 6, 4]))  # Output: 7
+
+# Time Complexity: O(n)  
+# We iterate through the prices list once, checking and adding profits where applicable.  
+# Since each operation inside the loop is O(1), the overall complexity is O(n).  
+
+# Space Complexity: O(1)  
+# We use only a single variable (`profit`) to track the total profit, requiring constant space.  
+# Thus, the space complexity is O(1).  
+
 
 """
 Technique: Greedy Algorithm (Load Balancing - Manual Min Selection)
@@ -804,6 +767,17 @@ tasks = [2, 3, 4]
 workers = [5, 5]
 print(assign_tasks(tasks, workers))  # Output: [5, 4] or [4, 5] (valid distributions)
 
+# Time Complexity: O(n log n + n * m)  
+# Sorting the tasks takes O(n log n).  
+# For each task, we iterate over all workers (O(m)) to find the best assignment.  
+# In the worst case, this results in O(n * m) operations.  
+# Thus, the overall complexity is O(n log n + n * m).  
+
+# Space Complexity: O(m)  
+# We use an array (`worker_loads`) of size m to track each worker’s load.  
+# No additional space is used apart from input storage, so the space complexity is O(m).  
+
+
 """
 Technique: Greedy Algorithm (Interval Scheduling with Room Assignment)
 Statement: Schedule meetings in rooms such that no two meetings overlap in the same room.
@@ -833,6 +807,16 @@ def schedule_meetings(meetings, rooms):
 meetings = [(1, 4), (3, 5), (6, 8)]
 rooms = 2
 print(schedule_meetings(meetings, rooms))  # Output: "Meetings scheduled successfully"
+
+# Time Complexity: O(n log n + n * m)  
+# Sorting the meetings takes O(n log n).  
+# For each meeting, we iterate over at most m rooms to find an available one, taking O(n * m).  
+# Thus, the overall complexity is O(n log n + n * m).  
+
+# Space Complexity: O(m)  
+# We use an array (`room_end_times`) of size m to track when each room is free.  
+# No additional space is used apart from input storage, so the space complexity is O(m).  
+
 
 """
 Statement: Plan a travel itinerary such that the total cost does not exceed the budget and all destinations are visited.
@@ -865,5 +849,15 @@ budget = 1000
 itinerary, total_spent = plan_itinerary(destinations, budget)
 print("Planned Itinerary:", itinerary)  # Example Output: ['Rome', 'London']
 print("Total Cost:", total_spent)  # Example Output: 700
+
+# Time Complexity: O(n log n)  
+# Sorting the destinations by cost takes O(n log n).  
+# The loop iterates through the destinations once (O(n)), but sorting dominates.  
+# Thus, the overall complexity is O(n log n).  
+
+# Space Complexity: O(n)  
+# We store the selected destinations in `itinerary`, which in the worst case stores all n destinations.  
+# So the space complexity is O(n).  
+
 
 
