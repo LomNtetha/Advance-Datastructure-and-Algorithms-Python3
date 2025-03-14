@@ -3,11 +3,6 @@
 Suppose we have coin denominations of 25, 10, 5, and 1 (as in U.S. currency) and need to make 41 cents. Our goal is to use as few coins as possible
 to reach this amount.
 
-Complexity:
-Time Complexity: O(n), where 
-n is the number of coin denominations (constant in this case as it is a fixed list of 4 denominations).
-Space Complexity: O(k), where 
-k is the number of coins used (to store the list coins_used).
 """
 
 class Solution:
@@ -44,6 +39,12 @@ amount = 41  # Target amount in cents
 min_coins, coins_used = solution.minimumCoins(amount)
 print(f"Minimum coins required: {min_coins}")
 print(f"Coins used: {coins_used}")
+
+# Complexity:
+# Time Complexity: O(n), where 
+# n is the number of coin denominations (constant in this case as it is a fixed list of 4 denominations).
+# Space Complexity: O(k), where 
+# k is the number of coins used (to store the list coins_used).
 
 
 """
@@ -95,6 +96,17 @@ max_activities, selected_activities = solution.max_activities(start, end)
 
 print(f"Maximum number of activities: {max_activities}")
 print(f"Indices of selected activities: {selected_activities}")
+
+# Time Complexity: O(n log n)  
+# - Zipping `start` and `end` lists takes O(n).  
+# - Sorting the activities based on end times takes O(n log n).  
+# - Iterating through the activities to select them takes O(n).  
+# - Thus, the overall complexity is O(n log n), as sorting dominates.  
+
+# Space Complexity: O(n)  
+# - We store the `activities` list (O(n)).  
+# - The `selected_activities` list may store up to O(n) indices in the worst case.  
+# - Therefore, the space complexity is O(n).  
 
 """
 Statement: You are given a list of transactions with start and end times. Schedule the maximum number of transactions without overlapping.
@@ -177,6 +189,9 @@ max_value = solution.fractional_knapsack(weights, values, capacity)
 # Print the result
 print(f"Maximum value in the knapsack: {max_value}")
 
+# Time Complexity: O(n log n) We sort the items based on their value-to-weight ratio.
+# Space Complexity: O(n) We store the sorted list of items.
+
 
 """
 An investor has $50,000 to allocate across three investment options. Each option has a cost per unit (investment) and an expected return per unit.
@@ -250,8 +265,15 @@ projects = [10, 20, 30, 40]
 budget = 50
 print(max_funded_projects(projects, budget))  # Output: ([10, 20], 2)
 
-# Time Complexity: O(n log n) We sort the items based on their value-to-weight ratio.
-# Space Complexity: O(n) We store the sorted list of items.
+
+# Time Complexity: O(n log n)  
+# - Sorting the projects by cost takes O(n log n).  
+# - The loop iterates over the projects once, which is O(n).  
+# - Thus, the overall complexity is O(n log n), as sorting dominates.  
+
+# Space Complexity: O(n)  
+# - We store the selected projects in the `funded` list, which in the worst case can store O(n) projects.  
+# - Therefore, the space complexity is O(n).  
 
 
 """
@@ -304,8 +326,15 @@ solution = Solution()
 print(solution.findMinPlatforms(arrival, departure))  # Output: 3
 
 
-# Time Complexity: O(n log n) We sort the arrival and departure times.
-# Space Complexity: O(1) We use only a few extra variables.
+# Time Complexity: O(n log n)  
+# - Sorting the `arrival` and `departure` times takes O(n log n) for each list.  
+# - The while loop iterates over the `arrival` and `departure` lists, which is O(n).  
+# - Thus, the overall complexity is O(n log n) due to the sorting step.  
+
+# Space Complexity: O(n)  
+# - We store the `arrival` and `departure` lists, each of size O(n).  
+# - The `platforms_needed` and `max_platforms` variables use O(1) space.  
+# - Therefore, the space complexity is O(n), dominated by the storage of the lists.  
 
 
 """
