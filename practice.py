@@ -53,3 +53,35 @@ num_activities, select_activity = max_activities(start,end)
 print(f"Number of activities {num_activities}")
 
 print(f"selected activities {select_activity}")
+
+
+def fractiona_kanapsack(weights,values, capacity):
+   
+   items = zip(values,weights)
+   
+
+   ratio_items = [(v/w,w) for v, w in items]
+
+   items= sorted(ratio_items,key=lambda x:x[1])
+
+   total_value = 0.0
+
+   for value_per_item, weight in ratio_items:
+      if capacity >= weight:
+         total_value += value_per_item * weight
+         capacity-= weight
+
+      else:
+         total_value += value_per_item * capacity
+         break
+   return total_value
+
+
+
+
+weights = [10, 20, 30]  # Weights of items
+values = [60, 100, 120]  # Values of items
+capacity = 50
+
+max_value = fractiona_kanapsack(weights,values,capacity)
+print(max_value)
