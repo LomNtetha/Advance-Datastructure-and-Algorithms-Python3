@@ -94,8 +94,8 @@ start = [1, 3, 0, 5, 8, 5]
 end = [2, 4, 6, 7, 9, 9]
 max_activities, selected_activities = solution.max_activities(start, end)
 
-print(f"Maximum number of activities: {max_activities}")
-print(f"Indices of selected activities: {selected_activities}")
+print(f"Maximum number of activities: {max_activities}")#  Maximum number of activities: 4
+print(f"Indices of selected activities: {selected_activities}") # Indices of selected activities: [0, 1, 3, 4]
 
 # Time Complexity: O(n log n)  
 # - Zipping `start` and `end` lists takes O(n).  
