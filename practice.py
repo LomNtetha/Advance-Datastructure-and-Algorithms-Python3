@@ -187,3 +187,18 @@ source = 0
 short_dist = dijkstra_algorithms(graph,source)
 
 print(short_dist)
+
+def large_numbers(nums):
+   num_str = list(map(str,nums))
+
+   num_str.sort(key=lambda x:x*10, reverse = True)
+
+   result = ''.join(num_str)
+
+   return result
+
+nums = [3, 30, 34, 5, 9]
+
+large = large_numbers(nums)
+
+print(large)
