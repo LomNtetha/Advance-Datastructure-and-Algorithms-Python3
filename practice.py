@@ -202,3 +202,34 @@ nums = [3, 30, 34, 5, 9]
 large = large_numbers(nums)
 
 print(large)
+
+
+
+def minimize_difference(heights,k):
+
+   heights.sort()
+
+   n = len(heights)
+
+   initial_min = heights[-1] - heights[0]
+
+   min_diff = initial_min
+
+   for i in range(n-1):
+
+      new_min = min(heights[0] + k, heights[i + 1] - k)
+      new_max = max(heights[-1] -k, heights[i] +k)
+
+
+      min_diff = min(min_diff, (new_max - new_min))
+
+   return min_diff
+
+
+
+heights = [1, 5, 15, 10]
+k = 3
+
+diff_minimum = minimize_difference(heights, k)
+
+print(diff_minimum)
