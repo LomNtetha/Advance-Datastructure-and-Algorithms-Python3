@@ -1,3 +1,6 @@
+from typing import List, Tuple
+
+
 def denominations_coin(denominations, amount):
 
     denominations.sort(reverse= True)
@@ -117,3 +120,28 @@ departure = ["9:10", "12:00", "11:20", "11:30", "19:00", "20:00"]
 maxplatform = max_platform_need_train(arrival, departure)
 
 print(maxplatform)
+
+def job_sequencing(jobs):
+
+   jobs.sort(key =lambda x:x[1], reverse = True )
+
+   max_dealine = max(job[0] for job in jobs) 
+
+   slots = [-1] *(max_dealine+1)
+
+   total_profit = 0
+
+   for dealine,profit in jobs:
+
+      for j in range (min(dealine,max_dealine),0, -1):
+         if slots[j] == -1:
+            slots[j] = profit
+            total_profit += profit
+            break
+   return total_profit
+
+jobs = [(2, 100), (1, 19), (2, 27), (1, 25), (3, 15)]
+
+profit_dealine = job_sequencing(jobs)
+
+print(profit_dealine)
