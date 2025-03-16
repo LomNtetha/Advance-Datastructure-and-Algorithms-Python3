@@ -18,15 +18,6 @@ Complexity Analysis
 Time Complexity
 The algorithm iterates from day 1 to the last travel day (days[-1]), which could be up to 365 (if the last day is day 365).
 Each day, the calculation of dp[day] only involves a fixed number of operations (finding the minimum of three values).
-Total Time Complexity: 
-O(D), where  𝐷
-is the last travel day (maximum 365).
-
-Space Complexity
-The dp dictionary stores costs for each day from 1 to days[-1]. In the worst case, if travel days span the entire year, dp could have up to 365 entries.
-Total Space Complexity: 
-O(D), where 
-𝐷 is the last travel day.
 """
 
 
@@ -56,6 +47,14 @@ days = [1, 4, 6, 7, 8, 20]
 costs = [2, 7, 15]
 solution = Solution()
 print("Minimum cost to cover all travel days:", solution.min_cost_for_travel(days, costs))
+
+# Total Time Complexity: 
+# O(D), where  𝐷 is the last travel day (maximum 365).
+
+# Space Complexity
+# The dp dictionary stores costs for each day from 1 to days[-1]. In the worst case, if travel days span the entire year, 
+# dp could have up to 365 entries.
+# Total Space Complexity:  O(D), where  the last travel day.
 
 
 """
@@ -204,6 +203,9 @@ print(sol.rob([2, 3, 2]))  # Output: 3
 print(sol.rob([1, 2, 3, 1]))  # Output: 4
 print(sol.rob([1, 2, 3]))  # Output: 3
 
+# Time Complexity: O(n)
+# Space Complexity: O(1)
+
 
 """
 4. Coin Change
@@ -233,6 +235,19 @@ class Solution:
 # Example usage
 sol = Solution()
 print(sol.coin_change([1, 2, 5], 11))  # Output: 3
+
+# Time Complexity: O(n⋅m)
+# n = length of coins (number of coin denominations).
+# m = amount (target amount).
+# The algorithm uses dynamic programming and iterates through each coin.
+# For each coin, it updates the dp array from coin to amount, leading to:
+# O(n⋅m)
+# since we iterate over all m values for each of the n coins.
+
+# # Space Complexity: O(m)
+# The dp array stores the minimum number of coins required for each amount from 0 to amount, consuming 
+# O(m) space.
+# There are no additional recursive calls or extra data structures beyond this array.
 
 """
 5. Longest Increasing Subsequence
@@ -327,11 +342,6 @@ Problem: Find the length of the longest subsequence present in both strings.
 Input: text1 = "abcde", text2 = "ace"
 
 Output: 3 (subsequence: "ace")
-
-Time Complexity: 
-O(m×n)
-Space Complexity: 
-O(m×n)
 """
 
 
@@ -355,6 +365,11 @@ class Solution:
 sol = Solution()
 print(sol.longest_common_subsequence("abcde", "ace"))  # Output: 3
 
+# Time Complexity: 
+# O(m×n)
+# Space Complexity: 
+# O(m×n)
+
 """
 9. Edit Distance
 Problem: Find the minimum number of operations (insert, delete, replace) to convert one string into another.
@@ -362,9 +377,6 @@ Problem: Find the minimum number of operations (insert, delete, replace) to conv
 Input: word1 = "horse", word2 = "ros"
 
 Output: 3
-
-Time Complexity: O(m×n)
-Space Complexity: O(m×n)
 """
 
 class Solution:
@@ -394,6 +406,9 @@ class Solution:
 # Example usage
 sol = Solution()
 print(sol.min_distance("horse", "ros"))  # Output: 3
+
+# Time Complexity: O(m×n)
+# Space Complexity: O(m×n)
 
 """
 10. Decode Ways
@@ -438,11 +453,6 @@ Problem: Find the minimum sum path from the top-left to the bottom-right corner 
 Input: grid = [[1, 3, 1], [1, 5, 1], [4, 2, 1]]
 
 Output: 7
-
-Time Complexity: 
-O(m×n)
-Space Complexity: 
-O(m×n)
 """
 
 
@@ -473,6 +483,11 @@ class Solution:
 sol = Solution()
 print(sol.min_path_sum([[1, 3, 1], [1, 5, 1], [4, 2, 1]]))  # Output: 7
 
+# Time Complexity: 
+# O(m×n)
+# Space Complexity: 
+# O(m×n)
+
 
 """
 12. Maximum Subarray Sum (Kadane’s Algorithm)
@@ -481,9 +496,6 @@ Problem: Find the largest sum of any contiguous subarray.
 Input: nums = [-2, 1, -3, 4, -1, 2, 1, -5, 4]
 
 Output: 6
-
-Time Complexity: O(n)
-Space Complexity: O(1)
 """
 
 
@@ -500,7 +512,10 @@ class Solution:
 
 # Example usage
 sol = Solution()
-print(sol.max_sub_array([-2, 1, -3, 4, -1, 2, 1, -5, 4]))  # Output: 6
+print(sol.max_sub_array([-2, 1, -3, 4, -1, 2, 1, -5, 4]))  # Output: 
+
+# Time Complexity: O(n)
+# Space Complexity: O(1)
 
 """
 13. Unique Paths
@@ -510,8 +525,6 @@ Input: m = 3, n = 7
 
 Output: 28
 
-Time Complexity: O(m×n)
-Space Complexity: O(m×n)
 """
 
 class Solution:
@@ -528,7 +541,11 @@ class Solution:
 
 # Example usage
 sol = Solution()
-print(sol.unique_paths(3, 7))  # Output: 28
+print(sol.unique_paths(3, 7))  # Output: 
+
+
+# Time Complexity: O(m×n)
+# Space Complexity: O(m×n)
 
 """
 14. Palindromic Substrings
@@ -538,8 +555,6 @@ Input: s = "aaa"
 
 Output: 6
 
-Time Complexity: O(n^2)
-Space Complexity: O(n 2)
 """
 
 class Solution:
@@ -568,6 +583,9 @@ class Solution:
 # Example usage
 sol = Solution()
 print(sol.count_substrings("aaa"))  # Output: 6
+
+# Time Complexity: O(n^2)
+# Space Complexity: O(n 2)
 
 """
 Fibonacci Sequence
@@ -600,6 +618,9 @@ class Solution:
 sol = Solution()
 print(sol.fibonacci(7))  # Output: 13
 
+# Time Complexity: O(n)
+# Space Complexity: O(n)
+
 
 # print(fibonacci(7))  # Output: 13
 
@@ -607,8 +628,7 @@ print(sol.fibonacci(7))  # Output: 13
 The given code solves the problem of finding the longest palindromic substring in a given string. The question is:
 
 "Given a string s, find the longest substring in s that is a palindrome. A palindrome is a string that reads the same backward as forward."
-Time Complexity: O(n^2)
-Space Complexity: O(n^2)
+
 
 """
 class Solution:
@@ -643,6 +663,9 @@ class Solution:
 solution = Solution()
 print(solution.longestPalindrome("babad"))  # Output: "bab" or "aba"
 
+# Time Complexity: O(n^2)
+# Space Complexity: O(n^2)
+
 
 """"
 Longest Palindromic Subsequence
@@ -653,14 +676,6 @@ Input: s = "bbbab"
 Output: 4 (subsequence: "bbbb")
 """
 
-"""
-Time Complexity: 
-
-O(n2)
-Space Complexity: 
-
-O(n^2)
-"""
 class Solution:
     def longestPalindrome(self, s: str) -> int:
         n = len(s)  # Length of the input string
@@ -692,6 +707,9 @@ class Solution:
 solution = Solution()
 print(solution.longestPalindrome("babad"))  # Output: 3
 from typing import List
+
+# Time Complexity: O(n2)
+# Space Complexity:  O(n^2)
 
 """
 Efficient Approach: Dynamic Programming + Bitmasking (Held-Karp
@@ -741,4 +759,8 @@ distances = [
 # Output
 solution = Solution()
 print(solution.tsp(distances))  # Output: Shortest possible route cost
+
+# Complexity Analysis
+# Time Complexity: O(n² * 2ⁿ)
+# Space Complexity: O(n * 2ⁿ) (due to memoization)
 
