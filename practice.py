@@ -312,3 +312,18 @@ n = 5
 nums = ways_to_climp_stairs(n)
 
 print(nums)
+
+def rob_houses(nums):
+
+   prev = curr = 0
+
+   for num in nums:
+
+      prev,curr = curr,max(curr, prev +num)
+
+   return curr
+
+nums = [2, 7, 9, 3, 1]
+
+robs = rob_houses(nums)
+print(robs)
