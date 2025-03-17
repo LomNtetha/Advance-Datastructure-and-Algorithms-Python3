@@ -268,3 +268,28 @@ prices = [7, 1, 5, 3, 6, 4]
 double_pp = double_profit(prices)
 
 print(double_pp)
+
+def min_cost_travel_day(days,costs):
+
+   dp = {}
+   travel_days = set(days)
+
+   for day in range(1,days[-1] + 1):
+
+      if day not in travel_days:
+         dp[day] = dp.get(day -1, 0)
+
+      else:
+          dp[day] = min(
+             dp.get(day -1, 0) + costs[0],
+             dp.get(day -7, 0) + costs[1],
+             dp.get(day -30, 0) + costs[2]
+            )
+   return dp[days[-1]]
+         
+days = [1, 4, 6, 7, 8, 20]
+costs = [2, 7, 15]
+
+min_cost_day = min_cost_travel_day(days,costs)
+
+print(min_cost_day)
