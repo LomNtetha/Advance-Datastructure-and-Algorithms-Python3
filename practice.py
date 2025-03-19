@@ -358,3 +358,22 @@ numss = [1, 2, 3, 1]
 excudeddd = rob_houses_in_circle(numss)
 
 print(excudeddd)
+
+def dp_denominations(coins,amount):
+   dp = [float('inf')] * (amount +1)
+   dp[0] = 0
+
+   for coin in coins:
+      for i in range(coin, amount +1):
+         dp[i] = min(dp[i], dp[i - coin] + 1)
+
+   results = dp[amount] if dp[amount] != float('inf') else -1
+
+   return results
+
+coins = [1, 2, 5]
+
+amount = 11
+
+dp_results = dp_denominations(coins,amount)
+print(dp_results)
