@@ -219,6 +219,70 @@ print(sol.is_valid("{[(])}"))  # Output: False (mismatched brackets)
 
 
 """
+Problem Statement
+You are keeping score for a baseball game with a list of strings where each string represents an operation performed on the game. The valid operations are:
+
+An integer (x) – Record this number of points in the game.
+'+' Record a new score that is the sum of the previous two scores.
+'D' Record a new score that is double the previous score.
+'C' Remove the last recorded score.
+You need to return the sum of all scores after applying these operations.
+
+Example 1
+Input:
+ops = ["5", "2", "C", "D", "+"]
+Explanation:
+"5" → Add 5 to the record: [5]
+"2" → Add 2 to the record: [5, 2]
+"C" → Remove the last score (2): [5]
+"D" → Double the previous score (5 → 10): [5, 10]
+"+" → Add sum of last two scores (5 + 10 = 15): [5, 10, 15]
+Output:
+python
+Copy code
+sum([5, 10, 15]) = 30
+Example 2
+Input:
+ops = ["5", "-2", "4", "C", "D", "9", "+", "+"]
+Output:
+27
+Explanation:
+"5" → [5]
+"-2" → [5, -2]
+"4" → [5, -2, 4]
+"C" → Remove last score [5, -2]
+"D" → Double last score (-2 → -4) [5, -2, -4]
+"9" → [5, -2, -4, 9]
+"+" → Sum last two (-4 + 9 = 5) [5, -2, -4, 9, 5]
+"+" → Sum last two (9 + 5 = 14) [5, -2, -4, 9, 5, 14]
+Final sum:
+sum([5, -2, -4, 9, 5, 14]) = 27
+"""
+
+from typing import List
+
+class Solution:
+    def calPoints(self, ops: List[str]) -> int:
+        stack = []
+        
+        for op in ops:
+            if op == "C":
+                stack.pop()  # Remove the last valid score
+            elif op == "D":
+                stack.append(2 * stack[-1])  # Double the last score
+            elif op == "+":
+                stack.append(stack[-1] + stack[-2])  # Sum of last two scores
+            else:
+                stack.append(int(op))  # Convert to int and add to stack
+        
+        return sum(stack)  # Sum up all valid scores
+
+# Example usage:
+solution = Solution()
+ops = ["5", "2", "C", "D", "+"]
+print(solution.calPoints(ops))  # Output: 30
+
+"""
 5. Reverse a Stack
 Problem Statement:
 Write a function that reverses a stack using recursion.
