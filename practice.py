@@ -395,3 +395,32 @@ nums = [10, 9, 2, 5, 3, 7, 101, 18]
 res = longest_increasing_subsquence(nums)
 
 print(res)
+
+
+from typing import List
+
+def calpoints(ops):
+   stack = []
+
+   for op in ops:
+      if op == "C":
+         stack.pop()
+      elif op == "D":
+         stack.append(2 * stack[-1])
+      elif op == "+":
+         stack.append(stack[-1] + stack[-2])
+
+      else:
+         stack.append(int(op))
+   return sum(stack)
+
+
+
+ops = ["5", "2", "C", "D", "+"]
+ops1 = ["5", "-2", "4", "C", "D", "9", "+", "+"]
+
+ops_sum1 = calpoints(ops)
+ops_sum2 = calpoints(ops1)
+
+print (ops_sum1)
+print (ops_sum2)
