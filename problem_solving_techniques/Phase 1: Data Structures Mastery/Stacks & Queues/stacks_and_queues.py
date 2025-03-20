@@ -220,7 +220,8 @@ print(sol.is_valid("{[(])}"))  # Output: False (mismatched brackets)
 
 """
 Problem Statement
-You are keeping score for a baseball game with a list of strings where each string represents an operation performed on the game. The valid operations are:
+You are keeping score for a baseball game with a list of strings where each string represents an operation performed on the game. 
+The valid operations are:
 
 An integer (x) – Record this number of points in the game.
 '+' Record a new score that is the sum of the previous two scores.
@@ -237,13 +238,14 @@ Explanation:
 "C" → Remove the last score (2): [5]
 "D" → Double the previous score (5 → 10): [5, 10]
 "+" → Add sum of last two scores (5 + 10 = 15): [5, 10, 15]
+
 Output:
-python
-Copy code
 sum([5, 10, 15]) = 30
+
 Example 2
 Input:
 ops = ["5", "-2", "4", "C", "D", "9", "+", "+"]
+
 Output:
 27
 Explanation:
