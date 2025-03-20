@@ -424,3 +424,27 @@ ops_sum2 = calpoints(ops1)
 
 print (ops_sum1)
 print (ops_sum2)
+
+def is_valid(expression):
+  stack = []
+  pairs = {')':'(', '}':'{',']':'['}
+
+  for char in expression:
+
+      if char in pairs.values():
+         stack.append(char)
+         
+      elif char in pairs:
+         if not stack or stack.pop() != pairs[char]:
+            return False
+        
+  return not stack
+
+
+expression1 = ("{[()]}")
+expression2 = ("{[(])}")
+epx1 = is_valid(expression1)
+exp2 = is_valid(expression2)
+
+print(epx1)
+print(exp2)
