@@ -323,35 +323,32 @@ The shortest path from "Entrance" to "Bedroom" passes through all intermediate r
 """
 from collections import deque
 
-def find_shortest_path(graph, start, end):
-    # Check if both start and end rooms exist in the graph
-    if start not in graph or end not in graph:
-        return None  # Return None if either room does not exist
-    
-    queue = deque([[start]])  # Initialize queue with a list containing the start room
-    visited = set()  # Set to keep track of visited rooms to prevent cycles
-    
-    while queue:
-        path = queue.popleft()  # Get the first path from the queue
-        room = path[-1]  # Get the last room in the current path
+class Solution:
+    def bfs_shortest_path(self, graph, start, end):
+          # Check if both start and end rooms exist in the graph
+        if start not in graph or end not in graph:
+            return []  # Return empty list if start or end node is not in the graph
         
-        # If we reached the destination, return the path
-        if room == end:
-            return path  # Shortest path found
+        queue = deque([(start, [start])])  # Queue stores (current_node, path_to_node)
+        visited = set()  # Set to track visited nodes | Set to keep track of visited rooms to prevent cycles
         
-        # If the room has not been visited, process its neighbors
-        if room not in visited:
-            visited.add(room)  # Mark the room as visited
+        while queue:
+            node, path = queue.popleft()  # Dequeue the first element
             
-            for neighbor in graph[room]:  # Loop through adjacent rooms
-                if neighbor not in visited:
-                    new_path = list(path)  # Create a copy of the current path
-                    new_path.append(neighbor)  # Append the neighboring room
-                    queue.append(new_path)  # Add the new path to the queue
-    
-    return None  # Return None if no path is found
+            if node == end:
+                return path  # Return path when we reach the end node
+            # If the room has not been visited, process its neighbors
+            if node not in visited:
+                visited.add(node)  # Mark node as visited | # Mark the room as visited
+                
+                for neighbor in graph.get(node, []):# Loop through adjacent rooms
+                    if neighbor not in visited:
+                        queue.append((neighbor, path + [neighbor]))  # Append new path
+        
+        return []  # Return empty list if no path is found
 
-# Example graph representation as an adjacency list
+# Example usage
+sol = Solution()
 graph = {
     "Entrance": ["Hallway"],
     "Hallway": ["Entrance", "Kitchen"],
@@ -360,14 +357,10 @@ graph = {
     "Bedroom": ["Living Room"]
 }
 
-# Test case
+# Find shortest path from "Entrance" to "Bedroom"
 start = "Entrance"
 end = "Bedroom"
-print(find_shortest_path(graph, start, end))  # Expected output: ['Entrance', 'Hallway', 'Kitchen', 'Living Room', 'Bedroom']
-
-
-
-
+print(sol.bfs_shortest_path(graph, start, end))
 """
 5. Find the Shortest Path Using Dijkstra's Algorithm
 Problem Statement:
