@@ -476,3 +476,38 @@ start = 0
 
 dfs_result = dfs(graph,start)
 print(dfs_result)
+
+from collections import deque
+
+
+def bfs(graph, start):
+
+   visited = set()
+   queue = deque([start])
+   results = []
+
+
+   while queue:
+      node = queue.popleft()
+
+      if node not in visited:
+         visited.add(node)
+         results.append(node)
+
+         for neighbor in graph.get(node, []):
+            if neighbor not in visited:
+               queue.append(neighbor)
+   return results
+
+
+graph = {
+    0: [1, 2],  # Node 0 is connected to nodes 1 and 2
+    1: [2],     # Node 1 is connected to node 2
+    2: [3],     # Node 2 is connected to node 3
+    3: [3]      # Node 3 has a self-loop (connected to itself)
+}
+
+start = 0
+
+bfs_results = bfs(graph,start)
+print(bfs_results)
