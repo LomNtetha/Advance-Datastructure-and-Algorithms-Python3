@@ -7,13 +7,6 @@ nums = [1, 2, 3, 1]
 Output: True
 
 """
-"""
-Time Complexity:
-O(n) because creating a set requires iterating through the list once.
-Space Complexity:
-O(n) since the set may store up to n elements.
-
-"""
 
 from typing import List
 
@@ -34,6 +27,11 @@ sol = Solution().containsDuplicate(example_input)
 # Call the containsDuplicate function and print the result
 print(f"Contains Duplicate: {sol}")
 
+# Time Complexity:
+# O(n) because creating a set requires iterating through the list once.
+# Space Complexity:
+# O(n) since the set may store up to n elements.
+
     
 """
 2 .Given two strings s and t, return True if t is an anagram of s, and False otherwise.
@@ -43,13 +41,6 @@ Input:
 s = "anagram"
 t = "nagaram"
 Output: True
-
-"""
-"""
-Time Complexity:
-O(n log n) due to sorting both strings.
-Space Complexity:
-O(n) because we create new sorted versions of the strings.
 
 """
 class Solution:
@@ -71,6 +62,11 @@ sol = Solution().isAnagram(s, t)
 # Call the isAnagram function and print the result
 print(f"Are '{s}' and '{t}' anagrams? {sol}")
 
+# Time Complexity:
+# O(n log n) due to sorting both strings.
+# Space Complexity:
+# O(n) because we create new sorted versions of the strings.
+
 
 """
 3 .Given two integer arrays nums1 and nums2, return an array of their intersection. Each element in the result must be unique.
@@ -80,13 +76,6 @@ Input:
 nums1 = [1, 2, 2, 1]
 nums2 = [2, 2]
 Output: [2]
-"""
-"""
-Time Complexity:
-O(n + m) where n is the length of nums1 and m is the length of nums2.
-Space Complexity:
-O(n + m) due to the space needed for storing the sets.
-
 """
 
 from typing import List
@@ -109,6 +98,11 @@ sol = Solution().intersection(nums1, nums2)
 # Call the intersection function and print the result
 print(f"The intersection of {nums1} and {nums2} is: {sol}")
 
+# Time Complexity:
+# O(n + m) where n is the length of nums1 and m is the length of nums2.
+# Space Complexity:
+# O(n + m) due to the space needed for storing the sets.
+
 
 """
 4. Given an array of strings, group the anagrams together.
@@ -119,14 +113,6 @@ strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 Output:
 
 [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
-
-"""
-
-"""
-Time Complexity:
-O(n * k log k) where n is the number of strings and k is the maximum length of a string (sorting takes O(k log k)).
-Space Complexity:
-O(n * k) because we are storing the strings grouped by their sorted versions.
 
 """
 
@@ -159,6 +145,11 @@ sol = Solution().groupAnagrams(strs)
 # Call the groupAnagrams function and print the result
 print(f"Grouped anagrams for {strs}: {sol}")
 
+# Time Complexity:
+# O(n * k log k) where n is the number of strings and k is the maximum length of a string (sorting takes O(k log k)).
+# Space Complexity:
+# O(n * k) because we are storing the strings grouped by their sorted versions.
+
     
 """
 5. Given an array of integers nums and an integer k, return the total number of continuous subarrays whose sum equals k.
@@ -168,13 +159,6 @@ Input:
 nums = [1, 1, 1]
 k = 2
 Output: 2
-
-"""
-"""
-Time Complexity:
-O(n) since we traverse the array once.
-Space Complexity:
-O(n) for the hash map storing cumulative sums.
 
 """
 
@@ -214,6 +198,12 @@ sol = Solution().subarraySum(nums, k)
 # Call the subarraySum function and print the result
 print(f"Number of subarrays in {nums} that sum to {k}: {sol}")
 
+# Time Complexity:
+# O(n) since we traverse the array once.
+# Space Complexity:
+# O(n) for the hash map storing cumulative sums.
+
+
 """
 6. Given an unsorted array of integers nums, return the length of the longest consecutive elements sequence.
 
@@ -221,14 +211,6 @@ Example:
 Input:
 nums = [100, 4, 200, 1, 3, 2]
 Output: 4
-
-"""
-
-"""
-Time Complexity:
-O(n) since we check each number in the set only once.
-Space Complexity:
-O(n) for storing the numbers in a set.
 
 """
 
@@ -269,6 +251,11 @@ sol = Solution().longestConsecutive(nums)
 # Call the longestConsecutive function and print the result
 print(f"The length of the longest consecutive sequence in {nums}: {sol}")
 
+# Time Complexity:
+# O(n) since we check each number in the set only once.
+# Space Complexity:
+# O(n) for storing the numbers in a set.
+
 
 """
 7. Given two strings s and t, determine if they are isomorphic.
@@ -278,12 +265,6 @@ Input:
 s = "egg"
 t = "add"
 Output: True
-"""
-"""
-Time Complexity:
-O(n) since we traverse both strings once.
-Space Complexity:
-O(n) for the two dictionaries storing the mappings.
 """
 class Solution:
     def isIsomorphic(self, s: str, t: str) -> bool:
@@ -318,6 +299,11 @@ sol = Solution().isIsomorphic(s, t)
 # Call the isIsomorphic function and print the result
 print(f"Are the strings '{s}' and '{t}' isomorphic? {sol}")
 
+# Time Complexity:
+# O(n) since we traverse both strings once.
+# Space Complexity:
+# O(n) for the two dictionaries storing the mappings.
+
     
 """
 8. Given a pattern and a string s, find if s follows the same pattern.
@@ -327,12 +313,6 @@ Input:
 pattern = "abba"
 s = "dog cat cat dog"
 Output: True
-"""
-"""
-Time Complexity:
-O(n) since we process each character and word once.
-Space Complexity:
-O(n) for the two dictionaries storing the mappings.
 """
 class Solution:
     def wordPattern(self, pattern: str, s: str) -> bool:
@@ -365,6 +345,11 @@ s = "dog cat cat dog"
 solution = Solution().wordPattern(pattern, s)
 # Print the output
 print(solution)  # Output: True
+
+# Time Complexity:
+# O(n) since we process each character and word once.
+# Space Complexity:
+# O(n) for the two dictionaries storing the mappings.
 
 
 
@@ -408,12 +393,11 @@ magazine = "aab"
 sol = Solution().canConstruct(ransomNote, magazine)
 print(f"Can construct '{ransomNote}' from '{magazine}'? {sol}")
 
-"""
-This approach uses the collections.Counter class to count the frequencies of characters and check if the magazine contains enough characters to 
-fulfill the ransom note's requirements. It has a time complexity of O(n+m), 
-where n and m are the lengths of ransomNote and magazine, respectively.
 
-"""
+# This approach uses the collections.Counter class to count the frequencies of characters and check if the magazine contains enough characters to 
+# fulfill the ransom note's requirements. It has a time complexity of O(n+m), 
+# where n and m are the lengths of ransomNote and magazine, respectively.
+
 
     
 """
@@ -425,12 +409,6 @@ Input:
 s = "abcd"
 t = "abcde"
 Output: 'e'
-"""
-"""
-Time Complexity:
-O(n) where n is the length of s + t.
-Space Complexity:
-O(1) since we use a constant amount of space for the XOR result.
 """
 class Solution:
     def findTheDifference(self, s: str, t: str) -> str:
@@ -453,6 +431,11 @@ solution = Solution().findTheDifference(s, t)
 # Print the output
 print(solution)  # Output: "e"
 
+# Time Complexity:
+# O(n) where n is the length of s + t.
+# Space Complexity:
+# O(1) since we use a constant amount of space for the XOR result.
+
 """
 11. Given a string s, find the first non-repeating character and return its index. If it does not exist, return -1.
 
@@ -460,13 +443,6 @@ Example:
 Input:
 s = "loveleetcode"
 Output: 2 (the character 'v' is the first unique character)
-"""
-
-"""
-Time Complexity:
-O(n) where n is the length of the string.
-Space Complexity:
-O(1) because the alphabet contains a fixed number of characters.
 """
 from collections import Counter
 
@@ -487,6 +463,11 @@ s = "loveleetcode"
 solution = Solution()
 print(solution.firstUniqChar(s))  # Output: 2
 
+# Time Complexity:
+# O(n) where n is the length of the string.
+# Space Complexity:
+# O(1) because the alphabet contains a fixed number of characters.
+
 
 """
 12. Given an array nums of size n, return the majority element (the element that appears more than n / 2 times).
@@ -497,12 +478,6 @@ nums = [2, 2, 1, 1, 1, 2, 2]
 Output: 2
 """
 
-"""
-Time Complexity:
-O(n) where n is the number of elements in nums.
-Space Complexity:
-O(n) due to the hash map storing counts of elements.
-"""
 from typing import List
 
 class Solution:
@@ -515,6 +490,11 @@ nums = [2, 2, 1, 1, 1, 2, 2]
 solution = Solution()
 print(solution.majorityElement(nums))  # Output: 2
 
+# Time Complexity:
+# O(n) where n is the number of elements in nums.
+# Space Complexity:
+# O(n) due to the hash map storing counts of elements.
+
 """
 13. Given an integer array nums and an integer k, return the k most frequent elements.
 
@@ -523,14 +503,6 @@ Input:
 nums = [1, 1, 1, 2, 2, 3]
 k = 2
 Output: [1, 2]
-"""
-
-"""
-Time Complexity:
-O(n log k) due to using the heap to extract the top k elements.
-Space Complexity:
-O(n) for the hash map storing the frequency counts.
-
 """
 
 from collections import Counter
@@ -552,6 +524,11 @@ nums = [1,1,1,2,2,3]
 k = 2
 solution = Solution().topKFrequent(nums, k)
 print(solution)  # Output: [1, 2]
+
+# Time Complexity:
+# O(n log k) due to using the heap to extract the top k elements.
+# Space Complexity:
+# O(n) for the hash map storing the frequency counts.
 
 
 """
@@ -603,13 +580,6 @@ list1 = ["Shogun", "Tapioca Express", "Burger King", "KFC"]
 list2 = ["Piatti", "The Grill at Torrey Pines", "Hungry Hunter Steakhouse", "Shogun"]
 Output: ["Shogun"]
 """
-
-"""
-Time Complexity:
-O(n + m) where n is the length of list1 and m is the length of list2.
-Space Complexity:
-O(n) due to the hash map storing restaurant indices from list1.
-"""
 from typing import List
 
 class Solution:
@@ -650,6 +620,11 @@ solution = Solution().findRestaurant(list1, list2)
 # Print the output
 print(solution)  # Output: ['Shogun']
 
+# Time Complexity:
+# O(n + m) where n is the length of list1 and m is the length of list2.
+# Space Complexity:
+# O(n) due to the hash map storing restaurant indices from list1.
+
     
 
 
@@ -661,12 +636,6 @@ Example:
 Input:
 n = 19
 Output: True (Explanation: 19 -> 82 -> 68 -> 100 -> 1)
-"""
-"""
-Time Complexity:
-O(log n) due to the number of digits involved in each iteration.
-Space Complexity:
-O(log n) because we store the numbers we've seen in a set.
 """
 
 class Solution:
@@ -696,6 +665,11 @@ print(solution.isHappy(n1))  # Output: True
 n2 = 2
 print(solution.isHappy(n2))  # Output: False
 
+# Time Complexity:
+# O(log n) due to the number of digits involved in each iteration.
+# Space Complexity:
+# O(log n) because we store the numbers we've seen in a set.
+
 
 """
 17. Given two strings s and p, return all the start indices of p's anagrams in s. You may return the answer in any order.
@@ -705,13 +679,6 @@ Input:
 s = "cbaebabacd"
 p = "abc"
 Output: [0, 6]
-"""
-"""
-Time Complexity:
-O(n) where n is the length of string s.
-Space Complexity:
-O(1) since both p_count and s_count are bounded by the alphabet size (fixed size).
-
 """
 from collections import Counter
 from typing import List
@@ -752,3 +719,8 @@ p = "abc"
 solution = Solution().findAnagrams(s, p)
 
 print(solution)  # Output: [0, 6]
+
+# Time Complexity:
+# O(n) where n is the length of string s.
+# Space Complexity:
+# O(1) since both p_count and s_count are bounded by the alphabet size (fixed size).
