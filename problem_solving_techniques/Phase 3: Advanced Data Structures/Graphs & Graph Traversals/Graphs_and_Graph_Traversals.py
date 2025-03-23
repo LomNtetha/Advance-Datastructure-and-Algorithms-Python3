@@ -65,6 +65,12 @@ graph = {
 # Perform DFS starting from node 0
 print(sol.dfs(graph, 0))  # Output: [0, 1, 2, 3]
 
+# Final Complexity Summary
+# Time Complexity: O(N+E)
+# Space Complexity: O(N) (due to recursion and visited storage)
+
+
+
 
 """
 2. Breadth-First Search (BFS) on a Graph
@@ -126,6 +132,10 @@ graph = {
 }
 # Perform BFS starting from node 0
 print(sol.bfs(graph, 0))  # Output: [0, 1, 2, 3]
+
+# Final Complexity Summary
+# Time Complexity: O(N+E)
+# Space Complexity: O(N) (due to visited set and queue storage)
 
 
 
@@ -203,6 +213,11 @@ graph = {
 # Perform topological sort and print the result
 print(sol.topological_sort(graph))  # Output: [5, 4, 2, 3, 1, 0]
 
+# Final Complexity Summary
+# Time Complexity: O(N + E)  # Each node and edge is processed once
+# Space Complexity: O(N)  # Due to recursion stack and visited storage
+
+
 
 """
 4. Detect a Cycle in a Directed Graph
@@ -277,6 +292,11 @@ sol = Solution()
 # Define a graph with a cycle (0 -> 1 -> 2 -> 0)
 graph = {0: [1], 1: [2], 2: [0]}
 print(sol.has_cycle(graph))  # Output: True
+
+# Final Complexity Summary
+# Time Complexity: O(N + E)  # Each node and edge is processed once in DFS
+# Space Complexity: O(N)  # Due to recursion stack, visited, and recursion_stack storage
+
 
 
 """
@@ -361,6 +381,13 @@ graph = {
 start = "Entrance"
 end = "Bedroom"
 print(sol.bfs_shortest_path(graph, start, end))
+
+# Final Complexity Summary
+# Time Complexity: O(N + E)  # Each node and edge is processed once in BFS
+# Space Complexity: O(N)  # Due to queue and visited storage
+
+
+
 """
 5. Find the Shortest Path Using Dijkstra's Algorithm
 Problem Statement:
@@ -440,6 +467,11 @@ graph = {
 # Compute shortest paths from node 0
 print(sol.dijkstra(graph, 0))  # Output: {0: 0, 1: 3, 2: 1, 3: 4}
 
+# Final Complexity Summary
+# Time Complexity: O((N + E) log N)  # Priority queue operations dominate the complexity
+# Space Complexity: O(N + E)  # Storing distances and priority queue data
+
+
 
     
 """
@@ -513,6 +545,11 @@ source = 0        # Starting vertex
 
 # Print the result of running Bellman-Ford algorithm
 print(sol.bellman_ford(edges, num_vertices, source))
+
+# Final Complexity Summary
+# Time Complexity: O(V * E) # The algorithm relaxes all edges V-1 times, and for each relaxation, all edges are checked.
+
+# Space Complexity: O(V) # Storing the distances for each vertex.
 
 
 
@@ -593,6 +630,11 @@ graph = {
 # Find all paths from node 0 to node 3
 print(sol.find_all_paths(graph, 0, 3))
 
+# Final Complexity Summary
+# Time Complexity: O(2^V) # In the worst case, each node can have two choices (if branching factor is large), leading to exponential growth in 
+# the number of paths.
+
+# Space Complexity: O(V) # The depth of the recursion tree and the maximum path length can go up to the number of vertices.
 
 """
 8. Check if a Graph is Bipartite
@@ -680,6 +722,12 @@ graph = {
 # Determine if the graph is bipartite
 print(sol.is_bipartite(graph))  # Output: True
 
+# Final Complexity Summary
+# Time Complexity: O(V + E) # The algorithm visits each node once (O(V)) and explores each edge once (O(E)) during the DFS traversal.
+
+# Space Complexity: O(V) # The space complexity is dominated by the storage of the colors dictionary, which stores the color of each vertex. The depth of the recursion 
+# stack is also O(V) in the worst case.
+
 
 
 """
@@ -764,6 +812,12 @@ graph = {
 
 # Calculate and print the number of connected components in the graph
 print(sol.count_connected_components(graph))  # Output: 3
+
+# Final Complexity Summary
+# Time Complexity: O(V + E) # Each node is visited once (O(V)), and each edge is examined once (O(E)) during the DFS traversal.
+
+# Space Complexity: O(V) # The space complexity is dominated by the storage of the visited set, which tracks the visited nodes, 
+# and the recursion stack during DFS, which can be O(V) in the worst case.
 
 """
 
@@ -852,6 +906,26 @@ graph = {
 
 # Find the MST and print it
 print(sol.prims_mst(graph))
+
+# Final Complexity Analysis
+# Time Complexity: O(E * log V)
+
+# Heap Operations: Each node is added and removed from the heap, resulting in O(V * log V) operations.
+
+# Edge Relaxation: Each edge is processed once, and for each edge, we perform a heap push operation (O(log V)), 
+# resulting in O(E * log V) for all edges.
+
+# Therefore, the overall time complexity is O(E * log V), where E is the number of edges and V is the number of vertices in the graph.
+
+# Space Complexity: O(V + E)
+
+# Visited Set: O(V) for tracking visited nodes.
+
+# Heap: O(V) for storing nodes and edges in the heap.
+
+# MST List: O(E) for storing the resulting MST edges.
+
+# The space complexity is dominated by the storage of these data structures, so it is O(V + E).
 
 """
 
