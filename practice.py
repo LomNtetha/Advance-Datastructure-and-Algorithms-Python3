@@ -517,13 +517,14 @@ bfs_result = bfs(graph,start)
 
 print(bfs_result)
 
-def shortest_path_rooms_bfs(graph,start,end):
+
+def shortest_path_bfs(graph,start,end):
 
    if start not in graph or end not in graph:
-      return []
+      return None
    
    visited = set()
-   queue = deque([(start,[start])])
+   queue = deque([(start, [start])])
 
    while queue:
       node,path = queue.popleft()
@@ -536,23 +537,20 @@ def shortest_path_rooms_bfs(graph,start,end):
 
          for neighbor in graph.get(node,[]):
             if neighbor not in visited:
-               queue.append((neighbor,path +[neighbor]))
+               queue.append((neighbor,path+[neighbor]))
 
    return []
 
-
 graph = {
-    "Entrance": ["Hallway"],
-    "Hallway": ["Entrance", "Kitchen"],
-    "Kitchen": ["Hallway", "Living Room"],
-    "Living Room": ["Kitchen", "Bedroom"],
-    "Bedroom": ["Living Room"]
+   "Entrance": ["Hallway"],
+   "Hallway": ["Entrance","Kitchen"],
+   "Kitchen": ["Hallway","Living Room"],
+   "Living Room":["Kitchen","Bedroom"],
+   "Bedroom": ["Living Room"]
 }
-
-# Find shortest path from "Entrance" to "Bedroom"
 start = "Entrance"
 end = "Bedroom"
 
-sort_ways = shortest_path_rooms_bfs(graph,start,end)
+bfs_short_path = shortest_path_bfs(graph,start,end)
 
-print(sort_ways)
+print(bfs_short_path)
