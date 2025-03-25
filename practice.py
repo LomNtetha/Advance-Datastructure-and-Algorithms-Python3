@@ -522,9 +522,8 @@ def shortest_path_rooms_bfs(graph,start,end):
    if start not in graph or end not in graph:
       return []
    
-   visisted = set()
-   queue = deque([(start, [start])])
-
+   visited = set()
+   queue = deque([(start,[start])])
 
    while queue:
       node,path = queue.popleft()
@@ -532,15 +531,14 @@ def shortest_path_rooms_bfs(graph,start,end):
       if node == end:
          return path
       
-      if node not in visisted:
-         visisted.add(node)
+      if node not in visited:
+         visited.add(node)
 
          for neighbor in graph.get(node,[]):
-            if neighbor not in visisted:
-               queue.append((neighbor,path + [neighbor]))
+            if neighbor not in visited:
+               queue.append((neighbor,path +[neighbor]))
 
    return []
-
 
 
 graph = {
