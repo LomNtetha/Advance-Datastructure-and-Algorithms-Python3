@@ -554,3 +554,28 @@ end = "Bedroom"
 bfs_short_path = shortest_path_bfs(graph,start,end)
 
 print(bfs_short_path)
+
+
+def plan_cheap_visit(destination,budget):
+
+   destination.sort(key = lambda x:x[1])
+
+   total_cost_to_vist = 0
+   visted_city = []
+
+   for city, cost in destination:
+     
+      if total_cost_to_vist + cost<= budget:
+         visted_city.append(city)
+         total_cost_to_vist += cost
+      else:
+         break
+   return total_cost_to_vist, visted_city
+
+destinations = [("Paris", 500), ("London", 400), ("Rome", 300)]  # (destination, cost)
+budget = 1000
+
+totalcost,vistedcity= plan_cheap_visit(destinations,budget) 
+
+print(totalcost)
+print(vistedcity)
