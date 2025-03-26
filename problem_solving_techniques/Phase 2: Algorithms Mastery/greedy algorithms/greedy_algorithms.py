@@ -814,6 +814,7 @@ Statement: Schedule meetings in rooms such that no two meetings overlap in the s
 Example Input:
 meetings = [(1, 4), (3, 5), (6, 8)]  # (start, end) times
 rooms = 2                              # Number of room
+
 """
 def schedule_meetings(meetings, rooms):
     meetings.sort()  # Sort by start time
@@ -845,6 +846,32 @@ print(schedule_meetings(meetings, rooms))  # Output: "Meetings scheduled success
 # Space Complexity: O(m)  
 # We use an array (`room_end_times`) of size m to track when each room is free.  
 # No additional space is used apart from input storage, so the space complexity is O(m).  
+
+def schedule_meetings(meetings, rooms):
+    meetings.sort()  # Sort meetings based on start time
+    ongoing_meetings = []
+
+    for start, end in meetings:
+        # Remove meetings that have ended
+        ongoing_meetings = [e for e in ongoing_meetings if e > start]
+
+        # Check room availability
+        if len(ongoing_meetings) < rooms:
+            ongoing_meetings.append(end)
+        else:
+            return "Rooms are full"
+
+    return "Meetings scheduled successfully"
+
+meetings = [(1, 4), (3, 5), (6, 8)]
+rooms = 2
+
+meeting_result = schedule_meetings(meetings, rooms)
+print(meeting_result)
+
+# Time Complexity: Worst-case O(N²) due to filtering the ongoing_meetings list inside the loop, but best-case O(N log N) if minimal overlaps occur.
+
+# Space Complexity: O(N) for storing the ongoing_meetings list.
 
 
 """
