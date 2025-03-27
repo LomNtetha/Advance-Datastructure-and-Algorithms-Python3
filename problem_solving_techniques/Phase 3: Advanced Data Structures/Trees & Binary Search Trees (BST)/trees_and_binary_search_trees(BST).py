@@ -20,6 +20,12 @@ The tree structure:
 Example Output:
 [1, 3, 2]
 """
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 class Solution:
     def inorderTraversal(self, root):
         """
@@ -46,6 +52,23 @@ class Solution:
         # Start the traversal from the root node and return the result
         return dfs(root)
 
+# Example Input
+# Tree structure:
+#     1
+#      \
+#       2
+#      /
+#     3
+root = TreeNode(1)
+root.right = TreeNode(2)
+root.right.left = TreeNode(3)
+
+# Create an instance of Solution and call the method
+solution = Solution()
+output = solution.inorderTraversal(root)
+print(output)  # Expected Output: [1, 3, 2]
+
+
 
 
 # Complexity:
@@ -68,6 +91,12 @@ Tree structure:
 Example Output:
 [1, 2, 3]
 """
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 class Solution:
     def preorderTraversal(self, root):
         """
@@ -94,6 +123,39 @@ class Solution:
         # Start the traversal from the root node and return the result
         return dfs(root)
 
+# Example Input 1
+# Tree structure:
+#     1
+#      \
+#       2
+#      /
+#     3
+root1 = TreeNode(1)
+root1.right = TreeNode(2)
+root1.right.left = TreeNode(3)
+
+# Example Input 2
+# Tree structure:
+#       4
+#      / \
+#     2   5
+#    / \
+#   1   3
+root2 = TreeNode(4)
+root2.left = TreeNode(2)
+root2.right = TreeNode(5)
+root2.left.left = TreeNode(1)
+root2.left.right = TreeNode(3)
+
+# Create an instance of Solution and call the method
+solution = Solution()
+
+output1 = solution.preorderTraversal(root1)
+print(output1)  # Expected Output: [1, 2, 3]
+
+output2 = solution.preorderTraversal(root2)
+print(output2)  # Expected Output: [4, 2, 1, 3, 5]
+
 
 # Complexity:
 # Time: O(n)
@@ -115,6 +177,12 @@ Tree structure:
 Example Output:
 [3, 2, 1]
 """
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 class Solution:
     def postorderTraversal(self, root):
         """
@@ -142,6 +210,40 @@ class Solution:
         # Start the traversal from the root node and return the result
         return dfs(root)
 
+# Example Input 1
+# Tree structure:
+#     1
+#      \
+#       2
+#      /
+#     3
+root1 = TreeNode(1)
+root1.right = TreeNode(2)
+root1.right.left = TreeNode(3)
+
+# Example Input 2
+# Tree structure:
+#       4
+#      / \
+#     2   5
+#    / \
+#   1   3
+root2 = TreeNode(4)
+root2.left = TreeNode(2)
+root2.right = TreeNode(5)
+root2.left.left = TreeNode(1)
+root2.left.right = TreeNode(3)
+
+# Create an instance of Solution and call the method
+solution = Solution()
+
+output1 = solution.postorderTraversal(root1)
+print(output1)  # Expected Output: [3, 2, 1]
+
+output2 = solution.postorderTraversal(root2)
+print(output2)  # Expected Output: [1, 3, 2, 5, 4]
+
+
 # Complexity:
 # Time: O(n)
 # Space: O(h)
@@ -164,6 +266,12 @@ Example Output:
 [1, 2, 4, 5, 3]
 
 """
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 class Solution:
     def depthFirstSearch(self, root):
         """
@@ -179,6 +287,9 @@ class Solution:
         
         # Initialize the stack with the root node to start the DFS process
         # The stack will help us to explore nodes in depth-first order.
+        if not root:
+            return []
+        
         stack, result = [root], []
 
         # Continue DFS traversal as long as there are nodes in the stack
@@ -198,6 +309,42 @@ class Solution:
 
         # Return the result list containing the values of nodes visited in DFS order
         return result
+
+# Example Input 1
+# Tree structure:
+#     1
+#    / \
+#   2   3
+#  / \
+# 4   5
+root1 = TreeNode(1)
+root1.left = TreeNode(2)
+root1.right = TreeNode(3)
+root1.left.left = TreeNode(4)
+root1.left.right = TreeNode(5)
+
+# Example Input 2
+# Tree structure:
+#        10
+#       /  \
+#      20   30
+#     /  \
+#    40   50
+root2 = TreeNode(10)
+root2.left = TreeNode(20)
+root2.right = TreeNode(30)
+root2.left.left = TreeNode(40)
+root2.left.right = TreeNode(50)
+
+# Create an instance of Solution and call the method
+solution = Solution()
+
+output1 = solution.depthFirstSearch(root1)
+print(output1)  # Expected Output: [1, 2, 4, 5, 3]
+
+output2 = solution.depthFirstSearch(root2)
+print(output2)  # Expected Output: [10, 20, 40, 50, 30]
+
 
 
 # Complexity:
@@ -223,6 +370,12 @@ Example Output:
 """
 from collections import deque
 
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 class Solution:
     def breadthFirstSearch(self, root):
         """
@@ -235,9 +388,10 @@ class Solution:
         Returns:
         list[int]: A list of node values in the order of BFS traversal (level-order).
         """
-        
+        if not root:
+            return []
+
         # Initialize the queue with the root node to start the BFS process
-        # The queue will help us explore nodes level by level, starting from the root.
         queue, result = deque([root]), []
 
         # Continue BFS traversal as long as there are nodes in the queue
@@ -246,17 +400,53 @@ class Solution:
             node = queue.popleft()
             
             # If the current node is not None, process it by appending its value to the result list
-            if node:
-                result.append(node.val)
-                
-                # Add the left child of the current node to the queue (to be visited next)
+            result.append(node.val)
+            
+            # Add the left child of the current node to the queue (to be visited next)
+            if node.left:
                 queue.append(node.left)
                 
-                # Add the right child of the current node to the queue (to be visited after the left)
+            # Add the right child of the current node to the queue (to be visited after the left)
+            if node.right:
                 queue.append(node.right)
 
         # Return the result list containing the values of nodes visited in BFS order
         return result
+
+# Example Input 1
+# Tree structure:
+#     1
+#    / \
+#   2   3
+#  / \
+# 4   5
+root1 = TreeNode(1)
+root1.left = TreeNode(2)
+root1.right = TreeNode(3)
+root1.left.left = TreeNode(4)
+root1.left.right = TreeNode(5)
+
+# Example Input 2
+# Tree structure:
+#        10
+#       /  \
+#      20   30
+#     /  \
+#    40   50
+root2 = TreeNode(10)
+root2.left = TreeNode(20)
+root2.right = TreeNode(30)
+root2.left.left = TreeNode(40)
+root2.left.right = TreeNode(50)
+
+# Create an instance of Solution and call the method
+solution = Solution()
+
+output1 = solution.breadthFirstSearch(root1)
+print(output1)  # Expected Output: [1, 2, 3, 4, 5]
+
+output2 = solution.breadthFirstSearch(root2)
+print(output2)  # Expected Output: [10, 20, 30, 40, 50]
 
 
 # Complexity:
@@ -292,10 +482,16 @@ Tree structure after insertion:
 
 """
 
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 class Solution:
     def insertIntoBST(self, root, val):
         """
-        This method inserts a new value into a binary search tree (BST) while maintaining its properties.
+        Inserts a new value into a binary search tree (BST) while maintaining its properties.
         
         Parameters:
         root (TreeNode): The root of the binary search tree.
@@ -305,24 +501,55 @@ class Solution:
         TreeNode: The root of the modified binary search tree after insertion.
         """
         
-        # Base case: If the root is None, we create a new TreeNode with the value to be inserted.
+        # Base case: If the root is None, create a new TreeNode with the value to be inserted.
         if not root:
             return TreeNode(val)
         
         # If the value to be inserted is smaller than the current node's value,
-        # it should go to the left subtree.
+        # insert into the left subtree.
         if val < root.val:
-            # Recurse into the left subtree and insert the value there
             root.left = self.insertIntoBST(root.left, val)
-        
-        # If the value to be inserted is greater than or equal to the current node's value,
-        # it should go to the right subtree.
-        else:
-            # Recurse into the right subtree and insert the value there
+        else:  # Otherwise, insert into the right subtree.
             root.right = self.insertIntoBST(root.right, val)
         
-        # After inserting the value, return the root (unchanged) to maintain the tree structure.
         return root
+
+# Helper function to print the BST in level order for verification
+from collections import deque
+
+def level_order_traversal(root):
+    if not root:
+        return []
+    
+    queue, result = deque([root]), []
+    while queue:
+        node = queue.popleft()
+        if node:
+            result.append(node.val)
+            queue.append(node.left)
+            queue.append(node.right)
+    return result
+
+# Example Input
+# Tree structure before insertion:
+#     4
+#    / \
+#   2   7
+#  / \
+# 1   3
+root = TreeNode(4)
+root.left = TreeNode(2)
+root.right = TreeNode(7)
+root.left.left = TreeNode(1)
+root.left.right = TreeNode(3)
+
+# Insert value 5
+solution = Solution()
+new_root = solution.insertIntoBST(root, 5)
+
+# Expected Output: [4, 2, 7, 1, 3, 5]
+print(level_order_traversal(new_root))  # Output should reflect the updated tree structure
+
 
 # Complexity:
 # Time: O(h)
@@ -353,10 +580,16 @@ Tree structure after deletion:
    /      \
   2        7
 """
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 class Solution:
     def deleteNode(self, root, key):
         """
-        This method deletes a node with a given key in a binary search tree (BST) while maintaining its properties.
+        Deletes a node with a given key in a binary search tree (BST) while maintaining its properties.
         
         Parameters:
         root (TreeNode): The root of the binary search tree.
@@ -382,7 +615,7 @@ class Solution:
         
         # If the key is equal to the current node's value, we've found the node to delete.
         else:
-            # Case 1: The node has no left child, return the right subtree (which may be None).
+            # Case 1: The node has no left child, return the right subtree.
             if not root.left:
                 return root.right
             
@@ -402,8 +635,52 @@ class Solution:
             # Delete the in-order successor node in the right subtree.
             root.right = self.deleteNode(root.right, root.val)
         
-        # Return the root after deletion (the tree is modified).
         return root
+
+# Helper function to print the BST in level order for verification
+from collections import deque
+
+def level_order_traversal(root):
+    if not root:
+        return []
+    
+    queue, result = deque([root]), []
+    while queue:
+        node = queue.popleft()
+        if node:
+            result.append(node.val)
+            queue.append(node.left)
+            queue.append(node.right)
+        else:
+            result.append(None)
+    
+    # Trim trailing None values for better representation
+    while result and result[-1] is None:
+        result.pop()
+    
+    return result
+
+# Example Input:
+# Tree structure before deletion:
+#      5
+#     / \
+#    3   6
+#   / \    \
+#  2   4    7
+root = TreeNode(5)
+root.left = TreeNode(3)
+root.right = TreeNode(6)
+root.left.left = TreeNode(2)
+root.left.right = TreeNode(4)
+root.right.right = TreeNode(7)
+
+# Delete node with key 3
+solution = Solution()
+new_root = solution.deleteNode(root, 3)
+
+# Expected Output: [5, 4, 6, 2, None, None, 7]
+print(level_order_traversal(new_root))  # Output should reflect the updated tree structure
+
 
 
 # Complexity:
@@ -428,6 +705,12 @@ Tree structure:
 Example Output:
 True
 """
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 class Solution:
     def isValidBST(self, root, low=float('-inf'), high=float('inf')):
         """
@@ -454,6 +737,20 @@ class Solution:
         # Recursively check the right subtree, ensuring all values are greater than the current node's value.
         return self.isValidBST(root.left, low, root.val) and self.isValidBST(root.right, root.val, high)
 
+# Example Input:
+# Tree structure:
+#     2
+#    / \
+#   1   3
+root = TreeNode(2)
+root.left = TreeNode(1)
+root.right = TreeNode(3)
+
+# Check if the tree is a valid BST
+solution = Solution()
+print(solution.isValidBST(root))  # Expected Output: True
+
+
 
 # Complexity:
 # Time: O(n)
@@ -475,6 +772,12 @@ Tree structure:
 Example Output:
 6
 """
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 class Solution:
     def lowestCommonAncestor(self, root, p, q):
         """
@@ -502,6 +805,30 @@ class Solution:
             else:
                 return root
 
+# Example Input:
+# Tree structure:
+#         6
+#        / \
+#       2   8
+#      / \  / \
+#     0   4 7  9
+root = TreeNode(6)
+root.left = TreeNode(2)
+root.right = TreeNode(8)
+root.left.left = TreeNode(0)
+root.left.right = TreeNode(4)
+root.right.left = TreeNode(7)
+root.right.right = TreeNode(9)
+
+p = root.left  # Node with value 2
+q = root.right  # Node with value 8
+
+# Find the LCA
+solution = Solution()
+lca = solution.lowestCommonAncestor(root, p, q)
+
+print(lca.val)  # Expected Output: 6
+
 
 # Complexity:
 # Time: O(h)
@@ -523,6 +850,12 @@ Tree structure:
 Example Output:
 3
 """
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
 class Solution:
     def maxDepth(self, root):
         """
@@ -544,6 +877,25 @@ class Solution:
         # Recursive case: The depth of the current tree is 1 (for the root) 
         # plus the maximum of the depths of the left and right subtrees.
         return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
+
+# Example Input:
+# Tree structure:
+#         3
+#        / \
+#       9   20
+#          /  \
+#         15   7
+root = TreeNode(3)
+root.left = TreeNode(9)
+root.right = TreeNode(20)
+root.right.left = TreeNode(15)
+root.right.right = TreeNode(7)
+
+# Calculate the height (maximum depth) of the binary tree
+solution = Solution()
+height = solution.maxDepth(root)
+
+print(height)  # Expected Output: 3
 
 # Complexity:
 # Time: O(n)
