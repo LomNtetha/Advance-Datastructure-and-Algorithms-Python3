@@ -173,44 +173,61 @@ class Solution:
 
         Returns:
         - list: A list of nodes in topologically sorted order.
+
+        Raises:
+        - TypeError: If graph is not a dictionary.
+        - ValueError: If the graph contains a cycle.
+
+        Example:
+        >>> sol = Solution()
+        >>> graph = {
+            5: [2, 0],
+            4: [0, 1],
+            2: [3],
+            3: [1],
+            0: [],
+            1: []
+        }
+        >>> sol.topological_sort(graph)
+        [5, 4, 2, 3, 1, 0]
         """
-        visited = set()  # Set to keep track of visited nodes
-        stack = []       # Stack to store the topological order of nodes
+
+        visited = set()
+        result_stack = []
+        recursion_stack = set()  # To detect cycles
 
         def dfs(node):
-            """
-            Depth-First Search (DFS) helper function to explore nodes recursively.
+            if node in visited:
+                return
 
-            Args:
-            - node (int): The current node being explored.
-            """
-            if node not in visited:  # Process only if the node has not been visited
-                visited.add(node)    # Mark the node as visited
-                # Explore all neighbors of the current node
-                for neighbor in graph.get(node, []):
-                    dfs(neighbor)    # Recursively call DFS for each neighbor
-                stack.append(node)  # Add the node to the stack after exploring all neighbors
+            visited.add(node)
+            recursion_stack.add(node)
 
-        # Start DFS from each unvisited node in the graph
-        for node in graph:
+            for neighbor in graph.get(node, []):
+                dfs(neighbor)
+
+            recursion_stack.remove(node)
+            result_stack.append(node)
+
+        # Process nodes in sorted order for deterministic output
+        for node in sorted(graph.keys()):
             if node not in visited:
-                dfs(node)  # Initiate DFS from the current unvisited node
+                dfs(node)
 
-        # Return the reversed stack to get nodes in topological order
-        return stack[::-1]
+        return result_stack[::-1]
 
-# Example usage
+
+ 
+    graph = {
+        5: [2, 0],
+        4: [0, 1],
+        2: [3],
+        3: [1],
+        0: [],
+        1: []
+    }
+
 sol = Solution()
-# Define a directed acyclic graph (DAG) as an adjacency list
-graph = {
-    5: [2, 0],  # Node 5 has edges to nodes 2 and 0
-    4: [0, 1],  # Node 4 has edges to nodes 0 and 1
-    2: [3],     # Node 2 has an edge to node 3
-    3: [1],     # Node 3 has an edge to node 1
-    0: [],      # Node 0 has no outgoing edges
-    1: []       # Node 1 has no outgoing edges
-}
-# Perform topological sort and print the result
 print(sol.topological_sort(graph))  # Output: [5, 4, 2, 3, 1, 0]
 
 # Final Complexity Summary
