@@ -185,6 +185,43 @@ def subst_generate(nums):
 
 nums = [1, 2, 3]
 
-permut = subst_generate(nums)
+back_subst = subst_generate(nums)
 
-print(permut)
+print(back_subst)
+
+
+def permutetation(nums):
+
+    results = []
+
+    def backtrack(path,used):
+
+        if len(path) == len(nums):
+            return
+        
+        results.append(path[:])
+
+        for i in range(len(nums)):
+
+            if used[i]:
+                continue
+
+            used[i] = True
+            path.append(nums[i])
+
+            backtrack(path,used)
+
+            used[i] = False
+
+            path.pop()
+
+    backtrack([],[False] * len(nums))
+    return results
+
+        
+nums = [1, 2, 3]
+
+permute = permutetation(nums)
+
+print(permute)
+
