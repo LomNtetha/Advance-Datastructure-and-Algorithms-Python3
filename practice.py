@@ -162,3 +162,29 @@ class Solution:
 
 sol = Solution()
 print(sol.topological_sort(graph))  # Output: [5, 4, 2, 3, 1, 0]
+
+def subst_generate(nums):
+
+    results = []
+
+    def bactrack(start,current):
+        results.append(current[:])
+
+        for i in range(start, len(nums)):
+
+            current.append(nums[i])
+
+            bactrack(i + 1, current)
+
+
+            current.pop()
+
+    bactrack(0,[])
+    return results
+
+
+nums = [1, 2, 3]
+
+permut = subst_generate(nums)
+
+print(permut)
