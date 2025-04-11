@@ -133,61 +133,100 @@ print("Output:", output)
 # Complexity:
 # Time: O(2^t) - Where t is the target; in the worst case, we can explore each number multiple times.
 # Space: O(t) - Space for the recursion stack.
+
 """
-4. N-Queens
-Solve the N-Queens puzzle, placing N queens on an N×N chessboard so that no two queens threaten each other.
+4. Combination Sum II
+Find all unique combinations of numbers that sum to a target, avoiding duplicates.
 
 Example:
 
-Input: n = 4
-Output: [[.Q.., ...Q, Q..., ..Q.], [..Q., Q..., ...Q, .Q..]]
+Input: candidates = [10, 1, 2, 7, 6, 1, 5], target = 8
+Output: [[1, 1, 6], [1, 2, 5], [2, 6], [7, 1]]
 
+"""
+
+class Solution:
+    def combinationSum2(self, candidates: list[int], target: int) -> list[list[int]]:
+        result = []
+        candidates.sort()  # Sort to handle duplicates
+        
+        def backtrack(start: int, current: list[int], remaining: int):
+            # Base case: if remaining sum is zero, we found a valid combination
+            if remaining == 0:
+                result.append(current[:])  # Make a copy of current
+                return
+            if remaining < 0:  # No valid combination
+                return
+            
+            for i in range(start, len(candidates)):
+                # Skip duplicates
+                if i > start and candidates[i] == candidates[i - 1]:
+                    continue
+                # Include candidates[i] in the current combination
+                current.append(candidates[i])
+                # Recur with the updated remaining sum
+                backtrack(i + 1, current, remaining - candidates[i])
+                # Backtrack: remove the last element
+                current.pop()
+        
+        backtrack(0, [], target)
+        return result
+# Example usage:
+candidates = [10, 1, 2, 7, 6, 1, 5]
+target = 8
+solution = Solution()
+output = solution.combinationSum2(candidates, target)
+
+print("Input: candidates =", candidates, ", target =", target)
+print("Output:", output)
+# Complexity:
+# Time: O(2^n) - Each element can be included or excluded, while avoiding duplicates.
+# Space: O(n) - Space for the recursion stack.
+
+"""
+5. Combination Sum III
+Find all possible combinations of k numbers that add up to a number n, with the numbers chosen from 1 to 9.
+
+Example:
+
+Input: k = 3, n = 7
+Output: [[1, 2, 4]]
 
 """
 class Solution:
-    def solveNQueens(self, n: int) -> list[list[str]]:
+    def combinationSum3(self, k: int, n: int) -> list[list[int]]:
         result = []
-        board = [["."] * n for _ in range(n)]  # Create an empty board
         
-        def is_safe(row: int, col: int) -> bool:
-            # Check the column and diagonals
-            for i in range(row):
-                if board[i][col] == "Q":  # Check column
-                    return False
-                if col - (row - i) >= 0 and board[i][col - (row - i)] == "Q":  # Check left diagonal
-                    return False
-                if col + (row - i) < n and board[i][col + (row - i)] == "Q":  # Check right diagonal
-                    return False
-            return True
-        
-        def backtrack(row: int):
-            # Base case: if all queens are placed
-            if row == n:
-                result.append(["".join(r) for r in board])  # Convert to required format
+        def backtrack(start: int, current: list[int], remaining: int):
+            # Base case: if k numbers are chosen and remaining sum is zero
+            if len(current) == k and remaining == 0:
+                result.append(current[:])  # Make a copy of current
+                return
+            if len(current) > k or remaining < 0:  # No valid combination
                 return
             
-            for col in range(n):
-                if is_safe(row, col):  # Check if it's safe to place queen
-                    board[row][col] = "Q"  # Place queen
-                    backtrack(row + 1)  # Recur to place the next queen
-                    board[row][col] = "."  # Backtrack
+            for i in range(start, 10):  # Numbers from 1 to 9
+                current.append(i)  # Include number i
+                # Recur with the next number
+                backtrack(i + 1, current, remaining - i)
+                current.pop()  # Backtrack: remove the last element
         
-        backtrack(0)
+        backtrack(1, [], n)
         return result
-    
 # Example usage:
-n = 4
+k, n = 3, 7
 solution = Solution()
-output = solution.solveNQueens(n)
+output = solution.combinationSum3(k, n)
 
-print("Input: n =", n)
+print("Input: k =", k, ", n =", n)
 print("Output:", output)
 
 # Complexity:
-# Time: O(N!) - Each row has N options and there are N rows.
-# Space: O(N) - Space used for the recursion stack and the board.
+# Time: O(2^n) - Each number can either be included or excluded.
+# Space: O(n) - Space for the recursion stack.
+
 """
-5. Letter Combinations of a Phone Number
+6. Letter Combinations of a Phone Number
 Given a string containing digits, return all possible letter combinations that the number could represent.
 
 Example:
@@ -241,55 +280,61 @@ print("Output:", output)
 # Time: O(4^n) - Each digit can represent up to 4 letters.
 # Space: O(n) - Space for the recursion stack.
 """
-6. Combination Sum II
-Find all unique combinations of numbers that sum to a target, avoiding duplicates.
+7. N-Queens
+Solve the N-Queens puzzle, placing N queens on an N×N chessboard so that no two queens threaten each other.
 
 Example:
 
-Input: candidates = [10, 1, 2, 7, 6, 1, 5], target = 8
-Output: [[1, 1, 6], [1, 2, 5], [2, 6], [7, 1]]
+Input: n = 4
+Output: [[.Q.., ...Q, Q..., ..Q.], [..Q., Q..., ...Q, .Q..]]
+
 
 """
-
 class Solution:
-    def combinationSum2(self, candidates: list[int], target: int) -> list[list[int]]:
+    def solveNQueens(self, n: int) -> list[list[str]]:
         result = []
-        candidates.sort()  # Sort to handle duplicates
+        board = [["."] * n for _ in range(n)]  # Create an empty board
         
-        def backtrack(start: int, current: list[int], remaining: int):
-            # Base case: if remaining sum is zero, we found a valid combination
-            if remaining == 0:
-                result.append(current[:])  # Make a copy of current
-                return
-            if remaining < 0:  # No valid combination
+        def is_safe(row: int, col: int) -> bool:
+            # Check the column and diagonals
+            for i in range(row):
+                if board[i][col] == "Q":  # Check column
+                    return False
+                if col - (row - i) >= 0 and board[i][col - (row - i)] == "Q":  # Check left diagonal
+                    return False
+                if col + (row - i) < n and board[i][col + (row - i)] == "Q":  # Check right diagonal
+                    return False
+            return True
+        
+        def backtrack(row: int):
+            # Base case: if all queens are placed
+            if row == n:
+                result.append(["".join(r) for r in board])  # Convert to required format
                 return
             
-            for i in range(start, len(candidates)):
-                # Skip duplicates
-                if i > start and candidates[i] == candidates[i - 1]:
-                    continue
-                # Include candidates[i] in the current combination
-                current.append(candidates[i])
-                # Recur with the updated remaining sum
-                backtrack(i + 1, current, remaining - candidates[i])
-                # Backtrack: remove the last element
-                current.pop()
+            for col in range(n):
+                if is_safe(row, col):  # Check if it's safe to place queen
+                    board[row][col] = "Q"  # Place queen
+                    backtrack(row + 1)  # Recur to place the next queen
+                    board[row][col] = "."  # Backtrack
         
-        backtrack(0, [], target)
+        backtrack(0)
         return result
+    
 # Example usage:
-candidates = [10, 1, 2, 7, 6, 1, 5]
-target = 8
+n = 4
 solution = Solution()
-output = solution.combinationSum2(candidates, target)
+output = solution.solveNQueens(n)
 
-print("Input: candidates =", candidates, ", target =", target)
+print("Input: n =", n)
 print("Output:", output)
+
 # Complexity:
-# Time: O(2^n) - Each element can be included or excluded, while avoiding duplicates.
-# Space: O(n) - Space for the recursion stack.
+# Time: O(N!) - Each row has N options and there are N rows.
+# Space: O(N) - Space used for the recursion stack and the board.
+
 """
-7. Word Search
+8. Word Search
 Determine if a word exists in a 2D board of characters.
 
 Example:
@@ -350,7 +395,7 @@ print("Output:", output)
 # Time: O(m * n * 4^k) - m: rows, n: cols, k: length of the word; exploring 4 directions.
 # Space: O(k) - Space for the recursion stack.
 """
-8. Palindrome Partitioning
+9. Palindrome Partitioning
 Given a string, partition it such that every substring is a palindrome. Return all possible palindrome partitioning.
 
 Example:
@@ -391,47 +436,6 @@ print("Output:", output)
 
 # Complexity:
 # Time: O(2^n) - Each character can either be included or excluded in the partitioning.
-# Space: O(n) - Space for the recursion stack.
-"""
-9. Combination Sum III
-Find all possible combinations of k numbers that add up to a number n, with the numbers chosen from 1 to 9.
-
-Example:
-
-Input: k = 3, n = 7
-Output: [[1, 2, 4]]
-
-"""
-class Solution:
-    def combinationSum3(self, k: int, n: int) -> list[list[int]]:
-        result = []
-        
-        def backtrack(start: int, current: list[int], remaining: int):
-            # Base case: if k numbers are chosen and remaining sum is zero
-            if len(current) == k and remaining == 0:
-                result.append(current[:])  # Make a copy of current
-                return
-            if len(current) > k or remaining < 0:  # No valid combination
-                return
-            
-            for i in range(start, 10):  # Numbers from 1 to 9
-                current.append(i)  # Include number i
-                # Recur with the next number
-                backtrack(i + 1, current, remaining - i)
-                current.pop()  # Backtrack: remove the last element
-        
-        backtrack(1, [], n)
-        return result
-# Example usage:
-k, n = 3, 7
-solution = Solution()
-output = solution.combinationSum3(k, n)
-
-print("Input: k =", k, ", n =", n)
-print("Output:", output)
-
-# Complexity:
-# Time: O(2^n) - Each number can either be included or excluded.
 # Space: O(n) - Space for the recursion stack.
 """
 10. Sudoku Solver
