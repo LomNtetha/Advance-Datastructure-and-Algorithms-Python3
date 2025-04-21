@@ -135,8 +135,120 @@ print(shortest_flight_path(graph, 'JFK', 'ORD'))  # Output: ['JFK', 'ATL', 'ORD'
 
 # Time Complexity: O(V + E), where V is the number of airports and E is the number of routes.
 # Space Complexity: O(V), for storing visited nodes and the queue.
+
 """
-Problem 3: Course Prerequisite Scheduling
+3. Vehicle Routing for Deliveries
+Problem Statement:
+A delivery company needs to assign drivers to routes, ensuring each route is covered and each driver follows a feasible path. Given a set of drivers
+and routes, find a valid assignment.
+
+Example Input:
+
+drivers = {
+    "John": ["Route1", "Route2"],
+    "Mike": ["Route2", "Route3"],
+    "Emma": ["Route1", "Route3"]
+}
+routes = ["Route1", "Route2", "Route3"]
+
+"""
+def can_assign_route(driver, visited, match, drivers):
+    for route in drivers[driver]:
+        if not visited.get(route, False):
+            visited[route] = True
+            if route not in match or can_assign_route(match[route], visited, match, drivers):
+                match[route] = driver
+                return True
+    return False
+
+def assign_routes(drivers, routes):
+    match = {}  # route -> driver mapping
+
+    for driver in drivers:
+        visited = {}
+        can_assign_route(driver, visited, match, drivers)
+
+    # Validate if all routes are covered
+    if len(match) == len(routes):
+        return {v: k for k, v in match.items()}  # reverse mapping: driver -> route
+    else:
+        return "No valid assignment possible"
+
+# Example input
+drivers = {
+    "John": ["Route1", "Route2"],
+    "Mike": ["Route2", "Route3"],
+    "Emma": ["Route1", "Route3"]
+}
+routes = ["Route1", "Route2", "Route3"]
+
+# Run the function
+assignment = assign_routes(drivers, routes)
+print(assignment)
+
+
+"""
+4. Optimal Room Assignment for Hotel Guests
+Problem Statement:
+A hotel has N rooms and M guests. Each guest has a preference for certain rooms. Assign guests to rooms so that all guests are 
+accommodated, and their preferences are respected as much as possible.
+
+Example Input:
+guests = {
+    "John": [1, 2, 3],
+    "Mike": [2, 3, 4],
+    "Emma": [1, 4]
+}
+rooms = [1, 2, 3, 4]  # Available rooms
+"""
+def can_assign_room(guest, visited, room_assignments, preferences):
+    """
+    Try to assign a room to the guest using DFS.
+    If a preferred room is taken, try to reassign the current guest in that room.
+    """
+    for room in preferences[guest]:
+        # Check if this room has already been visited during this DFS call
+        if not visited.get(room, False):
+            visited[room] = True  # Mark the room as visited
+            
+            # If the room is not assigned or if we can reassign the current guest
+            if room not in room_assignments or can_assign_room(room_assignments[room], visited, room_assignments, preferences):
+                room_assignments[room] = guest  # Assign the room to the current guest
+                return True  # Successful assignment
+    return False  # No valid assignment found for this guest
+
+def assign_rooms(guests, rooms):
+    """
+    Assign rooms to guests based on their preferences using DFS-based bipartite matching.
+    Returns a mapping of guest -> room or an error message if not all guests can be accommodated.
+    """
+    room_assignments = {}  # Mapping of room -> guest
+
+    for guest in guests:
+        visited = {}  # Tracks rooms visited during DFS for this guest
+        
+        # Try to find a room for the current guest
+        if not can_assign_room(guest, visited, room_assignments, guests):
+            return "No valid assignment possible"  # At least one guest couldn't be assigned
+    
+    # Convert room -> guest mapping to guest -> room for final result
+    guest_room_assignment = {guest: room for room, guest in room_assignments.items()}
+    return guest_room_assignment
+
+# === Example input ===
+guests = {
+    "John": [1, 2, 3],
+    "Mike": [2, 3, 4],
+    "Emma": [1, 4]
+}
+rooms = [1, 2, 3, 4]
+
+# === Run the function and print the result ===
+result = assign_rooms(guests, rooms)
+print(result)
+
+"""
+Problem 5: Course Prerequisite Scheduling
 Problem Statement
 You are given a list of courses and their prerequisites. Each course is represented by a unique integer, and the prerequisites are 
 given as a list of pairs [a, b], where a is a course that depends on b (i.e., b is a prerequisite for a). 
@@ -199,7 +311,7 @@ print(can_finish_courses(4, prerequisites))  # Output: True
 # Time Complexity: O(V + E), where V is the number of courses and E is the number of prerequisites.
 # Space Complexity: O(V + E), for storing the graph and in-degree array.
 """
-Problem 4: Delivery Route Optimization
+Problem 6: Delivery Route Optimization
 Problem Statement
 You are given a graph representing delivery locations and the distances between them. Each node in the graph represents a delivery location, 
 and the edges represent the distances between locations. Your task is to find the shortest possible route for a delivery truck to visit all 
@@ -265,7 +377,7 @@ print(shortest_delivery_route(graph))  # Output: (80, [0, 1, 3, 2, 0])
 # Time Complexity: O((n-1)!), where n is the number of locations.
 # Space Complexity: O(n), for storing the optimal route.
 """
-Problem 5: Network Packet Routing
+Problem 7: Network Packet Routing
 Problem Statement
 You are given a network topology represented as a graph, where each node represents a router or a network device, and edges represent 
 connections between them with associated weights (e.g., latency, distance, or cost). Your task is to find the shortest path for a packet to 
@@ -341,7 +453,7 @@ print(dijkstra_shortest_path(graph, 'A', 'D'))  # Output: (4, ['A', 'B', 'C', 'D
 # Time Complexity: O((V + E) log V), where V is the number of nodes and E is the number of edges.
 # Space Complexity: O(V), for storing distances and the priority queue.
 """
-Problem 6: Website Crawling
+Problem 8: Website Crawling
 Problem Statement
 You are given a starting URL of a website. Your task is to crawl the website by following all the links on the page and build a graph of 
 interconnected pages. Each node in the graph represents a webpage, and edges represent hyperlinks from one page to another. T
@@ -412,7 +524,7 @@ print(crawl_website(start_url, max_pages=5))
 # Time Complexity: O(N * M), where N is the number of pages and M is the number of links per page.
 # Space Complexity: O(N), for storing visited URLs and the graph.
 """
-Problem 7: Disease Spread Simulation
+Problem 9: Disease Spread Simulation
 Problem Statement
 You are given a population represented as a graph, where each node represents an individual, and edges represent 
 interactions between individuals. Your task is to simulate the spread of a disease through this population. 
@@ -473,7 +585,7 @@ print(simulate_disease_spread(graph, 'A'))  # Output: Random subset of nodes
 # Time Complexity: O(V + E), where V is the number of individuals and E is the number of interactions.
 # Space Complexity: O(V), for storing infected individuals and the queue.
 """
-Problem 8: Power Grid Failure Analysis
+Problem 10: Power Grid Failure Analysis
 Problem Statement: Given a power grid represented as a graph, identify critical nodes whose failure would disconnect the grid.
 
 Example Input:
@@ -530,7 +642,7 @@ print(find_critical_nodes(graph))  # Output: ['B', 'C']
 # Time Complexity: O(V * (V + E)), where V is the number of nodes and E is the number of edges.
 # Space Complexity: O(V), for storing visited nodes.
 """
-Problem 9: Traffic Light Optimization
+Problem 11: Traffic Light Optimization
 Problem Statement
 You are given a road network represented as a graph, where each node represents an intersection, and edges represent roads connecting 
 these intersections. Your task is to optimize traffic light timings at each intersection to minimize congestion. The goal is to assign 
@@ -594,7 +706,7 @@ print(optimize_traffic_lights(graph))  # Output: {'A': 0, 'B': 1, 'C': 1, 'D': 0
 # Time Complexity: O(V + E), where V is the number of intersections and E is the number of roads.
 # Space Complexity: O(V), for storing colors and the queue
 """
-Problem 10: Recommendation System for Movies
+Problem 12: Recommendation System for Movies
 Problem Statement
 You are given a graph representing users and their movie ratings. Each node in the graph represents a user, and the edges 
 represent similarity between users based on their movie ratings. Your task is to recommend movies to a target user 
@@ -661,7 +773,7 @@ print(recommend_movies(graph, 'Alice'))  # Output: ['Movie3']
 # Space Complexity: O(M), for storing recommendations.
 
 """
-Problem 11: User Similarity Detection
+Problem 13: User Similarity Detection
 Problem Statement: Given a graph of users and their movie ratings, determine if two users are similar based on their movie ratings. 
 Use Cosine Similarity to calculate the similarity score between two users. If the similarity score is above a certain threshold (e.g., 0.7), 
 consider them similar.
