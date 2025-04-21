@@ -252,3 +252,38 @@ target = 7
 value_combination = commibination_sum(candidates, target)
 
 print(value_combination)
+
+
+def combination_sum2(candidates,target):
+
+    resuts = []
+
+    candidates.sort()
+
+    def backtrack(start,current, remaining):
+        if remaining == 0:
+            resuts.append(current[:])
+            return
+        if remaining < 0:
+            return
+        
+        for i in range(start,len(candidates)):
+            if i < start and candidates[i] == candidates[i - 1]:
+                continue
+
+            current.append(candidates[i])
+
+            backtrack(i+1, current, remaining - candidates[i])
+
+            current.pop()
+
+    backtrack(0,[],target)
+
+    return resuts
+
+candidates = [10, 1, 2, 7, 6, 1, 5]
+target = 8
+
+combinationsum2_value = combination_sum2(candidates,target)
+
+print(combinationsum2_value)
