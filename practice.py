@@ -223,3 +223,39 @@ nums = [1, 2, 3]
 value_permutation = backtrack_permutation(nums)
 
 print(value_permutation)
+
+
+def commibination_sum(candidates,target):
+
+    results = []
+
+    def backtrack(start,current,remaining):
+
+        if remaining == 0:
+
+            results.append(current[:])
+
+            return
+        
+        if remaining < 0:
+
+            return
+        
+
+        for i in range(start,len(candidates)):
+
+            current.append(candidates[i])
+
+            backtrack(i,current, remaining - candidates[i])
+
+            current.pop()
+
+    backtrack(0,[], target)
+    return results
+
+candidates = [2, 3, 6, 7]
+target = 7
+
+commbination_value = commibination_sum(candidates,target)
+
+print(commbination_value)
