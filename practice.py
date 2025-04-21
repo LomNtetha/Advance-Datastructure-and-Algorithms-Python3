@@ -163,124 +163,25 @@ class Solution:
 sol = Solution()
 print(sol.topological_sort(graph))  # Output: [5, 4, 2, 3, 1, 0]
 
-def subst_generate(nums):
+def subst_backtracking(nums):
 
     results = []
 
-    def bactrack(start,current):
+    def backtrack(start,current):
         results.append(current[:])
 
         for i in range(start, len(nums)):
-
             current.append(nums[i])
 
-            bactrack(i + 1, current)
-
+            backtrack(i + 1, current)
 
             current.pop()
 
-    bactrack(0,[])
+    backtrack(0,[])
     return results
-
 
 nums = [1, 2, 3]
 
-back_subst = subst_generate(nums)
+value_subset = subst_backtracking(nums)
 
-print(back_subst)
-
-
-def permutetation(nums):
-
-    results = []
-
-    def backtrack(path,used):
-
-        if len(path) == len(nums):
-            return
-        
-        results.append(path[:])
-
-        for i in range(len(nums)):
-
-            if used[i]:
-                continue
-
-            used[i] = True
-            path.append(nums[i])
-
-            backtrack(path,used)
-
-            used[i] = False
-
-            path.pop()
-
-    backtrack([],[False] * len(nums))
-    return results
-
-        
-nums = [1, 2, 3]
-
-permute = permutetation(nums)
-
-print(permute)
-
-
-def combinationsum(candidates,target):
-
-    result = []
-
-    def backtrack(start,current,remaining):
-        if remaining == 0:
-            result.append(current[:])
-            return
-        if remaining < 0:
-            return
-        
-        for i in range(start,len(candidates)):
-
-            current.append(candidates[i])
-
-            backtrack(i,current, remaining - candidates[i])
-            current.pop()
-
-    backtrack(0,[],target)
-    return result
-candidates = [2, 3, 6, 7]
-target = 7
-
-combination_value = combinationsum(candidates,target)
-
-print(combination_value)
-
-def combinationsum2(candidates,target):
-
-    result = []
-    candidates.sort()
-
-    def backtrack(start,current,remaining):
-        if remaining == 0:
-            result.append(current[:])
-            return
-        
-        if remaining < 0:
-            return
-        
-        for i in range(start, len(candidates)):
-            if i > start and candidates[i] == candidates[i - 1]:
-                continue
-
-            current.append(candidates[i])
-
-            backtrack(i+1,current, remaining - candidates[i])
-            current.pop()
-
-    backtrack(0,[],target)
-    return  result
-
-candidates = [10, 1, 2, 7, 6, 1, 5]
-target = 8
-
-value_combination2 = combinationsum2(candidates,target)
-
-print(value_combination2)
+print (value_subset)
