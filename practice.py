@@ -230,18 +230,12 @@ def commibination_sum(candidates,target):
     results = []
 
     def backtrack(start,current,remaining):
-
         if remaining == 0:
-
             results.append(current[:])
-
             return
-        
         if remaining < 0:
-
             return
         
-
         for i in range(start,len(candidates)):
 
             current.append(candidates[i])
@@ -250,12 +244,11 @@ def commibination_sum(candidates,target):
 
             current.pop()
 
-    backtrack(0,[], target)
+    backtrack(0,[],target)
     return results
-
 candidates = [2, 3, 6, 7]
 target = 7
 
-commbination_value = commibination_sum(candidates,target)
+value_combination = commibination_sum(candidates, target)
 
-print(commbination_value)
+print(value_combination)
