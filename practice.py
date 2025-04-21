@@ -185,3 +185,41 @@ nums = [1, 2, 3]
 value_subset = subst_backtracking(nums)
 
 print (value_subset)
+
+
+def backtrack_permutation(nums):
+
+    reslut = []
+
+    def backtrack(path,used):
+
+        if len(path) == len(nums):
+
+            reslut.append(path[:])
+            return
+        
+        for i in range(len(nums)):
+
+            if used[i]:
+                continue
+
+            used[i] = True
+
+            path.append(nums[i])
+
+            backtrack(path,used)
+
+            path.pop()
+
+            used[i] = False
+
+
+    backtrack([],[False] * len(nums))
+
+    return reslut
+
+nums = [1, 2, 3]
+
+value_permutation = backtrack_permutation(nums)
+
+print(value_permutation)
