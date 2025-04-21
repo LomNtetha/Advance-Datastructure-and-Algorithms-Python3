@@ -1534,52 +1534,6 @@ Example Output:
 """
 class Solution:
     def kosaraju(self, graph):
-        def dfs(node, visited, stack):
-            visited.add(node)
-            for neighbor in graph.get(node, []):
-                if neighbor not in visited:
-                    dfs(neighbor, visited, stack)
-            stack.append(node)
-
-        def reverse_graph(graph):
-            reversed_graph = {}
-            for node in graph:
-                for neighbor in graph[node]:
-                    reversed_graph.setdefault(neighbor, []).append(node)
-            return reversed_graph
-
-        def dfs_scc(node, visited, component):
-            visited.add(node)
-            component.append(node)
-            for neighbor in reversed_graph.get(node, []):
-                if neighbor not in visited:
-                    dfs_scc(neighbor, visited, component)
-
-        stack = []
-        visited = set()
-        for node in graph:
-            if node not in visited:
-                dfs(node, visited, stack)
-
-        reversed_graph = reverse_graph(graph)
-        visited.clear()
-        scc_count = 0
-
-        while stack:
-            node = stack.pop()
-            if node not in visited:
-                scc_count += 1
-                dfs_scc(node, visited, [])
-
-        return scc_count
-
-# Example
-sol = Solution()
-graph = {0: [1], 1: [2], 2: [0], 3: [4]}
-print(sol.kosaraju(graph))
-
-class Solution:
-    def kosaraju(self, graph):
         """
         Implements Kosaraju's Algorithm to find the number of strongly connected components (SCCs) in a directed graph.
 
