@@ -287,3 +287,69 @@ target = 8
 combinationsum2_value = combination_sum2(candidates,target)
 
 print(combinationsum2_value)
+
+
+
+def dfs(graph,start):
+
+    visited = set()
+    results = []
+
+    def dfs_helper(node):
+
+        if node not in visited:
+            visited.add(node)
+            results.append(node)
+
+            for neighbor in graph.get(node,[]):
+                dfs_helper(neighbor)
+
+    dfs_helper(start)
+    return results
+
+graph = {
+    0: [1, 2],
+    1: [2],
+    2: [3],
+    3: [3]
+}
+start = 0
+
+value_dfs = dfs(graph,start)
+
+print(value_dfs)
+
+
+def bfs(graph,start):
+
+    visisted = set()
+
+    queue = deque([start])
+
+    results = []
+
+    while queue:
+        node = queue.popleft()
+
+        if node not in visisted:
+            visisted.add(node)
+
+            results.append(node)
+
+
+            for neighbor in graph.get(node,[]):
+                if neighbor not in visisted:
+                    queue.append(neighbor)
+
+    return results
+
+graph = {
+    0: [1, 2],
+    1: [2],
+    2: [3],
+    3: [3]
+}
+start = 0
+
+bfs_value = bfs(graph,start)
+print(bfs_value)
