@@ -395,3 +395,31 @@ end = "Bedroom"
 value_of_short_path = rooms_shartes_path_in_bfs(graph,start,end)
 
 print(value_of_short_path)
+
+def bellman_ford_algorithms_short_distance(edges,num_vertices,source):
+
+    distances = [float('inf')] * num_vertices
+    distances[source] = 0
+
+    for _ in range(num_vertices - 1):
+        for u,v,weight in edges:
+            if distances[u] + weight < distances[v]:
+                distances[v] = distances[u] + weight
+
+    for u,v,weight in edges:
+        if distances[u] + weight < distances[v]:
+            return("The edges contains circle")
+    return distances
+edges = [
+    (0, 1, 4),  # Edge from vertex 0 to vertex 1 with weight 4
+    (0, 2, 1),  # Edge from vertex 0 to vertex 2 with weight 1
+    (2, 1, 2),  # Edge from vertex 2 to vertex 1 with weight 2
+    (1, 3, 1),  # Edge from vertex 1 to vertex 3 with weight 1
+    (2, 3, 5)   # Edge from vertex 2 to vertex 3 with weight 5
+]
+
+num_vertices = 4  # Total number of vertices in the graph
+source = 0     
+
+bellman_value = bellman_ford_algorithms_short_distance(edges,num_vertices,source)
+print(bellman_value)
