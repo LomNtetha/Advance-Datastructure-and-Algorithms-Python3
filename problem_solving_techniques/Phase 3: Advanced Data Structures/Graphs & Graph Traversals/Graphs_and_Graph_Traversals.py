@@ -602,6 +602,8 @@ class Solution:
         Returns:
         - result (list): A list of all paths from source to destination. Each path is represented as a list of nodes.
         """
+        # Initialize the result list to store all paths
+        result = []
 
         def dfs(current, path):
             """
@@ -627,8 +629,7 @@ class Solution:
                 # Backtrack: remove the neighbor from the path
                 path.pop()
 
-        # Initialize the result list to store all paths
-        result = []
+        
         # Start DFS from the source node, initializing the path with the source
         dfs(source, [source])
         return result
@@ -1295,8 +1296,6 @@ If a node is unreachable, return inf for that pair.
 
 Example Input:
 
-plaintext
-Copy code
 graph = [
     [0, 3, inf, inf],
     [inf, 0, 1, inf],
@@ -1305,8 +1304,6 @@ graph = [
 ]
 Example Output:
 
-plaintext
-Copy code
 [
     [0, 3, 4, 6],
     [inf, 0, 1, 3],
