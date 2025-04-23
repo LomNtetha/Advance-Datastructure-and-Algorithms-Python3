@@ -423,3 +423,39 @@ source = 0
 
 bellman_value = bellman_ford_algorithms_short_distance(edges,num_vertices,source)
 print(bellman_value)
+
+def find_all_availble_routes(graph,source,destination):
+
+    result = []
+
+    def backtrack_dfs(current,path):
+
+        if current == destination:
+            result.append(path[:])
+            return 
+        
+        for neigbhor in graph.get(current,[]):
+
+            path.append(neigbhor)
+
+            backtrack_dfs(neigbhor,path)
+
+
+            path.pop()
+
+    backtrack_dfs(source,[source])
+    return result
+
+            
+graph = {
+    0: [1, 2],
+    1: [2, 3],
+    2: [3],
+    3: []
+}
+source = 0
+destination = 3
+
+value_backtrack = find_all_availble_routes(graph,source,destination)
+
+print(value_backtrack)
