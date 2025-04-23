@@ -633,6 +633,15 @@ class Solution:
         # Start DFS from the source node, initializing the path with the source
         dfs(source, [source])
         return result
+    
+    graph = {
+    0: [1, 2],
+    1: [2, 3],
+    2: [3],
+    3: []
+}
+source = 0
+destination = 3
 
 # Example usage
 sol = Solution()
@@ -646,7 +655,7 @@ graph = {
 }
 
 # Find all paths from node 0 to node 3
-print(sol.find_all_paths(graph, 0, 3))
+print(sol.find_all_paths(graph, source, destination))
 
 # Final Complexity Summary
 # Time Complexity: O(2^V) # In the worst case, each node can have two choices (if branching factor is large), leading to exponential growth in 
