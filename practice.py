@@ -353,3 +353,45 @@ start = 0
 
 bfs_value = bfs(graph,start)
 print(bfs_value)
+
+
+def rooms_shartes_path_in_bfs(graph,start,end):
+
+    if start not in graph or end not in graph:
+        return []
+    
+    visisted = set()
+    queue = deque([(start,[start])])
+
+    while queue:
+        node,path = queue.popleft()
+
+        if node == end:
+            return path
+        
+        if node not in visisted:
+            visisted.add(node)
+
+
+            for neighbor in graph.get(node,[]):
+                if neighbor not in visisted:
+                    queue.append((neighbor, path + [neighbor]))
+
+    return []
+
+graph = {
+    "Entrance": ["Hallway"],
+    "Hallway": ["Entrance", "Kitchen"],
+    "Kitchen": ["Hallway", "Living Room"],
+    "Living Room": ["Kitchen", "Bedroom"],
+    "Bedroom": ["Living Room"]
+}
+
+
+# Find shortest path from "Entrance" to "Bedroom"
+start = "Entrance"
+end = "Bedroom"
+
+value_of_short_path = rooms_shartes_path_in_bfs(graph,start,end)
+
+print(value_of_short_path)
