@@ -140,113 +140,163 @@ print(shortest_flight_path(graph, 'JFK', 'ORD'))  # Output: ['JFK', 'ATL', 'ORD'
 3. Vehicle Routing for Deliveries
 Problem Statement:
 A delivery company needs to assign drivers to routes, ensuring each route is covered and each driver follows a feasible path. Given a set of drivers
-and routes, find a valid assignment.
+and routes, find a valid assignment. Each driver can only be assigned to one route, and each route must be assigned to exactly one driver.
 
 Example Input:
-
 drivers = {
-    "John": ["Route1", "Route2"],
-    "Mike": ["Route2", "Route3"],
-    "Emma": ["Route1", "Route3"]
+    "John": ["Route1", "Route2"],  # John can take Route1 or Route2
+    "Mike": ["Route2", "Route3"],  # Mike can take Route2 or Route3
+    "Emma": ["Route1", "Route3"]   # Emma can take Route1 or Route3
 }
-routes = ["Route1", "Route2", "Route3"]
-
+routes = ["Route1", "Route2", "Route3"]  # All routes that need to be covered
 """
+
 def can_assign_route(driver, visited, match, drivers):
-    for route in drivers[driver]:
-        if not visited.get(route, False):
-            visited[route] = True
+    """
+    Attempts to assign a route to the given driver using a recursive backtracking approach.
+    Args:
+        driver: The driver to assign a route to.
+        visited: Dictionary tracking which routes have been considered in the current attempt.
+        match: Dictionary mapping routes to assigned drivers.
+        drivers: Dictionary mapping drivers to their available routes.
+    Returns:
+        True if a valid route can be assigned to the driver, False otherwise.
+    """
+    for route in drivers[driver]:  # Check each route the driver can take
+        if not visited.get(route, False):  # If the route hasn't been visited in this attempt
+            visited[route] = True  # Mark the route as visited
+            # If the route is unassigned or its current driver can be reassigned
             if route not in match or can_assign_route(match[route], visited, match, drivers):
-                match[route] = driver
+                match[route] = driver  # Assign the route to the current driver
                 return True
-    return False
+    return False  # No valid route could be assigned
 
 def assign_routes(drivers, routes):
-    match = {}  # route -> driver mapping
+    """
+    Assigns drivers to routes such that all routes are covered (if possible).
+    Uses a bipartite matching algorithm to find a valid assignment.
+    Args:
+        drivers: Dictionary mapping drivers to their available routes.
+        routes: List of routes to be covered.
+    Returns:
+        A dictionary mapping drivers to their assigned routes, or a string indicating failure.
+    """
+    match = {}  # Initialize an empty route-to-driver mapping
 
+    # Try to assign a route to each driver
     for driver in drivers:
-        visited = {}
+        visited = {}  # Reset visited routes for each driver's assignment attempt
         can_assign_route(driver, visited, match, drivers)
 
     # Validate if all routes are covered
-    if len(match) == len(routes):
-        return {v: k for k, v in match.items()}  # reverse mapping: driver -> route
+    if len(match) == len(routes):  # Check if every route has an assigned driver
+        # Return a reversed mapping (driver -> route) for easier interpretation
+        return {v: k for k, v in match.items()}
     else:
-        return "No valid assignment possible"
+        return "No valid assignment possible"  # Return failure message if not all routes are covered
 
 # Example input
 drivers = {
-    "John": ["Route1", "Route2"],
-    "Mike": ["Route2", "Route3"],
-    "Emma": ["Route1", "Route3"]
+    "John": ["Route1", "Route2"],  # John can take Route1 or Route2
+    "Mike": ["Route2", "Route3"],  # Mike can take Route2 or Route3
+    "Emma": ["Route1", "Route3"]   # Emma can take Route1 or Route3
 }
-routes = ["Route1", "Route2", "Route3"]
+routes = ["Route1", "Route2", "Route3"]  # All routes that need to be covered
 
-# Run the function
+# Run the function and print the result
 assignment = assign_routes(drivers, routes)
-print(assignment)
+print(assignment)  # Output: Example valid assignment, e.g., {'John': 'Route1', 'Mike': 'Route2', 'Emma': 'Route3'}
 
+# Time Complexity: O(D * R * min(D, R)), where D is the number of drivers and R is the number of routes.
+#                 Approximates to O(D^2 * R) for dense graphs where each driver can take most routes.
+# Space Complexity: O(E + R), where E is the number of driver-route pairs (edges) and R is the number of routes.
+#                  Approximates to O(D * R) in the worst case.
 
 """
 4. Optimal Room Assignment for Hotel Guests
+Room Assignment Problem
 Problem Statement:
-A hotel has N rooms and M guests. Each guest has a preference for certain rooms. Assign guests to rooms so that all guests are 
-accommodated, and their preferences are respected as much as possible.
+A hotel needs to assign guests to rooms based on their preferences, ensuring each guest gets exactly one room and each room is assigned to at most
+one guest.
+Given a set of guests and their preferred rooms, find a valid assignment using bipartite matching.
 
 Example Input:
 guests = {
-    "John": [1, 2, 3],
-    "Mike": [2, 3, 4],
-    "Emma": [1, 4]
+    "John": [1, 2, 3],  # John prefers rooms 1, 2, or 3
+    "Mike": [2, 3, 4],  # Mike prefers rooms 2, 3, or 4
+    "Emma": [1, 4]      # Emma prefers rooms 1 or 4
 }
 rooms = [1, 2, 3, 4]  # Available rooms
 """
+
 def can_assign_room(guest, visited, room_assignments, preferences):
     """
-    Try to assign a room to the guest using DFS.
-    If a preferred room is taken, try to reassign the current guest in that room.
+    Try to assign a room to the guest using Depth-First Search (DFS) for bipartite matching.
+    If a preferred room is taken, attempt to reassign the current guest in that room to another room.
+    
+    Args:
+        guest: The guest to assign a room to.
+        visited: Dictionary tracking which rooms have been considered in the current DFS attempt.
+        room_assignments: Dictionary mapping rooms to their assigned guests.
+        preferences: Dictionary mapping guests to their preferred rooms.
+    
+    Returns:
+        True if a valid room can be assigned to the guest, False otherwise.
     """
+    # Iterate through each room the guest prefers
     for room in preferences[guest]:
-        # Check if this room has already been visited during this DFS call
+        # Check if this room has already been visited during this DFS call to avoid cycles
         if not visited.get(room, False):
-            visited[room] = True  # Mark the room as visited
+            visited[room] = True  # Mark the room as visited to prevent revisiting
             
-            # If the room is not assigned or if we can reassign the current guest
+            # If the room is unassigned or its current guest can be reassigned to another room
             if room not in room_assignments or can_assign_room(room_assignments[room], visited, room_assignments, preferences):
                 room_assignments[room] = guest  # Assign the room to the current guest
-                return True  # Successful assignment
-    return False  # No valid assignment found for this guest
+                return True  # Successful assignment found
+    return False  # No valid room could be assigned to this guest
 
 def assign_rooms(guests, rooms):
     """
-    Assign rooms to guests based on their preferences using DFS-based bipartite matching.
-    Returns a mapping of guest -> room or an error message if not all guests can be accommodated.
-    """
-    room_assignments = {}  # Mapping of room -> guest
-
-    for guest in guests:
-        visited = {}  # Tracks rooms visited during DFS for this guest
-        
-        # Try to find a room for the current guest
-        if not can_assign_room(guest, visited, room_assignments, guests):
-            return "No valid assignment possible"  # At least one guest couldn't be assigned
+    Assign rooms to guests based on their preferences using a DFS-based bipartite matching algorithm.
+    Ensures each guest gets one room and each room is assigned to at most one guest.
     
-    # Convert room -> guest mapping to guest -> room for final result
+    Args:
+        guests: Dictionary mapping guests to their preferred rooms (list of room numbers).
+        rooms: List of available room numbers.
+    
+    Returns:
+        A dictionary mapping guests to their assigned rooms, or a string indicating failure if not all guests can be assigned.
+    """
+    room_assignments = {}  # Initialize empty mapping of room -> guest
+
+    # Attempt to assign a room to each guest
+    for guest in guests:
+        visited = {}  # Reset visited rooms for each guest's assignment attempt to avoid interference
+        
+        # Try to find a valid room for the current guest using DFS
+        if not can_assign_room(guest, visited, room_assignments, guests):
+            return "No valid assignment possible"  # Return failure if any guest cannot be assigned a room
+    
+    # Convert room -> guest mapping to guest -> room for the final output
     guest_room_assignment = {guest: room for room, guest in room_assignments.items()}
-    return guest_room_assignment
+    return guest_room_assignment  # Return the valid assignment
 
-# === Example input ===
+# === Example Input ===
 guests = {
-    "John": [1, 2, 3],
-    "Mike": [2, 3, 4],
-    "Emma": [1, 4]
+    "John": [1, 2, 3],  # John can be assigned to room 1, 2, or 3
+    "Mike": [2, 3, 4],  # Mike can be assigned to room 2, 3, or 4
+    "Emma": [1, 4]      # Emma can be assigned to room 1 or 4
 }
-rooms = [1, 2, 3, 4]
+rooms = [1, 2, 3, 4]   # List of all available rooms
 
-# === Run the function and print the result ===
-result = assign_rooms(guests, rooms)
-print(result)
+# === Run the Function ===
+result = assign_rooms(guests, rooms)  # Compute the room assignments
+print(result)  # Output: Example valid assignment, e.g., {'John': 1, 'Mike': 2, 'Emma': 4}
 
+# Time Complexity: O(G * R * min(G, R)), where G is the number of guests and R is the number of rooms.
+#                 Approximates to O(G^2 * R) for dense graphs where each guest prefers most rooms.
+# Space Complexity: O(E + R), where E is the number of guest-room preference pairs (edges) and R is the number of rooms.
+#                  Approximates to O(G * R) in the worst case.
 """
 Problem 5: Course Prerequisite Scheduling
 Problem Statement
@@ -791,16 +841,22 @@ For the input above, the similarity between 'Alice' and 'Bob' might look like:
 Similarity between Alice and Bob: 0.92
 A similarity score of 0.92 indicates that 'Alice' and 'Bob' are highly similar.
 """
-
 import math
-
 def cosine_similarity(user1_ratings, user2_ratings):
     """
     Calculates the cosine similarity between two users based on their movie ratings.
     
-    :param user1_ratings: Dictionary of movie ratings for user 1.
-    :param user2_ratings: Dictionary of movie ratings for user 2.
-    :return: Cosine similarity score between the two users.
+    Args:
+        user1_ratings: Dictionary of movie ratings for user 1 (movie -> rating).
+        user2_ratings: Dictionary of movie ratings for user 2 (movie -> rating).
+    
+    Returns:
+        Float: Cosine similarity score between the two users (0.0 if no similarity).
+    
+    Time Complexity: O(M), where M is the max number of movies rated by either user.
+                     - Set intersection: O(M_1 + M_2 + min(M_1, M_2)).
+                     - Dot product and magnitudes: O(C), where C is the number of common movies.
+    Space Complexity: O(M), for storing the set of common movies.
     """
     # Find common movies rated by both users
     common_movies = set(user1_ratings.keys()) & set(user2_ratings.keys())
@@ -809,16 +865,16 @@ def cosine_similarity(user1_ratings, user2_ratings):
     if not common_movies:
         return 0.0
     
-    # Calculate the dot product and magnitudes
+    # Calculate the dot product and magnitudes for cosine similarity
     dot_product = sum(user1_ratings[movie] * user2_ratings[movie] for movie in common_movies)
     magnitude1 = math.sqrt(sum(user1_ratings[movie] ** 2 for movie in common_movies))
     magnitude2 = math.sqrt(sum(user2_ratings[movie] ** 2 for movie in common_movies))
     
-    # Avoid division by zero
+    # Avoid division by zero (e.g., if all ratings are 0)
     if magnitude1 == 0 or magnitude2 == 0:
         return 0.0
     
-    # Calculate cosine similarity
+    # Calculate cosine similarity: dot product / (magnitude1 * magnitude2)
     similarity = dot_product / (magnitude1 * magnitude2)
     return similarity
 
@@ -826,35 +882,46 @@ def are_users_similar(graph, user1, user2, threshold=0.7):
     """
     Determines if two users are similar based on their movie ratings.
     
-    :param graph: Dictionary representing users and their movie ratings.
-    :param user1: The first user.
-    :param user2: The second user.
-    :param threshold: Similarity threshold (default is 0.7).
-    :return: True if users are similar, False otherwise.
+    Args:
+        graph: Dictionary mapping users to their movie ratings.
+        user1: String, the first user.
+        user2: String, the second user.
+        threshold: Float, similarity threshold (default is 0.7).
+    
+    Returns:
+        Bool: True if users are similar (similarity >= threshold), False otherwise.
+    
+    Time Complexity: O(M), where M is the max number of movies rated by either user.
+                     Dominated by the cosine_similarity call.
+    Space Complexity: O(M), inherited from cosine_similarity.
     """
-    # Get the movie ratings for the two users
+    # Get the movie ratings for the two users, default to empty dict if user not found
     user1_ratings = graph.get(user1, {})
     user2_ratings = graph.get(user2, {})
     
-    # Calculate cosine similarity
+    # Calculate cosine similarity between the users
     similarity = cosine_similarity(user1_ratings, user2_ratings)
     
-    # Check if the similarity score is above the threshold
+    # Return True if similarity meets or exceeds the threshold
     return similarity >= threshold
 
-# Example usage
+# === Example Usage ===
 graph = {
-    'Alice': {'Movie1': 5, 'Movie2': 3},
-    'Bob': {'Movie1': 4, 'Movie3': 2},
-    'Charlie': {'Movie2': 5, 'Movie3': 4}
+    'Alice': {'Movie1': 5, 'Movie2': 3},  # Alice's ratings for Movie1 and Movie2
+    'Bob': {'Movie1': 4, 'Movie3': 2},    # Bob's ratings for Movie1 and Movie3
+    'Charlie': {'Movie2': 5, 'Movie3': 4} # Charlie's ratings for Movie2 and Movie3
 }
 
-# Check if Alice and Bob are similar
+# === Check Similarity ===
 user1 = 'Alice'
 user2 = 'Bob'
 if are_users_similar(graph, user1, user2):
-    print(f"{user1} and {user2} are similar.")
+    print(f"{user1} and {user2} are similar.")  # Output if similarity >= 0.7
 else:
-    print(f"{user1} and {user2} are not similar.")
+    print(f"{user1} and {user2} are not similar.")  # Output if similarity < 0.7
 
-# Output: Alice and Bob are similar.
+
+# Time Complexity: O(M), where M is the maximum number of movies rated by either user.
+#                 Dominated by set intersection and iterating over common movies.
+# Space Complexity: O(M), where M is the maximum number of movies rated by either user.
+#                  Dominated by storing the set of common movies.
