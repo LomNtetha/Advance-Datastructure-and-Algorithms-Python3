@@ -64,7 +64,8 @@ graph = {
     'Charlie': ['Alice', 'Bob'],
     'David': ['Bob']
 }
-print(recommend_friends(graph, 'Alice'))  # Output: ['David']
+user = 'Alice'
+print(recommend_friends(graph, user))  # Output: ['David']
 
 # Time Complexity: O(V + E), where V is the number of users and E is the number of friendships.
 # Space Complexity: O(V), for storing visited nodes and the queue.
