@@ -1,4 +1,4 @@
-from collections import deque
+from collections import defaultdict, deque
 
 
 def dfs(graph,start):
@@ -459,3 +459,41 @@ destination = 3
 value_backtrack = find_all_availble_routes(graph,source,destination)
 
 print(value_backtrack)
+
+
+def recommend_friend(graph,user):
+
+    recommended = defaultdict(int)
+
+    visited = set()
+
+    queue = deque([user])
+
+    visited.add(user)
+
+    while queue:
+        current_user = queue.popleft()
+
+        for friend in graph.get(current_user,[]):
+            if friend not in visited:
+
+                visited.add(friend)
+                queue.append(friend)
+
+                for matual_friend in graph.get(friend,[]):
+                    if matual_friend not in visited and matual_friend not in graph[user]:
+                        recommended[matual_friend] += 1
+
+    return sorted(recommended.keys(), key=lambda x: recommended[x], reverse = True)
+graph = {
+    'Alice': ['Bob', 'Charlie'],
+    'Bob': ['Alice', 'Charlie', 'David'],
+    'Charlie': ['Alice', 'Bob'],
+    'David': ['Bob']
+}
+    
+user = 'Alice'
+
+reommend_user_names = recommend_friend(graph,user)
+
+print (reommend_user_names)
