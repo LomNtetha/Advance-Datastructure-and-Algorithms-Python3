@@ -91,48 +91,76 @@ For the input above, the shortest path from JFK to ORD is:
 """
 from collections import deque
 
-def shortest_flight_path(graph, start, end):
+def shortest_path_airport(graph, start, end):
     """
-    Finds the shortest path (minimum stops) between two airports.
-    :param graph: Adjacency list representation of flight routes.
-    :param start: Starting airport.
-    :param end: Destination airport.
-    :return: List representing the shortest path.
-    """
-    # If the start and end are the same, return the start as the path
-    if start == end:
-        return [start]
+    Find the shortest path between two airports in an unweighted, undirected graph using BFS.
 
-    # Queue for BFS traversal, storing tuples of (current node, path so far)
-    queue = deque([(start, [start])])
-    # Set to keep track of visited airports
+    Args:
+        graph (dict): Adjacency list representing airport connections (keys: airports, values: lists of connected airports).
+        start (str): Starting airport code (e.g., 'JFK').
+        end (str): Destination airport code (e.g., 'ORD').
+
+    Returns:
+        list: Shortest path from start to end as a list of airport codes (e.g., ['JFK', 'ATL', 'ORD']).
+              Returns None if start or end is not in the graph.
+              Returns empty list if no path exists.
+    
+    Time Complexity: O(V + E), where V is the number of vertices (airports) and E is the number of edges (connections).
+    Space Complexity: O(V) for the queue and visited set.
+    """
+    # Check if start or end nodes exist in the graph; return None if either is missing
+    if start not in graph or end not in graph:
+        return None
+    
+    # Initialize a set to track visited airports to avoid cycles
     visited = set()
+    
+    # Initialize a queue for BFS, storing tuples of (current_node, path_so_far)
+    # Start with the starting airport and its path (initially just [start])
+    queue = deque([(start, [start])])
 
-    # Perform BFS to find the shortest path
+    # Main BFS loop: continue until the queue is empty (all possible paths explored)
     while queue:
-        current, path = queue.popleft()
-        # Explore neighbors of the current airport
-        for neighbor in graph.get(current, []):
-            if neighbor == end:
-                # If the destination is found, return the complete path
-                return path + [neighbor]
-            if neighbor not in visited:
-                # Mark the neighbor as visited
-                visited.add(neighbor)
-                # Add the neighbor to the queue with the updated path
-                queue.append((neighbor, path + [neighbor]))
+        # Pop the next node and its path from the front of the queue
+        node, path = queue.popleft()
 
-    # If no path is found, return None
-    return None
+        # If the current node is the destination, return the path
+        if node == end:
+            return path
+        
+        # If the node hasn't been visited, process it
+        if node not in visited:
+            # Mark the node as visited to prevent revisiting
+            visited.add(node)
 
-# Example usage
+            # Iterate through neighbors of the current node (get empty list if node not in graph)
+            for neighbor in graph.get(node, []):
+                # If the neighbor hasn't been visited, add it to the queue with the updated path
+                if neighbor not in visited:
+                    queue.append((neighbor, path + [neighbor]))
+
+    # If no path is found after exploring all nodes, return an empty list
+    return []
+
+# Example graph: adjacency list representing airport connections
+# Keys are airport codes, values are lists of directly connected airports
 graph = {
-    'JFK': ['LAX', 'ATL'],
-    'LAX': ['JFK', 'ATL'],
-    'ATL': ['JFK', 'LAX', 'ORD'],
-    'ORD': ['ATL']
+    'JFK': ['LAX', 'ATL'],  # JFK connects to LAX and ATL
+    'LAX': ['JFK', 'ATL'],  # LAX connects to JFK and ATL
+    'ATL': ['JFK', 'LAX', 'ORD'],  # ATL connects to JFK, LAX, and ORD
+    'ORD': ['ATL']  # ORD connects to ATL
 }
-print(shortest_flight_path(graph, 'JFK', 'ORD'))  # Output: ['JFK', 'ATL', 'ORD']
+
+# Define start and end airports for the shortest path query
+start = 'JFK'
+end = 'ORD'
+
+# Find the shortest path from JFK to ORD using BFS
+shortest_air_path = shortest_path_airport(graph, start, end)
+
+# Print the result
+# Expected output: ['JFK', 'ATL', 'ORD'] (shortest path from JFK to ORD via ATL)
+print(shortest_air_path)
 
 # Time Complexity: O(V + E), where V is the number of airports and E is the number of routes.
 # Space Complexity: O(V), for storing visited nodes and the queue.
