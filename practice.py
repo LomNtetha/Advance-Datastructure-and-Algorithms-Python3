@@ -497,3 +497,42 @@ user = 'Alice'
 reommend_user_names = recommend_friend(graph,user)
 
 print (reommend_user_names)
+
+def find_short_routes_airplane_bfs(graph,start,end):
+
+    if start not in graph  or end not in graph:
+        return None
+    
+    visited = set()
+
+    queue = deque([(start,[start])])
+
+    while queue:
+        node,path = queue.popleft()
+
+        if node == end:
+            return path
+        
+        if node not in visited:
+            visited.add(node)
+
+            for neighbor in graph.get(node,[]):
+                if neighbor not in visited:
+                    queue.append((neighbor,path +[neighbor]))
+
+    return []
+
+
+graph = {
+    'JFK': ['LAX', 'ATL'],
+    'LAX': ['JFK', 'ATL'],
+    'ATL': ['JFK', 'LAX', 'ORD'],
+    'ORD': ['ATL']
+}
+
+start = 'JFK'
+end = 'ORD'
+
+short = find_short_routes_airplane_bfs(graph,start,end)
+
+print(short)
