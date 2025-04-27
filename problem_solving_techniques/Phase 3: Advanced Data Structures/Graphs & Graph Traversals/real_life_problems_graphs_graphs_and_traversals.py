@@ -178,7 +178,10 @@ drivers = {
     "Emma": ["Route1", "Route3"]   # Emma can take Route1 or Route3
 }
 routes = ["Route1", "Route2", "Route3"]  # All routes that need to be covered
+
+Algorithm type: Bipartite Graph Matching (specifically, maximum bipartite matching using DFS to find augmenting paths)
 """
+
 
 def can_assign_route(driver, visited, match, drivers):
     """
@@ -192,8 +195,10 @@ def can_assign_route(driver, visited, match, drivers):
         True if a valid route can be assigned to the driver, False otherwise.
     """
     for route in drivers[driver]:  # Check each route the driver can take
+
         if not visited.get(route, False):  # If the route hasn't been visited in this attempt
             visited[route] = True  # Mark the route as visited
+            
             # If the route is unassigned or its current driver can be reassigned
             if route not in match or can_assign_route(match[route], visited, match, drivers):
                 match[route] = driver  # Assign the route to the current driver
