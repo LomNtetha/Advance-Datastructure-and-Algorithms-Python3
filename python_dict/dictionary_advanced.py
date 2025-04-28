@@ -50,13 +50,13 @@ Question: Write a Python program to check if a given key exists in a dictionary.
 
 Comment: Using the in operator to check for key existence.
 """
-def key_exists(d, key):
-    return key in d  # Return True if the key exists in the dictionary, else False
+def key_exists(my_dict, key):
+    return key in my_dict  # Return True if the key exists in the dictionary, else False
 
 # Example usage
 my_dict = {'a': 1, 'b': 2}
-print(key_exists(my_dict, 'a'))  # True
-
+key = 'a'
+print(key_exists(my_dict, key))  # True
 # Time Complexity: O(1) (average case for dictionary lookup)
 
 # Space Complexity: O(1)
@@ -67,8 +67,8 @@ Question: Write a Python program to find the largest value in a dictionary.
 
 Comment: We can use the max() function with the key parameter to find the largest value.
 """
-def largest_value(d):
-    return max(d.values())  # Return the largest value in the dictionary
+def largest_value(my_dict):
+    return max(my_dict.values())  # Return the largest value in the dictionary
 
 # Example usage
 my_dict = {'a': 10, 'b': 20, 'c': 15}
@@ -160,8 +160,12 @@ Question: Write a Python program to count how many times each value appears in a
 Comment: We will use another dictionary to count occurrences.
 """
 def count_values(d):
-    value_count = {}  # Initialize an empty dictionary to store value frequencies
-    for value in d.values():  # Loop through the values in the dictionary
+     # Initialize an empty dictionary to store value frequencies
+    value_count = {} 
+
+     # Loop through the values in the dictionary
+    for value in d.values(): 
+
         value_count[value] = value_count.get(value, 0) + 1  # Increment the count for the value
     return value_count  # Return the dictionary containing the count of each value
 
@@ -233,10 +237,15 @@ Question: Write a Python program to get the most frequent value in a dictionary.
 Comment: We will use the max() function with key parameter to find the most frequent value.
 """
 def most_frequent_value(d):
-    value_count = {}  # Initialize a dictionary to store value frequencies
-    for value in d.values():  # Loop through the values in the dictionary
+     # Initialize a dictionary to store value frequencies
+    value_count = {} 
+
+    # Loop through the values in the dictionary
+    for value in d.values():  
         value_count[value] = value_count.get(value, 0) + 1  # Count occurrences of each value
-    return max(value_count, key=value_count.get)  # Return the value with the highest frequency
+
+    # Return the value with the highest frequency
+    return max(value_count, key=value_count.get)  
 
 # Example usage
 my_dict = {'a': 3, 'b': 2, 'c': 3, 'd': 1}
