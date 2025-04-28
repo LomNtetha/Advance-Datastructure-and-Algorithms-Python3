@@ -1,3 +1,10 @@
+
+# ✅ Notes
+# Recursion always requires a base case (when to stop).
+
+# Without a base case, recursion leads to infinite loops and stack overflow errors.
+
+# Recursion often involves breaking a problem into smaller identical subproblems.
 """
 1. Climbing Stairs (Recursive Steps)
 Problem:
@@ -12,6 +19,10 @@ def climb_stairs(n):
     return climb_stairs(n-1) + climb_stairs(n-2)
 
 print(climb_stairs(5))  # Output: 8
+
+# Time Complexity: O(2^n) — because we branch into two recursive calls each time.
+
+# Space Complexity: O(n) — the recursion depth is n (maximum).
 
 """
 2. File System Navigation
@@ -43,6 +54,10 @@ filesystem = {
 
 search_files(filesystem)
 
+# Time Complexity: O(N) — where N is total number of files + folders.
+
+# Space Complexity: O(D) — where D is the maximum depth of nested folders (due to recursion stack).
+
 """
 3. Calculate Factorial (with real-world meaning)
 Problem:
@@ -58,6 +73,9 @@ def factorial(n):
     return n * factorial(n-1)
 
 print(factorial(5))  # Output: 120
+# Time Complexity: O(n) — one call for each decrement from n to 0.
+
+# Space Complexity: O(n) — recursion depth is n.
 
 """
 4. Sum of Digits of a Credit Card
@@ -73,6 +91,9 @@ def sum_of_digits(n):
     return n % 10 + sum_of_digits(n // 10)
 
 print(sum_of_digits(12345))  # Output: 15
+# Time Complexity: O(d) — where d is the number of digits in n.
+
+# Space Complexity: O(d) — depth equals the number of digits.
 
 """
 5. Robot Paths on a Grid
@@ -87,6 +108,10 @@ def robot_paths(m, n):
     return robot_paths(m-1, n) + robot_paths(m, n-1)
 
 print(robot_paths(2, 2))  # Output: 6
+
+# Time Complexity: O(2^(m+n)) — at each cell, two recursive calls.
+
+# Space Complexity: O(m+n) — recursion stack height.
 
 """
 6. Recursive Binary Search
@@ -109,6 +134,10 @@ def binary_search(arr, target, low, high):
 guests = ["Alice", "Bob", "Charlie", "David", "Eve"]
 print(binary_search(guests, "Charlie", 0, len(guests)-1))  # Output: True
 
+# Time Complexity: O(log n) — list size halves each time.
+
+# Space Complexity: O(log n) — due to recursion stack.
+
 """
 7. Palindrome Checker
 Problem:
@@ -125,6 +154,10 @@ def is_palindrome(s):
 
 print(is_palindrome("racecar"))  # Output: True
 print(is_palindrome("hello"))    # Output: False
+
+# Time Complexity: O(n) — n comparisons for n characters.
+
+# Space Complexity: O(n) — because slicing creates new substrings (inefficient).
 
 """
 8. Tower of Hanoi
@@ -145,6 +178,10 @@ def tower_of_hanoi(n, source, auxiliary, target):
 
 tower_of_hanoi(3, 'A', 'B', 'C')
 
+# Time Complexity: O(2^n) — each move doubles with each additional disk.
+
+# Space Complexity: O(n) — depth of recursive calls is n.
+
 """
 9. Recursive String Reversal
 Problem:
@@ -156,6 +193,10 @@ def reverse_string(s):
     return reverse_string(s[1:]) + s[0]  # Reverse substring then add first character
 
 print(reverse_string("Python"))  # Output: "nohtyP"
+
+# Time Complexity: O(n^2) — because strings are immutable in Python and slicing takes O(n).
+
+# Space Complexity: O(n) — recursion depth is n.
 """
 10. Calculate Total Cost with Tax
 Problem:
@@ -172,11 +213,126 @@ prices = [100, 200, 300]  # Prices of items
 tax_rate = 0.1  # 10% tax
 print(total_cost(prices, tax_rate))  # Output: 660.0
 
+# Time Complexity: O(n) — loop over each item once.
 
-# ✅ Notes
-# Recursion always requires a base case (when to stop).
+# Space Complexity: O(n) — recursion stack holds n calls.
 
-# Without a base case, recursion leads to infinite loops and stack overflow errors.
+"""
+11. Decode Ways (Message Decoding)
+In a secret agent system, a message is encoded where '1' = 'A', '2' = 'B', ..., '26' = 'Z'.
+Given a digit string, how many ways can you decode it?
 
-# Recursion often involves breaking a problem into smaller identical subproblems.
+Example: "12" → could be "AB" (1 and 2) or "L" (12) → 2 ways.
+"""
+def num_decodings(s):
+    # Base case: empty string means 1 valid way
+    if not s:
+        return 1
+    # If starts with '0', invalid
+    if s[0] == '0':
+        return 0
+    # Only 1 character left
+    if len(s) == 1:
+        return 1
+
+    # Decode single character + decode double character if valid
+    ways = num_decodings(s[1:])
+    if int(s[:2]) <= 26:
+        ways += num_decodings(s[2:])
+    
+    return ways
+
+print(num_decodings("226"))  # Output: 3
+# Time Complexity: O(2^n) — two choices at each character (split 1 or 2 digits).
+
+# Space Complexity: O(n) — recursion depth.
+"""
+12. Word Break (Check Dictionary Words)
+Given a string and a dictionary of words, determine if the string can be segmented into a space-separated sequence of one or more dictionary words.
+
+Example:
+"applepenapple" with dictionary ["apple", "pen"] → True
+
+"""
+def word_break(s, word_dict):
+    if not s:
+        return True
+    
+    for word in word_dict:
+        # If s starts with a word
+        if s.startswith(word):
+            # Recursively check the rest
+            if word_break(s[len(word):], word_dict):
+                return True
+    return False
+
+print(word_break("applepenapple", ["apple", "pen"]))  # Output: True
+
+# Time Complexity: O(2^n) — each letter can create multiple splits.
+
+# Space Complexity: O(n) — maximum call stack depth.
+
+"""
+13. Unique Binary Search Trees (Number of Structures)
+Given n, how many unique binary search trees can you form with values 1..n?
+
+Example:
+n = 3 → 5 unique BSTs
+
+"""
+def num_trees(n):
+    # Base case: 0 or 1 node → 1 structure
+    if n <= 1:
+        return 1
+    total = 0
+    # Each number as root
+    for i in range(n):
+        # Number of left subtrees * number of right subtrees
+        left = num_trees(i)
+        right = num_trees(n-1-i)
+        total += left * right
+    return total
+
+print(num_trees(3))  # Output: 5
+# Time Complexity: O(2^n) — exponentially growing splits.
+
+# Space Complexity: O(n) — depth of recursion.
+"""
+14. Minimum Path Sum in a Grid
+Given a m x n grid filled with non-negative numbers,
+find a path from top-left to bottom-right which minimizes the sum of all numbers along its path.
+You can only move right or down.
+"""
+
+def min_path_sum(grid):
+    m, n = len(grid), len(grid[0])
+
+    def dfs(x, y):
+        # Base case: out of bounds
+        if x >= m or y >= n:
+            return float('inf')
+        # Base case: reach end
+        if x == m-1 and y == n-1:
+            return grid[x][y]
+        # Recurse by moving right or down
+        return grid[x][y] + min(dfs(x+1, y), dfs(x, y+1))
+    
+    return dfs(0, 0)
+
+grid = [
+    [1,3,1],
+    [1,5,1],
+    [4,2,1]
+]
+print(min_path_sum(grid))
+# Time Complexity: O(2^(m+n)) — two options at each cell.
+
+# Space Complexity: O(m+n) — recursion depth.
+
+
+
+
+
+
+
 
