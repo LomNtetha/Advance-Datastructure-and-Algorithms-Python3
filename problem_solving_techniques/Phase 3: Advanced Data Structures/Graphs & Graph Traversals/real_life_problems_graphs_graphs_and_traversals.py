@@ -414,46 +414,79 @@ For the input above, the shortest route is:
 
 
 """
-from itertools import permutations
+from functools import lru_cache
 
-def shortest_delivery_route(graph):
-    """
-    Finds the shortest delivery route visiting all locations and returning to the start.
-    :param graph: Adjacency matrix representation of distances.
-    :return: Minimum distance and the optimal route.
-    """
-    n = len(graph)
-    # Initialize minimum distance to infinity
-    min_distance = float('inf')
-    # Variable to store the optimal route
-    optimal_route = []
+class Solution:
+    def tsp(self, distances: list[list[int]]) -> tuple[int, list[int]]:
+        """
+        Solves the TSP problem using Dynamic Programming with Bitmasking.
 
-    # Generate all possible permutations of routes
-    for route in permutations(range(1, n)):
-        current_distance = 0
-        current_node = 0
-        # Calculate the total distance for the current route
-        for next_node in route:
-            current_distance += graph[current_node][next_node]
-            current_node = next_node
-        # Add the distance to return to the starting point
-        current_distance += graph[current_node][0]
+        :param distances: 2D matrix where distances[i][j] is the cost from city i to city j.
+        :return: Tuple containing (minimum cost, route taken as list of city indices)
+        """
+        n = len(distances)
+        VISITED_ALL = (1 << n) - 1  # All cities visited => bitmask like 1111 for n=4
 
-        # Update the minimum distance and optimal route if a better route is found
-        if current_distance < min_distance:
-            min_distance = current_distance
-            optimal_route = [0] + list(route) + [0]
+        @lru_cache(None)
+        def dp(mask, pos):
+            """
+            Recursive function to compute minimum cost.
+            :param mask: bitmask representing visited cities
+            :param pos: current city
+            :return: tuple (min_cost, path)
+            """
+            if mask == VISITED_ALL:
+                return distances[pos][0], [0]  # Return to start (0)
 
-    return min_distance, optimal_route
+            min_cost = float('inf')
+            min_path = []
 
-# Example usage
-graph = [
+            # Try next unvisited cities
+            for city in range(n):
+                # Check if the current city has not been visited using bitmask
+                if not (mask & (1 << city)):
+                    # Mark the current city as visited by setting the corresponding bit
+                    new_mask = mask | (1 << city)
+
+                    # Get the cost to travel from the current city (pos) to the next city
+                    cost_to_city = distances[pos][city]
+
+                    # Recursively compute the minimum cost and path from the next city onward
+                    sub_cost, sub_path = dp(new_mask, city)
+
+                    # Total cost for this path is the cost to go to 'city' plus the cost of the subpath
+                    total_cost = cost_to_city + sub_cost
+
+                    # Update the minimum cost and corresponding path if this route is better
+                    if total_cost < min_cost:
+                        min_cost = total_cost
+                        # Add the current city to the beginning of the sub-path to form the new path
+                        min_path = [city] + sub_path
+
+            # Return the minimum cost and path from this position with the current mask
+            return min_cost, min_path
+
+
+        # Start from city 0 with only city 0 visited
+        min_cost, path = dp(1, 0)
+        full_route = [0] + path  # Prepend the start city
+
+        # Return the minimum cost and full route including returning to city 0
+        return min_cost, full_route
+
+# Example Input
+distances = [
     [0, 10, 15, 20],
     [10, 0, 35, 25],
     [15, 35, 0, 30],
     [20, 25, 30, 0]
 ]
-print(shortest_delivery_route(graph))  # Output: (80, [0, 1, 3, 2, 0])
+
+# Output
+solution = Solution()
+cost, route = solution.tsp(distances)
+print((cost, route))
+
 
 # Time Complexity: O((n-1)!), where n is the number of locations.
 # Space Complexity: O(n), for storing the optimal route.
