@@ -728,25 +728,61 @@ distances = [
 from functools import lru_cache
 
 class Solution:
-    def tsp(self, distances: list[list[int]]) -> int:
+    def tsp(self, distances: list[list[int]]) -> tuple[int, list[int]]:
+        """
+        Solves the TSP problem using Dynamic Programming with Bitmasking.
+
+        :param distances: 2D matrix where distances[i][j] is the cost from city i to city j.
+        :return: Tuple containing (minimum cost, route taken as list of city indices)
+        """
         n = len(distances)
-        VISITED_ALL = (1 << n) - 1  # All cities visited (Bitmask: 111...111)
+        VISITED_ALL = (1 << n) - 1  # All cities visited => bitmask like 1111 for n=4
 
         @lru_cache(None)
         def dp(mask, pos):
-            """Recursively find the shortest path."""
-            if mask == VISITED_ALL:  # All cities visited, return to start
-                return distances[pos][0]
+            """
+            Recursive function to compute minimum cost.
+            :param mask: bitmask representing visited cities
+            :param pos: current city
+            :return: tuple (min_cost, path)
+            """
+            if mask == VISITED_ALL:
+                return distances[pos][0], [0]  # Return to start (0)
 
             min_cost = float('inf')
+            min_path = []
+
+            # Try next unvisited cities
             for city in range(n):
-                if not (mask & (1 << city)):  # If city not visited
-                    new_cost = distances[pos][city] + dp(mask | (1 << city), city)
-                    min_cost = min(min_cost, new_cost)
+                # Check if the current city has not been visited using bitmask
+                if not (mask & (1 << city)):
+                    # Mark the current city as visited by setting the corresponding bit
+                    new_mask = mask | (1 << city)
 
-            return min_cost
+                    # Get the cost to travel from the current city (pos) to the next city
+                    cost_to_city = distances[pos][city]
 
-        return dp(1, 0)  # Start from city 0 with only city 0 visited
+                    # Recursively compute the minimum cost and path from the next city onward
+                    sub_cost, sub_path = dp(new_mask, city)
+
+                    # Total cost for this path is the cost to go to 'city' plus the cost of the subpath
+                    total_cost = cost_to_city + sub_cost
+
+                    # Update the minimum cost and corresponding path if this route is better
+                    if total_cost < min_cost:
+                        min_cost = total_cost
+                        # Add the current city to the beginning of the sub-path to form the new path
+                        min_path = [city] + sub_path
+
+            # Return the minimum cost and path from this position with the current mask
+            return min_cost, min_path
+
+
+        # Start from city 0 with only city 0 visited
+        min_cost, path = dp(1, 0)
+        full_route = [0] + path  # Prepend the start city
+
+        return min_cost, full_route
 
 # Example Input
 distances = [
@@ -758,7 +794,10 @@ distances = [
 
 # Output
 solution = Solution()
-print(solution.tsp(distances))  # Output: Shortest possible route cost
+cost, route = solution.tsp(distances)
+print(f"Minimum Cost: {cost}")
+print(f"Route: {route}")
+
 
 # Complexity Analysis
 # Time Complexity: O(n² * 2ⁿ)
