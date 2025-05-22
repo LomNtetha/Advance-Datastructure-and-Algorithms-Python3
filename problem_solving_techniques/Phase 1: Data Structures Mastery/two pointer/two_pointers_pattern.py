@@ -222,10 +222,35 @@ print(solution.longestPalindrome("babad"))  # Output: 3
 
 
 """
-7. Problem: Given an array representing heights of vertical lines, find two lines that together with the x-axis form a container
-that holds the most water
+7. Problem Statement:
+You are given an array of non-negative integers where each element represents the height of a vertical line
+drawn at that index on the x-axis. The lines, along with the x-axis, can form a series of containers.
+Your task is to find two lines such that, together with the x-axis, they form a container that can hold the maximum amount of water.
 
-Approach: Use two pointers calculate the area between the two lines, and move the pointer with the shorter line to try and find a larger area.
+Constraints:
+The width of the container is the horizontal distance between the two lines.
+
+The height of the container is determined by the shorter of the two lines (since water would spill over the shorter side).
+
+You cannot slant or tilt the container — it must be vertical and based on the original array positions.
+
+Input:
+A list of integers representing line heights. For example:
+height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
+
+Output:
+An integer representing the maximum amount of water that can be contained.
+
+Explanation (using the sample input):
+If you pick the lines at index 1 (height = 8) and index 8 (height = 7), the container width is 8 - 1 = 7, and the height is min(8, 7) = 7.
+
+So, the area (water held) is 7 * 7 = 49, which is the maximum among all possible combinations in this array.
+
+Objective:
+Write an algorithm to compute the maximum area that can be formed between any two lines from the array.
+
+Follow-up:
+Can you solve it in O(n) time using a two-pointer approach?
 
 Time Complexity: O(n) Each pair of pointers is evaluated once.
 
