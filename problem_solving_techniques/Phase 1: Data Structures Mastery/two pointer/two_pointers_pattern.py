@@ -292,6 +292,9 @@ print(Solution().maxArea(height))  # Output: 49
 8. Trapping Rain Water
 Example Question: Given n non-negative integers representing the height of bars, compute how much water it can trap after raining.
 
+The bars are placed next to each other, and rainwater will be trapped between the bars, based on the height of the tallest 
+bars on the left and right of each position.
+
 Input:
 
 height = [0,1,0,2,1,0,1,3,2,1,2,1]

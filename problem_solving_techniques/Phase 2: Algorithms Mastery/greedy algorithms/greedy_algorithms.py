@@ -32,7 +32,7 @@ class Solution:
         return coin_count, coins_used
 
 # Coin denominations in descending order
-denominations = [25, 16,10, 5, 1]
+denominations = [25,10, 5, 1]
 # Example usage
 solution = Solution()
 amount = 41  # Target amount in cents
