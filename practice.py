@@ -121,3 +121,41 @@ end = "Bedroom"
 short = bfs_shortest_path_in_rooms(graph,start,end)
 
 print(short)
+
+from collections import defaultdict
+def recommend_friends(graph,user):
+
+    visited = set()
+    recommended =defaultdict(int)
+    queue = deque([user])
+    visited.add(user)
+
+    
+
+    while queue:
+        current_user = queue.popleft()
+
+        for friend in graph.get(current_user,[]):
+            if friend not in visited:
+                visited.add(friend)
+                queue.append(friend)
+                
+                for matual_friend in graph.get(friend,[]):
+                    if matual_friend not in visited and matual_friend not in graph[user]:
+                        recommended[matual_friend] += 1
+
+    return sorted(recommended.keys(), key=lambda x: recommended[x], reverse=True)
+
+    
+
+graph = {
+    'Alice': ['Bob', 'Charlie'],
+    'Bob': ['Alice', 'Charlie', 'David'],
+    'Charlie': ['Alice', 'Bob'],
+    'David': ['Bob']
+}
+user = 'Alice'
+
+friendss = recommend_friends(graph,user)
+
+print (friendss)
