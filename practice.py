@@ -259,3 +259,37 @@ departure = ["9:10", "12:00", "11:20", "11:30", "19:00", "20:00"]
 min_platform_needed = min_platform_needed(arrival,departure)
 
 print(min_platform_needed)
+
+def max_profit_sell(prices):
+
+    min_price = float('inf')
+    max_profit = 0
+
+    for price in prices:
+        min_price = min(min_price,price)
+        max_profit = max(max_profit, price - min_price)
+
+    return max_profit
+
+prices = [7, 1, 5, 3, 6, 4]
+
+mx_profit = max_profit_sell(prices)
+
+print(mx_profit)
+
+
+def maxProfit_II(prices):
+
+    profit = 0
+
+    for i in range(1,len(prices)):
+        if prices[i]>prices[i-1]:
+            profit += prices[i] - prices[i-1]
+
+    return profit
+
+prices = [7, 1, 5, 3, 6, 4]
+
+profit_II = maxProfit_II(prices)
+
+print(profit_II)
