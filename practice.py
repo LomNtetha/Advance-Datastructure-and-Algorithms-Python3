@@ -80,3 +80,44 @@ start = 0
 bfs_result = bfs(graph,start)
 
 print(bfs_result)
+
+def bfs_shortest_path_in_rooms(graph,start,end):
+
+    if start not in graph or end not in graph:
+        return []
+    
+    visited = set()
+    queue = deque([(start, [start])])
+
+
+    while queue:
+        node,path = queue.popleft()
+
+        if node == end:
+            return path
+        if node not in visited:
+            visited.add(node)
+
+            for neigbhor in graph.get(node,[]):
+                if neigbhor not in visited:
+                    queue.append((neigbhor, path + [neigbhor]))
+
+    return []
+
+
+
+graph = {
+    "Entrance": ["Hallway"],
+    "Hallway": ["Entrance", "Kitchen"],
+    "Kitchen": ["Hallway", "Living Room"],
+    "Living Room": ["Kitchen", "Bedroom"],
+    "Bedroom": ["Living Room"]
+}
+
+# Find shortest path from "Entrance" to "Bedroom"
+start = "Entrance"
+end = "Bedroom"
+
+short = bfs_shortest_path_in_rooms(graph,start,end)
+
+print(short)
