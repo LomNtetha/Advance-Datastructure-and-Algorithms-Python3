@@ -293,3 +293,29 @@ prices = [7, 1, 5, 3, 6, 4]
 profit_II = maxProfit_II(prices)
 
 print(profit_II)
+
+
+def job_sequencing(jobs):
+
+    jobs.sort(key=lambda x:x[1], reverse=True)
+
+    max_dealine = max(job[0] for job in jobs)
+
+    slots = [-1] * (max_dealine + 1)
+
+    tota_profit =0
+
+    for dealine, profit in jobs:
+        for j in range(min(dealine,max_dealine),0,-1):
+
+            if slots[j] == -1:
+                slots[j]=profit
+                tota_profit +=profit
+                break
+    return tota_profit
+jobs = [(2, 100), (1, 19), (2, 27), (1, 25), (3, 15)]
+
+
+tp = job_sequencing(jobs)
+
+print(tp)
