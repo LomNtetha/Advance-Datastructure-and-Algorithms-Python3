@@ -18,3 +18,33 @@ used, count = mincoindenominations(denominations,amount)
 
 print(used)
 print(count)
+
+def dfs(gragh,start):
+
+    visited = set()
+    result = []
+
+
+    def dfs_backtrack(node):
+
+        if node not in visited:
+            visited.add(node)
+            result.append(node)
+
+
+            for neigbhor in gragh.get(node,[]):
+                dfs_backtrack(neigbhor)
+    dfs_backtrack(start)
+    return result
+
+graph = {
+    0: [1, 2],  # Node 0 is connected to nodes 1 and 2
+    1: [2],     # Node 1 is connected to node 2
+    2: [3],     # Node 2 is connected to node 3
+    3: [3]      # Node 3 has a self-loop (connected to itself)
+}
+start =0
+
+num = dfs(graph,start)
+
+print(num)
