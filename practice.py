@@ -48,3 +48,35 @@ start =0
 num = dfs(graph,start)
 
 print(num)
+
+from collections import deque
+
+def bfs(graph,start):
+
+    visisted = set()
+    queue = deque([start])
+    result = []
+
+    while queue:
+        node = queue.popleft()
+
+        if node not in visisted:
+            visisted.add(node)
+            result.append(node)
+
+            for neighbor in graph.get(node,[]):
+                if neighbor not in visisted:
+                    queue.append(neighbor)
+
+    return result
+graph = {
+    0: [1, 2],
+    1: [2],
+    2: [3],
+    3: [3]
+}
+start = 0
+
+bfs_result = bfs(graph,start)
+
+print(bfs_result)
