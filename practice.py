@@ -50,6 +50,7 @@ num = dfs(graph,start)
 print(num)
 
 from collections import deque
+from typing import List
 
 def bfs(graph,start):
 
@@ -546,3 +547,18 @@ target = 9
 twopointer = twosum(numbers,target)
 
 print(twopointer)
+
+def reverstring(s):
+
+    left,right = 0,len(s)-1
+
+    while left < right:
+        s[left],s[right] = s[right],s[left]
+
+        left += 1
+        right -= 1
+
+
+s = ["h", "e", "l", "l", "o"] 
+reverstring(s)
+print(s)
