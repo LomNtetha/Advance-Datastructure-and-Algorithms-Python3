@@ -319,3 +319,25 @@ jobs = [(2, 100), (1, 19), (2, 27), (1, 25), (3, 15)]
 tp = job_sequencing(jobs)
 
 print(tp)
+
+
+def majorityelements(nums):
+    count1 = 0
+    count2 = 0
+
+    for num in nums:
+        if num == 1:
+            count1 += 1
+        elif num == 2:
+            count2 += 1
+
+    if count2 > count1:
+        return 2
+    else:
+        return 1
+
+
+nums = [2, 2, 1, 1, 1, 2, 2]
+
+mar = majorityelements(nums)
+print(mar)
