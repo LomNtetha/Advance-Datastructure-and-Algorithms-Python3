@@ -451,3 +451,39 @@ nums = [1, 2, 3]
 sub = subsets(nums)
 
 print(sub)
+
+def permutations(nums):
+
+    result = []
+
+    def backtrack(path,used):
+        if len(path) == len(used):
+            result.append(path[:])
+
+            return
+        
+
+        for i in range(len(nums)):
+
+            if used[i]:
+                continue
+
+            used[i] = True
+
+            path.append(nums[i])
+
+            backtrack(path,used)
+            path.pop()
+
+            used[i] = False
+
+
+    backtrack([], [False] * len(nums))
+    return result
+
+nums = [1, 2, 3]
+
+p = permutations(nums)
+
+print(p)
+
