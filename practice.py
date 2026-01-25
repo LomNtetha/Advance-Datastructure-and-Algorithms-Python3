@@ -386,3 +386,25 @@ n = 5
 x = ways_to_climb_staries(n)
 
 print(x)
+
+def rob(houses):
+
+    if not houses:
+        return 0
+    
+    if len(houses) ==1:
+        return houses[0]
+    
+    dp = [1] * len(houses)
+
+    dp[0],dp[1] = houses[0],max(houses[0],houses[1])
+
+    for i in range(2,len(houses)):
+
+        dp[i] = max(dp[i-1], dp[i-2] + houses[i])  
+
+    return dp[-1]     
+houses = [2, 7, 9, 3, 1]
+
+robs = rob(houses)
+print(robs)
