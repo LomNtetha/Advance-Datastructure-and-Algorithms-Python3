@@ -424,3 +424,30 @@ houses = [2, 7, 9, 3, 1]
 robbing = easy_rob_house_solution(houses)
 
 print(robbing)
+
+def subsets(nums):
+
+    results = []
+
+    def backtrack(start,current):
+
+        results.append(current[:])
+
+        for i in range(start,len(nums)):
+
+            current.append(nums[i])
+
+            backtrack(i+1,current)
+
+            current.pop()
+
+    backtrack(0,[])
+
+    return results
+
+
+nums = [1, 2, 3]
+
+sub = subsets(nums)
+
+print(sub)
