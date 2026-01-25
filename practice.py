@@ -521,3 +521,28 @@ comb = comibination_sum(candidates,target)
 
 print(comb)
 
+def twosum(numbers,target):
+
+    left,right = 0, len(numbers)-1
+
+    current_sum = 0
+
+    while left < right:
+
+        current_sum = numbers[left] + numbers[right]
+
+        if current_sum == target:
+            return [left+1,right+1]
+        
+        elif current_sum < target:
+            left += 1
+        else:
+            right -= 1
+
+numbers = [2, 7, 11, 15]  # A sorted list of numbers.
+target = 9 
+
+
+twopointer = twosum(numbers,target)
+
+print(twopointer)
