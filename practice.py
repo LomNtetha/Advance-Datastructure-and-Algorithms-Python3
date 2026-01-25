@@ -367,3 +367,22 @@ costs = [2, 7, 15]
 min_cost = min_costs_travel(days,costs)
 
 print(min_cost)
+
+def ways_to_climb_staries(n):
+
+    if n <=2:
+        return n
+    
+    dp = [1] * (n+1)
+    dp[1],dp[2] =1,2
+
+    for i in range(3, n+1):
+
+        dp[i] = dp[i-1] + dp[i-2]
+
+    return dp[i]
+
+n = 5
+x = ways_to_climb_staries(n)
+
+print(x)
