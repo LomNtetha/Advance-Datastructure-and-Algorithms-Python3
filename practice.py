@@ -408,3 +408,19 @@ houses = [2, 7, 9, 3, 1]
 
 robs = rob(houses)
 print(robs)
+
+def easy_rob_house_solution(houses):
+
+    prev = curr = 0
+
+    for house in houses:
+        prev,curr = curr,max(curr,prev+house)
+
+    return curr
+
+
+houses = [2, 7, 9, 3, 1]
+
+robbing = easy_rob_house_solution(houses)
+
+print(robbing)
