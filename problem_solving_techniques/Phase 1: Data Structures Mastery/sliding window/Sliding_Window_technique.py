@@ -13,13 +13,6 @@ Use a sliding window of size k. First, sum the first k elements, then slide the 
 coming into the window and subtracting the element that is moving out of the window.
 """
 
-"""
-time complexity is: 𝑂(𝑛)
-This means the algorithm runs in linear time relative to the number of elements in the input 
-Space Complexity: 𝑂(1)
-This indicates that the algorithm uses a fixed amount of space.
-"""
-
 from typing import List, Optional, Set
 from collections import deque
 from collections import defaultdict
@@ -49,6 +42,34 @@ nums = [2, 1, 5, 1, 3, 2]
 k = 3
 solution = Solution()
 print(solution.maxSumSubarray(nums, k))  # Output: 9
+
+# time complexity is: 𝑂(𝑛)
+# This means the algorithm runs in linear time relative to the number of elements in the input 
+# Space Complexity: 𝑂(1)
+# This indicates that the algorithm uses a fixed amount of space.
+
+def sub_array_large_num(nums, k):
+    left = 0
+    current_sum = 0
+    large_sum = 0
+
+    for right in range(len(nums)):
+        current_sum += nums[right]
+
+        # when window size reaches k
+        if right - left + 1 == k:
+            large_sum = max(large_sum, current_sum)
+            current_sum -= nums[left]  # slide the window
+            left += 1
+
+    return large_sum
+
+
+nums = [2, 1, 5, 1, 3, 2]
+k = 3
+
+print(sub_array_large_num(nums, k))
+
 
 """
 2. Subarray with Sum Equal to Target
@@ -104,11 +125,6 @@ If a repeating character is found, move the start pointer to shrink the window u
 
 """
 
-"""
-Time Complexity: 𝑂(𝑛)
-
-Space Complexity:O(1) with constant character set sizes.
-"""
 
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
@@ -132,6 +148,10 @@ s = "abcabcbb"
 solution = Solution()
 print(solution.lengthOfLongestSubstring(s))  # Output: 3
 
+# Time Complexity: 𝑂(𝑛)
+
+# Space Complexity:O(1) with constant character set sizes.
+
 
 """
 4. Minimum Size Subarray Sum
@@ -148,15 +168,6 @@ Approach:
 Use a sliding window to track the current sum of elements. Start with both pointers at the beginning of the array.
 Expand the window by moving the end pointer until the sum is greater than or equal to target. Then, shrink the window by moving
 the start pointer to find the smallest possible window that satisfies the condition.
-
-"""
-
-"""
-Time Complexity: O(n)
-The algorithm processes each element in the array at most twice (once when expanding the right pointer and once when contracting the left pointer).
-
-Space Complexity: O(1)
-Only a fixed number of variables are used (not dependent on the input size), so the space complexity is constant.
 
 """
 
@@ -187,6 +198,12 @@ target = 7  # Target sum
 solution = Solution()  # Create an instance of the Solution class
 print(solution.minSubArrayLen(target, nums))  # Output: 2
 
+# Time Complexity: O(n)
+# The algorithm processes each element in the array at most twice (once when expanding the right pointer and once when contracting the left pointer).
+
+# Space Complexity: O(1)
+# Only a fixed number of variables are used (not dependent on the input size), so the space complexity is constant.
+
 
 """
 5. Sliding Window Maximum
@@ -204,13 +221,6 @@ Approach:
 Use a deque (double-ended queue) to store the indices of elements in the current window in decreasing order of their values. 
 The front of the deque contains the index of the largest element in the window. For each new element, remove elements from 
 the back of the deque that are smaller than the current element since they cannot be the maximum.
-
-"""
-"""
-Time Complexity:
-O(n): Each element is added and removed from the deque at most once.
-Space Complexity:
-O(k): The deque will store at most k indices, where k is the size of the sliding window.
 
 """
 
@@ -247,6 +257,11 @@ nums = [1, 3, -1, -3, 5, 3, 6, 7]  # Input array
 k = 3  # Size of the sliding window
 solution = Solution()  # Create an instance of the Solution class
 print(solution.maxSlidingWindow(nums, k))  # Output: [3, 3, 5, 5, 6, 7]
+
+# Time Complexity:
+# O(n): Each element is added and removed from the deque at most once.
+# Space Complexity:
+# O(k): The deque will store at most k indices, where k is the size of the sliding window.
 
 
 """
