@@ -619,7 +619,7 @@ def slidingwindow(nums,k):
     for right in range(len(nums)):
         current_sum += nums[right]
 
-        if right - left+1 ==k:
+        if right == k:
             max_sum = max(max_sum,current_sum)
             current_sum -= nums[left]
             left += 1
@@ -632,3 +632,25 @@ k = 3
 swsub = slidingwindow(nums,k)
 
 print(swsub)
+
+def prefix_sum_subarray(arr,j,i):
+
+    prefix_sum = [0] * len(arr)
+    prefix_sum[0] = arr[0]
+
+
+    for k in range(1,len(arr)):
+        prefix_sum[k] = prefix_sum[k - 1] + arr[k]
+
+
+    if i == 0:
+        return prefix_sum[j]
+    else:
+        return prefix_sum[j] - prefix_sum[i-1]
+
+arr = [2, 4, 1, 6, 3]
+i, j = 1, 3
+
+prefix_answr = prefix_sum_subarray(arr,j,i)
+
+print(prefix_answr)
