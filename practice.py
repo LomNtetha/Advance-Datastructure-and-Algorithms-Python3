@@ -610,3 +610,25 @@ height = [1, 8, 6, 2, 5, 4, 8, 3, 7]
 area = maxarea(height)
 
 print(area)
+
+def slidingwindow(nums,k):
+    left = 0
+    current_sum =0
+    max_sum = 0
+
+    for right in range(len(nums)):
+        current_sum += nums[right]
+
+        if right - left+1 ==k:
+            max_sum = max(max_sum,current_sum)
+            current_sum -= nums[left]
+            left += 1
+
+    return max_sum
+
+nums = [2, 1, 5, 1, 3, 2]
+k = 3
+
+swsub = slidingwindow(nums,k)
+
+print(swsub)
