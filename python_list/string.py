@@ -166,3 +166,36 @@ print(solution.makeNewString(a, b))  # Output: "HiThereHi"
 a = "Hello"
 b = "Hi"
 print(solution.makeNewString(a, b))  # Output: "HiHelloHi"
+
+"""
+Top 5 most frequent letters
+
+Top 5 most frequent words"""
+
+from collections import Counter
+import re
+
+def top_5_letters_and_words(text):
+    # ---------- LETTERS ----------
+    letters = [char for char in text.lower() if char.isalpha()]
+    letter_counts = Counter(letters)
+    top_5_letters = letter_counts.most_common(5)
+
+    # ---------- WORDS ----------
+    words = re.findall(r'\b[a-zA-Z]+\b', text.lower())
+    word_counts = Counter(words)
+    top_5_words = word_counts.most_common(5)
+
+    # ---------- OUTPUT ----------
+    print("Top 5 Letters:")
+    for letter, count in top_5_letters:
+        print(f"{letter}:{count}")
+
+    print("\nTop 5 Words:")
+    for word, count in top_5_words:
+        print(f"{word}:{count}")
+
+
+# Example
+sentence = "This is a simple sentence example. This sentence is simple."
+top_5_letters_and_words(sentence)
