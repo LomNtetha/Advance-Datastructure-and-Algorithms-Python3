@@ -704,3 +704,20 @@ s = "dog cat cat dog"
 follow_pattern = wordspattern(pattern,s)
 
 print(follow_pattern)
+
+from collections import Counter
+def countRansome(ransomNote,magazine):
+
+    ransome_count = Counter(ransomNote)
+    magazine_count = Counter(magazine)
+
+    for ran,mag in ransome_count.items():
+        if magazine_count[ran] < mag:
+            return False
+    return True
+    
+ransomNote = "aa"
+magazine = "aab"
+
+note = countRansome(ransomNote,magazine)
+print(note)
