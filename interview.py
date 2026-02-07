@@ -341,3 +341,63 @@ profit = job_sequencing(jobs)
 
 print(profit)
 
+def minimize_diffrence(heights,k):
+
+    heights.sort()
+
+    n = len(heights)
+
+    min_diffirence = heights[-1] - heights[0]
+
+    for i in range(n - 1):
+
+        new_max = max(heights[-1]-k,heights[i]+k)
+        new_min = min(heights[0]+k,heights[i+1] -k)
+
+        min_diffirence = min(min_diffirence,new_max-new_min)
+
+    return min_diffirence
+
+
+
+heights = [1, 5, 15, 10]
+k = 3
+
+mini = minimize_diffrence(heights,k)
+
+print(mini)
+
+
+def best_time_sell(prices):
+
+    min_price = float('inf')
+    max_profit = 0
+
+    for price in prices:
+        min_price = min(min_price,price)
+        max_profit = max(max_profit, price - min_price)
+
+    return max_profit
+
+prices = [7, 1, 5, 3, 6, 4]
+
+mxprofit = best_time_sell(prices)
+
+print(mxprofit)
+
+def maxProfit(prices):
+
+    profit = 0
+
+    for i in range(1,len(prices)):
+
+        if prices[i] > prices[i-1]:
+            profit += prices[i] - prices[i-1]
+
+    return profit
+
+prices = [7, 1, 5, 3, 6, 4]
+
+prft = maxProfit(prices)
+print(prft)
+
