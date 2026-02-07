@@ -213,3 +213,54 @@ friends = recommend_friends(graph,user)
 
 print(friends)
 
+
+def denominations_coins(denominations,amount):
+
+    used_coins = []
+    count = 0
+
+    for coin in denominations:
+
+        if coin <= amount:
+            used_coins.append(coin)
+            count += 1
+            amount -= coin
+
+    return count,used_coins
+
+denominations = [25,16,10, 5, 1]
+# Example usage
+amount = 41  # Target amount in cents
+
+u,c = denominations_coins(denominations,amount)
+
+print(u)
+print(c)
+
+def max_activities(start,end):
+
+    activities = list(zip(start,end))
+
+    activities.sort(key=lambda x:x[1])
+
+    last_end_time = activities[0][1]
+    count = 1
+    selected_activities = [0]
+
+
+    for i in range(1,len(activities)):
+
+        if activities[i][0] >= last_end_time:
+            count += 1
+            selected_activities.append(i)
+            last_end_time = activities[i][0]
+
+    return count,selected_activities
+
+start = [1, 3, 0, 5, 8, 5]
+end = [2, 4, 6, 7, 9, 9]
+
+cnt,sela = max_activities(start,end)
+print(cnt)
+print(sela)
+
