@@ -174,3 +174,42 @@ all = find_all_path(graph,source,destination)
 
 print(all)
 
+from collections import deque, defaultdict
+
+def recommend_friends(graph,user):
+
+    visited = set()
+
+    recommend = defaultdict(int)
+
+    queue = deque([user])
+
+    visited.add(user)
+
+    while queue:
+        current_user = queue.popleft()
+
+        for friend in graph.get(current_user,[]):
+
+            if friend not in visited:
+                visited.add(friend)
+                queue.append(friend)
+
+            for mutual_friend in graph.get(friend,[]):
+                    if mutual_friend not in visited and mutual_friend not in graph[user]:
+                        recommend[mutual_friend] += 1
+
+    return sorted(recommend.keys(), key=lambda x: recommend[x], reverse=True)
+
+graph = {
+    'Alice': ['Bob', 'Charlie'],
+    'Bob': ['Alice', 'Charlie', 'David'],
+    'Charlie': ['Alice', 'Bob'],
+    'David': ['Bob']
+}
+user = 'Alice'
+
+friends = recommend_friends(graph,user)
+
+print(friends)
+
