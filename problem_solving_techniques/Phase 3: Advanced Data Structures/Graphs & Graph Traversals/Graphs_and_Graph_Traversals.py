@@ -489,6 +489,55 @@ print(sol.dijkstra(graph, 0))  # Output: {0: 0, 1: 3, 2: 1, 3: 4}
 # Space Complexity: O(N + E)  # Storing distances and priority queue data
 
 
+class Solution:
+    def dijkstra(self, graph: Dict[int, List[Tuple[int, int]]], source: int) -> List[int]:
+        # Initialize distances from source to all nodes as infinity
+        distances = {i: float('inf') for i in graph}
+        # Set the distance of the source to itself as 0
+        distances[source] = 0
+        
+        # Min-heap to keep track of the shortest distance discovered so far
+        min_heap = [(0, source)]  # (distance, node)
+        
+        # Iterate while the heap is not empty
+        while min_heap:
+            current_distance, current_node = heapq.heappop(min_heap)
+            
+            # If we have already found a shorter path before, skip this one
+            if current_distance > distances[current_node]:
+                continue
+            
+            # Iterate over neighbors of the current node
+            for neighbor, weight in graph[current_node]:
+                # Calculate the new distance to the neighbor
+                dist = current_distance + weight
+                
+                # If a shorter distance is found, update and push it to the heap
+                if dist < distances[neighbor]:
+                    distances[neighbor] = dist
+                    heapq.heappush(min_heap, (dist, neighbor))
+        
+        # Return the distances from the source to all other nodes
+        return [distances[i] for i in range(len(graph))]
+# Example usage
+graph = {
+    0: [(1, 4), (7, 8)],
+    1: [(0, 4), (2, 8), (7, 11)],
+    2: [(1, 8), (3, 7), (8, 2), (5, 4)],
+    3: [(2, 7), (4, 9), (5, 14)],
+    4: [(3, 9), (5, 10)],
+    5: [(4, 10), (3, 14), (2, 4), (6, 2)],
+    6: [(5, 2), (7, 1), (8, 6)],
+    7: [(0, 8), (1, 11), (8, 7), (6, 1)],
+    8: [(2, 2), (7, 7), (6, 6)]
+}
+
+source = 0
+solution = Solution()
+distances = solution.dijkstra(graph, source)
+
+# Output distances
+print("Distances:", [distances[i] for i in range(len(graph))])
 
     
 """
