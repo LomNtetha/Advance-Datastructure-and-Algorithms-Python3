@@ -17,58 +17,33 @@ from typing import List, Optional, Set
 from collections import deque
 from collections import defaultdict
 
-class Solution:
-    def maxSumSubarray(self, nums: List[int], k: int) -> int:
-        # Step 1: Initialize variables
-        max_sum = 0  # This will store the maximum sum found
-        current_sum = 0  # This will store the current window sum
-        
-        # Step 2: Sum the first 'k' elements
-        for i in range(k):
-            current_sum += nums[i]  # Calculate the sum of the first 'k' elements
-        max_sum = current_sum  # Initialize max_sum with the current_sum
-        
-        # Step 3: Slide the window across the array
-        for i in range(k, len(nums)):
-            # Update current_sum by adding the next element and removing the element going out of the window
-            current_sum += nums[i] - nums[i - k]
-            # Update max_sum if the new current_sum is greater
-            max_sum = max(max_sum, current_sum)
-        
-        return max_sum  # Return the maximum sum found
-
-# Example Usage
-nums = [2, 1, 5, 1, 3, 2]
-k = 3
-solution = Solution()
-print(solution.maxSumSubarray(nums, k))  # Output: 9
-
-# time complexity is: 𝑂(𝑛)
-# This means the algorithm runs in linear time relative to the number of elements in the input 
-# Space Complexity: 𝑂(1)
-# This indicates that the algorithm uses a fixed amount of space.
-
 def sub_array_large_num(nums, k):
     left = 0
     current_sum = 0
-    large_sum = 0
+    max_sum = 0
 
     for right in range(len(nums)):
         current_sum += nums[right]
 
-        # when window size reaches k
-        if right - left + 1 == k:
-            large_sum = max(large_sum, current_sum)
-            current_sum -= nums[left]  # slide the window
+        if right >= k - 1:
+            max_sum = max(max_sum, current_sum)
+            current_sum -= nums[left]
             left += 1
 
-    return large_sum
+    return max_sum
 
 
 nums = [2, 1, 5, 1, 3, 2]
 k = 3
 
 print(sub_array_large_num(nums, k))
+
+
+# time complexity is: 𝑂(𝑛)
+# This means the algorithm runs in linear time relative to the number of elements in the input 
+# Space Complexity: 𝑂(1)
+# This indicates that the algorithm uses a fixed amount of space.
+
 
 
 """
@@ -437,35 +412,35 @@ The last message is 15:Goodbye, starting a new window [15, 19].
 Only 15:Goodbye falls in this range.
 Each group is output as an inner array.
 """
-def group_messages(messages: List[str]) -> List[List[str]]:
-    result = []  # List to hold the grouped messages
-    current_group = []  # Temporary group for messages in the current window
-    start_time = None  # Start timestamp of the current window
-    
-    for message in messages:
-        # Parse the timestamp and the message
-        timestamp, content = message.split(":")
-        timestamp = int(timestamp)
-        
-        if start_time is None:  # Initialize the first window
-            start_time = timestamp
-        
-        # Check if the message falls within the 5-minute window
-        if timestamp - start_time < 5:
-            current_group.append(message)
+def group_messages(messages):
+    result = []
+    current_group = []
+    window_start = None
+
+    for msg in messages:
+        timestamp = int(msg.split(":")[0])
+
+        # Start a new group if empty
+        if not current_group:
+            current_group.append(msg)
+            window_start = timestamp
+            continue
+
+        # If message is within 5 minutes, add to current group
+        if timestamp <= window_start + 4:
+            current_group.append(msg)
         else:
-            # Push the current group to the result and start a new group
+            # Close current group and start a new one
             result.append(current_group)
-            current_group = [message]
-            start_time = timestamp  # Update the start time for the new group
-    
-    # Add the last group to the result
+            current_group = [msg]
+            window_start = timestamp
+
+    # Add the last group
     if current_group:
         result.append(current_group)
-    
+
     return result
 
-# Example usage
 messages = [
     "1:Hello",
     "2:Hi",
@@ -475,8 +450,7 @@ messages = [
     "15:Goodbye"
 ]
 
-output = group_messages(messages)
-print(output)
+print(group_messages(messages))
 
 
 """
