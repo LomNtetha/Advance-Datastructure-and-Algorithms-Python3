@@ -401,3 +401,68 @@ prices = [7, 1, 5, 3, 6, 4]
 prft = maxProfit(prices)
 print(prft)
 
+
+def min_cost_travel(days,costs):
+
+    dp = {}
+
+    travel_days = set(days)
+
+    for day in range(1,days[-1] + 1):
+
+        if day not in travel_days:
+
+            dp[day] = dp.get(day -1 , 0)
+
+        else:
+            dp[day] = min(
+                dp.get(day -1 , 0) + costs[0],
+                dp.get(day -7 , 0)+ costs[1],
+                dp.get(day -30 , 0)+ costs[2]
+
+            )
+    return dp[days[-1]]
+
+
+days = [1, 4, 6, 7, 8, 20]
+costs = [2, 7, 15]
+
+dp_min = min_cost_travel(days,costs)
+
+print(dp_min)
+
+def robHouses(houses):
+
+    prev = curr = 0
+
+    for house in houses:
+
+        prev,curr = curr,max(curr,prev+house)
+
+    return curr
+houses = [2, 7, 9, 3, 1]
+
+mxrob = robHouses(houses)
+
+print(mxrob)
+
+def ways_climb_stairs(n):
+    if n <= 2:
+        return n
+    
+    dp = [1] * (n+1)
+
+    dp[1],dp[2] = 1,2
+
+    for i in range(3,n+1):
+
+        dp[i] = dp[i-1] + dp[i-2]
+
+    return dp[i]
+
+
+n = 5
+
+ways = ways_climb_stairs(n)
+
+print(ways)
