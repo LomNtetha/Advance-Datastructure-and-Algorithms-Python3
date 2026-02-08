@@ -530,3 +530,22 @@ messages = [
 ]
 
 print(groub_messages(messages))
+
+def prefix_sub_arry_sum(arr,i,j):
+
+    prefix_sum = [0] * len(arr)
+    prefix_sum[0]= arr[0]
+
+    for k in range(1,len(arr)):
+        prefix_sum[k] = prefix_sum[k-1] + arr[k]
+
+    if i == 0:
+        return prefix_sum[j]
+    
+    else:
+        return prefix_sum[j] - prefix_sum[i-1]
+
+arr = [2, 4, 1, 6, 3]
+i, j = 1, 3
+
+print(prefix_sub_arry_sum(arr,i,j))
