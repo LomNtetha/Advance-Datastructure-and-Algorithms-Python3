@@ -466,3 +466,67 @@ n = 5
 ways = ways_climb_stairs(n)
 
 print(ways)
+
+
+def maxSubArray(nums,k):
+
+    left = 0
+    current_sum = 0
+    max_sum = 0
+
+    for right in range(len(nums)):
+        current_sum += nums[right]
+
+        if right >= k -1:
+            max_sum = max(max_sum,current_sum)
+            current_sum -= nums[left]
+            left += 1
+
+    return max_sum
+
+
+nums = [2, 1, 5, 1, 3, 2]
+k = 3
+
+
+submx = maxSubArray(nums,k)
+
+print(submx)
+
+
+def groub_messages(messages):
+
+    result = []
+    current_group = []
+    window_start = None
+
+    for msg in messages:
+        timestamp = int(msg.split(":")[0])
+        
+        if not current_group:
+            current_group.append(msg)
+            window_start = timestamp
+            continue
+        
+        if timestamp <= window_start + 4:
+            current_group.append(msg)
+        else:
+            result.append(current_group)
+            current_group = [msg]
+            window_start = timestamp
+
+    if current_group:
+        result.append(current_group)
+
+    return result
+
+
+
+messages = [
+    "3:Order placed",
+    "3:Order confirmed",
+    "8:Dispatched",
+    "12:Delivered"
+]
+
+print(groub_messages(messages))
