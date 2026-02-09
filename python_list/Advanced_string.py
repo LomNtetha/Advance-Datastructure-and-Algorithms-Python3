@@ -537,6 +537,57 @@ sentences = [
 
 print(longestSentence(sentences))
 
+
+"""
+Problem Statement
+
+You are given a list of sentences.
+Each sentence is a string that may contain letters, spaces, and other characters.
+
+Your task is to find and return the sentence that contains the highest number of alphabetic characters.
+
+Only letters (a–z, A–Z) should be counted.
+
+Spaces and non-letter characters should be ignored.
+
+If multiple sentences have the same maximum number of characters, return the first one.
+
+📥 Input
+
+A list of strings sentences.
+
+sentences = [
+    "hello world m l p k p pp pp pp",
+    "this is a leetcode style problem",
+    "python"
+]
+"""
+
+def longestCharacters(sentences):
+    max_chars = 0
+    result = ""
+
+    for sentence in sentences:
+        char_count = sum(1 for c in sentence if c.isalpha())
+
+        if char_count > max_chars:
+            max_chars = char_count
+            result = sentence
+
+    return result
+
+
+sentences = [
+    "hello world m l p k p pp pp pp",
+    "this is a leetcode style problem",
+    "python"
+]
+
+print(longestCharacters(sentences))
+
+
+
+
 """
 Problem Statement (Detailed):
 
