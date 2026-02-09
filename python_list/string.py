@@ -199,3 +199,28 @@ def top_5_letters_and_words(text):
 # Example
 sentence = "This is a simple sentence example. This sentence is simple."
 top_5_letters_and_words(sentence)
+
+
+
+def longestSentence(sentences):
+    max_words = 0
+    result = ""
+
+    for sentence in sentences:
+        word_count = len(sentence.split())
+
+        if word_count > max_words:
+            max_words = word_count
+            result = sentence
+
+    return result
+
+sentences = [
+    "hello world",
+    "this is a leetcode style problem",
+    "python"
+]
+
+
+print(longestSentence(sentences))
+
