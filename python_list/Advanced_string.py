@@ -678,3 +678,100 @@ def top_5_letters_and_words(text):
 # Example Usage
 sentence = "This is a simple sentence example. This sentence is simple."
 top_5_letters_and_words(sentence)
+
+
+
+"""
+Now, lets look into this through a question. Given a string of braces named bound_by, and a string named tag_name. 
+The task is to print a new string such that tag_name is in the middle of bound_by.
+
+Example 1:
+
+Input: 
+bound_by = [[]], tag_name = tag
+Output:
+[[tag]]
+Example 2:
+
+Input: 
+bound_by = <>, tag_name = body
+Output:
+<body>
+"""
+class Solution:
+    def createBoundedTag(self, bound_by, tag_name):
+        # Find the midpoint to split bound_by
+        midpoint = len(bound_by) // 2
+        opening = bound_by[:midpoint]  # First half
+        closing = bound_by[midpoint:]  # Second half
+        
+        # Form the result with tag_name in the middle
+        return f"{opening}{tag_name}{closing}"
+
+# Example usage:
+solution = Solution()
+
+# Test case 1
+bound_by = "[[]]"
+tag_name = "tag"
+print(solution.createBoundedTag(bound_by, tag_name))  # Output: "[[tag]]"
+
+# Test case 2
+bound_by = "<>"
+tag_name = "body"
+print(solution.createBoundedTag(bound_by, tag_name))  # Output: "<body>"
+
+"""
+5️⃣ Longest Common Prefix
+
+Question
+Find the longest common prefix among an array of strings.
+
+Input
+
+["flower","flow","flight"]
+
+
+Output
+
+"fl"
+
+
+Edge cases
+
+["dog","racecar","car"] → ""
+
+[""] → ""
+
+["a"] → "a"
+
+[] → ""
+"""
+
+def longestCommonPrefix(strs):
+    # If the input list is empty, there is no common prefix
+    if not strs:
+        return ""
+
+    # Start by assuming the first word is the common prefix
+    prefix = strs[0]
+
+    # Compare the prefix with each remaining word
+    for word in strs[1:]:
+        # While the current word does NOT start with the prefix
+        # keep shortening the prefix from the end
+        while not word.startswith(prefix):
+            prefix = prefix[:-1]
+
+            # If prefix becomes empty, no common prefix exists
+            if not prefix:
+                return ""
+
+    # After checking all words, return the longest common prefix
+    return prefix
+
+strs = ["flower","flow","flight"]
+
+print(longestCommonPrefix(strs))
+
+
