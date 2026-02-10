@@ -10,20 +10,37 @@ paragraph = "Hello world. Hello everyone. World is beautiful."
 
 Sample Output:
 
-"hello"
+['hello', 'world']
 
 """
 
 import re
 from collections import Counter
 
-def most_frequent_word(paragraph: str) -> str:
+def most_frequent_words(paragraph: str):
+    # Normalize and split words
     words = re.findall(r'\b\w+\b', paragraph.lower())
+    
+    # Count frequencies
     count = Counter(words)
-    return count.most_common(1)[0][0]
+    
+    # Find the highest frequency
+    max_freq = max(count.values())
+    
+    # Collect words with the highest frequency
+    most_common_words = []
+    for word, freq in count.items():
+        if freq == max_freq:
+            most_common_words.append(word)
+    
+    # Return the result
+    return most_common_words
 
 paragraph = "Hello world. Hello everyone. World is beautiful."
-print(most_frequent_word(paragraph))
+
+result = most_frequent_words(paragraph)
+print(result)  # ['hello', 'world']
+
 
 """
 📌 Problem: Group Sentences by Shared Words
@@ -71,32 +88,36 @@ sentences = [
 """
 
 def group_similar_sentences(sentences):
-    groups = []
-    seen = set()
+    groups = []  # List to store groups of similar sentences
+    seen = set()  # Set to keep track of sentences we have already grouped
 
+    # Loop through each sentence by index
     for i, sentence in enumerate(sentences):
         if i in seen:
+            # Skip if this sentence is already part of a previous group
             continue
         
-        words_i = set(sentence.split())
-        group = [i]
+        words_i = set(sentence.split())  # Convert sentence i to a set of words
+        group = [i]  # Start a new group with the current sentence index
 
+        # Compare sentence i with all following sentences
         for j in range(i + 1, len(sentences)):
             if j in seen:
+                # Skip if sentence j is already grouped
                 continue
-            words_j = set(sentences[j].split())
-            # If they share at least one word
-            if words_i & words_j:
-                group.append(j)
-                seen.add(j)
-
-        seen.add(i)
-        groups.append(group)
+            words_j = set(sentences[j].split())  # Convert sentence j to a set of words
+            # If sentence i and j share at least one word
+            if words_i & words_j:  # & is set intersection
+                group.append(j)     # Add sentence j to current group
+                seen.add(j)         # Mark sentence j as seen
+        
+        seen.add(i)  # Mark sentence i as seen
+        groups.append(group)  # Add the group to the result list
 
     return groups
 
 
-# Example
+# Example usage
 sentences = [
     "hello world the world is beautiful",
     "i am tired today hello world",
@@ -106,6 +127,7 @@ sentences = [
 ]
 
 print(group_similar_sentences(sentences))
+
 
 
 """
@@ -125,17 +147,74 @@ Sample Output:
 
 
 """
+import re
+from collections import Counter
+
+def word_frequency_sort(text: str):
+    # Convert text to lowercase and extract words using regex
+    # \b\w+\b matches word boundaries with one or more word characters
+    words = re.findall(r'\b\w+\b', text.lower())
+    
+    # Count the frequency of each word
+    count = Counter(words)
+    
+    # Get words sorted by frequency in descending order
+    most_common_words = []
+    for word, _ in count.most_common():
+        most_common_words.append(word)
+    
+    # Return the sorted list of words
+    return most_common_words
+
+# Example usage
+text = "apple banana apple apple orange banana"
+print(word_frequency_sort(text))  # ['apple', 'banana', 'orange']
 
 import re
 from collections import Counter
 
 def word_frequency_sort(text: str):
+    # 1. Convert text to lowercase and extract words
+    # \b\w+\b matches word boundaries with one or more letters/digits/underscore
     words = re.findall(r'\b\w+\b', text.lower())
+    
+    # 2. Count the frequency of each word
     count = Counter(words)
-    return [word for word, _ in count.most_common()]
+    
+    # 3. Collect words sorted by frequency
+    most_common_words = []
+    for word, frequency in count.most_common():  # Instead of using _, we name it 'frequency'
+        most_common_words.append(word)
+    
+    # 4. Return the final list
+    return most_common_words
 
+# Example usage
 text = "apple banana apple apple orange banana"
-print(word_frequency_sort(text))
+result = word_frequency_sort(text)
+print(result)  # ['apple', 'banana', 'orange']
+
+def word_frequency_with_count(text: str):
+    # 1. Convert text to lowercase and extract words
+    words = re.findall(r'\b\w+\b', text.lower())
+    
+    # 2. Count the frequency of each word
+    count = Counter(words)
+    
+    # 3. Collect words along with their frequencies
+    # The list will contain tuples: (word, frequency)
+    result = []
+    for word, frequency in count.most_common():  # sorted by frequency descending
+        result.append((word, frequency))
+    
+    # 4. Return the list of tuples
+    return result
+
+# Example usage
+text = "apple banana apple apple orange banana"
+result = word_frequency_with_count(text)
+print(result) #[('apple', 3), ('banana', 2), ('orange', 1)]
+
 
 """
 4️⃣ Check If Sentence is a Pangram
@@ -154,11 +233,36 @@ True
 """
 
 def is_pangram(sentence: str) -> bool:
+    # 1. Create a set of letters in the sentence
+    # - Convert each character to lowercase
+    # - Only include alphabetic characters (ignore digits, spaces, punctuation)
     letters = set(c.lower() for c in sentence if c.isalpha())
+    
+    # 2. Check if the number of unique letters is 26 (all letters of the English alphabet)
     return len(letters) == 26
 
+# Example usage
 sentence = "The quick brown fox jumps over a lazy dog"
-print(is_pangram(sentence))
+print(is_pangram(sentence))  # True
+
+def is_pangram(sentence: str) -> bool:
+    # 1. Initialize an empty set to store unique letters
+    letters = set()
+    
+    # 2. Loop through each character in the sentence
+    for c in sentence:
+        # 3. Consider only alphabetic characters
+        if c.isalpha():
+            # 4. Convert character to lowercase and add to the set
+            letters.add(c.lower())
+    
+    # 5. Check if we have all 26 letters of the alphabet
+    return len(letters) == 26
+
+# Example usage
+sentence = "The quick brown fox jumps over a lazy dog"
+print(is_pangram(sentence))  # True
+
 
 """
 5️⃣ Find Common Words Across Paragraphs
@@ -195,6 +299,31 @@ paragraphs = [
 ]
 print(common_words(paragraphs))
 
+from typing import List
+
+def common_words(paragraphs: List[str]):
+    # 1. Convert each paragraph into a set of words
+    # - p.split() splits the paragraph into words by spaces
+    # - set(...) removes duplicates within the paragraph
+    sets = [set(p.split()) for p in paragraphs]
+    
+    # 2. Find the intersection of all sets
+    # - set.intersection(*sets) returns words that appear in every paragraph
+    common = set.intersection(*sets)
+    
+    # 3. Convert the result back to a list and return
+    return list(common)
+
+# Example usage
+paragraphs = [
+    "hello world beautiful day",
+    "hello everyone in the world",
+    "what a beautiful world hello"
+]
+
+print(common_words(paragraphs))  # ['hello', 'world']
+
+
 """
 1️⃣ Longest Substring Without Repeating Characters
 
@@ -212,18 +341,55 @@ Sample Output:
 
 """
 
-
-def length_of_longest_substring(s: str) -> int:
-    seen = {}
-    start = 0
+def length_of_longest_substring_set(s: str) -> int:
+    seen = set()  # Set to store characters in current window
+    start = 0     # Start index of current window
     max_len = 0
 
-    for i, char in enumerate(s):
-        if char in seen and seen[char] >= start:
-            start = seen[char] + 1
-        seen[char] = i
-        max_len = max(max_len, i - start + 1)
+    for end, char in enumerate(s):
+        # If char is already in the set, shrink the window from the left
+        while char in seen:
+            seen.remove(s[start])
+            start += 1
+        
+        # Add the current character to the set
+        seen.add(char)
+        
+        # Update max length
+        max_len = max(max_len, end - start + 1)
+    
     return max_len
+
+# Example usage
+s = "abcabcbb"
+print(length_of_longest_substring_set(s))  # Output: 3
+
+
+def length_of_longest_substring_set(s: str) -> int:
+    seen = set()  # Set to store characters in the current window
+    start = 0     # Start index of current window
+    max_len = 0
+
+    # Loop over the indices using range
+    for end in range(len(s)):
+        char = s[end]  # Get the character at index 'end'
+
+        # If char is already in the set, shrink the window from the left
+        while char in seen:
+            seen.remove(s[start])
+            start += 1
+        
+        # Add the current character to the set
+        seen.add(char)
+        
+        # Update max length
+        max_len = max(max_len, end - start + 1)
+    
+    return max_len
+
+# Example usage
+s = "abcabcbb"
+print(length_of_longest_substring_set(s))  # Output: 3
 
 
 """
@@ -245,17 +411,31 @@ Sample Output:
 """
 
 def count_substrings(s: str) -> int:
-    n = len(s)
-    count = 0
+    n = len(s)  # Length of the input string
+    count = 0   # Initialize the count of palindromic substrings
 
-    for center in range(2*n - 1):
+    # Loop through all possible centers of palindromes
+    # There are 2*n - 1 possible centers:
+    # - n single-character centers (odd-length palindromes)
+    # - n-1 two-character centers (even-length palindromes)
+    for center in range(2 * n - 1):
+        # left pointer of the current palindrome
         left = center // 2
+        # right pointer; for even-length palindromes, start at left+1
         right = left + center % 2
+
+        # Expand around the center as long as the substring is a palindrome
         while left >= 0 and right < n and s[left] == s[right]:
-            count += 1
-            left -= 1
-            right += 1
-    return count
+            count += 1        # Found a palindrome
+            left -= 1         # Expand to the left
+            right += 1        # Expand to the right
+
+    return count  # Return the total number of palindromic substrings
+
+# Example usage
+s = "aaa"
+print(count_substrings(s))  # Output: 6
+
 
 
 """
@@ -278,12 +458,31 @@ Sample Output:
 
 
 from collections import defaultdict
+
 def group_anagrams(strs):
+    # 1. Create a dictionary where each key maps to a list of strings
+    # defaultdict(list) automatically creates an empty list if a key does not exist
     res = defaultdict(list)
+    
+    # 2. Loop through each string in the input list
     for s in strs:
+        # 3. Sort the characters in the string and convert it to a tuple
+        # - This tuple will be the key in the dictionary
+        # - All anagrams will have the same sorted tuple key
         key = tuple(sorted(s))
+        
+        # 4. Append the string to the list corresponding to this key
         res[key].append(s)
+    
+    # 5. Return only the lists of anagrams
+    # list(res.values()) returns a list of all the values (lists of anagrams)
     return list(res.values())
+
+# Example usage
+strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+print(group_anagrams(strs))
+# Output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
+
 
 """
 5️⃣ Implement strStr() (Substring Search)
@@ -302,13 +501,28 @@ Sample Output:
 2
 
 """
-
 def str_str(haystack: str, needle: str) -> int:
-    if not needle: return 0
+    # 1. If the needle is empty, return 0
+    # This follows the convention: empty string is found at index 0
+    if not needle:
+        return 0
+
+    # 2. Loop through haystack where the needle could start
+    # - Stop at len(haystack) - len(needle) + 1 to avoid index out of range
     for i in range(len(haystack) - len(needle) + 1):
+        # 3. Check if the substring of haystack matches needle
+        # - haystack[i:i+len(needle)] extracts a substring of the same length as needle
         if haystack[i:i+len(needle)] == needle:
-            return i
+            return i  # Found the needle, return its starting index
+
+    # 4. Needle not found in haystack, return -1
     return -1
+
+# Example usage
+haystack = "hello"
+needle = "ll"
+print(str_str(haystack, needle))  # Output: 2
+
 
 """
 6️⃣ Count and Say
@@ -328,19 +542,41 @@ Sample Output:
 
 """
 def count_and_say(n: int) -> str:
+    # 1. Start with the first term in the sequence
     s = "1"
-    for _ in range(n-1):
-        next_s = ""
-        i = 0
+
+    # 2. Build the sequence up to the nth term
+    # - Repeat (n-1) times because we already have the first term
+    for _ in range(n - 1):
+        next_s = ""  # Will hold the next term in the sequence
+        i = 0        # Pointer to iterate over current term 's'
+
+        # 3. Process the current string 's'
         while i < len(s):
-            count = 1
-            while i+1 < len(s) and s[i] == s[i+1]:
+            count = 1  # Count occurrences of the same digit
+
+            # 4. Count consecutive identical digits
+            while i + 1 < len(s) and s[i] == s[i + 1]:
                 i += 1
                 count += 1
+
+            # 5. Append count and the digit to next_s
+            # Example: "111" → "31" (three 1's)
             next_s += str(count) + s[i]
+
+            # 6. Move to the next new digit
             i += 1
+
+        # 7. Set s to next_s for the next iteration
         s = next_s
+
+    # 8. Return the nth term of the sequence
     return s
+
+# Example usage
+n = 5
+print(count_and_say(n))  # Output: "111221"
+
 """
 7️⃣ Reverse Words in a String
 
@@ -379,17 +615,36 @@ Sample Output:
 """
 
 def longest_palindrome(s: str) -> str:
-    n = len(s)
-    res = ""
-    for center in range(2*n-1):
+    n = len(s)  # Length of the input string
+    res = ""    # To store the longest palindromic substring found
+
+    # Loop through all possible centers of palindromes
+    # There are 2*n - 1 possible centers:
+    # - n single-character centers (for odd-length palindromes)
+    # - n-1 two-character centers (for even-length palindromes)
+    for center in range(2 * n - 1):
+        # Compute left pointer for the current center
         left = center // 2
+        # Compute right pointer; for even-length palindromes, start at left+1
         right = left + center % 2
-        while left >=0 and right < n and s[left]==s[right]:
-            if right-left+1 > len(res):
-                res = s[left:right+1]
-            left -=1
-            right +=1
+
+        # Expand around the center as long as the substring is a palindrome
+        while left >= 0 and right < n and s[left] == s[right]:
+            # If the current palindrome is longer than previously found, update result
+            if right - left + 1 > len(res):
+                res = s[left:right + 1]
+            
+            # Expand to the next characters
+            left -= 1
+            right += 1
+
+    # Return the longest palindromic substring
     return res
+
+# Example usage
+s = "babad"
+print(longest_palindrome(s))  # Output: "bab" or "aba"
+
 
 """
 9️⃣ Minimum Window Substring
@@ -411,24 +666,50 @@ Sample Output:
 
 
 from collections import Counter
-def min_window(s: str, t: str) -> str:
-    need = Counter(t)
-    missing = len(t)
-    left = start = end = 0
 
+def min_window(s: str, t: str) -> str:
+    # 1. Count the characters we need from string t
+    need = Counter(t)
+    
+    # 2. Number of characters we are still missing in the current window
+    missing = len(t)
+    
+    # 3. Pointers to define the sliding window
+    left = 0       # Left end of the window
+    start = 0      # Start index of the minimum window found
+    end = 0        # End index of the minimum window found
+
+    # 4. Expand the window by moving 'right' through the string s
     for right, char in enumerate(s):
+        # If this character is needed, reduce the missing count
         if need[char] > 0:
             missing -= 1
+        
+        # Decrement the need for this character
+        # (can go negative if the character appears more than needed)
         need[char] -= 1
 
+        # 5. When we have all characters from t in the current window
         while missing == 0:
-            if end == 0 or right-left+1 < end-start+1:
+            # Update the minimum window if it's smaller than previously found
+            if end == 0 or right - left + 1 < end - start + 1:
                 start, end = left, right
-            need[s[left]] += 1
-            if need[s[left]] > 0:
-                missing += 1
-            left += 1
-    return s[start:end+1] if end >= start else ""
+
+            # Move the left pointer to try and shrink the window
+            need[s[left]] += 1  # Add back the character at 'left' to need
+            if need[s[left]] > 0:  # If we now miss this character
+                missing += 1      # Increment missing count
+
+            left += 1  # Shrink the window from the left
+
+    # 6. Return the minimum window substring, or "" if no valid window found
+    return s[start:end + 1] if end >= start else ""
+
+# Example usage
+s = "ADOBECODEBANC"
+t = "ABC"
+print(min_window(s, t))  # Output: "BANC"
+
 
 """🔟 Decode String (Nested Repetition)
 
@@ -516,26 +797,36 @@ Both have the same number of words, so we return the first on
 """
 
 def longestSentence(sentences):
+    # 1. Initialize the maximum word count found so far
     max_words = 0
+    
+    # 2. Initialize the sentence that has the maximum words
     result = ""
 
+    # 3. Loop through each sentence in the list
     for sentence in sentences:
+        # Count the number of words in the current sentence
+        # - split() splits by spaces and returns a list of words
         word_count = len(sentence.split())
 
+        # 4. If this sentence has more words than the previous maximum
         if word_count > max_words:
-            max_words = word_count
-            result = sentence
+            max_words = word_count  # Update the maximum word count
+            result = sentence       # Update the result sentence
 
+    # 5. Return the sentence with the most words
     return result
 
+# Example usage
 sentences = [
     "hello world",
     "this is a leetcode style problem",
     "python"
 ]
 
+print(longestSentence(sentences))  
+# Output: "this is a leetcode style problem"
 
-print(longestSentence(sentences))
 
 
 """
@@ -564,26 +855,36 @@ sentences = [
 """
 
 def longestCharacters(sentences):
+    # 1. Initialize the maximum character count found so far
     max_chars = 0
+    
+    # 2. Initialize the sentence that has the maximum alphabetic characters
     result = ""
 
+    # 3. Loop through each sentence in the list
     for sentence in sentences:
+        # Count the number of alphabetic characters in the current sentence
+        # - sum(1 for c in sentence if c.isalpha()) counts letters only
         char_count = sum(1 for c in sentence if c.isalpha())
 
+        # 4. If this sentence has more alphabetic characters than the previous maximum
         if char_count > max_chars:
-            max_chars = char_count
-            result = sentence
+            max_chars = char_count  # Update the maximum character count
+            result = sentence       # Update the result sentence
 
+    # 5. Return the sentence with the most alphabetic characters
     return result
 
 
+# Example usage
 sentences = [
     "hello world m l p k p pp pp pp",
     "this is a leetcode style problem",
     "python"
 ]
 
-print(longestCharacters(sentences))
+print(longestCharacters(sentences))  
+# Output: "this is a leetcode style problem"
 
 
 
