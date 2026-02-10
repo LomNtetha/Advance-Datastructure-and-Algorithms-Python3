@@ -1,7 +1,7 @@
 """1️⃣ Most Frequent Word in Paragraph
 
 Problem:
-Given a paragraph as a string, find the word that appears most frequently. Ignore punctuation and case.
+Given a paragraph as a string, find the words that appears most frequently. Ignore punctuation and case.
 
 Sample Input:
 
@@ -17,20 +17,21 @@ Sample Output:
 import re
 from collections import Counter
 
-def most_frequent_words(paragraph: str):
+def most_frequent_words(paragraph):
     # Normalize and split words
     words = re.findall(r'\b\w+\b', paragraph.lower())
     
     # Count frequencies
-    count = Counter(words)
+    count = Counter(words) # so by default count is dictionary,{ 'hello': 2,'world': 2,'everyone': 1,'is': 1,'beautiful': 1}
     
     # Find the highest frequency
-    max_freq = max(count.values())
+    max_freq = max(count.values()) # dict_values([2, 2, 1, 1, 1])
     
     # Collect words with the highest frequency
     most_common_words = []
-    for word, freq in count.items():
+    for word, freq in count.items(): # dict_items([ ('hello', 2), ('world', 2),('everyone', 1), ('is', 1), ('beautiful', 1) ])
         if freq == max_freq:
+            #append the word
             most_common_words.append(word)
     
     # Return the result
