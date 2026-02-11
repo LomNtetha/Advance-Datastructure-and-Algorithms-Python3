@@ -29,7 +29,7 @@ def most_frequent_words(paragraph):
     
     # Collect words with the highest frequency
     most_common_words = []
-    for word, freq in count.items(): # dict_items([ ('hello', 2), ('world', 2),('everyone', 1), ('is', 1), ('beautiful', 1) ])
+    for word, freq in count.items(): # dict_items([ ('hello', 2), ('world', 2),('everyone', 1), ('is', 1), ('beautiful', 1)])
         if freq == max_freq:
             #append the word
             most_common_words.append(word)
@@ -42,92 +42,70 @@ paragraph = "Hello world. Hello everyone. World is beautiful."
 result = most_frequent_words(paragraph)
 print(result)  # ['hello', 'world']
 
-
 """
-📌 Problem: Group Sentences by Shared Words
+Problem: Group Words by Paragraph Index
 
-Problem Statement (Detailed):
+You are given a list of strings where each string represents a paragraph.
 
-You are given a list of sentences. Each sentence consists of words separated by spaces. Your task is to group sentences that share at least one word into the same group.
+Your task is to:
 
-Two sentences are considered similar if they share at least one word.
+Identify all words that appear in more than one paragraph.
 
-A sentence can only belong to one group.
+For each such word, return the list of paragraph indexes where the word appears.
 
-Return a list of groups, where each group contains the indices of sentences in the original list.
+Return the result as a list of lists of paragraph indexes.
 
-The order of groups or the order of indices inside a group does not matter.
+📌 Input
 
-📥 Input
+A list of strings:
 
-sentences: A list of strings, each string representing a sentence.
-
-Constraints:
-
-1 <= len(sentences) <= 1000
-
-Each sentence contains at most 1000 words
-
-Words contain only lowercase and uppercase English letters
-
-📤 Output
-
-A list of groups, each group being a list of integers representing sentence indices that are similar.
-
-🧪 Sample Input
 sentences = [
     "hello world the world is beautiful",
     "i am tired today hello world",
-    "i am tired today",
-    "python is fun",
-    "i love python"
+    "i am tired today"
 ]
 
-📤 Sample Output
-[[0, 1, 2], [3, 4]]
+📌 Output
+[[0,1], [0,1], [1,2], [1,2], [1,2], [1,2]]
 
+
+Each list represents the paragraph indexes where a word appears more than once across different paragraphs.
 """
 
-def group_similar_sentences(sentences):
-    groups = []  # List to store groups of similar sentences
-    seen = set()  # Set to keep track of sentences we have already grouped
 
-    # Loop through each sentence by index
+from collections import defaultdict
+
+def group_words_by_paragraph(sentences):
+    # Create a hash map where:
+    # key = word, value = set of paragraph indexes where the word appears
+    # Using a set ensures that each paragraph index is stored only once
+    word_map = defaultdict(set)
+
+    # First loop: iterate over each sentence by its index
     for i, sentence in enumerate(sentences):
-        if i in seen:
-            # Skip if this sentence is already part of a previous group
-            continue
-        
-        words_i = set(sentence.split())  # Convert sentence i to a set of words
-        group = [i]  # Start a new group with the current sentence index
+        # Split the sentence into words
+        for word in sentence.split():
+            # Add the paragraph index to the set for this word
+            word_map[word].add(i)
 
-        # Compare sentence i with all following sentences
-        for j in range(i + 1, len(sentences)):
-            if j in seen:
-                # Skip if sentence j is already grouped
-                continue
-            words_j = set(sentences[j].split())  # Convert sentence j to a set of words
-            # If sentence i and j share at least one word
-            if words_i & words_j:  # & is set intersection
-                group.append(j)     # Add sentence j to current group
-                seen.add(j)         # Mark sentence j as seen
-        
-        seen.add(i)  # Mark sentence i as seen
-        groups.append(group)  # Add the group to the result list
+    # Prepare the final result list
+    result = []
 
-    return groups
+    # Second loop: go through all sets of paragraph indexes
+    for indexes in word_map.values():
+        # Include only words that appear in more than one paragraph
+        if len(indexes) > 1:
+            # Convert the set to a list and append to the result
+            result.append(list(indexes))
 
-
-# Example usage
+    # Return the list of index groups
+    return result
 sentences = [
     "hello world the world is beautiful",
     "i am tired today hello world",
-    "i am tired today",
-    "python is fun",
-    "i love python"
 ]
 
-print(group_similar_sentences(sentences))
+print(group_words_by_paragraph(sentences))
 
 
 
