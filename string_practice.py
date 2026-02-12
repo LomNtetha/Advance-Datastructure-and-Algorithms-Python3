@@ -76,3 +76,27 @@ def most_common_freq_word(text):
 text = "apple banana apple banana apple banana orange banana"
 
 print(most_common_freq_word(text))
+
+
+import re
+
+from collections import Counter
+
+def words_with_thier_frequency(text):
+
+    words = re.findall(r'\b\w+\b',text.lower())
+
+    count = Counter(words)
+
+    result = []
+
+
+    for word,frequency in count.most_common():
+
+        result.append((word,frequency))
+
+    return result
+
+text = "apple banana banana banana apple apple orange banana"
+
+print(words_with_thier_frequency(text))
