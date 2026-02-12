@@ -60,13 +60,12 @@ Return the result as a list of lists of paragraph indexes.
 A list of strings:
 
 sentences = [
-    "hello world the world is beautiful",
+  "hello world the world is beautiful",
     "i am tired today hello world",
-    "i am tired today"
 ]
 
 📌 Output
-[[0,1], [0,1], [1,2], [1,2], [1,2], [1,2]]
+[[0,1], [0,1]
 
 
 Each list represents the paragraph indexes where a word appears more than once across different paragraphs.
@@ -85,7 +84,7 @@ def group_words_by_paragraph(sentences):
     for i, sentence in enumerate(sentences):
         # Split the sentence into words
         for word in sentence.split():
-            # Add the paragraph index to the set for this word
+            # Add the paragraph index to the set for this word to prevent duplicates
             word_map[word].add(i)
 
     # Prepare the final result list
@@ -106,6 +105,40 @@ sentences = [
 ]
 
 print(group_words_by_paragraph(sentences))
+
+from collections import defaultdict
+
+def group_words_by_paragraph(sentences):
+    # key = word
+    # value = set of paragraph indexes
+    word_map = defaultdict(set)
+
+    # Loop through sentences with index
+    for i, sentence in enumerate(sentences):
+        # Split sentence into words
+        words = sentence.split()
+
+        for word in words:
+            # Add paragraph index to the word's set
+            word_map[word].add(i)
+
+    result = []
+
+    # Collect indexes that appear in more than one paragraph
+    for indexes in word_map.values():
+        if len(indexes) > 1:
+            result.append(list(indexes))
+
+    return result
+
+
+sentences = [
+    "hello world the world is beautiful",
+    "i am tired today hello world",
+]
+
+print(group_words_by_paragraph(sentences))
+
 
 
 
