@@ -56,12 +56,23 @@ sentences = [
 
 print(group_sentences_by_words(sentences))
 
+import re
+from collections import Counter
     
+def most_common_freq_word(text):
 
+    words = re.findall(r'\b\w+\b',text.lower())
 
+    count = Counter(words)
 
+    common_words = []
 
-sentences = [
-    "hello world the world is beautiful",
-    "i am tired today hello world",
-]
+    for word, freq in count.most_common():
+
+        common_words.append(word)
+
+    return common_words
+
+text = "apple banana apple banana apple banana orange banana"
+
+print(most_common_freq_word(text))
