@@ -100,3 +100,43 @@ def words_with_thier_frequency(text):
 text = "apple banana banana banana apple apple orange banana"
 
 print(words_with_thier_frequency(text))
+
+def is_pangram(sentence):
+
+    letters = set(c.lower() for c in sentence if c.isalpha())
+
+    return len(letters) == 26
+
+sentence = "The quick brown fox jumps over a lazy dog"
+
+print(is_pangram(sentence))
+
+from collections import defaultdict
+
+def group_word_by_sentence(sentences):
+
+    map_word = defaultdict(set)
+
+    for i,sentence in enumerate(sentences):
+
+        words = sentence.split()
+
+        for word in words:
+            map_word[word].add(i)
+
+    result = []
+
+    for word,indexes in map_word.items():
+
+        if len(indexes) == len(sentences):
+            result.append(word)
+
+    return result
+
+sentences = [
+    "hello world beautiful day",
+    "hello everyone in the world",
+    "what a beautiful world hello"
+]
+
+print(group_word_by_sentence(sentences))

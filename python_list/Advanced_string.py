@@ -297,6 +297,42 @@ Sample Output:
 
 """
 
+from collections import defaultdict
+
+def group_sentences_by_words(sentences):
+    # Create a dictionary where each word maps to a set of sentence indexes it appears in
+    word_map = defaultdict(set)  # word -> set of sentence indexes
+
+    # Loop over each sentence and its index
+    for i, sentence in enumerate(sentences):
+        # Split the sentence into words
+        words = sentence.split()
+        # Add the current sentence index to the set of indexes for each word
+        for word in words:
+            word_map[word].add(i)
+
+    # Prepare a list to store words that appear in all sentences
+    result = []
+    # Loop through the word_map to find words appearing in every sentence
+    for word, indexes in word_map.items():
+        # If the word appears in all sentences, add it to the result
+        if len(indexes) == len(sentences):
+            result.append(word)
+
+    return result
+
+
+# Example sentences
+sentences = [
+    "hello world beautiful day",
+    "hello everyone in the world",
+    "what a beautiful world hello"
+]
+
+# Call the function and print the words appearing in all sentences
+print(group_sentences_by_words(sentences)) #['hello', 'world']
+
+
 from typing import List
 
 def common_words(paragraphs: List[str]):
