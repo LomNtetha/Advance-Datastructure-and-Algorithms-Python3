@@ -457,32 +457,32 @@ Sample Output:
 
 
 """
-
 def count_substrings(s: str) -> int:
-    n = len(s)  # Length of the input string
-    count = 0   # Initialize the count of palindromic substrings
+    # 🔹 Clean the string:
+    # - Convert to lowercase
+    # - Keep only letters and numbers
+    s = ''.join(c.lower() for c in s if c.isalnum())
 
-    # Loop through all possible centers of palindromes
-    # There are 2*n - 1 possible centers:
-    # - n single-character centers (odd-length palindromes)
-    # - n-1 two-character centers (even-length palindromes)
+    n = len(s)
+    count = 0
+
+    # There are 2*n - 1 possible centers
     for center in range(2 * n - 1):
-        # left pointer of the current palindrome
         left = center // 2
-        # right pointer; for even-length palindromes, start at left+1
         right = left + center % 2
 
-        # Expand around the center as long as the substring is a palindrome
+        # Expand around center
         while left >= 0 and right < n and s[left] == s[right]:
-            count += 1        # Found a palindrome
-            left -= 1         # Expand to the left
-            right += 1        # Expand to the right
+            count += 1
+            left -= 1
+            right += 1
 
-    return count  # Return the total number of palindromic substrings
+    return count
+
 
 # Example usage
-s = "aaa"
-print(count_substrings(s))  # Output: 6
+s = "A man, a plan, a canal Panama!"
+print(count_substrings(s))
 
 
 
