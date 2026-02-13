@@ -189,3 +189,21 @@ s = "A man, a plan, a canal Panama!"
 
 
 print(count_palindrome(s))
+
+from collections import defaultdict
+def group_anagrams(strs):
+
+    groupAnagram = defaultdict(list)
+
+    for s in strs:
+
+        sorted_str = ''.join(sorted(s))
+        groupAnagram[sorted_str].append(s)
+
+    return list(groupAnagram.values())
+
+
+strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+
+print(group_anagrams(strs))
+

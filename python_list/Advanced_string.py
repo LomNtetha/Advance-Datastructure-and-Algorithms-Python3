@@ -507,30 +507,26 @@ Sample Output:
 
 
 from collections import defaultdict
-
-def group_anagrams(strs):
-    # 1. Create a dictionary where each key maps to a list of strings
-    # defaultdict(list) automatically creates an empty list if a key does not exist
-    res = defaultdict(list)
-    
-    # 2. Loop through each string in the input list
-    for s in strs:
-        # 3. Sort the characters in the string and convert it to a tuple
-        # - This tuple will be the key in the dictionary
-        # - All anagrams will have the same sorted tuple key
-        key = tuple(sorted(s))
+def groupAnagrams( strs):
+        """
+        Group anagrams from a list of strings.
+        """
+        # Dictionary to group words that are anagrams
+        anagrams = defaultdict(list)
         
-        # 4. Append the string to the list corresponding to this key
-        res[key].append(s)
-    
-    # 5. Return only the lists of anagrams
-    # list(res.values()) returns a list of all the values (lists of anagrams)
-    return list(res.values())
+        # Iterate through each string
+        for s in strs:
+            # Sort the string to create a key and group anagrams together
+            sorted_str = ''.join(sorted(s))
+            anagrams[sorted_str].append(s)
+        
+        # Return the grouped anagrams
+        return list(anagrams.values())
 
-# Example usage
+# Example input
 strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
-print(group_anagrams(strs))
-# Output: [['eat', 'tea', 'ate'], ['tan', 'nat'], ['bat']]
+
+print(groupAnagrams(strs))
 
 
 """
