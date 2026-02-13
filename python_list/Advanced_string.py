@@ -468,8 +468,9 @@ def count_substrings(s: str) -> int:
 
     # There are 2*n - 1 possible centers
     for center in range(2 * n - 1):
-        left = center // 2
-        right = left + center % 2
+        # divide by Floor division //  and it always round down
+        left = center // 2  #gives the starting left index for the palindrome
+        right = left + center % 2 #starting right index
 
         # Expand around center
         while left >= 0 and right < n and s[left] == s[right]:

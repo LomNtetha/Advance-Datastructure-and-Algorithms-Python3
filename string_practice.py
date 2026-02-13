@@ -163,3 +163,29 @@ s = "abcabcbb"
 
 
 print(lenght_longest_substring(s))
+
+
+def count_palindrome(s):
+
+    s = ''.join(c.lower() for c in s if c.isalnum())
+
+    count = 0
+    n = len(s)
+
+
+    for center in range(2*n -1):
+
+        left = center // 2
+        right = left + center % 2
+
+        while left >= 0 and right < n and s[left] == s[right]:
+            count += 1
+            right += 1
+            left -= 1
+
+    return count
+
+s = "A man, a plan, a canal Panama!"
+
+
+print(count_palindrome(s))
