@@ -568,6 +568,84 @@ haystack = "hello"
 needle = "ll"
 print(str_str(haystack, needle))  # Output: 2
 
+"""
+📱 Problem Statement
+
+You are building a messaging app like WhatsApp.
+
+When a user searches for a word inside a chat message, the system should return the starting index of the first time the keyword appears.
+
+If the keyword does not exist in the message, return -1.
+
+If the keyword is empty, return 0.
+
+✅ Sample Input
+message = "Hey, are you coming to the party tonight?"
+keyword = "party"
+
+✅ Sample Output
+27
+
+
+Because "party" starts at index 27.
+
+❌ Another Example (Not Found)
+message = "Hey, are you coming to the party tonight?"
+keyword = "meeting"
+
+
+Output:
+
+-1
+
+
+Because "meeting" does not exist in the message.
+"""
+
+
+def search_keyword(message: str, keyword: str) -> int:
+    # 1️⃣ If keyword is empty, return 0
+    if not keyword:
+        return 0
+
+    # 2️⃣ Loop through possible starting positions
+    for i in range(len(message) - len(keyword) + 1):
+
+        # 3️⃣ Compare substring with keyword
+        if message[i:i + len(keyword)] == keyword:
+            return i  # Found it
+
+    # 4️⃣ If not found
+    return -1
+
+
+# Example usage
+message = "Hey, are you coming to the party tonight?"
+keyword = "party"
+
+print(search_keyword(message, keyword))  # Output: 27
+
+
+# here is the simple version 
+def search_keyword(message: str, keyword: str) -> int:
+    """
+    Returns the starting index of the first occurrence
+    of keyword inside message.
+    
+    If keyword is not found, returns -1.
+    If keyword is empty, returns 0.
+    """
+    return message.find(keyword)
+
+
+# Example 1: Found
+message = "Hey, are you coming to the party tonight?"
+keyword = "party"
+
+result = search_keyword(message, keyword)
+print(result)   # Output: 27
+
+
 
 """
 6️⃣ Count and Say
