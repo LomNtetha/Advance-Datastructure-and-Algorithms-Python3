@@ -665,6 +665,47 @@ Sample Output:
 
 """
 def count_and_say(n: int) -> str:
+    # 1️⃣ Start with the first term in the sequence
+    result = "1"
+
+    # 2️⃣ We already have term 1, so repeat (n - 1) times
+    # to build up to the nth term
+    for _ in range(n - 1):
+
+        new_result = ""   # This will store the next term
+        count = 1         # Count of repeated digits
+
+        # 3️⃣ Loop through the current result starting from index 1
+        for i in range(1, len(result)):
+
+            # 4️⃣ If current digit is same as previous digit,
+            # increase the count
+            if result[i] == result[i - 1]:
+                count += 1
+            else:
+                # 5️⃣ If digit changes:
+                # append count + previous digit
+                # Example: "111" → "31"
+                new_result += str(count) + result[i - 1]
+
+                # Reset count for new digit
+                count = 1
+
+        # 6️⃣ After loop ends, we must add the last group
+        # (because the loop stops before adding it)
+        new_result += str(count) + result[-1]
+
+        # 7️⃣ Update result for the next iteration
+        result = new_result
+
+    # 8️⃣ Return the nth term
+    return result
+
+
+# Example usage
+print(count_and_say(4))  # Output: "1211"
+
+def count_and_say(n: int) -> str:
     # 1. Start with the first term in the sequence
     s = "1"
 
