@@ -207,3 +207,15 @@ strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 
 print(group_anagrams(strs))
 
+
+def reverse_words(s):
+
+    return ' '.join(s.strip() .split() [::-1])
+
+s = "hello world today is monday on the 16 feb 2026"
+
+print(reverse_words(s))
+
+
+
+
