@@ -486,6 +486,56 @@ s = "A man, a plan, a canal Panama!"
 print(count_substrings(s))
 
 
+"""
+8️⃣ Longest Palindromic Substring
+
+Problem:
+Find the longest palindromic substring in a string.
+
+Sample Input:
+
+s = "babad"
+
+
+Sample Output:
+
+"bab"  # or "aba"
+
+"""
+
+def longest_palindrome(s: str) -> str:
+    n = len(s)  # Length of the input string
+    res = ""    # To store the longest palindromic substring found
+
+    # Loop through all possible centers of palindromes
+    # There are 2*n - 1 possible centers:
+    # - n single-character centers (for odd-length palindromes)
+    # - n-1 two-character centers (for even-length palindromes)
+    for center in range(2 * n - 1):
+        # Compute left pointer for the current center
+        left = center // 2
+        # Compute right pointer; for even-length palindromes, start at left+1
+        right = left + center % 2
+
+        # Expand around the center as long as the substring is a palindrome
+        while left >= 0 and right < n and s[left] == s[right]:
+            # If the current palindrome is longer than previously found, update result
+            if right - left + 1 > len(res):
+                res = s[left:right + 1]
+            
+            # Expand to the next characters
+            left -= 1
+            right += 1
+
+    # Return the longest palindromic substring
+    return res
+
+# Example usage
+s = "babad"
+print(longest_palindrome(s))  # Output: "bab" or "aba"
+
+
+
 
 """
 
@@ -760,54 +810,6 @@ Sample Output:
 
 def reverse_words(s: str) -> str:
     return ' '.join(s.strip().split()[::-1])
-
-"""
-8️⃣ Longest Palindromic Substring
-
-Problem:
-Find the longest palindromic substring in a string.
-
-Sample Input:
-
-s = "babad"
-
-
-Sample Output:
-
-"bab"  # or "aba"
-
-"""
-
-def longest_palindrome(s: str) -> str:
-    n = len(s)  # Length of the input string
-    res = ""    # To store the longest palindromic substring found
-
-    # Loop through all possible centers of palindromes
-    # There are 2*n - 1 possible centers:
-    # - n single-character centers (for odd-length palindromes)
-    # - n-1 two-character centers (for even-length palindromes)
-    for center in range(2 * n - 1):
-        # Compute left pointer for the current center
-        left = center // 2
-        # Compute right pointer; for even-length palindromes, start at left+1
-        right = left + center % 2
-
-        # Expand around the center as long as the substring is a palindrome
-        while left >= 0 and right < n and s[left] == s[right]:
-            # If the current palindrome is longer than previously found, update result
-            if right - left + 1 > len(res):
-                res = s[left:right + 1]
-            
-            # Expand to the next characters
-            left -= 1
-            right += 1
-
-    # Return the longest palindromic substring
-    return res
-
-# Example usage
-s = "babad"
-print(longest_palindrome(s))  # Output: "bab" or "aba"
 
 
 """
