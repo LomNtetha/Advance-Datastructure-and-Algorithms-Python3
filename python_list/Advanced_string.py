@@ -858,7 +858,7 @@ def min_window(s: str, t: str) -> str:
         # 5. When we have all characters from t in the current window
         while missing == 0:
             # Update the minimum window if it's smaller than previously found
-            if end == 0 or right - left + 1 < end - start + 1:
+            if (end == 0) or (right - left + 1) < (end - start + 1):
                 start, end = left, right
 
             # Move the left pointer to try and shrink the window

@@ -240,3 +240,39 @@ def longest_palindome(s):
 s = "babad"
 
 print(longest_palindome(s))
+
+from collections import Counter
+
+
+def min_window(s,t):
+
+    need = Counter(t)
+    missing = len(t)
+
+    left = 0
+    start = 0
+    end = 0
+
+    for right,char in enumerate(s):
+
+        if need[char]>0:
+            missing -= 1
+        need[char] -= 1
+
+
+        while missing == 0:
+            if (end == 0) or (right - left + 1) < (end - start + 1):
+                start,end = left,right
+
+            need[s[left]] += 1
+            if need[s[left]] > 0:
+                missing += 1
+            left += 1
+
+    return s[start:end + 1]
+
+
+s = "ADOBECODEBANC"
+t = "ABC"
+
+print(min_window(s,t))
