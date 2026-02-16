@@ -276,3 +276,26 @@ s = "ADOBECODEBANC"
 t = "ABC"
 
 print(min_window(s,t))
+
+def longestSentence(sentences):
+
+    max_words = 0
+    result = ""
+
+    for sentence in sentences:
+        word_count = len(sentence.split())
+
+        if word_count > max_words:
+            max_words = word_count
+            result = sentence
+
+    return result
+
+
+sentences = [
+    "hello world b b ",
+    "this is c c g",
+    "python"
+]
+
+print(longestSentence(sentences))
