@@ -216,6 +216,27 @@ s = "hello world today is monday on the 16 feb 2026"
 
 print(reverse_words(s))
 
+from collections import Counter
 
+def longest_palindome(s):
 
+    n = len(s)
 
+    res = ""
+
+    for center in range(2*n-1):
+
+        left = center // 2
+        right = left + center % 2
+
+        while left >=0 and right < n and s[left] == s[right]:
+            if right - left + 1 > len(res):
+                res = s[left:right + 1]
+
+            left -=1
+            right +=1
+    return res
+
+s = "babad"
+
+print(longest_palindome(s))
