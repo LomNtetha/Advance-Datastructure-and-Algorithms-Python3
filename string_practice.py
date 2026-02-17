@@ -320,3 +320,30 @@ sentences = [
 ]
 
 print(longestcharacter(sentences))
+
+from collections import Counter
+import re
+
+def most_letters_words(sentence):
+
+    letters = [char for char in sentence.lower() if char.isalpha()]
+    count_letter = Counter(letters)
+    top_5_letters = count_letter.most_common(5)
+
+    words = re.findall(r'\b[a-zA-Z]+\b',sentence.lower())
+    count_word = Counter(words)
+    top_5_words = count_word.most_common(5)
+
+    print("top 5 letters")
+    for letter,count in top_5_letters:
+        print(f"{letter}:{count}")
+       
+    print("\ntop 5 words")
+    for word,count in top_5_words:
+        print(f"{word}:{count}")
+
+
+
+sentence = "This is a simple sentence example. This sentence is simple."
+
+most_letters_words(sentence)
