@@ -347,3 +347,22 @@ def most_letters_words(sentence):
 sentence = "This is a simple sentence example. This sentence is simple."
 
 most_letters_words(sentence)
+
+def createByBoundedTag(bound_by,tag_name):
+
+    midpoint = len(bound_by) // 2
+
+    opening =bound_by[:midpoint]
+    closing = bound_by[midpoint:]
+
+    return f"{opening}{tag_name}{closing}"
+
+bound_by = "[[]]"
+tag_name = "tag"
+
+print(createByBoundedTag(bound_by,tag_name))
+
+bound_by = "<>"
+tag_name = "body"
+
+print(createByBoundedTag(bound_by,tag_name))
