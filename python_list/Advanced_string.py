@@ -915,14 +915,14 @@ def decode_string(s: str) -> str:
     return res
 
 """
-🧩 Problem Statement
+Problem Statement
 
 You are given an array of strings sentences, where each string represents a sentence consisting of words separated by a single space.
 
 Return the sentence that contains the maximum number of words.
 If there are multiple sentences with the same maximum number of words, return the first one.
 
-✍️ Input
+Input
 
 sentences: List[str]
 
