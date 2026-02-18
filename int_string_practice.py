@@ -70,3 +70,30 @@ def top_5_words_character(text):
 text = "This is this a simple sentence example. This sentence is simple."
 
 top_5_words_character(text)
+
+from collections import defaultdict
+from collections import Counter
+
+def group_related_words(sentences):
+
+    word_map = defaultdict(set)
+
+    for i ,sentence in enumerate(sentences):
+
+        words = sentence.split()
+        for word in words:
+            word_map[word].add(i)
+
+    result = []
+
+    for indexes in word_map.values():
+
+        if len(indexes) > 1:
+            result.append(list(indexes))
+    return result
+sentences = [
+  "hello world the world is beautiful",
+    "i am tired today hello world",
+]
+
+print(group_related_words(sentences))
