@@ -97,3 +97,28 @@ sentences = [
 ]
 
 print(group_related_words(sentences))
+
+from collections import defaultdict
+
+def group_by_words(sentences):
+
+    map_words = defaultdict(set)
+
+    for i,sentence in enumerate(sentences):
+
+        words = sentence.split()
+
+        for word in words:
+            map_words[word].add(i)
+
+    result  = []
+
+    for j,indexes in map_words.items():
+        if len(indexes)>1:
+            result.append(j)
+    return result
+sentences = [
+  "hello world the world is beautiful",
+    "i am tired today hello world",
+]
+print(group_by_words(sentences))
