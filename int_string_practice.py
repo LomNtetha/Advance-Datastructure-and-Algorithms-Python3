@@ -22,3 +22,25 @@ def Most_common_words(paragraph):
 paragraph = "Hello world. Hello everyone. World is beautiful."
 
 print(Most_common_words(paragraph))
+
+
+from collections import Counter
+import re
+
+def most_freq_words(text):
+
+    result = []
+
+    words = re.findall(r'\b\w+\b', text.lower())
+
+    count = Counter(words)
+
+    most_freq_words= count.most_common()
+
+    for word,freq in most_freq_words:
+        result.append(word)
+
+    return result
+text = "apple banana apple apple orange banana"
+
+print(most_freq_words(text))
