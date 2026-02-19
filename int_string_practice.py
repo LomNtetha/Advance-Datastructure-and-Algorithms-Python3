@@ -122,3 +122,29 @@ sentences = [
     "i am tired today hello world",
 ]
 print(group_by_words(sentences))
+
+from collections import Counter
+
+def longestSentence(senteces):
+  
+  max_length = 0
+  result = ""
+
+  for sentence in senteces:
+      
+      words = sentence.split()
+
+      if len(words) > max_length:
+          max_length = len(words)
+          result = sentence
+
+  return result
+
+
+
+sentences = [
+    "programming is fun",
+    "i like python 2"
+]
+
+print(longestSentence(sentences))
