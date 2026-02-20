@@ -148,3 +148,25 @@ sentences = [
 ]
 
 print(longestSentence(sentences))
+
+def longestCharacter(sentences):
+
+    max_character = 0
+    result = ''
+
+    for sentence in sentences:
+
+        charaters = sum(1 for ch in sentence if ch.isalpha())
+
+        if charaters > max_character:
+            max_character = charaters
+            result = sentence
+            
+    return result
+
+sentences = [
+    "programming is fun",
+    "i like python 2"
+]
+
+print(longestCharacter(sentences))
