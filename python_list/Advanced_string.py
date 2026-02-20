@@ -42,6 +42,17 @@ paragraph = "Hello world. Hello everyone. World is beautiful."
 result = most_frequent_words(paragraph)
 print(result)  # ['hello', 'world']
 
+# ✅ Time complexity: O(n)
+
+# Space Complexity:
+
+# words list: O(m)
+
+# count dict: O(k)
+
+# most_common_words list: O(k)
+# So total space: O(m + k). Since k ≤ m ≤ n, space complexity is O(n) in the worst case.
+
 
 """
 3️⃣ Word Frequency Sort
@@ -82,6 +93,17 @@ def word_frequency_sort(text: str):
 # Example usage
 text = "apple banana apple apple orange banana"
 print(word_frequency_sort(text))  # ['apple', 'banana', 'orange']
+
+
+# Overall Complexity
+
+# Time Complexity:
+# O(n) for regex + O(m) for counting + O(k log k) for sorting.
+# Since m ≤ n (words ≤ characters), dominant term is O(n + k log k).
+
+# Space Complexity:
+# O(m) for the list of words + O(k) for Counter + O(k) for result list ≈ O(m + k).
+# In worst case, all words are unique, so O(n).
 
 import re
 from collections import Counter
@@ -219,6 +241,9 @@ def top_5_letters_and_words(text):
 sentence = "This is a simple sentence example. This sentence is simple."
 top_5_letters_and_words(sentence)
 
+# Time Complexity: O(n + k log k) — n = text length, k = number of unique words
+# Space Complexity: O(n + k) — storing letters, words, and counts
+
 
 
 """
@@ -284,6 +309,10 @@ sentences = [
 ]
 
 print(group_words_by_paragraph(sentences))
+
+# Time Complexity: O(m)
+
+# Space Complexity: O(m)
 
 from collections import defaultdict
 
@@ -494,6 +523,18 @@ sentences = [
 print(longestSentence(sentences))  
 # Output: "this is a leetcode style problem"
 
+# Overall Complexity
+
+# Time Complexity: O(m) — dominated by splitting all sentences into words
+
+# Space Complexity: O(1) — we only store max_words and result (no extra lists)
+
+#  Short Answer:
+
+# Time Complexity: O(m)
+
+# Space Complexity: O(1)
+
 
 
 """
@@ -553,6 +594,18 @@ sentences = [
 print(longestCharacters(sentences))  
 # Output: "this is a leetcode style problem"
 
+# Overall Complexity
+
+# Time Complexity: O(L) — dominated by scanning all characters
+
+# Space Complexity: O(1) — only max_chars and result are stored
+
+# ✅ Short Answer:
+
+# Time Complexity: O(L)
+
+# Space Complexity: O(1)
+
 
 """
 Now, lets look into this through a question. Given a string of braces named bound_by, and a string named tag_name. 
@@ -593,6 +646,12 @@ print(solution.createBoundedTag(bound_by, tag_name))  # Output: "[[tag]]"
 bound_by = "<>"
 tag_name = "body"
 print(solution.createBoundedTag(bound_by, tag_name))  # Output: "<body>"
+
+# Overall Complexity
+
+# Time Complexity: O(n + m) — slicing + concatenation
+
+# Space Complexity: O(n + m) — new string is stored in memory
 
 
 
@@ -635,6 +694,16 @@ def length_of_longest_substring_set(s: str) -> int:
 # Example usage
 s = "abcabcbb"
 print(length_of_longest_substring_set(s))  # Output: 3
+
+# Overall Complexity
+
+# Time Complexity: O(n) — each character is processed at most twice (once added, once removed)
+
+# Space Complexity: O(k) — size of the set storing unique characters in the current window
+
+# k = number of unique characters in s
+
+# Worst case k = n if all characters are distinct
 
 
 def length_of_longest_substring_set(s: str) -> int:
@@ -709,6 +778,12 @@ def count_substrings(s: str) -> int:
 s = "A man, a plan, a canal Panama!"
 print(count_substrings(s))
 
+# Overall Complexity
+
+# Time Complexity: O(n²) — dominated by the expand-around-center step
+
+# Space Complexity: O(n) — storing the cleaned string
+
 
 """
 8️⃣ Longest Palindromic Substring
@@ -757,6 +832,12 @@ def longest_palindrome(s: str) -> str:
 # Example usage
 s = "babad"
 print(longest_palindrome(s))  # Output: "bab" or "aba"
+
+# Overall Complexity
+
+# Time Complexity: O(n²) — dominated by expanding around all centers
+
+# Space Complexity: O(1) extra (res stores a substring, but no additional data structures beyond the input string)
 
 """
 9️⃣ Minimum Window Substring
@@ -822,6 +903,18 @@ s = "ADOBECODEBANC"
 t = "ABC"
 print(min_window(s, t))  # Output: "BANC"
 
+# Overall Complexity
+
+# Time Complexity: O(|s| + |t|)
+
+# Space Complexity: O(k) ≤ O(|t|)
+
+# Short Answer:
+
+# Time Complexity: O(|s| + |t|)
+
+# Space Complexity: O(k) ≤ O(|t|)
+
 """
 5️⃣ Longest Common Prefix
 
@@ -875,6 +968,12 @@ strs = ["flower","flow","flight"]
 
 print(longestCommonPrefix(strs))
 
+# Overall Complexity
+
+# Time Complexity: O(n * m) — worst-case when all strings are almost identical and you compare most characters
+
+# Space Complexity: O(1) — only storing the prefix
+
 
 """
 4️⃣ Check If Sentence is a Pangram
@@ -903,7 +1002,13 @@ def is_pangram(sentence: str) -> bool:
 
 # Example usage
 sentence = "The quick brown fox jumps over a lazy dog"
-print(is_pangram(sentence))  # True
+print(is_pangram(sentence))  # 
+
+# Overall Complexity
+
+# Time Complexity: O(n) — must scan all characters once
+
+# Space Complexity: O(1) — at most 26 letters stored in the set
 
 def is_pangram(sentence: str) -> bool:
     # 1. Initialize an empty set to store unique letters
@@ -964,6 +1069,12 @@ def groupAnagrams( strs):
 strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
 
 print(groupAnagrams(strs))
+
+# Overall Complexity
+
+# Time Complexity: O(n * k log k) — dominated by sorting each string
+
+# Space Complexity: O(n * k) — storing grouped anagrams
 
 """
 7️⃣ Reverse Words in a String
@@ -1102,6 +1213,12 @@ keyword = "party"
 result = search_keyword(message, keyword)
 print(result)   # Output: 27
 
+# Overall Complexity
+
+# Time Complexity: O(n * m) worst-case, O(n + m) average
+
+# Space Complexity: O(1)
+
 
 
 """
@@ -1161,6 +1278,12 @@ def count_and_say(n: int) -> str:
 
 # Example usage
 print(count_and_say(4))  # Output: "1211"
+
+# Overall Complexity
+
+# Time Complexity: O(2^n) (exponential in n) — because the sequence length grows exponentially and string concatenation costs add up
+
+# Space Complexity: O(2^n) — storing the nth term
 
 def count_and_say(n: int) -> str:
     # 1. Start with the first term in the sequence
