@@ -170,3 +170,18 @@ sentences = [
 ]
 
 print(longestCharacter(sentences))
+
+def createBoundBy(bound_by,tag_nname):
+
+    midpoint = len(bound_by) // 2
+
+
+    opening = bound_by[:midpoint]
+    closing = bound_by[midpoint:]
+    
+    return f"{opening}{tag_name}{closing}"
+
+bound_by = "[[]]"
+tag_name = "tag"
+
+print(createBoundBy(bound_by,tag_name))
