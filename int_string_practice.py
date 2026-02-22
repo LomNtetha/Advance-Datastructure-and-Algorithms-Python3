@@ -209,3 +209,29 @@ def length_of_longest_substring_set(s: str) -> int:
 # Example usage
 s = "abcabcbb"
 print(length_of_longest_substring_set(s))  # Output: 3
+
+def length_of_longest_substring_set(s: str) -> int:
+    seen = set()  # Set to store characters in the current window
+    start = 0     # Start index of current window
+    max_len = 0
+
+    # Loop over the indices using range
+    for end in range(len(s)):
+        char = s[end]  # Get the character at index 'end'
+
+        # If char is already in the set, shrink the window from the left
+        while char in seen:
+            seen.remove(s[start])
+            start += 1
+        
+        # Add the current character to the set
+        seen.add(char)
+        
+        # Update max length
+        max_len = max(max_len, end - start + 1)
+    
+    return max_len
+
+# Example usage
+s = "abcabcbb"
+print(length_of_longest_substring_set(s))  # Output: 3
