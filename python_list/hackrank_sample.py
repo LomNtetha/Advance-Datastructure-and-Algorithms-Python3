@@ -981,3 +981,89 @@ class Solution:
 
 solution = Solution()
 solution.fizzBuzz(15)
+
+"""
+Problem: Count Square Sub-Grids
+
+You are given several queries.
+Each query represents a rectangular grid with:
+
+r rows
+
+c columns
+
+A square sub-grid is a smaller square (like 1×1, 2×2, etc.) that can fit completely inside the grid. The square can slide to different positions inside the grid.
+
+For each query [r, c], count all possible square sub-grids that can be formed and return the result.
+
+The largest square that can fit is:
+
+min(r, c)
+
+For a square of size k × k, the number of positions (ways) it can appear is:
+
+(r - k + 1) * (c - k + 1)
+
+Sum the number of squares for all possible sizes.
+
+Sample Input
+queries = [[2,1], [2,3]]
+Sample Output
+[2, 8]
+Explanation
+Query 1 → [2,1]
+
+Grid:
+
+□
+□
+
+Only 1×1 squares fit:
+
+2 × 1 = 2
+
+Total squares:
+
+2
+Query 2 → [2,3]
+
+Grid:
+
+□ □ □
+□ □ □
+
+1×1 squares
+
+2 × 3 = 6
+
+2×2 squares
+
+(2 - 2 + 1) × (3 - 2 + 1)
+= 1 × 2
+= 2
+
+Total squares:
+
+6 + 2 = 8
+Final Output
+[2, 8]
+"""
+
+
+def square(queries):
+    result = []
+
+    for row, column in queries:
+        total = 0
+        sub_grid = min(row, column)  # maximum square size
+
+        # Sum all squares from size 1×1 to sub_grid×sub_grid
+        for k in range(1, sub_grid + 1):
+            total += (row - k + 1) * (column - k + 1)
+
+        result.append(total)
+
+    return result
+
+queries = [[2,1], [2,3]]
+print(square(queries))
