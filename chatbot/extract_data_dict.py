@@ -1321,35 +1321,35 @@ payload = {
 }
 # 📤 Output
 [111, 222]
-# ✅ Solution
-def filter_messages_by_keyword(payload, keyword):
+
+def extract_timestamps(payload):
     """
-    Return a list of messages containing the specified keyword.
+    Extract all timestamps from metadata fields in the messages.
     """
-    result = []  # Initialize list to store matching messages
+    timestamps = []  # Initialize an empty list to store timestamps
 
     # Loop through each message in the payload safely
-    for msg in payload.get("messages", []):
-        text = msg.get("text")  # Get the message text
-        if text and keyword in text:
-            result.append(text)  # Add message to result if it contains the keyword
+    for msg in payload.get("messages", []): #if none return empty list
+        metadata = msg.get("metadata", {})  # Get metadata dict, default to empty if missing
+        timestamp = metadata.get("timestamp")  # Get the timestamp from metadata
+        if timestamp is not None:  # Only add it if timestamp exists
+            timestamps.append(timestamp)  # Add timestamp to the result list
 
-    # Return the final list of messages matching the keyword
-    return result
+    # Return the final list of timestamps
+    return timestamps
 
 
 # Example usage
 payload = {
     "messages": [
-        {"text": "hello world"},
-        {"text": "bye world"},
-        {"text": "hello bot"}
+        {"metadata": {"timestamp": 111}},
+        {"metadata": {"timestamp": 222}}
     ]
 }
-keyword = "hello"
 
-print(filter_messages_by_keyword(payload, keyword))
-# Output: ["hello world", "hello bot"]
+print(extract_timestamps(payload))  # Output: [111, 222]
+
+
 """🧩 Question 20: Build Reply Mapping
 📘 Problem
 
