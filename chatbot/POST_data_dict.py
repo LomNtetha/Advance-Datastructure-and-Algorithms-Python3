@@ -155,6 +155,113 @@ products = [
 print(calculate_total_with_quantity(products))
 # Output: {"total": 35}
 
+import requests
+import json
+
+def post_and_calculate_total(url, payload):
+    """
+    Post a WhatsApp webhook payload to the given URL and calculate total order cost from the response.
+
+    Args:
+        url (str): Endpoint to send POST request.
+        payload (dict): WhatsApp webhook-like JSON payload.
+
+    Returns:
+        float: Total cost of all order items returned by the endpoint.
+    """
+    headers = {
+        "Content-Type": "application/json"
+    }
+
+    try:
+        # Step 1: Send POST request with the payload to the given URL
+        # - `headers` specifies that we are sending JSON
+        # - `json.dumps(payload)` converts the Python dict into a JSON string
+        response = requests.post(url, headers=headers, data=json.dumps(payload))
+        
+        # Step 1a: Raise an exception if the HTTP response status code indicates an error
+        response.raise_for_status()  # e.g., 404, 500, or other HTTP errors
+
+        # Step 2: Parse the JSON response from the server
+        data = response.json()  # Converts JSON response into a Python dictionary
+
+        # Step 3: Initialize total cost accumulator
+        total_cost = 0
+
+        # Step 3a: Loop through each entry in the response
+        for entry in data.get("entry", []):
+            # Step 3b: Loop through each change in the entry
+            for change in entry.get("changes", []):
+                # Step 3c: Get the 'value' dictionary which contains message info
+                value = change.get("value", {})
+                # Step 3d: Loop through each message in the 'messages' list
+                for message in value.get("messages", []):
+                    # Step 3e: Only process messages of type 'order'
+                    if message.get("type") == "order":
+                        # Step 3f: Access the 'order' dictionary
+                        order = message.get("order", {})
+                        # Step 3g: Loop through all product items in the order
+                        for item in order.get("product_items", []):
+                            qty = item.get("quantity", 0)      # Default to 0 if missing
+                            price = item.get("item_price", 0)  # Default to 0 if missing
+                            total_cost += qty * price          # Add item's total to overall total
+
+        # Step 4: Return the calculated total cost
+        return total_cost
+
+    except requests.exceptions.RequestException as e:
+        # This block runs if any network or HTTP error occurs during the POST
+        print(f"Error posting payload: {e}")
+        return 0  # Return 0 if POST fails or endpoint is unreachable
+
+
+# Example usage
+webhook_url = "https://example.com/whatsapp_webhook"  # Replace with real endpoint
+
+payload = {
+  "object": "whatsapp_business_account",
+  "entry": [
+    {
+      "id": "WHATSAPP_BUSINESS_ACCOUNT_ID",
+      "changes": [
+        {
+          "value": {
+            "messaging_product": "whatsapp",
+            "metadata": {
+                "display_phone_number": "2665785555387",
+                "phone_number_id": "26655656727743183882"
+            },
+            "contacts": [
+              {
+                "profile": {"name": "Lumkile Ntetha"},
+                "wa_id": "26667899604"
+              }
+            ],
+            "messages": [
+              {
+                "from": "26667899604",
+                "id": "wamid.ID",
+                "timestamp": "1518694235",
+                "type": "order",
+                "order": {
+                  "catalog_id": "15527675282110",
+                  "product_items": [
+                    {"product_retailer_id": "i9sj06uvv4", "quantity": 1, "item_price": 90, "currency": "ZAR"}
+                  ]
+                }
+              }
+            ]
+          },
+          "field": "messages"
+        }
+      ]
+    }
+  ]
+}
+
+total = post_and_calculate_total(webhook_url, payload)
+print(f"Total Order Cost: {total}")
+
 # 🧩 Question 24: Build Chatbot Response Payload
 # 📘 Problem
 
