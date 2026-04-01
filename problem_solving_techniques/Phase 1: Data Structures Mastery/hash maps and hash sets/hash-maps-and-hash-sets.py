@@ -668,6 +668,36 @@ n2 = 2
 print(solution.isHappy(n2))  # Output: False
 
 def isHappy(n):
+    # A set to keep track of numbers we've already seen
+    # This helps detect cycles (if we see the same number again, it's not happy)
+    seen = set()
+    
+    base = 10   # Base 10 number system (digits are 0-9)
+    
+    # Repeat the process until we reach 1 (happy) or detect a cycle (not happy)
+    while n != 1 and n not in seen:
+        # Add the current number to the set of seen numbers
+        seen.add(n)
+        
+        total = 0  # Will store the sum of squares of digits for this iteration
+        
+        # Extract digits and calculate the sum of their squares
+        while n > 0:
+            digit = n % base        # Get the last digit of n
+            total += digit * digit  # Add square of the digit to total
+            n //= base              # Remove the last digit from n
+        
+        # Update n to be the sum of squares of its digits
+        n = total
+    
+    # If n == 1, it's a happy number; otherwise, it's not
+    return n == 1
+
+
+# Example usage
+print(isHappy(19))  # True
+
+def isHappy(n):
     seen = set()
     
     while n != 1 and n not in seen:
