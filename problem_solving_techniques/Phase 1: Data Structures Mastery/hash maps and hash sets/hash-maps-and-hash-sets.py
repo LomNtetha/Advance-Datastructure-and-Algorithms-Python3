@@ -667,6 +667,25 @@ print(solution.isHappy(n1))  # Output: True
 n2 = 2
 print(solution.isHappy(n2))  # Output: False
 
+def isHappy(n):
+    seen = set()
+    
+    while n != 1 and n not in seen:
+        seen.add(n)
+        
+        total = 0
+        for ch in str(n):   # convert number to string
+            digit = int(ch)
+            total += digit * digit
+        
+        n = total
+    
+    return n == 1
+
+
+# Example
+print(isHappy(19))  # True
+
 # Time Complexity:
 # O(log n) due to the number of digits involved in each iteration.
 # Space Complexity:
