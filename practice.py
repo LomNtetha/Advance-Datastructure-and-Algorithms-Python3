@@ -17,3 +17,28 @@ def longest_substring_length(s):
 s = ("abcabcbb")
 
 print(longest_substring_length(s))
+
+def longest_substring(s):
+
+    seen = set()
+    left = 0
+    max_lenght = 0
+    result = ""
+
+    for right in range(len(s)):
+
+        while s[right] in seen:
+            seen.remove(s[left])
+            left +=1 
+
+        seen.add(s[right])
+
+        if right - left + 1 > max_lenght:
+            max_lenght = right - left + 1
+            result = s[left:right+1]
+
+    return result 
+
+s = "pwwkew"
+
+print(longest_substring(s))
