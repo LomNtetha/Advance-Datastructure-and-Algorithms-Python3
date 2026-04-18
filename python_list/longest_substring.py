@@ -71,6 +71,72 @@ def longest_unique_substring_str(s):
 
 print(longest_unique_substring_str("pwwkew"))  # "wke"
 
+"""8. Optimized Longest Unique Substring (HashMap Index)
+Optimized version using index tracking.
+
+✅ Example
+Input: "abba"
+Output: 2
+"""
+def longest_unique_optimized(s):
+    char_index = {}    # Store last seen index of each character
+    left = 0
+    max_length = 0
+
+    for right in range(len(s)):
+        # If character seen before, move left pointer
+        if s[right] in char_index:
+            left = max(left, char_index[s[right]] + 1)
+
+        # Update latest index
+        char_index[s[right]] = right
+
+        # Update max length
+        max_length = max(max_length, right - left + 1)
+
+    return max_length
+
+
+print(longest_unique_optimized("abba"))  # 2
+
+
+"""10. Longest Palindromic Substring
+Problem
+
+Find the longest substring that is a palindrome.
+
+✅ Example
+Input: "babad"
+Output: "bab" or "aba"
+"""
+
+def longest_palindrome(s):
+    # Helper function to expand around center
+    def expand(left, right):
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+        
+        # Return valid palindrome substring
+        return s[left+1:right]
+
+    result = ""
+
+    for i in range(len(s)):
+        # Odd length palindrome
+        temp1 = expand(i, i)
+
+        # Even length palindrome
+        temp2 = expand(i, i+1)
+
+        # Pick longer one
+        result = max(result, temp1, temp2, key=len)
+
+    return result
+
+
+print(longest_palindrome("babad"))  # "bab" or "aba"
+
 """
 2. Longest Substring With At Most K Distinct Characters
 🧠 Problem
@@ -236,33 +302,6 @@ def longest_replacement_general(s, k):
 
 print(longest_replacement_general("ABAB", 2))  # 4
 
-"""8. Optimized Longest Unique Substring (HashMap Index)
-Optimized version using index tracking.
-
-✅ Example
-Input: "abba"
-Output: 2
-"""
-def longest_unique_optimized(s):
-    char_index = {}    # Store last seen index of each character
-    left = 0
-    max_length = 0
-
-    for right in range(len(s)):
-        # If character seen before, move left pointer
-        if s[right] in char_index:
-            left = max(left, char_index[s[right]] + 1)
-
-        # Update latest index
-        char_index[s[right]] = right
-
-        # Update max length
-        max_length = max(max_length, right - left + 1)
-
-    return max_length
-
-
-print(longest_unique_optimized("abba"))  # 2
 
 """9. Longest Substring With At Least K Repeating Characters
 Problem
@@ -295,40 +334,3 @@ def longest_substring_k_repeating(s, k):
 
 
 print(longest_substring_k_repeating("aaabb", 3))  # 3
-
-"""10. Longest Palindromic Substring
-Problem
-
-Find the longest substring that is a palindrome.
-
-✅ Example
-Input: "babad"
-Output: "bab" or "aba"
-"""
-
-def longest_palindrome(s):
-    # Helper function to expand around center
-    def expand(left, right):
-        while left >= 0 and right < len(s) and s[left] == s[right]:
-            left -= 1
-            right += 1
-        
-        # Return valid palindrome substring
-        return s[left+1:right]
-
-    result = ""
-
-    for i in range(len(s)):
-        # Odd length palindrome
-        temp1 = expand(i, i)
-
-        # Even length palindrome
-        temp2 = expand(i, i+1)
-
-        # Pick longer one
-        result = max(result, temp1, temp2, key=len)
-
-    return result
-
-
-print(longest_palindrome("babad"))  # "bab" or "aba"
