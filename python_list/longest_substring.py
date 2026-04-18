@@ -31,6 +31,11 @@ def longest_unique_substring(s):
 
 print(longest_unique_substring("abcabcbb"))  # 3
 
+
+# Time Complexity: 𝑂(𝑛)
+
+# Space Complexity:O(1) with constant character set sizes
+
 """
 5. Return the Actual Longest Substring (No Repeats)
 Problem
@@ -124,18 +129,98 @@ def longest_palindrome(s):
 
     for i in range(len(s)):
         # Odd length palindrome
-        temp1 = expand(i, i)
+        odd = expand(i, i)
 
         # Even length palindrome
-        temp2 = expand(i, i+1)
+        even = expand(i, i+1)
 
         # Pick longer one
-        result = max(result, temp1, temp2, key=len)
+        result = max(result, odd, even, key=len)
 
     return result
 
 
 print(longest_palindrome("babad"))  # "bab" or "aba"
+
+# Time Complexity: O(n^2)
+# Space Complexity: O(n^2)
+
+"""
+Problem
+
+Find the length of the longest palindromic subsequence in a string.
+
+Example:
+
+Input:  "bbbab"
+Output:  4   # "bbbb"
+"""
+
+def longest_palindrome_subseq(s):
+    n = len(s)
+
+    # dp[i][j] = LPS length in substring s[i..j]
+    dp = [[0] * n for _ in range(n)]
+
+    # every single character is a palindrome of length 1
+    for i in range(n):
+        dp[i][i] = 1
+
+    # build the table bottom-up
+    for length in range(2, n + 1):  # substring length
+        for i in range(n - length + 1):
+            j = i + length - 1
+
+            # if characters match
+            if s[i] == s[j]:
+                dp[i][j] = 2 + dp[i + 1][j - 1]
+            else:
+                # take best by skipping one side
+                dp[i][j] = max(dp[i + 1][j], dp[i][j - 1])
+
+    return dp[0][n - 1]
+
+
+# Test
+print(longest_palindrome_subseq("bbbab"))  # 4
+
+"""
+Longest Increasing Subsequence (LIS)
+🧩 Problem
+
+Given an array nums, return the length of the longest strictly increasing subsequence.
+
+👉 A subsequence means:
+
+You can skip elements
+But order must stay the same
+✅ Example
+Input:  [10, 9, 2, 5, 3, 7, 101, 18]
+Output: 4
+Explanation: One LIS is [2, 3, 7, 101]
+"""
+
+def length_of_lis(nums):
+    n = len(nums)
+
+    # dp[i] = longest increasing subsequence ending at i
+    dp = [1] * n  # every element is at least length 1
+
+    for i in range(n):
+        for j in range(i):
+            # if increasing order found
+            if nums[j] < nums[i]:
+                dp[i] = max(dp[i], dp[j] + 1)
+
+    return max(dp)
+
+
+# Test
+print(length_of_lis([10, 9, 2, 5, 3, 7, 101, 18]))  # 4
+
+# 🚀 Complexity
+# Time: O(n²) (simple DP)
+# Space: O(n)
 
 """
 2. Longest Substring With At Most K Distinct Characters
