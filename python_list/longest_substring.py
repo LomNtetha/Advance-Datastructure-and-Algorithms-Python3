@@ -118,9 +118,10 @@ Output: "bab" or "aba"
 def longest_palindrome(s):
     # Helper function to expand around center
     def expand(left, right):
+         # Expand while characters on both sides match and we are within bounds
         while left >= 0 and right < len(s) and s[left] == s[right]:
-            left -= 1
-            right += 1
+              left -= 1  # Move left pointer outward
+              right += 1  # Move right pointer outward
         
         # Return valid palindrome substring
         return s[left+1:right]
