@@ -143,6 +143,54 @@ def longest_palindrome(s):
 
 print(longest_palindrome("babad"))  # "bab" or "aba"
 
+"""
+Given a string s, find the length of the longest substring that is a palindrome.
+A palindrome is a string that reads the same forward and backward.
+The substring must be contiguous (continuous characters).
+
+✅ Example
+Input: s = "babad"
+Output: 3
+Explanation: "bab" or "aba" is the longest palindromic substring
+
+"""
+
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        # Helper function to expand around a given center
+        def expand_around_center(left: int, right: int) -> int:
+            # Expand while:
+            # 1. We are within bounds
+            # 2. Characters on both sides are equal
+            while left >= 0 and right < len(s) and s[left] == s[right]:
+                left -= 1   # move left pointer outward
+                right += 1  # move right pointer outward
+            
+            # After loop ends, pointers go one step too far
+            # So actual palindrome length = (right - 1) - (left + 1) + 1
+            # Simplified to:
+            return right - left - 1  
+
+        max_len = 0  # Store maximum palindrome length found
+
+        # Try every index as the center
+        for i in range(len(s)):
+            # Case 1: Odd-length palindrome (center at i)
+            odd_length = expand_around_center(i, i)
+
+            # Case 2: Even-length palindrome (center between i and i+1)
+            even_length = expand_around_center(i, i + 1)
+
+            # Take the maximum of current results
+            max_len = max(max_len, odd_length, even_length)
+
+        return max_len
+
+
+# Example usage
+solution = Solution()
+print(solution.longestPalindrome("babad"))  # Output: 3
+
 # Time Complexity: O(n^2)
 # Space Complexity: O(n^2)
 
@@ -156,6 +204,7 @@ Example:
 Input:  "bbbab"
 Output:  4   # "bbbb"
 """
+
 
 def longest_palindrome_subseq(s):
     n = len(s)
