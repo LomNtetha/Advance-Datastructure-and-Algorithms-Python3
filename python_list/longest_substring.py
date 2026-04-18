@@ -10,18 +10,18 @@ Explanation: "abc"
 💻 Solution
 """
 def longest_unique_substring(s):
-    char_set = set()   # Stores unique characters in current window
+    seen = set()   # Stores unique characters in current window
     left = 0           # Left pointer of sliding window
     max_length = 0     # Result
 
     for right in range(len(s)):
         # If duplicate character found, shrink window from left
-        while s[right] in char_set:
-            char_set.remove(s[left])
+        while s[right] in seen:
+            seen.remove(s[left])
             left += 1
         
         # Add current character to set
-        char_set.add(s[right])
+        seen.add(s[right])
 
         # Update max length
         max_length = max(max_length, right - left + 1)
@@ -30,6 +30,46 @@ def longest_unique_substring(s):
 
 
 print(longest_unique_substring("abcabcbb"))  # 3
+
+"""
+5. Return the Actual Longest Substring (No Repeats)
+Problem
+
+Return the actual substring instead of length.
+
+✅ Example
+Input: "pwwkew"
+Output: "wke"
+
+Input:  "abcabcbb"
+Output: "abc"
+
+Explanation:
+The longest substring without repeating characters is "abc".
+"""
+def longest_unique_substring_str(s):
+    seen = set()
+    left = 0
+    max_length = 0
+    result = ""        # Store substring result
+
+    for right in range(len(s)):
+        # Remove duplicates
+        while s[right] in seen:
+            seen.remove(s[left])
+            left += 1
+        
+        seen.add(s[right])
+
+        # Update result if longer substring found
+        if right - left + 1 > max_length:
+            max_length = right - left + 1
+            result = s[left:right+1]
+
+    return result
+
+
+print(longest_unique_substring_str("pwwkew"))  # "wke"
 
 """
 2. Longest Substring With At Most K Distinct Characters
@@ -126,39 +166,7 @@ def character_replacement(s, k):
 
 
 print(character_replacement("AABABBA", 1))  # 4
-"""
-5. Return the Actual Longest Substring (No Repeats)
-Problem
 
-Return the actual substring instead of length.
-
-✅ Example
-Input: "pwwkew"
-Output: "wke"
-"""
-def longest_unique_substring_str(s):
-    char_set = set()
-    left = 0
-    max_length = 0
-    result = ""        # Store substring result
-
-    for right in range(len(s)):
-        # Remove duplicates
-        while s[right] in char_set:
-            char_set.remove(s[left])
-            left += 1
-        
-        char_set.add(s[right])
-
-        # Update result if longer substring found
-        if right - left + 1 > max_length:
-            max_length = right - left + 1
-            result = s[left:right+1]
-
-    return result
-
-
-print(longest_unique_substring_str("pwwkew"))  # "wke"
 """
 6. Longest Substring With Equal 0s and 1s
 
