@@ -268,9 +268,136 @@ def length_of_lis(nums):
 # Test
 print(length_of_lis([10, 9, 2, 5, 3, 7, 101, 18]))  # 4
 
+"""
+Problem
+
+Given an array nums, return the actual longest increasing subsequence (LIS), not just its length.
+
+👉 Rules:
+
+The subsequence must be strictly increasing
+You can skip elements
+Maintain original order
+✅ Example
+Input:  [10, 9, 2, 5, 3, 7, 101, 18]
+Output: [2, 3, 7, 101]
+
+👉 Note: There can be multiple valid answers like [2, 5, 7, 101]
+"""
+def longest_increasing_subsequence(nums):
+    n = len(nums)
+    
+    # dp[i] will store the actual LIS ending at index i
+    dp = [[num] for num in nums]   # start with each number alone
+    
+    for i in range(n):
+        for j in range(i):
+            # If increasing and longer subsequence found
+            if nums[i] > nums[j] and len(dp[j]) + 1 > len(dp[i]):
+                # Extend previous subsequence
+                dp[i] = dp[j] + [nums[i]]
+    
+    # Return the longest subsequence from dp
+    return max(dp, key=len)
+
+
+print(longest_increasing_subsequence([10, 9, 2, 5, 3, 7, 101, 18]))
+# Output: [2, 3, 7, 101]
 # 🚀 Complexity
 # Time: O(n²) (simple DP)
 # Space: O(n)
+
+"""
+Problem: Longest Increasing Substring
+🧠 Problem
+
+Given an array nums, return:
+
+The length of the longest increasing substring
+The actual substring
+
+👉 Rules:
+
+Must be continuous (no skipping)
+Each next element must be strictly greater
+✅ Example
+Input:  [10, 9, 2, 5, 3, 7, 101, 18]
+Output:
+Substring: [3, 7, 101]
+
+👉 Other valid substring: [2, 5] (but shorter)
+"""
+def longest_increasing_substring(nums):
+    # If the input list is empty, return empty list
+    if not nums:
+        return []
+
+    # 'curr' stores the current increasing substring
+    # 'best' stores the longest substring found so far
+    best = curr = [nums[0]]  # start with first element
+
+    # Loop through the array starting from index 1
+    for i in range(1, len(nums)):
+        
+        # Check if current number continues increasing order
+        if nums[i] > nums[i - 1]:
+            # If yes, add it to current substring
+            curr.append(nums[i])
+        else:
+            # If not increasing, reset current substring
+            curr = [nums[i]]
+
+        # Update 'best' if current substring is longer
+        if len(curr) > len(best):
+            best = curr
+
+    # Return the longest increasing substring found
+    return best
+
+
+# Example usage
+nums = [10, 9, 2, 5, 3, 7, 101, 18]
+print(longest_increasing_substring(nums))
+# Output: [3, 7, 101]
+
+"""
+Problem
+
+Given an array nums, return the length of the longest strictly increasing substring.
+
+👉 Must be continuous (no skipping)
+
+✅ Example
+Input:  [10, 9, 2, 5, 3, 7, 101, 18]
+Output: 3
+
+Explanation:
+Longest increasing substring is [3, 7, 101]
+"""
+def longest_increasing_substring_length(nums):
+    if not nums:
+        return 0
+
+    max_len = 1   # Stores the maximum length found
+    curr_len = 1  # Current increasing streak
+
+    for i in range(1, len(nums)):
+        # If current element is greater than previous → increasing
+        if nums[i] > nums[i - 1]:
+            curr_len += 1
+        else:
+            # Reset streak
+            curr_len = 1
+        
+        # Update maximum length
+        max_len = max(max_len, curr_len)
+
+    return max_len
+
+
+# Example
+print(longest_increasing_substring_length([10, 9, 2, 5, 3, 7, 101, 18]))
+# Output: 3
 
 """
 2. Longest Substring With At Most K Distinct Characters
