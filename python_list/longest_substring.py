@@ -328,37 +328,40 @@ Substring: [3, 7, 101]
 👉 Other valid substring: [2, 5] (but shorter)
 """
 def longest_increasing_substring(nums):
-    # If the input list is empty, return empty list
+    # If list is empty, return empty result
     if not nums:
         return []
 
-    # 'curr' stores the current increasing substring
-    # 'best' stores the longest substring found so far
-    best = curr = [nums[0]]  # start with first element
+    left = 0           # Start of current window
+    best_start = 0     # Start index of best substring found
+    max_len = 1        # Track length internally (not returned)
 
-    # Loop through the array starting from index 1
-    for i in range(1, len(nums)):
-        
-        # Check if current number continues increasing order
-        if nums[i] > nums[i - 1]:
-            # If yes, add it to current substring
-            curr.append(nums[i])
-        else:
-            # If not increasing, reset current substring
-            curr = [nums[i]]
+    # Right pointer expands the window
+    for right in range(1, len(nums)):
 
-        # Update 'best' if current substring is longer
-        if len(curr) > len(best):
-            best = curr
+        # If sequence breaks (not strictly increasing)
+        if nums[right] <= nums[right - 1]:
+            left = right   # reset window start
 
-    # Return the longest increasing substring found
-    return best
+        # Current window length
+        curr_len = right - left + 1
+
+        # Update best window if longer
+        if curr_len > max_len:
+            max_len = curr_len
+            best_start = left
+
+    # Return ONLY the substring
+    return nums[best_start:best_start + max_len]
 
 
-# Example usage
+# Example
 nums = [10, 9, 2, 5, 3, 7, 101, 18]
 print(longest_increasing_substring(nums))
 # Output: [3, 7, 101]
+
+# Time Complexity: O(n)
+# Space Complexity: O(n) (because of returned substring)
 
 """
 Problem
@@ -375,20 +378,23 @@ Explanation:
 Longest increasing substring is [3, 7, 101]
 """
 def longest_increasing_substring_length(nums):
+    # If empty, no substring exists
     if not nums:
         return 0
 
-    max_len = 1   # Stores the maximum length found
-    curr_len = 1  # Current increasing streak
+    left = 0        # Start of current window
+    max_len = 1     # Best length found
 
-    for i in range(1, len(nums)):
-        # If current element is greater than previous → increasing
-        if nums[i] > nums[i - 1]:
-            curr_len += 1
-        else:
-            # Reset streak
-            curr_len = 1
-        
+    # Expand window with right pointer
+    for right in range(1, len(nums)):
+
+        # If sequence breaks (not increasing)
+        if nums[right] <= nums[right - 1]:
+            left = right   # reset window
+
+        # Calculate current window length
+        curr_len = right - left + 1
+
         # Update maximum length
         max_len = max(max_len, curr_len)
 
@@ -398,6 +404,18 @@ def longest_increasing_substring_length(nums):
 # Example
 print(longest_increasing_substring_length([10, 9, 2, 5, 3, 7, 101, 18]))
 # Output: 3
+
+# ⏱ Time Complexity: O(n)
+# We loop through the array once
+# Each element is visited only one time
+
+# 👉 Very efficient
+
+# 🧠 Space Complexity: O(1)
+# We only use a few variables:
+# left
+# max_len
+# curr_len
 
 """
 2. Longest Substring With At Most K Distinct Characters
