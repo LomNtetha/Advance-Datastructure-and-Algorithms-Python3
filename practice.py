@@ -150,3 +150,24 @@ def length_LIS(nums):
 nums = [10, 9, 2, 5, 3, 7, 101, 18]
 
 print(length_LIS(nums))
+
+def longset_increaing_subsquence(nums):
+
+    n = len(nums)
+
+    dp = [[num] for num in nums]
+
+    for i in range(n):
+        for j in range(i):
+
+            if nums[i] > nums[j] and len(dp[j]) + 1 > len(dp[i]):
+                
+                dp[i] = dp[j] + [nums[i]]
+
+    return max(dp,key=len)
+
+
+nums = [10, 9, 2, 5, 3, 7, 101, 18]
+
+
+print(longset_increaing_subsquence(nums))
