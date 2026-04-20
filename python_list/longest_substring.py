@@ -332,10 +332,10 @@ def longest_increasing_substring(nums):
 
     left = 0           # Start of current window
     best_start = 0     # Start index of best substring found
-    max_len = 0       # Track length internally (not returned)
+    max_len = 1       # Track length internally (not returned)
 
     # Right pointer expands the window
-    for right in range(len(nums)):
+    for right in range(1, len(nums)):
 
         # If sequence breaks (not strictly increasing)
         if nums[right] <= nums[right - 1]:
@@ -427,32 +427,40 @@ Output: 3
 Explanation: "ece"
 💻 Solution
 """
+
+from collections import Counter
+
 def longest_k_distinct(s, k):
-    char_count = {}    # Dictionary to count characters
     left = 0
-    max_length = 0
+    max_len = 0
+    count = Counter()   # stores frequency of characters in window
 
     for right in range(len(s)):
-        # Add current character
-        char_count[s[right]] = char_count.get(s[right], 0) + 1
+        # Add current character to window
+        count[s[right]] += 1
 
-        # If more than k distinct characters, shrink window
-        while len(char_count) > k:
-            char_count[s[left]] -= 1
+        # If more than k distinct chars → shrink window
+        while len(count) > k:
+            count[s[left]] -= 1
 
-            # Remove char if count becomes 0
-            if char_count[s[left]] == 0:
-                del char_count[s[left]]
+            # Remove character if its count becomes 0
+            if count[s[left]] == 0:
+                del count[s[left]]
 
             left += 1
-        
-        # Update max length
-        max_length = max(max_length, right - left + 1)
 
-    return max_length
+        # Update maximum length
+        max_len = max(max_len, right - left + 1)
+
+    return max_len
 
 
-print(longest_k_distinct("eceba", 2))  # 3
+# Example
+print(longest_k_distinct("eceba", 2))  # Output: 3
+
+# ⚡ Complexity
+# Time: O(n)
+# Space: O(k) (at most k characters in Counter)
 
 """
 3. Longest Substring With At Most Two Distinct Characters
@@ -485,31 +493,41 @@ Input: s = "AABABBA", k = 1
 Output: 4
 💻 Solution
 """
+
+from collections import Counter
+
 def character_replacement(s, k):
-    count = {}         # Frequency map
-    left = 0
-    max_freq = 0       # Highest frequency of a single char in window
-    max_length = 0
+    count = Counter()   # stores frequency of characters in current window
+    left = 0            # left pointer of sliding window
+    max_freq = 0        # highest frequency of a single character in window
+    res = 0             # result (maximum window size)
 
+    # expand window using right pointer
     for right in range(len(s)):
-        # Update frequency
-        count[s[right]] = count.get(s[right], 0) + 1
+        # add current character to frequency map
+        count[s[right]] += 1
 
-        # Track most frequent character
+        # update the most frequent character in the window
         max_freq = max(max_freq, count[s[right]])
 
-        # If replacements needed > k, shrink window
-        while (right - left + 1) - max_freq > k:
+        # if we need more than k replacements, shrink window
+        if (right - left + 1) - max_freq > k:
+            # remove left character from window
             count[s[left]] -= 1
-            left += 1
-        
-        # Update answer
-        max_length = max(max_length, right - left + 1)
+            left += 1  # move left pointer forward
 
-    return max_length
+        # update maximum length found so far
+        res = max(res, right - left + 1)
+
+    return res
 
 
-print(character_replacement("AABABBA", 1))  # 4
+# Example
+print(character_replacement("AABABBA", 1))  # Output: 4
+
+# ⚡ Complexity
+# Time: O(n)
+# Space: O(1) (at most 26 letters)
 
 """
 6. Longest Substring With Equal 0s and 1s
@@ -555,27 +573,30 @@ Similar to character replacement but generalized.
 Input: s = "ABAB", k = 2
 Output: 4
 """
+from collections import Counter
+
 def longest_replacement_general(s, k):
-    count = {}
+    count = Counter()
     left = 0
     max_freq = 0
-    max_length = 0
+    res = 0
 
     for right in range(len(s)):
-        # Add current character
-        count[s[right]] = count.get(s[right], 0) + 1
+        # add current character
+        count[s[right]] += 1
 
-        # Track max frequency
+        # track most frequent character in window
         max_freq = max(max_freq, count[s[right]])
 
-        # If invalid window, shrink
+        # shrink window if replacements needed > k
         while (right - left + 1) - max_freq > k:
             count[s[left]] -= 1
             left += 1
-        
-        max_length = max(max_length, right - left + 1)
 
-    return max_length
+        # update result
+        res = max(res, right - left + 1)
+
+    return res
 
 
 print(longest_replacement_general("ABAB", 2))  # 4
