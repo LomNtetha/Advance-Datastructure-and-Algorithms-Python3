@@ -448,9 +448,13 @@ def longest_k_distinct(s, k):
                 del count[s[left]]
 
             left += 1
+        
+
+         # Calculate length AFTER window is valid
+        curr_len = right - left + 1
 
         # Update maximum length
-        max_len = max(max_len, right - left + 1)
+        max_len = max(max_len, curr_len)
 
     return max_len
 
@@ -516,8 +520,10 @@ def character_replacement(s, k):
             count[s[left]] -= 1
             left += 1  # move left pointer forward
 
+        curr_window =  right - left + 1
+
         # update maximum length found so far
-        res = max(res, right - left + 1)
+        res = max(res,curr_window)
 
     return res
 
@@ -593,8 +599,10 @@ def longest_replacement_general(s, k):
             count[s[left]] -= 1
             left += 1
 
+        current_len = right - left + 1
+
         # update result
-        res = max(res, right - left + 1)
+        res = max(res,current_len)
 
     return res
 
