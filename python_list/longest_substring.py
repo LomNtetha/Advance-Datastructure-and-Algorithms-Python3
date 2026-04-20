@@ -312,8 +312,6 @@ Problem: Longest Increasing Substring
 🧠 Problem
 
 Given an array nums, return:
-
-The length of the longest increasing substring
 The actual substring
 
 👉 Rules:
@@ -334,10 +332,10 @@ def longest_increasing_substring(nums):
 
     left = 0           # Start of current window
     best_start = 0     # Start index of best substring found
-    max_len = 1        # Track length internally (not returned)
+    max_len = 0       # Track length internally (not returned)
 
     # Right pointer expands the window
-    for right in range(1, len(nums)):
+    for right in range(len(nums)):
 
         # If sequence breaks (not strictly increasing)
         if nums[right] <= nums[right - 1]:
