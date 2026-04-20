@@ -171,3 +171,55 @@ nums = [10, 9, 2, 5, 3, 7, 101, 18]
 
 
 print(longset_increaing_subsquence(nums))
+
+
+def longest_Increasing_substring(nums):
+
+    left = 0
+    best_start = 0
+    max_len = 0
+
+    for right in range(len(nums)):
+
+        if nums[right] <= nums[right-1]:
+
+            left = right
+
+        curr_len = right - left + 1
+
+        if curr_len > max_len:
+            max_len = curr_len
+            best_start = left
+
+    return nums[best_start:best_start+max_len]
+
+nums = [10, 9, 2, 5, 3, 7, 101, 18]
+
+print(longest_Increasing_substring(nums))
+
+def longest_increasing_substring_length(nums):
+
+    if not nums:
+        return 0
+    
+    left  = 0
+    max_len = 1
+
+    for right in range(1,len(nums)):
+
+        if nums[right] <= nums[right - 1]:
+
+            left = right
+
+
+        curr_len = right - left + 1
+
+        max_len = max(max_len,curr_len)
+
+    return max_len
+
+
+
+nums = [10, 9, 2, 5, 3, 7, 101, 18]
+
+print(longest_increasing_substring_length(nums))
