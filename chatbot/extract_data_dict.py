@@ -167,6 +167,61 @@ payload = {
 # 📤 Output
 "Hello bot"
 
+def get_all_messages(payload):
+
+    result = []
+
+    messeges = payload["entry"][0]["changes"][0]["value"]["messages"]
+
+    for msg in messeges:
+        result.append(msg["text"]["body"])
+    return result
+
+
+payload = {
+    "entry": [{
+        "changes": [{
+            "value": {
+                "messages": [
+                    {"text": {"body": "Hello bot"}},
+                    {"text": {"body": "How are you?"}},
+                    {"text": {"body": "Order pizza"}}
+                ]
+            }
+        }]
+    }]
+}
+
+print(get_all_messages(payload))
+
+def get_all_messages_plain(payload):
+
+    result = ""
+
+    messages = payload["entry"][0]["changes"][0]["value"]["messages"]
+
+    for msg in messages:
+
+        result += f"{msg["text"]["body"]}\n"
+
+    return result
+
+payload = {
+    "entry": [{
+        "changes": [{
+            "value": {
+                "messages": [
+                    {"text": {"body": "Hello bot"}},
+                    {"text": {"body": "How are you?"}},
+                    {"text": {"body": "Order pizza"}}
+                ]
+            }
+        }]
+    }]
+}
+
+print(get_all_messages_plain(payload))
+
 # ✅ Solution
 def get_message_text(payload):
     try:
