@@ -63,6 +63,70 @@ def get_intent(payload):
 
     return result
 
+"""
+Get all intents names 
+"""
+
+def get_all_intent(payload):
+    result = []
+    for intent in payload["message"]["nlp"]["intents"]:
+        result.append(intent["name"])
+    return result
+
+payload = {
+    "message": {
+        "nlp": {
+            "intents": [
+                {"name": "greet", "confidence": 0.98},
+                {"name": "help", "confidence": 0.85},
+                {"name": "order", "confidence": 0.60},
+                {"name": "bye", "confidence": 0.40},
+                {"name": "fallback", "confidence": 0.20}
+            ]
+        }
+    }
+}
+
+print(get_all_intent(payload)) # sample output [('greet', 0.98), ('help', 0.85), ('order', 0.6), ('bye', 0.4), ('fallback', 0.2)]
+
+def get_all_intents_plain(payload):
+
+    result  = ""
+
+    for intent in payload["message"]["nlp"]["intents"]:
+
+        result += f"{intent["name"]}: {intent["confidence"]}\n"
+
+    return result
+
+
+payload = {
+    "message": {
+        "nlp": {
+            "intents": [
+                {"name": "greet", "confidence": 0.98},
+                {"name": "help", "confidence": 0.85},
+                {"name": "order", "confidence": 0.60},
+                {"name": "bye", "confidence": 0.40},
+                {"name": "fallback", "confidence": 0.20}
+            ]
+        }
+    }
+}
+print(get_all_intents_plain(payload)) 
+# sample output
+# greet: 0.98
+# help: 0.85
+# order: 0.6
+# bye: 0.4
+# fallback: 0.2
+
+def get_order_intent(payload):
+    for intent in payload["message"]["nlp"]["intents"]:
+        if intent["name"] == "order":
+            print(f"{intent['name'].capitalize()}: {intent['confidence']}")  # output  Order: 0.6
+
+
 """✅Get the highest confidence intent (best practice)
 
 Even if the list is not sorted:"""

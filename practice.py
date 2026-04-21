@@ -254,4 +254,57 @@ k = 2
 
 print(longest_k_distincs(s,k))
 
+def get_intent(payload):
+
+    result = []
+
+    for intent in payload["message"]["nlp"]["intents"]:
+
+        result.append((intent["name"], intent["confidence"]))
+
+    return result
+
+   
+
+payload = {
+    "message": {
+        "nlp": {
+            "intents": [
+                {"name": "greet", "confidence": 0.98},
+                {"name": "help", "confidence": 0.85},
+                {"name": "order", "confidence": 0.60},
+                {"name": "bye", "confidence": 0.40},
+                {"name": "fallback", "confidence": 0.20}
+            ]
+        }
+    }
+}
+
+print(get_intent(payload))
+
+def get_all_intents_plain(payload):
+
+    result  = ""
+
+    for intent in payload["message"]["nlp"]["intents"]:
+
+        result += f"{intent["name"]}: {intent["confidence"]}\n"
+
+    return result
+
+
+payload = {
+    "message": {
+        "nlp": {
+            "intents": [
+                {"name": "greet", "confidence": 0.98},
+                {"name": "help", "confidence": 0.85},
+                {"name": "order", "confidence": 0.60},
+                {"name": "bye", "confidence": 0.40},
+                {"name": "fallback", "confidence": 0.20}
+            ]
+        }
+    }
+}
+print(get_all_intents_plain(payload))
 
