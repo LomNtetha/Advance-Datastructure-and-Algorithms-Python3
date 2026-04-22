@@ -1,3 +1,8 @@
+# Key Difference
+# Pattern	Matches	Excludes
+# \b[a-zA-Z]+\b	Only letters	numbers, _
+# \b\w+\b	letters + numbers + _	special chars only
+
 """1️⃣ Most Frequent Word in Paragraph
 
 Problem:
