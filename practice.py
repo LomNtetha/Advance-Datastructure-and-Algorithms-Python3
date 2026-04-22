@@ -363,5 +363,29 @@ payload = {
 
 print(get_all_messages_plain(payload))
 
+from collections import Counter
+
+import re
+
+def frequently_words(paragraph):
+
+    result = []
+
+    words = re.findall(r'\b\w+\b', paragraph.lower())
+
+    count = Counter(words)
+
+    max_freq = max(count.values())
+
+    for word,freq in count.items():
+
+        if freq >= max_freq:
+            result.append(word)
+
+    return result
+paragraph = "Hello world. Hello everyone. World is beautiful."
+
+print(frequently_words(paragraph))
+
 
 
