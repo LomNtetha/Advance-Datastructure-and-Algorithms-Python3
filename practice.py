@@ -463,5 +463,40 @@ sentences = [
 
 print(group_words_by_idexes(sentences))
 
+from collections import defaultdict
+
+def group_words_by_words(paragraphs):
+
+    map_word = defaultdict(set)
+
+    for i,sentence in enumerate(sentences):
+
+        words = sentence.split()
+
+        for word in words:
+
+            map_word[word].add(i)
+
+    result = []
+
+
+    for para,indexes in map_word.items():
+
+        if len(indexes) == len(sentences):
+
+            result.append(para)
+
+    return result
+
+
+paragraphs = [
+    "hello world beautiful day",
+    "hello everyone in the world",
+    "what a beautiful world hello"
+]
+
+print(group_words_by_words(paragraphs))
+
+
 
 
