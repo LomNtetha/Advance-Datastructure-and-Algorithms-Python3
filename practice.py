@@ -435,5 +435,33 @@ text = "This is a simple sentence example. This sentence is simple."
 
 print(most_frequent_letter_and_words(text))
 
+from collections import Counter, defaultdict
+
+def group_words_by_idexes(sentences):
+
+    group_word = defaultdict(set)
+    
+    for i, sentence in enumerate(sentences):
+
+        words = sentence.split()
+
+        for word in words:
+            group_word[word].add(i)
+
+    result  = []
+
+    for indexes in group_word.values():
+        if len(indexes) > 1:
+            result.append(list(indexes))
+
+    return result
+
+sentences = [
+  "hello world the world is beautiful",
+  "i am tired today hello world",
+]
+
+print(group_words_by_idexes(sentences))
+
 
 
