@@ -387,5 +387,27 @@ paragraph = "Hello world. Hello everyone. World is beautiful."
 
 print(frequently_words(paragraph))
 
+import re
+from collections import Counter
+
+
+def most_popular_words(text):
+
+    result = []
+
+    words = re.findall(r'\b\w+\b', text.lower())
+
+    count = Counter(words)
+
+    for word, freq in count.most_common():
+
+        result.append(word)
+
+    return result
+
+text = "apple banana apple apple orange banana"
+
+print(most_popular_words(text))
+
 
 
