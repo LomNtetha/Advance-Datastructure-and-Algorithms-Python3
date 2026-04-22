@@ -409,5 +409,31 @@ text = "apple banana apple apple orange banana"
 
 print(most_popular_words(text))
 
+import re
+
+from collections import Counter
+
+def most_frequent_letter_and_words(text):
+
+    words = re.findall(r'\b[a-zA-Z]+\b',text.lower())
+    count_words = Counter(words)
+    top_5_words = count_words.most_common(5)
+
+    letters = [char for char in text.lower() if char.isalpha()]
+    count_letters = Counter(letters)
+    top_5_letters = count_letters.most_common(5)
+
+    print("Top 5 words")
+    for word, freq in top_5_words:
+          print(f'{word}:{freq}')
+    
+    print("\nTop 5 letters")
+    for character, freq_ch in top_5_letters:
+        print(f'{character}:{freq_ch}')
+
+text = "This is a simple sentence example. This sentence is simple."
+
+print(most_frequent_letter_and_words(text))
+
 
 
