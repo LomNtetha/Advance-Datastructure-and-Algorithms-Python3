@@ -497,6 +497,29 @@ paragraphs = [
 
 print(group_words_by_words(paragraphs))
 
+def longest_sentence(sentences):
+
+    max_words = 0
+
+    result = ""
+
+    for sentence in sentences:
+
+        word_count = len(sentence.split())
+
+        if word_count > max_words:
+            max_words = word_count
+            result = sentence
+
+    return result
+
+sentences = [
+    "hello world",
+    "this is a leetcode style problem",
+    "python"
+]
+
+print(longest_sentence(sentences))
 
 
 
