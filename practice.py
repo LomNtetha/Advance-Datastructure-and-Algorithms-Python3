@@ -522,4 +522,30 @@ sentences = [
 print(longest_sentence(sentences))
 
 
+def longest_sentence_alphabet(sentences):
+
+    result  = ""
+
+    max_char = 0
+
+    for sentence  in sentences:
+        
+        count_char = sum(1 for cha in sentence if cha.isalpha())
+        
+
+        if count_char > max_char:
+            max_char = count_char
+            result = sentence
+
+    return result
+
+sentences = [
+    "hello world m l p k p pp pp pp",
+    "this is a leetcode style problem",
+    "python"
+]
+
+
+print(longest_sentence_alphabet(sentences))
+
 
