@@ -572,4 +572,25 @@ s = ("abcabcbb")
 
 print(longest_substring_lenghts(s))
 
+def max_sliding_window(nums, k):
+
+    result = []
+    left = 0
+
+    for right in range(len(nums)):
+
+        if right - left + 1 == k:
+
+            max_window = max(nums[left:right+1])
+            result.append(max_window)
+            left +=  1
+
+    return result
+ 
+
+nums = [1, 3, -1, -3, 5, 3, 6, 7]
+k = 3
+
+print(max_sliding_window(nums,k))
+
 
