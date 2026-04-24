@@ -593,4 +593,26 @@ k = 3
 
 print(max_sliding_window(nums,k))
 
+def validate_expression(expressions):
+
+    stack = []
+
+    pairs = {']':'[','}':'{',')':'('}
+
+    for char in expressions:
+        if char in pairs.values():
+            stack.append(char)
+
+        elif char in pairs:
+
+            if not stack or stack.pop() != pairs[char]:
+                return False
+            
+    return not stack
+
+
+expressions = "{[()]}"
+
+print(validate_expression(expressions))
+
 
