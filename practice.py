@@ -717,3 +717,31 @@ s = "A man, a plan, a canal: Panama"
 
 print(isPalindrome(s))
 
+
+def sub_arry_large_numer(nums,k):
+
+    left = 0
+    max_sum = 0
+    current_sum = 0
+    
+
+    for right in range(len(nums)):
+
+         current_sum += nums[right]
+         
+         
+         if right -left+1 == k:
+            
+            max_sum = max(max_sum,current_sum)
+            
+
+            current_sum -= nums[left]
+            left += 1
+
+    return max_sum
+
+nums = [2, 1, 5, 1, 3, 2]
+k = 3
+
+print(sub_arry_large_numer(nums,k))
+
