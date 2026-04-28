@@ -25,7 +25,7 @@ def sub_array_large_num(nums, k):
     for right in range(len(nums)):
         current_sum += nums[right]
 
-        if right >= k - 1:
+        if right -left+1 == k:
             max_sum = max(max_sum, current_sum)
             current_sum -= nums[left]
             left += 1
@@ -451,6 +451,72 @@ messages = [
 ]
 
 print(group_messages(messages))
+
+
+def group_messages(messages):
+    # This will store the final grouped result
+    result = []
+    
+    # Total number of messages
+    n = len(messages)
+    
+    # 'left' pointer → marks the start of a new group (window)
+    left = 0
+    
+    # Loop until we process all messages
+    while left < n:
+        
+        # Create a new group for the current window
+        group = []
+        
+        # Extract the timestamp of the first message in this window
+        # Example: "6:Hello" → split(":") → ["6", "Hello"]
+        start_time = int(messages[left].split(":")[0])
+
+        
+        
+        # 'right' pointer → used to expand the window
+        right = left
+        
+        # Try to include as many messages as possible in this window
+        while right < n:
+            
+            # Extract timestamp of the current message
+            current_time = int(messages[right].split(":")[0])
+            
+            # Check if current message is within 5-minute window
+            # Window range = [start_time, start_time + 4]
+            if current_time <= start_time + 4:
+                
+                # If yes → add message to current group
+                group.append(messages[right])
+                
+                # Move right pointer forward
+                right += 1
+            else:
+                # If not → stop expanding this window
+                break
+        
+        # Add the completed group to result
+        result.append(group)
+        
+        # Move 'left' to the next unprocessed message
+        # (this starts a new window)
+        left = right
+    
+    return result
+
+messages = [
+    "1:Hello",
+    "2:Hi",
+    "6:How are you?",
+    "7:I am fine",
+    "11:Thanks",
+    "15:Goodbye"
+]
+
+print(group_messages(messages))
+
 
 
 """

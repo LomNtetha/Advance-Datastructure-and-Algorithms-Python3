@@ -745,3 +745,57 @@ k = 3
 
 print(sub_arry_large_numer(nums,k))
 
+
+def group_messages(messages):
+
+    n = len(messages)
+
+    left = 0
+    
+
+    result  = []
+
+    while left < n:
+
+        group = []
+
+        start_time = int(messages[left].split(":")[0])
+
+        right  = left
+
+
+        while right < n:
+
+            current_time = int(messages[right].split(":")[0])
+
+
+            if current_time <= start_time + 4:
+
+                group.append(messages[right])
+
+                right += 1
+
+            else:
+                break
+
+        result.append(group)
+
+        left = right
+    
+
+    return result
+
+
+messages = [
+    "1:Hello",
+    "2:Hi",
+    "6:How are you?",
+    "7:I am fine",
+    "11:Thanks",
+    "15:Goodbye"
+]
+
+
+print(group_messages(messages))
+
+
