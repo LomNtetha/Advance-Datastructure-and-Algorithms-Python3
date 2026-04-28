@@ -799,3 +799,25 @@ messages = [
 print(group_messages(messages))
 
 
+def prefix_sum_cal(nums,i,j):
+
+    prefix_sum = [0] * len(nums)
+    prefix_sum[0] = nums[0]
+
+    for k in range(1,len(nums)):
+
+        prefix_sum[k] = prefix_sum[k-1] + nums[k]
+
+
+    if i == 0:
+
+        return prefix_sum[j]
+    
+    else:
+        return prefix_sum[j] - prefix_sum[i-1]
+
+nums = [2, 4, 1, 6, 3]
+i, j = 1, 3
+
+print(prefix_sum_cal(nums,i,j))
+
