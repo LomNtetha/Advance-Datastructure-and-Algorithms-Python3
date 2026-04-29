@@ -847,3 +847,39 @@ def subsets(nums):
 nums = [1, 2, 3]
 
 print(subsets(nums))
+
+
+def permutation(nums):
+
+    result = []
+
+    def backtrack(path,used):
+
+        if len(path) == len(nums):
+            result.append(path[:])
+            return
+        
+
+        for i in range(len(nums)):
+
+            if used[i]:
+                continue
+
+            used[i] = True
+
+            path.append(nums[i])
+
+            backtrack(path,used)
+
+            path.pop()
+
+            used[i] = False
+
+    backtrack([0],[False]*len(nums))
+
+    return result
+
+
+nums = [1, 2, 3]
+
+print(permutation(nums))
