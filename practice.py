@@ -963,3 +963,19 @@ def ways_climp_stairs(n):
 n = 5
 
 print(ways_climp_stairs(n))
+
+def max_rob(houses):
+
+    prev=curr = 0
+
+    for house in houses:
+
+        prev,curr = curr,max(curr,prev+house)
+
+    return curr
+
+
+houses = [2, 7, 9, 3, 1]
+
+print(max_rob(houses))
+
