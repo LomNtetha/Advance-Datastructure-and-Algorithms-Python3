@@ -979,3 +979,32 @@ houses = [2, 7, 9, 3, 1]
 
 print(max_rob(houses))
 
+
+
+def rob_house_cycle(nums):
+
+    def linear_rob(houses):
+
+        prev = curr = 0
+
+        for house in houses:
+
+            prev,curr = curr,max(curr,prev+house)
+
+        return curr
+    
+    if len(nums) == 1:
+        return nums[0]
+    if len(nums)  == 2:
+        return max(nums[0],nums[1])
+    
+
+    first_exclude = linear_rob(nums[:-1])
+    last_exclude = linear_rob(nums[1:])
+
+    return max(first_exclude,last_exclude)
+
+nums = [1,2,3,1]
+
+print(rob_house_cycle(nums))
+
