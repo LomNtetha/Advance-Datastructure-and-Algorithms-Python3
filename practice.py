@@ -1047,3 +1047,30 @@ departure = ["9:10", "12:00", "11:20", "11:30", "19:00", "20:00"]
 
 print(minimum_platforms_required(arrival,departure))
 
+def job_sequencing(jobs):
+
+    jobs.sort(key=lambda x: x[1],reverse=True)
+
+    maxdealine = max(job[0] for job in jobs)
+
+    slots = [-1] * (maxdealine+ 1)
+
+    total_profit = 0
+
+
+    for dealine, profit in jobs:
+
+        for j in range(min(maxdealine,dealine),0,-1) :
+
+            if slots[j] == -1:
+                slots[j] = profit
+                total_profit += profit
+
+                break
+
+    return total_profit
+
+jobs = [(2, 100), (1, 19), (2, 27), (1, 25), (3, 15)]
+
+print(job_sequencing(jobs))
+
