@@ -182,68 +182,49 @@ routes = ["Route1", "Route2", "Route3"]  # All routes that need to be covered
 Algorithm type: Bipartite Graph Matching (specifically, maximum bipartite matching using DFS to find augmenting paths)
 """
 
-def assign_routes(drivers, routes):
-    """
-    Assigns drivers to routes such that all routes are covered (if possible).
-    Uses a bipartite matching algorithm to find a valid assignment.
-    Args:
-        drivers: Dictionary mapping drivers to their available routes.
-        routes: List of routes to be covered.
-    Returns:
-        A dictionary mapping drivers to their assigned routes, or a string indicating failure.
-    """
-    match = {}  # Initialize an empty route-to-driver mapping
+def assign_routes():
+    # match: keeps which driver is assigned to which route
+    # format: {route: driver}
+    match = {}
 
-    # Try to assign a route to each driver
+    # DFS helper to try assigning a route to a driver
+    def dfs(driver, visited):
+        # Go through all routes this driver can take
+        for route in drivers[driver]:
+
+            # Skip if we already tried this route in this DFS path
+            if route not in visited:
+                visited.add(route)
+
+                # Case 1: route is free → assign it
+                # Case 2: route is taken → try to move current driver to another route
+                if route not in match or dfs(match[route], visited):
+                    match[route] = driver  # assign route to current driver
+                    return True
+
+        # No route could be assigned
+        return False
+
+    # Try to assign each driver
     for driver in drivers:
-        visited = set()  # Reset visited routes for each driver's assignment attempt
-        can_assign_route(driver, visited, match, drivers)
+        dfs(driver, set())  # visited resets for each driver
 
-    # Validate if all routes are covered
-    if len(match) == len(routes):  # Check if every route has an assigned driver
-        # Return a reversed mapping (driver -> route) for easier interpretation
-        return {v: k for k, v in match.items()}
-    else:
-        return "No valid assignment possible"  # Return failure message if not all routes are covered
+    # Convert {route: driver} → {driver: route}
+    result = {driver: route for route, driver in match.items()}
+    return result
 
-def can_assign_route(driver, visited, match, drivers):
-    """
-    Attempts to assign a route to the given driver using a recursive backtracking approach.
-    Args:
-        driver: The driver to assign a route to.
-        visited: Set tracking which routes have been considered in the current attempt.
-        match: Dictionary mapping routes to assigned drivers.
-        drivers: Dictionary mapping drivers to their available routes.
-    Returns:
-        True if a valid route can be assigned to the driver, False otherwise.
-    """
-    for route in drivers[driver]:  # Check each route the driver can take
-        if route not in visited:  # If the route hasn't been visited in this attempt
-            visited.add(route)  # Mark the route as visited
-            
-            # If the route is unassigned or its current driver can be reassigned
-            if route not in match or can_assign_route(match[route], visited, match, drivers):
-                match[route] = driver  # Assign the route to the current driver
-                return True
-    return False  # No valid route could be assigned
-
-# Example input
 drivers = {
-    "John": ["Route1", "Route2"],  # John can take Route1 or Route2
-    "Mike": ["Route2", "Route3"],  # Mike can take Route2 or Route3
-    "Emma": ["Route1", "Route3"]   # Emma can take Route1 or Route3
+    "John": ["Route1", "Route2"],
+    "Mike": ["Route2", "Route3"],
+    "Emma": ["Route1", "Route3"]
 }
-routes = ["Route1", "Route2", "Route3"]  # All routes that need to be covered
+print(assign_routes())
 
-# Run the function and print the result
-assignment = assign_routes(drivers, routes)
-print(assignment)  # Output: Example valid assignment, e.g., {'John': 'Route1', 'Mike': 'Route2', 'Emma': 'Route3'}
+# ✅ Time:
+# O(V×E)
+# ✅ Space:
+# O(V+E)
 
-
-# Time Complexity: O(D * R * min(D, R)), where D is the number of drivers and R is the number of routes.
-#                 Approximates to O(D^2 * R) for dense graphs where each driver can take most routes.
-# Space Complexity: O(E + R), where E is the number of driver-route pairs (edges) and R is the number of routes.
-#                  Approximates to O(D * R) in the worst case.
 
 """
 4. Optimal Room Assignment for Hotel Guests
@@ -262,72 +243,53 @@ guests = {
 rooms = [1, 2, 3, 4]  # Available rooms
 """
 
-def assign_rooms(guests, rooms):
-    """
-    Assign rooms to guests based on their preferences using a DFS-based bipartite matching algorithm.
-    Ensures each guest gets one room and each room is assigned to at most one guest.
-    
-    Args:
-        guests: Dictionary mapping guests to their preferred rooms (list of room numbers).
-        rooms: List of available room numbers.
-    
-    Returns:
-        A dictionary mapping guests to their assigned rooms, or a string indicating failure if not all guests can be assigned.
-    """
-    room_assignments = {}  # Initialize empty mapping of room -> guest
 
-    # Attempt to assign a room to each guest
+def assign_rooms():
+    # match: keeps which guest is assigned to which room
+    # format: {room: guest}
+    match = {}
+
+    # DFS helper to try assigning a room to a guest
+    def dfs(guest, visited):
+        # Try all preferred rooms for this guest
+        for room in guests[guest]:
+
+            # Skip if already tried this room in current DFS path
+            if room not in visited:
+                visited.add(room)
+
+                # Case 1: room is free → assign it
+                # Case 2: room is taken → try to move current guest elsewhere
+                if room not in match or dfs(match[room], visited):
+                    match[room] = guest  # assign room to current guest
+                    return True
+
+        # No room could be assigned
+        return False
+
+    # Try to assign each guest
     for guest in guests:
-        visited = set()  # Reset visited rooms for each guest's assignment attempt
-        
-        # Try to find a valid room for the current guest using DFS
-        if not can_assign_room(guest, visited, room_assignments, guests):
-            return "No valid assignment possible"  # Return failure if any guest cannot be assigned a room
+        dfs(guest, set())  # reset visited for each guest
 
-    # Convert room -> guest mapping to guest -> room for the final output
-    guest_room_assignment = {guest: room for room, guest in room_assignments.items()}
-    return guest_room_assignment  # Return the valid assignment
+    # Convert {room: guest} → {guest: room}
+    result = {guest: room for room, guest in match.items()}
+    return result
 
-def can_assign_room(guest, visited, room_assignments, preferences):
-    """
-    Try to assign a room to the guest using Depth-First Search (DFS) for bipartite matching.
-    If a preferred room is taken, attempt to reassign the current guest in that room to another room.
-    
-    Args:
-        guest: The guest to assign a room to.
-        visited: Set tracking which rooms have been considered in the current DFS attempt.
-        room_assignments: Dictionary mapping rooms to their assigned guests.
-        preferences: Dictionary mapping guests to their preferred rooms.
-    
-    Returns:
-        True if a valid room can be assigned to the guest, False otherwise.
-    """
-    for room in preferences[guest]:
-        if room not in visited:  # Check if this room has not been visited yet
-            visited.add(room)  # Mark the room as visited
-            
-            # If the room is unassigned or its current guest can be reassigned
-            if room not in room_assignments or can_assign_room(room_assignments[room], visited, room_assignments, preferences):
-                room_assignments[room] = guest  # Assign the room to the current guest
-                return True  # Successful assignment
-    return False  # No valid room could be assigned
-
-# === Example Input ===
 guests = {
-    "John": [1, 2, 3],  # John can be assigned to room 1, 2, or 3
-    "Mike": [2, 3, 4],  # Mike can be assigned to room 2, 3, or 4
-    "Emma": [1, 4]      # Emma can be assigned to room 1 or 4
+    "John": [1, 2, 3],
+    "Mike": [2, 3, 4],
+    "Emma": [1, 4]
 }
-rooms = [1, 2, 3, 4]   # List of all available rooms
 
-# === Run the Function ===
-result = assign_rooms(guests, rooms)
-print(result)  # Output: Example valid assignment, e.g., {'John': 3, 'Mike': 2, 'Emma': 4}
+rooms = [1, 2, 3, 4]
 
-# Time Complexity: O(G * R * min(G, R)), where G is the number of guests and R is the number of rooms.
-#                 Approximates to O(G^2 * R) for dense graphs where each guest prefers most rooms.
-# Space Complexity: O(E + R), where E is the number of guest-room preference pairs (edges) and R is the number of rooms.
-#                  Approximates to O(G * R) in the worst case.
+
+print(assign_rooms())
+
+# ✅ Time:
+# O(V×E)
+# ✅ Space:
+# O(V+E)
 """
 Problem 5: Course Prerequisite Scheduling
 Problem Statement
@@ -414,79 +376,54 @@ For the input above, the shortest route is:
 
 
 """
-from functools import lru_cache
+def tsp(graph):
+    n = len(graph)
 
-class Solution:
-    def tsp(self, distances: list[list[int]]) -> tuple[int, list[int]]:
-        """
-        Solves the TSP problem using Dynamic Programming with Bitmasking.
+    visited = set([0])   # start from node 0
+    path = [0]           # current path
+    min_cost = float('inf')
+    best_path = []
 
-        :param distances: 2D matrix where distances[i][j] is the cost from city i to city j.
-        :return: Tuple containing (minimum cost, route taken as list of city indices)
-        """
-        n = len(distances)
-        VISITED_ALL = (1 << n) - 1  # All cities visited => bitmask like 1111 for n=4
+    # DFS helper
+    def dfs(current, cost):
+        nonlocal min_cost, best_path
 
-        @lru_cache(None)
-        def dp(mask, pos):
-            """
-            Recursive function to compute minimum cost.
-            :param mask: bitmask representing visited cities
-            :param pos: current city
-            :return: tuple (min_cost, path)
-            """
-            if mask == VISITED_ALL:
-                return distances[pos][0], [0]  # Return to start (0)
+        # If all nodes visited → return to start
+        if len(visited) == n:
+            total_cost = cost + graph[current][0]
 
-            min_cost = float('inf')
-            min_path = []
+            if total_cost < min_cost:
+                min_cost = total_cost
+                best_path = path + [0]  # complete cycle
 
-            # Try next unvisited cities
-            for city in range(n):
-                # Check if the current city has not been visited using bitmask
-                if not (mask & (1 << city)):
-                    # Mark the current city as visited by setting the corresponding bit
-                    new_mask = mask | (1 << city)
+            return
 
-                    # Get the cost to travel from the current city (pos) to the next city
-                    cost_to_city = distances[pos][city]
+        # Try all next nodes
+        for next_node in range(n):
+            if next_node not in visited:
+                # choose
+                visited.add(next_node)
+                path.append(next_node)
 
-                    # Recursively compute the minimum cost and path from the next city onward
-                    sub_cost, sub_path = dp(new_mask, city)
+                # explore
+                dfs(next_node, cost + graph[current][next_node])
 
-                    # Total cost for this path is the cost to go to 'city' plus the cost of the subpath
-                    total_cost = cost_to_city + sub_cost
+                # backtrack
+                visited.remove(next_node)
+                path.pop()
 
-                    # Update the minimum cost and corresponding path if this route is better
-                    if total_cost < min_cost:
-                        min_cost = total_cost
-                        # Add the current city to the beginning of the sub-path to form the new path
-                        min_path = [city] + sub_path
+    dfs(0, 0)
 
-            # Return the minimum cost and path from this position with the current mask
-            return min_cost, min_path
+    return min_cost, best_path
 
-
-        # Start from city 0 with only city 0 visited
-        min_cost, path = dp(1, 0)
-        full_route = [0] + path  # Prepend the start city
-
-        # Return the minimum cost and full route including returning to city 0
-        return min_cost, full_route
-
-# Example Input
-distances = [
+graph = [
     [0, 10, 15, 20],
     [10, 0, 35, 25],
     [15, 35, 0, 30],
     [20, 25, 30, 0]
 ]
 
-# Output
-solution = Solution()
-cost, route = solution.tsp(distances)
-print((cost, route))
-
+print(tsp(graph))
 
 # Time Complexity: O((n-1)!), where n is the number of locations.
 # Space Complexity: O(n), for storing the optimal route.
@@ -905,6 +842,48 @@ For the input above, the similarity between 'Alice' and 'Bob' might look like:
 Similarity between Alice and Bob: 0.92
 A similarity score of 0.92 indicates that 'Alice' and 'Bob' are highly similar.
 """
+import math
+
+graph = {
+    'Alice': {'Movie1': 5, 'Movie2': 3},
+    'Bob': {'Movie1': 4, 'Movie3': 2},
+    'Charlie': {'Movie2': 5, 'Movie3': 4}
+}
+
+
+def cosine_similarity(u1, u2):
+    # dot product between two users
+    dot = 0
+
+    # magnitude (length) of each user vector
+    norm1 = 0
+    norm2 = 0
+
+    # consider all movies rated by either user
+    all_movies = set(u1.keys()) | set(u2.keys())
+
+    for movie in all_movies:
+        # get rating or 0 if not rated
+        r1 = u1.get(movie, 0)
+        r2 = u2.get(movie, 0)
+
+        # cosine similarity components
+        dot += r1 * r2          # A · B
+        norm1 += r1 * r1        # |A|^2
+        norm2 += r2 * r2        # |B|^2
+
+    # avoid division by zero (no ratings case)
+    if norm1 == 0 or norm2 == 0:
+        return 0
+
+    # cosine similarity formula
+    return dot / (math.sqrt(norm1) * math.sqrt(norm2))
+
+
+# Example usage
+score = cosine_similarity(graph['Alice'], graph['Bob'])
+
+print("Similarity:", round(score, 2))
 import math
 def cosine_similarity(user1_ratings, user2_ratings):
     """
