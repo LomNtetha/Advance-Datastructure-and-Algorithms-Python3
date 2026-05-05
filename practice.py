@@ -1183,3 +1183,46 @@ start = 0
 
 print(breadth_first_search(graph,start))
 
+from collections import deque
+
+def bfs_shortest_path(graph,start,end):
+
+    if start not in graph and end not in graph:
+
+        return []
+    
+    visited = set()
+    queue = deque([(start,[start])])
+
+
+    while queue:
+        node,path = queue.popleft()
+
+        if node == end:
+            return path
+        
+        if node not in visited:
+            visited.add(node)
+
+
+            for neighbor in graph.get(node, []):
+
+                if neighbor not in visited:
+                    queue.append((neighbor, path + [neighbor]))
+
+    return []
+
+graph = {
+    "Entrance": ["Hallway"],
+    "Hallway": ["Entrance", "Kitchen"],
+    "Kitchen": ["Hallway", "Living Room"],
+    "Living Room": ["Kitchen", "Bedroom"],
+    "Bedroom": ["Living Room"]
+}
+
+# Find shortest path from "Entrance" to "Bedroom"
+start = "Entrance"
+end = "Bedroom"
+
+print(bfs_shortest_path(graph,start,end))
+
