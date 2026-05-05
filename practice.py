@@ -1226,3 +1226,45 @@ end = "Bedroom"
 
 print(bfs_shortest_path(graph,start,end))
 
+from collections import deque, defaultdict
+
+
+def get_matual_friend(graph,user):
+
+    visited = set()
+    queue = deque([user])
+    visited.add(user)
+
+    recommended = defaultdict(int)
+
+
+    while queue:
+        current_user = queue.popleft()
+
+        for friend in graph.get(current_user,[]):
+
+            if friend not in visited:
+                visited.add(friend)
+                queue.append(friend)
+
+
+                for mutual_friend in graph.get(friend,[]):
+
+                    if mutual_friend not in visited and mutual_friend not in graph[user]:
+
+                        recommended[mutual_friend] += 1
+
+    return sorted(recommended.keys(), key=lambda x: recommended[x], reverse=True)
+
+
+
+graph = {
+    'Alice': ['Bob', 'Charlie'],
+    'Bob': ['Alice', 'Charlie', 'David'],
+    'Charlie': ['Alice', 'Bob'],
+    'David': ['Bob']
+}
+user = 'Alice'
+
+print(get_matual_friend(graph,user))
+
