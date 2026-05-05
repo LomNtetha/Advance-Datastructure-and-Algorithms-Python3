@@ -1119,3 +1119,36 @@ graph = {
 
 print(dijskstra_algarithm(graph,source))
 
+def depth_first_search(graph,start):
+
+    visted = set()
+    result = []
+
+    def dfs_helper(node):
+
+        if node not in visted:
+            visted.add(node)
+            result.append(node)
+
+
+            for neighbor in graph.get(node,[]):
+                dfs_helper(neighbor)
+
+    
+
+    dfs_helper(start)
+
+    
+
+    return result
+
+graph = {
+    0: [1, 2],
+    1: [2],
+    2: [3],
+    3: [3]
+}
+start = 0
+
+print(depth_first_search(graph,start))
+
