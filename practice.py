@@ -1152,3 +1152,34 @@ start = 0
 
 print(depth_first_search(graph,start))
 
+from collections import deque
+def breadth_first_search(graph,start):
+
+    visited = set()
+    queue = deque([start])
+    result = []
+
+
+    while queue:
+        node = queue.popleft()
+
+        if node not in visited:
+            visited.add(node)
+            result.append(node)
+
+
+            for neigbhor in graph.get(node,[]):
+                if neigbhor not in visited:
+                    queue.append(neigbhor)
+
+    return result
+graph = {
+    0: [1, 2],
+    1: [2],
+    2: [3],
+    3: [3]
+}
+start = 0
+
+print(breadth_first_search(graph,start))
+
