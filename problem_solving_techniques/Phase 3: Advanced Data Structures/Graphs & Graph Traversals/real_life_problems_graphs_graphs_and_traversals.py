@@ -182,43 +182,49 @@ routes = ["Route1", "Route2", "Route3"]  # All routes that need to be covered
 Algorithm type: Bipartite Graph Matching (specifically, maximum bipartite matching using DFS to find augmenting paths)
 """
 
-def assign_routes():
-    # match: keeps which driver is assigned to which route
-    # format: {route: driver}
+def assign_routes(drivers):
+    # match: stores final assignments
+    # key = route, value = driver
     match = {}
 
-    # DFS helper to try assigning a route to a driver
-    def dfs(driver, visited):
-        # Go through all routes this driver can take
+    # visited: tracks routes already explored in ONE DFS attempt
+    visited = set()
+
+    # DFS helper: tries to assign a route to a driver
+    def dfs(driver):
+        # loop through routes this driver can take
         for route in drivers[driver]:
 
-            # Skip if we already tried this route in this DFS path
+            # skip if this route already tried in current DFS
             if route not in visited:
-                visited.add(route)
+                visited.add(route)  # mark as visited
 
                 # Case 1: route is free → assign it
-                # Case 2: route is taken → try to move current driver to another route
-                if route not in match or dfs(match[route], visited):
-                    match[route] = driver  # assign route to current driver
+                # Case 2: route is taken → try to move the current driver
+                if route not in match or dfs(match[route]):
+                    match[route] = driver  # assign route to this driver
                     return True
 
-        # No route could be assigned
+        # no route could be assigned
         return False
 
-    # Try to assign each driver
+    # try to assign each driver
     for driver in drivers:
-        dfs(driver, set())  # visited resets for each driver
+        visited.clear()   # ✅ reset visited for each driver
+        dfs(driver)
 
-    # Convert {route: driver} → {driver: route}
-    result = {driver: route for route, driver in match.items()}
-    return result
+    # convert {route: driver} → {driver: route}
+    return {driver: route for route, driver in match.items()}
 
+
+# Example
 drivers = {
     "John": ["Route1", "Route2"],
     "Mike": ["Route2", "Route3"],
     "Emma": ["Route1", "Route3"]
 }
-print(assign_routes())
+
+print(assign_routes(drivers))
 
 # ✅ Time:
 # O(V×E)
@@ -244,37 +250,42 @@ rooms = [1, 2, 3, 4]  # Available rooms
 """
 
 
-def assign_rooms():
-    # match: keeps which guest is assigned to which room
-    # format: {room: guest}
+def assign_rooms(guests, rooms):
+    # match: stores final assignments
+    # key = room, value = guest
     match = {}
 
-    # DFS helper to try assigning a room to a guest
-    def dfs(guest, visited):
-        # Try all preferred rooms for this guest
+    # visited: tracks rooms explored in ONE DFS attempt
+    visited = set()
+
+    # DFS helper: try to assign a room to a guest
+    def dfs(guest):
+        # loop through rooms this guest prefers
         for room in guests[guest]:
 
-            # Skip if already tried this room in current DFS path
+            # skip if already tried in current DFS
             if room not in visited:
                 visited.add(room)
 
                 # Case 1: room is free → assign it
-                # Case 2: room is taken → try to move current guest elsewhere
-                if room not in match or dfs(match[room], visited):
-                    match[room] = guest  # assign room to current guest
+                # Case 2: room is taken → try to move current guest
+                if room not in match or dfs(match[room]):
+                    match[room] = guest
                     return True
 
-        # No room could be assigned
+        # no room could be assigned
         return False
 
-    # Try to assign each guest
+    # try to assign each guest
     for guest in guests:
-        dfs(guest, set())  # reset visited for each guest
+        visited.clear()   # ✅ reset for each new guest
+        dfs(guest)
 
-    # Convert {room: guest} → {guest: room}
-    result = {guest: room for room, guest in match.items()}
-    return result
+    # convert {room: guest} → {guest: room}
+    return {guest: room for room, guest in match.items()}
 
+
+# Example
 guests = {
     "John": [1, 2, 3],
     "Mike": [2, 3, 4],
@@ -283,8 +294,7 @@ guests = {
 
 rooms = [1, 2, 3, 4]
 
-
-print(assign_rooms())
+print(assign_rooms(guests, rooms))
 
 # ✅ Time:
 # O(V×E)
