@@ -1268,3 +1268,40 @@ user = 'Alice'
 
 print(get_matual_friend(graph,user))
 
+
+def assign_drivers(drivers):
+
+    match = {}
+
+    visited = set()
+
+
+    def dfs(driver):
+
+        for route in drivers:
+            if route not in visited:
+                visited.add(route)
+
+
+                if route not in match or dfs(match[route]):
+                    match[route] = driver
+                    return True
+                
+        return False
+    
+
+    for driver in drivers:
+        visited.clear()
+        dfs(driver)
+
+    return {route:driver for driver,route in match.items()}
+
+
+drivers = {
+    "John": ["Route1", "Route2"],
+    "Mike": ["Route2", "Route3"],
+    "Emma": ["Route1", "Route3"]
+}
+
+
+print(assign_drivers(drivers))
