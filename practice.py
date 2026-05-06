@@ -1278,7 +1278,7 @@ def assign_drivers(drivers):
 
     def dfs(driver):
 
-        for route in drivers:
+        for route in drivers[driver]:
             if route not in visited:
                 visited.add(route)
 
@@ -1303,5 +1303,38 @@ drivers = {
     "Emma": ["Route1", "Route3"]
 }
 
-
 print(assign_drivers(drivers))
+
+def assign_guests_rooms(guests,rooms):
+
+    match = {}
+    visited = set()
+
+    def dfs(guest):
+
+        for room in guests[guest]:
+            if room not in visited:
+                visited.add(room)
+
+
+                if room not in match or dfs(match[room]):
+                    match[room] = guest
+                    return True
+        return False
+    
+    for guest in guests:
+        visited.clear()
+        dfs(guest)
+
+
+    return {room:guest for guest,room in match.items()}
+
+guests = {
+    "John": [1, 2, 3],
+    "Mike": [2, 3, 4],
+    "Emma": [1, 4]
+}
+
+rooms = [1, 2, 3, 4]
+
+print(assign_guests_rooms(guests,rooms))
