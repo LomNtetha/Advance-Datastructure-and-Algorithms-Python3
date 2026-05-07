@@ -37,7 +37,7 @@ print(longest_unique_substring("abcabcbb"))  # 3
 # Space Complexity:O(1) with constant character set sizes
 
 """
-5. Return the Actual Longest Substring (No Repeats)
+2. Return the Actual Longest Substring (No Repeats)
 Problem
 
 Return the actual substring instead of length.
@@ -76,36 +76,7 @@ def longest_unique_substring_str(s):
 
 print(longest_unique_substring_str("pwwkew"))  # "wke"
 
-"""8. Optimized Longest Unique Substring (HashMap Index)
-Optimized version using index tracking.
-
-✅ Example
-Input: "abba"
-Output: 2
-"""
-def longest_unique_optimized(s):
-    char_index = {}    # Store last seen index of each character
-    left = 0
-    max_length = 0
-
-    for right in range(len(s)):
-        # If character seen before, move left pointer
-        if s[right] in char_index:
-            left = max(left, char_index[s[right]] + 1)
-
-        # Update latest index
-        char_index[s[right]] = right
-
-        # Update max length
-        max_length = max(max_length, right - left + 1)
-
-    return max_length
-
-
-print(longest_unique_optimized("abba"))  # 2
-
-
-"""10. Longest Palindromic Substring
+"""3. Longest Palindromic Substring
 Problem
 
 Find the longest substring that is a palindrome.
@@ -144,7 +115,7 @@ def longest_palindrome(s):
 print(longest_palindrome("babad"))  # "bab" or "aba"
 
 """
-Given a string s, find the length of the longest substring that is a palindrome.
+4. Given a string s, find the length of the longest substring that is a palindrome.
 A palindrome is a string that reads the same forward and backward.
 The substring must be contiguous (continuous characters).
 
@@ -196,7 +167,7 @@ print(solution.longestPalindrome("babad"))  # Output: 3
 
 
 """
-Problem: Longest Increasing Substring
+5. Problem: Longest Increasing Substring
 🧠 Problem
 
 Given an array nums, return:
@@ -250,7 +221,7 @@ print(longest_increasing_substring(nums))
 # Space Complexity: O(n) (because of returned substring)
 
 """
-Problem
+6. Problem
 
 Given an array nums, return the length of the longest strictly increasing substring.
 
@@ -304,7 +275,7 @@ print(longest_increasing_substring_length([10, 9, 2, 5, 3, 7, 101, 18]))
 # curr_len
 
 """
-2. Longest Substring With At Most K Distinct Characters
+7. Longest Substring With At Most K Distinct Characters
 🧠 Problem
 
 Return the length of the longest substring with at most k distinct characters.
@@ -355,7 +326,7 @@ print(longest_k_distinct("eceba", 2))  # Output: 3
 # Space: O(k) (at most k characters in Counter)
 
 """
-3. Longest Substring With At Most Two Distinct Characters
+8. Longest Substring With At Most Two Distinct Characters
 🧠 Problem
 
 Same as above, but k = 2.
@@ -375,7 +346,7 @@ def longest_two_distinct(s):
 print(longest_two_distinct("ccaabbb"))  # 5
 
 """
-4. Longest Repeating Character Replacement
+9. Longest Repeating Character Replacement
 🧠 Problem
 
 You can replace at most k characters. Find longest substring with same characters.
@@ -424,7 +395,7 @@ print(character_replacement("AABABBA", 1))  # Output: 4
 # Space: O(1) (at most 26 letters)
 
 """
-6. Longest Substring With Equal 0s and 1s
+10. Longest Substring With Equal 0s and 1s
 
 Problem
 
@@ -458,7 +429,7 @@ def longest_equal_01(s):
 
 print(longest_equal_01("110100"))  # 6
 
-"""7. Longest Substring With K Replacements (General)
+"""11. Longest Substring With K Replacements (General)
 Problem
 
 Similar to character replacement but generalized.
@@ -498,7 +469,7 @@ def longest_replacement_general(s, k):
 print(longest_replacement_general("ABAB", 2))  # 4
 
 
-"""9. Longest Substring With At Least K Repeating Characters
+"""12. Longest Substring With At Least K Repeating Characters
 Problem
 
 Each character must appear at least k times.
@@ -532,7 +503,7 @@ print(longest_substring_k_repeating("aaabb", 3))  # 3
 
 
 """
-Problem
+13. Problem
 
 Find the length of the longest palindromic subsequence in a string.
 
@@ -572,7 +543,7 @@ def longest_palindrome_subseq(s):
 print(longest_palindrome_subseq("bbbab"))  # 4
 
 """
-Longest Increasing Subsequence (LIS)
+14. Longest Increasing Subsequence (LIS)
 🧩 Problem
 
 Given an array nums, return the length of the longest strictly increasing subsequence.
@@ -606,7 +577,7 @@ def length_of_lis(nums):
 print(length_of_lis([10, 9, 2, 5, 3, 7, 101, 18]))  # 4
 
 """
-Problem
+15. Problem
 
 Given an array nums, return the actual longest increasing subsequence (LIS), not just its length.
 
