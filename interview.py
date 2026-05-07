@@ -139,3 +139,35 @@ def length_longest_increasing_substring(nums):
 nums = [10, 9, 2, 5, 3, 7, 101, 18]
 
 print(length_longest_increasing_substring(nums))
+
+from collections import Counter
+
+def longest_k_distinct(s,k):
+
+    left = 0
+    max_len = 0
+    count = Counter()
+
+    for right in range(len(s)):
+
+        count[s[right]] += 1
+
+        while len(count) > k:
+            count[s[left]] -= 1
+
+            if count[s[right]] == 0:
+
+                del count[s[left]]
+
+            left += 1
+
+            curr_len = right -left+1
+
+            max_len = max(max_len,curr_len)
+
+    return max_len
+
+s = "eceba"
+k = 2
+
+print(longest_k_distinct(s,k))
