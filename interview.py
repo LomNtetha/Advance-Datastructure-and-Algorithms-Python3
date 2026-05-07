@@ -148,26 +148,25 @@ def longest_k_distinct(s,k):
     max_len = 0
     count = Counter()
 
+
     for right in range(len(s)):
 
         count[s[right]] += 1
 
         while len(count) > k:
+
             count[s[left]] -= 1
 
-            if count[s[right]] == 0:
-
+            if count[s[left]] == 0:
                 del count[s[left]]
-
             left += 1
 
-            curr_len = right -left+1
-
-            max_len = max(max_len,curr_len)
+        curr_len = right - left+1
+        max_len = max(max_len,curr_len)
 
     return max_len
 
-s = "eceba"
+s = "ccaabbb"
 k = 2
 
 print(longest_k_distinct(s,k))

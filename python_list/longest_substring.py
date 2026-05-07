@@ -285,6 +285,12 @@ Input: s = "eceba", k = 2
 Output: 3
 Explanation: "ece"
 💻 Solution
+
+✅ Example
+Input: s = "ccaabbb"
+Output: 5
+Explanation: "aabbb"
+💻 Solution
 """
 
 from collections import Counter
@@ -324,26 +330,6 @@ print(longest_k_distinct("eceba", 2))  # Output: 3
 # ⚡ Complexity
 # Time: O(n)
 # Space: O(k) (at most k characters in Counter)
-
-"""
-8. Longest Substring With At Most Two Distinct Characters
-🧠 Problem
-
-Same as above, but k = 2.
-
-✅ Example
-Input: s = "ccaabbb"
-Output: 5
-Explanation: "aabbb"
-💻 Solution
-"""
-
-def longest_two_distinct(s):
-    # Reuse previous function
-    return longest_k_distinct(s, 2)
-
-
-print(longest_two_distinct("ccaabbb"))  # 5
 
 """
 9. Longest Repeating Character Replacement
