@@ -69,3 +69,30 @@ def longest_palindrome(s):
 s = "babad"
 
 print(longest_palindrome(s))
+
+def length_longest_palindrome(s):
+    def expand_length(left,right):
+
+        max_len = 0
+
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            left -= 1
+            right += 1
+
+        length = right - left - 1
+        max_len = max(max_len,length)
+        return max_len
+    result = 0
+
+    for i in range(len(s)):
+
+        odd = expand_length(i,i)
+
+        even = expand_length(i,i+1)
+
+        result = max(result,odd,even)
+
+    return result
+s = "babad"
+
+print(length_longest_palindrome(s))
