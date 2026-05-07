@@ -119,3 +119,23 @@ def longest_increasing_substring(nums):
 nums = [10, 9, 2, 5, 3, 7, 101, 18]
 
 print(longest_increasing_substring(nums))
+
+def length_longest_increasing_substring(nums):
+
+    left = 0
+    max_len = 1
+
+    for right in range(1,len(nums)):
+
+        if nums[right] <= nums[right-1]:
+
+            left = right
+
+        current_len = right - left+ 1
+        max_len = max(max_len,current_len)
+
+    return max_len
+
+nums = [10, 9, 2, 5, 3, 7, 101, 18]
+
+print(length_longest_increasing_substring(nums))
