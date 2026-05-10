@@ -245,3 +245,30 @@ def more_common_fruits(text):
 text = "apple banana apple apple orange banana"
 
 print(more_common_fruits(text))
+
+from collections import Counter
+import re
+
+def top_words_character_5(text):
+
+    words = re.findall(r'\b[a-zA-Z]+\b',text.lower())
+    count_words = Counter(words)
+    top_words = count_words.most_common(5)
+
+    characters = re.findall(r'[a-zA-z]', text.lower())
+    count_char = Counter(characters)
+    top_char = count_char.most_common(5)
+    
+    print("\ntop 5 words")
+    for word,frq_word in top_words:
+
+        print(f"{word}:{frq_word}")
+
+    print("\ntop 5 characters")
+    for char,frq_char in top_char:
+
+        print(f"{char}:{frq_char}")
+
+text = "This is a simple sentence example. This sentence is simple."
+
+top_words_character_5(text)
