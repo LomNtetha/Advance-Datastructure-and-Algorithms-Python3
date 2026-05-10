@@ -224,3 +224,24 @@ def most_appear_words(paragraph):
 paragraph = "Hello world. Hello everyone. World is beautiful."
 
 print(most_appear_words(paragraph))
+
+from collections import Counter
+
+import re
+def more_common_fruits(text):
+    
+    fruits = re.findall(r'\b\w+\b',text.lower())
+    result = []
+    count = Counter(fruits)
+
+    freq_fruits = count.most_common()
+
+    for word,frq in freq_fruits:
+
+        result.append(word)
+
+    return result
+
+text = "apple banana apple apple orange banana"
+
+print(more_common_fruits(text))
