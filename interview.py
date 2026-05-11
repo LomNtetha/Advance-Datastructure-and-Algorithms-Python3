@@ -351,4 +351,30 @@ sentences = [
     "programming is fun",
     "i like python"
 ]
-print(sentence_maximum_words(sentences))
+print(sentence_longest_words(sentences))
+
+
+def longest_character(sentences):
+
+    max_character = 0
+
+    result = ""
+
+    for sentence in sentences:
+
+        count_char = sum(1 for char in sentence if char.isalpha())
+
+        if count_char > max_character:
+            max_character = count_char
+            result = sentence
+
+    return result
+
+
+sentences = [
+    "hello world m l p k p pp pp pp",
+    "this is a leetcode style problem",
+    "python"
+]
+
+print(longest_character(sentences))
