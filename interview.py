@@ -272,3 +272,32 @@ def top_words_character_5(text):
 text = "This is a simple sentence example. This sentence is simple."
 
 top_words_character_5(text)
+
+from collections import defaultdict
+def group_words_paragraph(sentences):
+
+    map_word = defaultdict(set)
+
+    for i, sentence in enumerate(sentences):
+        
+
+        words = sentence.split()
+
+        for word in words:
+            map_word[word].add(i)
+
+    result = []
+
+    for indexes in map_word.values():
+        if len(indexes) > 1:
+            result.append(list(indexes))
+
+    return result
+
+
+sentences = [
+  "hello world the world is beautiful",
+  "i am tired today hello world",
+]
+
+print(group_words_paragraph(sentences))
