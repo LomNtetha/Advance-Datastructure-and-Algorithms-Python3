@@ -412,46 +412,6 @@ The last message is 15:Goodbye, starting a new window [15, 19].
 Only 15:Goodbye falls in this range.
 Each group is output as an inner array.
 """
-def group_messages(messages):
-    result = []
-    current_group = []
-    window_start = None
-
-    for msg in messages:
-        timestamp = int(msg.split(":")[0])
-
-        # Start a new group if empty
-        if not current_group:
-            current_group.append(msg)
-            window_start = timestamp
-            continue
-
-        # If message is within 5 minutes, add to current group
-        if timestamp <= window_start + 4:
-            current_group.append(msg)
-        else:
-            # Close current group and start a new one
-            result.append(current_group)
-            current_group = [msg]
-            window_start = timestamp
-
-    # Add the last group
-    if current_group:
-        result.append(current_group)
-
-    return result
-
-messages = [
-    "1:Hello",
-    "2:Hi",
-    "6:How are you?",
-    "7:I am fine",
-    "11:Thanks",
-    "15:Goodbye"
-]
-
-print(group_messages(messages))
-
 
 def group_messages(messages):
     # This will store the final grouped result
