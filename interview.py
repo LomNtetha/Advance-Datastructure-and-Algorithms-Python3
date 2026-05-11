@@ -329,3 +329,26 @@ paragraphs = [
 ]
 
 print(group_words_names(paragraphs))
+
+
+def sentence_longest_words(sentences):
+
+    max_words = 0
+
+    result = ""
+
+    for sentence in sentences:
+
+        word_count = len(sentence.split())
+
+        if word_count > max_words:
+            max_words=word_count
+            result = sentence
+
+    return result
+
+sentences = [
+    "programming is fun",
+    "i like python"
+]
+print(sentence_maximum_words(sentences))
