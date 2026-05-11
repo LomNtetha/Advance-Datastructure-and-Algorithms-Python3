@@ -397,3 +397,52 @@ nums = [2, 1, 5, 1, 3, 2]
 k = 3
 
 print(large_sub_array_k(nums,k))
+
+def sum_target(nums,target):
+
+    current_sum = 0
+    left = 0
+
+    result = []
+
+    for right in range(len(nums)):
+        current_sum += nums[right]
+
+        if current_sum > target:
+            nums[left] -= 1
+            left += 1
+        
+        if current_sum == target:
+            result.append(nums[left:right])
+
+    return result
+
+nums = [1, 2, 3, 4, 5]
+target = 9
+
+print(sum_target(nums,target))
+
+def sum_target(nums, target):
+    current_sum = 0
+    left = 0
+    result = []
+
+    for right in range(len(nums)):
+        current_sum += nums[right]
+
+        # shrink window if sum is too large
+        while current_sum > target:
+            current_sum -= nums[left]
+            left += 1
+
+        # check if target found
+        if current_sum == target:
+            result.append(nums[left:right + 1])
+
+    return result
+
+
+nums = [1, 2, 3, 4, 5]
+target = 9
+
+print(sum_target(nums, target))
