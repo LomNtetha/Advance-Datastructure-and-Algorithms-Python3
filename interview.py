@@ -378,3 +378,22 @@ sentences = [
 ]
 
 print(longest_character(sentences))
+
+def large_sub_array_k(nums,k):
+    curr_sum = 0
+    max_sum = 0
+    left = 0
+
+    for right in range(len(nums)):
+        curr_sum += nums[right]
+
+        if right -left+1 == k:
+            max_sum = max(max_sum,curr_sum)
+            curr_sum -= nums[left]
+            left += 1
+    return max_sum
+
+nums = [2, 1, 5, 1, 3, 2]
+k = 3
+
+print(large_sub_array_k(nums,k))
