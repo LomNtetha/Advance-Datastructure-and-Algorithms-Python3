@@ -301,3 +301,31 @@ sentences = [
 ]
 
 print(group_words_paragraph(sentences))
+
+from collections import defaultdict
+def group_words_names(paragraphs):
+
+    map_word = defaultdict(set)
+
+    for i,paragraph in enumerate(paragraphs):
+
+        words = paragraph.split()
+
+        for word in words:
+            map_word[word].add(i)
+
+    result = []
+
+    for para,indexes in map_word.items():
+        if len(indexes) == len(paragraphs):
+            result.append(para)
+
+    return result
+
+paragraphs = [
+    "hello world beautiful day",
+    "hello everyone in the world",
+    "what a beautiful world hello"
+]
+
+print(group_words_names(paragraphs))
