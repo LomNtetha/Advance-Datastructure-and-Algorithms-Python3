@@ -446,3 +446,44 @@ nums = [1, 2, 3, 4, 5]
 target = 9
 
 print(sum_target(nums, target))
+
+def group_messages_by_timstamp(messages):
+
+    result = []
+    left = 0
+    n = len(messages)
+
+    while left < n:
+
+        group = []
+
+        start_time = int(messages[left].split(":")[0])
+
+        right = left
+
+        while right <n:
+
+            current_time = int(messages[right].split(":")[0])
+
+            if current_time <= start_time + 4:
+
+                group.append(messages[right])
+
+                right += 1
+            else:
+                break
+
+            left = right
+        result.append(group)
+
+    return result
+
+messages = [
+    "1:Hello",
+    "2:Hi",
+    "6:How are you?",
+    "7:I am fine",
+    "11:Thanks",
+    "15:Goodbye"
+]
+print(group_messages_by_timstamp(messages))
